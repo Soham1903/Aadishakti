@@ -22,6 +22,16 @@ const userSchema = new mongoose.Schema({
     minlength: [4, "Password must be at least 4 characters"],
     select: true, // Include password by default for login
   },
+  gender: {
+    type: String,
+    required: [true, "Please enter your password"],
+  },
+  phoneno: {
+    type: String,
+    required: [true, "Please enter your phone no"],
+    minlength: [10, "Password must be at least 10 characters"],
+
+  },
   createdAt: {
     type: Date,
     default: Date.now,

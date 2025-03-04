@@ -1,4 +1,6 @@
-import Course from "../model/courseSchema.js";
+// console.log("Adding new course...");
+// console.log("Request body:", req.body);
+// console.log("Request file:", req.file);import Course from "../model/courseSchema.js";
 
 // Create a new course
 export const addCourse = async (req, res) => {

@@ -28,7 +28,7 @@ function Uploadimg() {
       return;
     }
 
-    if (images.length >= 5) {
+    if (images.length >= 8) {
       alert("You can upload a maximum of 5 images.");
       return;
     }
@@ -69,12 +69,14 @@ function Uploadimg() {
       <h3 className="text-xl font-semibold mb-4">Uploaded Images</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {images.map((img) => (
-          <div key={img._id} className="w-full flex flex-col items-center">
+          <div
+            key={img._id}
+            className="w-32 h-32 rounded-lg overflow-hidden shadow-md border border-gray-300 flex items-center justify-center bg-gray-100"
+          >
             <img
               src={`data:${img.contentType};base64,${img.imageBase64}`}
               alt="uploaded"
-              className="rounded-lg shadow-lg w-full"
-              style={{ maxWidth: "100px", maxHeight: "100px" }}
+              className="w-full h-full object-cover"
             />
           </div>
         ))}
