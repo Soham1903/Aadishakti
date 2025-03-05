@@ -70,3 +70,7 @@ button:focus-visible {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.banner-img:hover {
+  filter: blur(5px);
+}

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Trash2 } from "lucide-react"; // Using Lucide React for delete icon
 
 function Uploadimg() {
   const [images, setImages] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   useEffect(() => {
     fetchImages();
@@ -29,7 +31,7 @@ function Uploadimg() {
     }
 
     if (images.length >= 8) {
-      alert("You can upload a maximum of 5 images.");
+      alert("You can upload a maximum of 8 images.");
       return;
     }
 
@@ -45,6 +47,16 @@ function Uploadimg() {
       fetchImages();
     } catch (error) {
       console.error("Error uploading image:", error);
+    }
+  };
+
+  const handleDeleteImage = async (imageId) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/images/${imageId}`);
+      fetchImages(); // Refresh the images after deletion
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      alert("Failed to delete image");
     }
   };
 
@@ -68,16 +80,26 @@ function Uploadimg() {
 
       <h3 className="text-xl font-semibold mb-4">Uploaded Images</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {images.map((img) => (
+        {images.map((img, index) => (
           <div
             key={img._id}
-            className="w-32 h-32 rounded-lg overflow-hidden shadow-md border border-gray-300 flex items-center justify-center bg-gray-100"
+            className="relative w-32 h-32 rounded-lg overflow-hidden shadow-md border border-gray-300 flex items-center justify-center bg-gray-100"
+            onMouseEnter={() => setHoverIndex(index)}
+            onMouseLeave={() => setHoverIndex(null)}
           >
             <img
               src={`data:${img.contentType};base64,${img.imageBase64}`}
               alt="uploaded"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover banner-img"
             />
+            {hoverIndex === index && (
+              <div
+                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center cursor-pointer"
+                onClick={() => handleDeleteImage(img._id)}
+              >
+                <Trash2 className="text-white w-8 h-8" />
+              </div>
+            )}
           </div>
         ))}
       </div>
