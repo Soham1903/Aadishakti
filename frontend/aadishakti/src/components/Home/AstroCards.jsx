@@ -18,7 +18,7 @@ const cards = [
     description:
       "ग्रह आणि नक्षत्रांचा प्रभाव ओळखून जीवन समृद्ध करण्याची कला ज्योतिष शिकवते.",
     bgColor: "from-[#F4B6CD] to-[#EBA1C0]",
-    image: "/pngassets/card_6-removebg-preview.",
+    image: "/assets/card_6-removebg-preview.png",
   },
   {
     title: "ज्योतिष = कालज्ञानाचे गूढ शास्त्र",
