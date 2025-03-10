@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import logo from "../assets/aadishaktipng.png"; // Adjust the path if needed
+import logo from "/assets/aadishaktipng.png"; 
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
