@@ -89,7 +89,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/services" className="block py-2 px-3 text-white">
+              <Link to="/courses" className="block py-2 px-3 text-white">
                 Courses
               </Link>
             </li>
