@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Carousel = () => {
   const [images, setImages] = useState([]);
@@ -9,8 +10,7 @@ const Carousel = () => {
     const fetchImages = async () => {
       try {
         const response = await axios.get("http://localhost:4000/api/images");
-        console.log(response.data); // Log entire response to check the image data
-        setImages(response.data); // Set images from the response
+        setImages(response.data);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
@@ -19,7 +19,6 @@ const Carousel = () => {
     fetchImages();
   }, []);
 
-  // Automatically change the image every 3 seconds
   useEffect(() => {
     if (images.length > 0) {
       const interval = setInterval(() => {
@@ -27,8 +26,7 @@ const Carousel = () => {
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
       }, 3000);
-
-      return () => clearInterval(interval); // Cleanup interval on component unmount
+      return () => clearInterval(interval);
     }
   }, [images]);
 
@@ -49,29 +47,21 @@ const Carousel = () => {
   };
 
   return (
-    // Parent container with greyish background and padding
-    <div className="bg-gray-100 p-8 rounded-lg"> {/* Greyish background and padding */}
-      <div
-        id="indicators-carousel"
-        className="relative w-full mx-auto" // Full width for mobile
-        data-carousel="static"
-      >
-        {/* Carousel wrapper */}
-        <div className="relative h-[300px] md:h-[400px] overflow-hidden rounded-lg"> {/* Adjusted height for mobile */}
+    <div style={{ backgroundColor: "#fff6f3" }} className="p-8 rounded-lg">
+      <div className="relative w-full mx-auto">
+        <div className="relative h-[300px] md:h-[400px] overflow-hidden rounded-lg">
           {images.map((img, index) => (
             <div
               key={img._id}
               className={`duration-700 ease-in-out ${
                 index === activeIndex ? "block" : "hidden"
               }`}
-              data-carousel-item={index === activeIndex ? "active" : ""}
             >
               {img.contentType && img.imageBase64 ? (
                 <img
                   src={`data:${img.contentType};base64,${img.imageBase64}`}
                   alt={img.filename}
-                  className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-cover"
-                  style={{ height: "100%", width: "100%" }}
+                  className="absolute block w-full h-full object-cover"
                 />
               ) : (
                 <p>Image data is missing or invalid.</p>
@@ -80,70 +70,29 @@ const Carousel = () => {
           ))}
         </div>
 
-        {/* Slider indicators */}
-        <div className="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+        <div className="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
           {images.map((_, index) => (
             <button
               key={index}
-              type="button"
               className={`w-3 h-3 rounded-full ${
                 index === activeIndex ? "bg-white" : "bg-white/50"
               }`}
-              aria-current={index === activeIndex}
-              aria-label={`Slide ${index + 1}`}
               onClick={() => goToSlide(index)}
             ></button>
           ))}
         </div>
 
-        {/* Slider controls */}
         <button
-          type="button"
-          className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          className="absolute top-1/2 left-2 transform -translate-y-1/2 z-30 bg-white/30 p-2 rounded-full hover:bg-white/50"
           onClick={goToPrevSlide}
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
-            <svg
-              className="w-4 h-4 text-white rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 1 1 5l4 4"
-              />
-            </svg>
-            <span className="sr-only">Previous</span>
-          </span>
+          <ChevronLeft size={24} className="text-gray-800" />
         </button>
         <button
-          type="button"
-          className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 z-30 bg-white/30 p-2 rounded-full hover:bg-white/50"
           onClick={goToNextSlide}
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
-            <svg
-              className="w-4 h-4 text-white rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 9 4-4-4-4"
-              />
-            </svg>
-            <span className="sr-only">Next</span>
-          </span>
+          <ChevronRight size={24} className="text-gray-800" />
         </button>
       </div>
     </div>

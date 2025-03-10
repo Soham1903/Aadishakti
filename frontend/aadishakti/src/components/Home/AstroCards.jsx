@@ -1,5 +1,3 @@
-import React from "react";
-
 const cards = [
   {
     title: "ज्योतिष = मार्गदर्शनाची दिव्य ज्योत",
@@ -20,7 +18,7 @@ const cards = [
     description:
       "ग्रह आणि नक्षत्रांचा प्रभाव ओळखून जीवन समृद्ध करण्याची कला ज्योतिष शिकवते.",
     bgColor: "from-[#F4B6CD] to-[#EBA1C0]",
-    image: "/assets/card_6-removebg-preview.png",
+    image: "/pngassets/card_6-removebg-preview.",
   },
   {
     title: "ज्योतिष = कालज्ञानाचे गूढ शास्त्र",

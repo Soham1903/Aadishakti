@@ -1,6 +1,9 @@
 import React from 'react'
 import Carousel from './imageCarousel'
 import GradientCards from './AstroCards'
+import TopSellingCourses from './TopCourses'
+import Achievements from './Achievements'
+
 
 const Home = () => {
   return (
@@ -8,6 +11,9 @@ const Home = () => {
        <div className="w-full">
         <Carousel/>
         <GradientCards/>
+        <TopSellingCourses />
+        <Achievements/>
+        
         {/* <Journey />
         <Career/>
         <Achievement />
