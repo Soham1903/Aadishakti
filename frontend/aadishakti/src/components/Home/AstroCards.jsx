@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const cards = [
   {
     title: "ज्योतिष = मार्गदर्शनाची दिव्य ज्योत",
@@ -31,29 +33,34 @@ const cards = [
 
 const GradientCards = () => {
   return (
-    <div style={{ backgroundColor: "#fff6f3" }} className="py-10">
-      {" "}
-      {/* Added background color and padding */}
-      <div className="flex justify-center p-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+    <div className="py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card, index) => (
-            <div
+            <motion.div
               key={index}
               className={`relative bg-gradient-to-br ${card.bgColor} p-6 h-56 md:h-72 rounded-2xl shadow-lg transition-transform hover:scale-105`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <h2 className="text-lg font-semibold mb-2 text-gray-800">
+              <h2 className="text-lg font-semibold text-gray-800 mb-2">
                 {card.title}
               </h2>
-              {/* Hide description on mobile (show only on md and larger) */}
               <p className="text-gray-700 opacity-90 hidden md:block">
                 {card.description}
               </p>
-              <img
+              <motion.img
                 src={card.image}
                 alt={card.title}
-                className="absolute bottom-8 md:bottom-4 right-4 w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg"
+                className="absolute bottom-4 right-4 w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg"
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

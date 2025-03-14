@@ -138,7 +138,6 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
               <X className="h-6 w-6" />
             </button>
           </div>
-
           <img
             src={course.image}
             alt={course.title}

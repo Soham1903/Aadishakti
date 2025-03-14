@@ -1,23 +1,27 @@
 import React from 'react'
 import Carousel from './imageCarousel'
 import GradientCards from './AstroCards'
-import TopSellingCourses from './TopCourses'
-import Achievements from './Achievements'
-
+import VideoSection from './VideoSection'
+import TopCourses from './TopCourses'
+import Stats from './Stats'
+import FAQ from './FAQ';
+import  Reviews from "./Reviews";
+import  About from "./About";
 
 const Home = () => {
   return (
     <>
        <div className="w-full">
         <Carousel/>
+        <About />
         <GradientCards/>
-        <TopSellingCourses />
-        <Achievements/>
+        <VideoSection/>
+        <Stats/>
+        <TopCourses/>
+        < Reviews />
+        <FAQ />
         
-        {/* <Journey />
-        <Career/>
-        <Achievement />
-        <Uniqueness /> */}
+        
 
       </div>
     </>

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { useState, useEffect } from "react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 const TopCourses = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -107,10 +107,19 @@ const TopCourses = () => {
             courses, designed to deepen your understanding of the celestial
             arts.
           </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Top Selling Courses
+          </h2>
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+            Embark on a transformative journey through our carefully curated
+            courses, designed to deepen your understanding of the celestial
+            arts.
+          </p>
         </motion.div>
 
         <div className="relative">
           <div className="overflow-hidden">
+            <div></div>
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
@@ -124,6 +133,7 @@ const TopCourses = () => {
                 >
                   <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
                     <div className="relative">
+                      <img src={course.image} alt={course.title} />
                       <img
                         src={course.image}
                         alt={course.title}
@@ -135,7 +145,18 @@ const TopCourses = () => {
                         <span className="ml-2">{course.rating}</span>
                       </div>
                     </div>
-                    <div className="p-6">
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-2 text-gray-800">
+                      {course.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 line-clamp-2">
+                      {course.description}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-2xl font-bold text-[#921a40]">
+                        ${course.price}
+                      </span>
                       <h3 className="text-xl font-semibold mb-2 text-gray-800">
                         {course.title}
                       </h3>
