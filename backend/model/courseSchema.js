@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
 const CourseSchema = new mongoose.Schema({
@@ -10,7 +9,10 @@ const CourseSchema = new mongoose.Schema({
   },
   title: { type: String, required: true },
   description: { type: String, required: true },
-  image: { type: String }, // Stores image path
+  image: {
+    data: Buffer, // Store image as binary data
+    contentType: String, // Store the MIME type of the image
+  },
   price: { type: Number, required: true },
   duration: { type: String, required: true },
   syllabus: { type: String, required: true },

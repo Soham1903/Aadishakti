@@ -4,13 +4,9 @@ import { addCourse, getCourses } from "../controller/courseController.js";
 
 const router = express.Router();
 
-// Configure Multer for image upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
-});
+// Configure Multer for memory storage (store image as buffer)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
-const temp = 1;
 
 // Course routes
 router.post("/add", upload.single("image"), addCourse);

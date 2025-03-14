@@ -10,6 +10,7 @@ import UploadImage from "./components/Uploadimg";
 import CourseForm from "./components/CourseForm";
 import Courses from "./components/Courses";
 import CoursesSection from "./components/CourseSection";
+import UploadCourse from "./components/UploadCourse";
 import Footer from "./components/Footer";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/upload" element={<UploadImage />} />
         <Route path="/courses" element={<CoursesSection />} />
         <Route path="/course-form" element={<CourseForm />} />
+        <Route path="/upload-course" element={<UploadCourse/>} />
       </Routes>
       <Footer />
     </Router>
