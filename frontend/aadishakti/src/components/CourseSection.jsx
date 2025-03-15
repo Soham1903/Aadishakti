@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { Book, Star, Clock, Users, X } from 'lucide-react';
-import { useState } from 'react';
-import { FaShoppingCart, FaPlus, FaChevronDown } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { Book, Star, Clock, Users, X } from "lucide-react";
+import { useState } from "react";
+import { FaShoppingCart, FaPlus, FaChevronDown } from "react-icons/fa";
 
 const courses = [
   {
@@ -9,18 +9,20 @@ const courses = [
     title: "रेकी लेवल 1",
     duration: "6 days",
     price: "₹1,575",
-    description: "आरोग्यप्राप्ती होणे आणि रात्रीची झोप येणे यासारख्या विविध समस्यांसाठी उपयुक्त कार्यशाळा",
+    description:
+      "आरोग्यप्राप्ती होणे आणि रात्रीची झोप येणे यासारख्या विविध समस्यांसाठी उपयुक्त कार्यशाळा",
     schedule: "सायंकाळी 7:30 - 9:00",
-    image: "https://images.unsplash.com/photo-1600618528240-fb9fc964b853?auto=format&fit=crop&q=80&w=800",
+    image:
+      "https://images.unsplash.com/photo-1600618528240-fb9fc964b853?auto=format&fit=crop&q=80&w=800",
     instructor: "सौ चारुशीला श्रीकांत कांबळे",
     benefits: [
       "रेकी शक्ती म्हणजे काय?",
       "रेकी शक्तीचा इतिहास व फायदे",
       "रेकी शक्ती चे मुख्य तत्त्वज्ञान आणि नियम",
       "स्वतःवर रेकी शक्ती कशी घ्यावी",
-      "दुसऱ्या व्यक्तींवर रेकी शक्ती कशी द्यावी"
+      "दुसऱ्या व्यक्तींवर रेकी शक्ती कशी द्यावी",
     ],
-    includes: ["सर्टिफिकेट", "नोट्स", "रेकॉर्डिंग", "भरपूर प्रॅक्टिस"]
+    includes: ["सर्टिफिकेट", "नोट्स", "रेकॉर्डिंग", "भरपूर प्रॅक्टिस"],
   },
   {
     id: 2,
@@ -29,16 +31,17 @@ const courses = [
     price: "₹2,575",
     description: "वास्तुशास्त्राचे मूलभूत तत्व आणि उपाययोजना शिका",
     schedule: "सायंकाळी 7:00 - 8:30",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
     instructor: "सौ चारुशीला श्रीकांत कांबळे",
     benefits: [
       "वास्तुशास्त्राचे मूलभूत तत्त्व",
       "गृह वास्तु",
       "कार्यालय वास्तु",
       "दुकान वास्तु",
-      "वास्तुदोष निवारण"
+      "वास्तुदोष निवारण",
     ],
-    includes: ["प्रमाणपत्र", "अभ्यास साहित्य", "ऑनलाइन सपोर्ट"]
+    includes: ["प्रमाणपत्र", "अभ्यास साहित्य", "ऑनलाइन सपोर्ट"],
   },
   {
     id: 3,
@@ -47,34 +50,37 @@ const courses = [
     price: "₹3,300",
     description: "Professional Advance Tarot Card Reading Workshop",
     schedule: "सायंकाळी 7:30 - 9:00",
-    image: "https://images.unsplash.com/photo-1633097254859-6e4e4dde7578?auto=format&fit=crop&q=80&w=800",
+    image:
+      "https://images.unsplash.com/photo-1633097254859-6e4e4dde7578?auto=format&fit=crop&q=80&w=800",
     instructor: "सौ चारुशीला श्रीकांत कांबळे",
     benefits: [
       "सम्पूर्ण टेरो कार्ड रिडीग",
       "प्रॅक्टिस सहीत शिक्षण",
       "स्प्रेड कसे मांडावे",
       "जातकाच्या प्रश्नाची उत्तरे",
-      "उपाययोजना मार्गदर्शन"
+      "उपाययोजना मार्गदर्शन",
     ],
-    includes: ["Recording", "Certificate", "Study Material"]
+    includes: ["Recording", "Certificate", "Study Material"],
   },
   {
     id: 4,
     title: "मोबाईल न्यूमरॉलॉजी",
     duration: "4 days",
     price: "₹1,575",
-    description: "Learn the science of numbers and their influence on mobile numbers",
+    description:
+      "Learn the science of numbers and their influence on mobile numbers",
     schedule: "सायंकाळी 7:00 - 8:30",
-    image: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?auto=format&fit=crop&q=80&w=800",
+    image:
+      "https://images.unsplash.com/photo-1621504450181-5d356f61d307?auto=format&fit=crop&q=80&w=800",
     instructor: "सौ चारुशीला श्रीकांत कांबळे",
     benefits: [
       "मोबाईल नंबर मधील अंकांचे परिणाम",
       "भाग्यकारक मोबाईल नंबर",
       "पासवर्ड आणि स्क्रीन लॉक",
       "वैदिक ग्रिड नुसार मोबाईल नंबर",
-      "नवीन नंबर निवडण्याची पद्धत"
+      "नवीन नंबर निवडण्याची पद्धत",
     ],
-    includes: ["प्रमाणपत्र", "नोट्स", "रेकॉर्डिंग"]
+    includes: ["प्रमाणपत्र", "नोट्स", "रेकॉर्डिंग"],
   },
   {
     id: 5,
@@ -83,17 +89,18 @@ const courses = [
     price: "₹1,575",
     description: "Learn the power of switch words for various life aspects",
     schedule: "सायंकाळी 7:00 - 8:30",
-    image: "https://images.unsplash.com/photo-1527525443983-6e60c75fff46?auto=format&fit=crop&q=80&w=800",
+    image:
+      "https://images.unsplash.com/photo-1527525443983-6e60c75fff46?auto=format&fit=crop&q=80&w=800",
     instructor: "स्विच वर्ड ट्रेनर अनिता कलंत्री",
     benefits: [
       "स्विचवर्ड काय आहे",
       "जीवनातील प्रत्येक कामासाठी उपयोग",
       "शिक्षण आणि करिअर साठी स्विचवर्ड",
       "आरोग्य आणि समृद्धी साठी स्विचवर्ड",
-      "व्यक्तिमत्व विकासासाठी स्विचवर्ड"
+      "व्यक्तिमत्व विकासासाठी स्विचवर्ड",
     ],
-    includes: ["सर्टिफिकेट", "स्टडी मटेरियल", "प्रॅक्टिकल सेशन्स"]
-  }
+    includes: ["सर्टिफिकेट", "स्टडी मटेरियल", "प्रॅक्टिकल सेशन्स"],
+  },
 ];
 
 const categories = [
@@ -105,7 +112,7 @@ const categories = [
   "स्विचवर्ड",
   "ज्योतिष",
   "संमोहन",
-  "योगा"
+  "योगा",
 ];
 
 function CourseDetailsModal({ course, onClose, onAddToCart }) {
@@ -131,7 +138,6 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
               <X className="h-6 w-6" />
             </button>
           </div>
-          
           <img
             src={course.image}
             alt={course.title}
@@ -144,7 +150,9 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
                 <Clock className="h-5 w-5" />
                 <span>{course.schedule}</span>
               </div>
-              <span className="text-2xl font-bold text-[#921a40]">{course.price}</span>
+              <span className="text-2xl font-bold text-[#921a40]">
+                {course.price}
+              </span>
             </div>
 
             <div>
@@ -308,14 +316,20 @@ export default function Courses() {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold mb-2">{course.title}</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {course.title}
+                    </h3>
                     <div className="flex items-center text-sm text-gray-500 mb-2">
                       <Clock className="h-4 w-4 mr-1" />
                       <span>{course.duration}</span>
                     </div>
-                    <p className="text-gray-600 mb-4 line-clamp-2">{course.description}</p>
+                    <p className="text-gray-600 mb-4 line-clamp-2">
+                      {course.description}
+                    </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-[#921a40] font-semibold">{course.price}</span>
+                      <span className="text-[#921a40] font-semibold">
+                        {course.price}
+                      </span>
                       <div className="flex space-x-2">
                         <button
                           onClick={() => setSelectedCourse(course)}

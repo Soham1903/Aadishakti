@@ -30,7 +30,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Embark on a mystical journey through the cosmos as we unveil the secrets written in the stars. Our expert astrologers combine ancient wisdom with modern insights to illuminate your path through life's greatest mysteries.
+              Embark on a mystical journey through the cosmos as we unveil the secrets written in the stars. Our expert astrologers combine ancient wisdom with modern insights to illuminate your path through lifes greatest mysteries.
             </motion.p>
             <motion.p 
               className="text-gray-600 mb-8"
@@ -54,7 +54,7 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold">Lunar Guidance</h3>
-                  <p className="text-gray-500">Harness the moon's energy for personal transformation</p>
+                  <p className="text-gray-500">Harness the moons energy for personal transformation</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -63,7 +63,7 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold">Solar Empowerment</h3>
-                  <p className="text-gray-500">Align with the sun's vital force for success</p>
+                  <p className="text-gray-500">Align with the suns vital force for success</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
