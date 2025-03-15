@@ -8,8 +8,10 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import UploadImage from "./components/Uploadimg";
 import CourseForm from "./components/CourseForm";
+import CourseSection from './components/CourseSection';
 import Courses from "./components/Courses";
-import Footer from "./components/Footer";  
+import Footer from "./components/Footer"; 
+
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/upload" element={<UploadImage />} />
-        <Route path="/courses" element={<Courses />} />
+        <Route path="/courses" element={<CourseSection />} />
         <Route path="/course-form" element={<CourseForm />} />
       </Routes>
       <Footer />
