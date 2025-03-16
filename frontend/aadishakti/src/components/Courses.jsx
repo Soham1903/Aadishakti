@@ -4,7 +4,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/courses") // Adjust URL if needed
+    fetch("http://localhost:4000/api/courses/get") // Adjust URL if needed
       .then((res) => res.json())
       .then((data) => setCourses(data))
       .catch((err) => console.error("Error fetching courses:", err));
@@ -27,7 +27,7 @@ export default function Courses() {
             >
               {/* Course Image */}
               <img
-                src={`http://localhost:4000/${course.image}`}
+                src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
                 alt={course.title}
                 className="w-full h-48 object-cover"
               />

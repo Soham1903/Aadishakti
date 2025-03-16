@@ -3,13 +3,13 @@ import axios from "axios";
 
 const CourseForm = () => {
   const [formData, setFormData] = useState({
-    courseName: "",
+    title: "",
     description: "",
-    image: "",
     price: "",
     duration: "",
     syllabus: "",
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,43 +18,48 @@ const CourseForm = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          image: { data: reader.result, contentType: file.type },
-        });
-      };
-      reader.readAsDataURL(file); // Convert image to Base64
-    }
+    setSelectedFile(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!selectedFile) {
+      alert("Please upload an image");
+      return;
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("price", formData.price);
+    formDataToSend.append("duration", formData.duration);
+    formDataToSend.append("syllabus", formData.syllabus);
+    formDataToSend.append("image", selectedFile); // Correct file upload
+
     try {
       const response = await axios.post(
         "http://localhost:4000/api/courses/add",
-        formData, // No need for FormData since image is stored as Base64
-        { headers: { "Content-Type": "application/json" } }
+        formDataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       alert("Course added successfully!");
       console.log("Response:", response.data);
+
+      // Reset form
       setFormData({
-        courseName: "",
+        title: "",
         description: "",
-        image: "",
         price: "",
         duration: "",
         syllabus: "",
       });
+      setSelectedFile(null);
     } catch (error) {
       alert(
-        "Error adding course: " + error.response?.data?.message || error.message
+        "Error adding course: " +
+          (error.response?.data?.message || error.message)
       );
       console.log(error);
     }
@@ -68,7 +73,7 @@ const CourseForm = () => {
       <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
 
       <label className="block mb-2">
-        Title:
+        Course Name:
         <input
           type="text"
           name="title"
@@ -93,7 +98,6 @@ const CourseForm = () => {
         Upload Image:
         <input
           type="file"
-          accept="image/*"
           onChange={handleImageUpload}
           required
           className="w-full p-2"

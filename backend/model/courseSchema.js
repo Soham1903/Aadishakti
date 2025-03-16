@@ -10,8 +10,9 @@ const CourseSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   image: {
-    data: Buffer, // Store image as binary data
-    contentType: String, // Store the MIME type of the image
+    filename: String, // Name of the image file
+    contentType: String, // MIME type of the image
+    imageBase64: String, // Image stored as a base64 string
   },
   price: { type: Number, required: true },
   duration: { type: String, required: true },

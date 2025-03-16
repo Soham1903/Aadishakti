@@ -4,12 +4,16 @@ import Course from "../model/CourseSchema.js";
 export const addCourse = async (req, res) => {
   try {
     const { title, description, price, duration, syllabus } = req.body;
+
     const image = req.file
       ? {
-          data: req.file.buffer.toString("base64"),
-          contentType: req.file.mimetype,
+          filename: req.file.originalname, // Store original filename
+          contentType: req.file.mimetype, // Store MIME type
+          imageBase64: req.file.buffer.toString("base64"), // Convert image to Base64
         }
       : null;
+
+    console.log(req.body);
 
     const newCourse = new Course({
       title,
@@ -30,7 +34,6 @@ export const addCourse = async (req, res) => {
   }
 };
 
-// Get Courses
 export const getCourses = async (req, res) => {
   try {
     const courses = await Course.find();

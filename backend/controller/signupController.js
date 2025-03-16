@@ -1,15 +1,6 @@
   import ErrorHandler from "../error/error.js";
   import { User } from "../model/userSchema.js";
 
-<<<<<<< HEAD
-const signup = async (req, res, next) => {
-  try {
-    const { name, email, phoneno, gender, password } = req.body;
-    // console.log (req.body);
-    // Validate required fields
-    if (!name || !email || !phoneno || !gender || !password) {
-      return res.status(400).json({ message: "All fields are required" });
-=======
   const signup = async (req, res, next) => {
     try {
       const { name, email, phoneno, gender, password } = req.body;
@@ -41,7 +32,6 @@ const signup = async (req, res, next) => {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Server error, please try again later" });
->>>>>>> 29492aac34daada491a511dae1ffb7514735f3d6
     }
   };
 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Book, Star, Clock, Users, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaShoppingCart, FaPlus, FaChevronDown } from "react-icons/fa";
 
 const courses = [

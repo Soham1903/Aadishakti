@@ -11,8 +11,8 @@ import CourseForm from "./components/CourseForm";
 import Courses from "./components/Courses";
 import CoursesSection from "./components/CourseSection";
 import UploadCourse from "./components/UploadCourse";
-import AboutUs from './components/AboutUs';
-import ContactUs from './components/ContactUs';
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
 import Footer from "./components/Footer";
 
 function App() {
@@ -27,11 +27,11 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/upload" element={<UploadImage />} />
-        <Route path="/courses" element={<CoursesSection />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/course-form" element={<CourseForm />} />
-        <Route path="/about" element={<AboutUs />} /> 
-        <Route path="/contact" element={<ContactUs />} /> 
-        <Route path="/upload-course" element={<UploadCourse/>} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/upload-course" element={<UploadCourse />} />
       </Routes>
       <Footer />
     </Router>
