@@ -5,28 +5,28 @@ const cards = [
     title: "ज्योतिष = मार्गदर्शनाची दिव्य ज्योत",
     description:
       "जीवनाच्या प्रत्येक टप्प्यावर योग्य दिशा दाखवणारी प्रकाशकृती म्हणजे ज्योतिष.",
-    bgColor: "from-[#FCE7F3] to-[#FAD1E5]",
+    bgColor: "from-[f9f3f5] to-[#f9f3f5]",
     image: "/assets/card1-removebg-preview.png",
   },
   {
     title: "ज्योतिष = जीवनसंतुलनाचे रहस्य",
     description:
       "प्रकृती, नशिब आणि कर्तृत्व यांचा समतोल राखून सुखद जीवन जगण्यासाठी ज्योतिष उपयुक्त ठरते.",
-    bgColor: "from-[#FAD1E5] to-[#F4B6CD]",
+    bgColor: "from-[f9f3f5] to-[#f9f3f5]",
     image: "/assets/card2-removebg-preview.png",
   },
   {
     title: "ज्योतिष = ग्रहांचा संजीवनी प्रभाव",
     description:
       "ग्रह आणि नक्षत्रांचा प्रभाव ओळखून जीवन समृद्ध करण्याची कला ज्योतिष शिकवते.",
-    bgColor: "from-[#F4B6CD] to-[#EBA1C0]",
+    bgColor: "from-[f9f3f5] to-[#f9f3f5]",
     image: "/assets/card_6-removebg-preview.png",
   },
   {
     title: "ज्योतिष = कालज्ञानाचे गूढ शास्त्र",
     description:
       "भूतकाळ, वर्तमान आणि भविष्य यांचा ताळमेळ घालून योग्य मार्गदर्शन करणारे शास्त्र म्हणजे ज्योतिष.",
-    bgColor: "from-[#EBA1C0] to-[#FFD6E8]",
+    bgColor: "from-[f9f3f5] to-[#f9f3f5]",
     image: "/assets/card5-removebg-preview.png",
   },
 ];

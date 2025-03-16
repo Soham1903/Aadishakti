@@ -4,7 +4,7 @@ import { User } from "../model/userSchema.js";
 const signup = async (req, res, next) => {
   try {
     const { name, email, phoneno, gender, password } = req.body;
-
+    // console.log (req.body);
     // Validate required fields
     if (!name || !email || !phoneno || !gender || !password) {
       return res.status(400).json({ message: "All fields are required" });

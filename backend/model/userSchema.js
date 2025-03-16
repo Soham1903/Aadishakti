@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter your password"],
     minlength: [8, "Password must be at least 8 characters"], // Fixed to match frontend
-    select: false, // Exclude password from responses
+   
   },
   gender: {
     type: String,

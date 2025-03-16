@@ -23,7 +23,7 @@ const SignupForm = () => {
       setLoading(false);
       return;
     }
-    if (!validatePhone(formData.phone)) {
+    if (!validatePhone(formData.phoneno)) {
       setError("Phone number must be 10 digits");
       setLoading(false);
       return;
@@ -94,7 +94,7 @@ const SignupForm = () => {
 
           <div>
             <label className="block text-sm font-medium text-[#921A40]">Phone Number</label>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange} required className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]" />
+            <input type="text" name="phoneno" value={formData.phone} onChange={handleChange} required className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]" />
           </div>
 
           <div>
