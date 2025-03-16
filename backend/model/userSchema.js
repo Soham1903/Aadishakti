@@ -19,31 +19,29 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please enter your password"],
-    minlength: [4, "Password must be at least 4 characters"],
-    select: true, // Include password by default for login
+    minlength: [8, "Password must be at least 8 characters"], // Fixed to match frontend
+    select: false, // Exclude password from responses
   },
   gender: {
     type: String,
-    required: [true, "Please enter your password"],
+    required: [true, "Please select your gender"], // Fixed error message
   },
   phoneno: {
     type: String,
-    required: [true, "Please enter your phone no"],
-    minlength: [10, "Password must be at least 10 characters"],
-
+    required: [true, "Please enter your phone number"],
+    match: [/^[0-9]{10}$/, "Phone number must be exactly 10 digits"], // Ensuring 10-digit validation
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  resetPasswordToken: String, // Token for password reset
-  resetPasswordExpires: Date, // Expiration time for reset token
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 // Hash password before saving
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-
   try {
     this.password = await bcrypt.hash(this.password, 10);
     next();
