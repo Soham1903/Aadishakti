@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import logo from '/assets/aadishaktipng.png'; // Import the logo from your old code
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import logo from "/assets/aadishaktipng.png";
+import { useUser } from "../UserContext.jsx"; // Import the logo from your old code
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
   const [dropdownOpen, setDropdownOpen] = useState(false); // For login/signup dropdown
+  const { user } = useUser();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,7 +25,7 @@ const Navbar = () => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
               <img
-                src={logo} 
+                src={logo}
                 alt="Gurukul Logo"
                 className="relative h-12 w-12 rounded-full border-2 border-white/50"
               />
@@ -31,6 +33,7 @@ const Navbar = () => {
             <span className="text-2xl font-bold bg-gradient-to-r from-white to-pink-200 text-transparent bg-clip-text">
               Gurukulin
             </span>
+            <h1>Welcome, {user ? user.name : "Guest"}!</h1>
           </div>
 
           {/* Desktop Menu */}
