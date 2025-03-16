@@ -6,6 +6,7 @@ import { dbConnection } from "./database/dbConnection.js";
 import signupRoute from "./routes/authRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import promocodeRoutes from "./routes/promocodeRoutes.js";
 import axios from "axios";
 const app = express();
 import multer from "multer";
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/", signupRoute); // Auth Routes
 app.use("/api/images", imageRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/promocode", promocodeRoutes);
 
 dbConnection();
 export default app;
