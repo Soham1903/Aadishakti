@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:4000/api/courses/get") // Adjust URL if needed
@@ -9,6 +11,10 @@ export default function Courses() {
       .then((data) => setCourses(data))
       .catch((err) => console.error("Error fetching courses:", err));
   }, []);
+
+  const handlieCourseClick = (title) => {
+    navigate(`/courses/${title}`);
+  };
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -24,6 +30,7 @@ export default function Courses() {
             <div
               key={course._id}
               className="bg-white shadow-lg rounded-lg overflow-hidden"
+              onClick={() => handlieCourseClick(course.title)}
             >
               {/* Course Image */}
               <img

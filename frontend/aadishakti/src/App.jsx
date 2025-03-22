@@ -14,6 +14,7 @@ import UploadCourse from "./components/UploadCourse";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import Footer from "./components/Footer";
+import CourseDetails from "./components/CourseDetails";
 import { UserProvider } from "./UserContext.jsx";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/upload" element={<UploadImage />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:title" element={<CourseDetails />} />
           <Route path="/course-form" element={<CourseForm />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
