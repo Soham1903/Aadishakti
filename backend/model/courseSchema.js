@@ -14,8 +14,11 @@ const CourseSchema = new mongoose.Schema({
     contentType: String, // MIME type of the image
     imageBase64: String, // Image stored as a base64 string
   },
+  instructor: { type: String, required: true }, // New Field
+  timing: { type: String, required: true }, // New Field (e.g. 10:00 AM)
   price: { type: Number, required: true },
   duration: { type: String, required: true },
+  benefits: { type: String, required: true }, // New Field (e.g. key benefits)
   syllabus: { type: String, required: true },
 });
 

@@ -3,7 +3,16 @@ import Course from "../model/CourseSchema.js";
 // Add Course
 export const addCourse = async (req, res) => {
   try {
-    const { title, description, price, duration, syllabus } = req.body;
+    const {
+      title,
+      description,
+      price,
+      duration,
+      syllabus,
+      instructor,
+      timing,
+      benefits,
+    } = req.body;
 
     const image = req.file
       ? {
@@ -21,10 +30,14 @@ export const addCourse = async (req, res) => {
       price,
       duration,
       syllabus,
+      instructor,
+      timing,
+      benefits,
       image,
     });
 
     await newCourse.save();
+    console.log(newCourse);
     res
       .status(201)
       .json({ message: "Course added successfully!", course: newCourse });
@@ -34,6 +47,7 @@ export const addCourse = async (req, res) => {
   }
 };
 
+// Get All Courses
 export const getCourses = async (req, res) => {
   try {
     const courses = await Course.find();
