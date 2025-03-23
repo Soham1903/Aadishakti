@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCart } from "../contexts/CartContext";
 import { useParams } from 'react-router-dom';
 import { 
   Star, 
@@ -16,6 +17,7 @@ import {
 
 export default function CourseDetails() {
   const { title } = useParams();
+  const { addToCart } = useCart(); // ✅ Import the addToCart function
   const [course, setCourse] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
@@ -36,6 +38,10 @@ export default function CourseDetails() {
         setLoading(false);
       });
   }, [title]);
+
+  const handleAddToCart = () => {
+    addToCart(course); // ✅ Call the addToCart with course data
+  };
 
   if (loading) {
     return (
@@ -119,7 +125,7 @@ export default function CourseDetails() {
               </ul>
             </div>
 
-            {/* What's Included (Updated) */}
+            {/* What's Included */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-[#921a40] mb-6">What's Included</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -169,7 +175,11 @@ export default function CourseDetails() {
                 Buy Now
               </button>
 
-              <button className="w-full px-6 py-4 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2">
+              {/* ✅ "Add to Cart" button with onClick */}
+              <button 
+                onClick={handleAddToCart}
+                className="w-full px-6 py-4 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
+              >
                 <ShoppingCart className="w-6 h-6" />
                 Add to Cart
               </button>

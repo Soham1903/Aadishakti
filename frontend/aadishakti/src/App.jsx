@@ -16,11 +16,14 @@ import ContactUs from "./components/ContactUs";
 import Footer from "./components/Footer";
 import CourseDetails from "./components/CourseDetails";
 import { UserProvider } from "./UserContext.jsx";
+import { CartProvider } from "./contexts/CartContext";
 import Dashboard from './components/Dashboard';
+import Cart from "./components/Cart.jsx";
 
 function App() {
   return (
     <UserProvider>
+      <CartProvider>
       <Router>
         <Navbar />
         <Routes>
@@ -38,11 +41,15 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/upload-course" element={<UploadCourse />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/dashboard" element={<Dashboard />} />
           
         </Routes>
         <Footer />
       </Router>
+
+      </CartProvider>
+      
     </UserProvider>
   );
 }

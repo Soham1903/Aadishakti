@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../UserContext";
+import { useCart } from "../contexts/CartContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, setUser } = useUser();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -80,6 +82,19 @@ const Navbar = () => {
               <span className="relative z-10">MY DASHBOARD</span>
               <div className="absolute inset-0 h-full w-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-white/10 rounded-lg"></div>
             </button>
+
+            {/* Cart Icon */}
+            <div
+              className="relative cursor-pointer"
+              onClick={() => navigate("/cart")}
+            >
+              <FaShoppingCart size={22} />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItems.length}
+                </span>
+              )}
+            </div>
 
             {/* Login/Signup/Logout Button */}
             <div className="relative">
@@ -166,6 +181,20 @@ const Navbar = () => {
               >
                 MY DASHBOARD
               </button>
+
+              {/* Cart Icon Mobile */}
+              <div
+                className="relative flex items-center cursor-pointer px-3 py-2 hover:bg-white/10 rounded-md"
+                onClick={() => navigate("/cart")}
+              >
+                <FaShoppingCart size={20} />
+                {cartItems.length > 0 && (
+                  <span className="ml-2 bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    {cartItems.length}
+                  </span>
+                )}
+              </div>
+
               {user ? (
                 <button
                   onClick={handleLogout}
