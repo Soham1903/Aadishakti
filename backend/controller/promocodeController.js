@@ -41,7 +41,7 @@ export const createPromoCode = async (req, res) => {
  */
 export const applyPromoCode = async (req, res) => {
   try {
-    const { code, orderValue, userId } = req.body;
+    const { code, orderValue } = req.body;
 
     // Check if promo code exists
     const promo = await PromoCode.findOne({ code: code.toUpperCase() });
