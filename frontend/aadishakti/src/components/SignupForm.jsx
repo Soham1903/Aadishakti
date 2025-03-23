@@ -1,15 +1,22 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Loader2, AlertCircle } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Loader2, AlertCircle, Moon, Sun, Stars } from "lucide-react";
 
 const SignupForm = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ name: "", email: "", phoneno: "", gender: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneno: "",
+    gender: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const validateEmail = (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+  const validateEmail = (email) =>
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
   const validatePhone = (phone) => /^[0-9]{10}$/.test(phone);
   const validatePassword = (password) => password.length >= 8;
 
@@ -58,64 +65,146 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-[#F4D9D0] px-6">
-      <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-xl border border-[#D9ABAB]">
-        <h2 className="text-center text-3xl font-bold text-[#921A40]">Create Your Account</h2>
-        <p className="text-center text-sm text-[#C75B7A] mt-2">
-          Already have an account? {" "}
-          <button onClick={() => navigate("/login")} className="text-[#921A40] font-medium hover:underline">
-            Log in
-          </button>
-        </p>
+    <div className="min-h-screen relative overflow-hidden bg-[#f9f3f5] flex items-center justify-center px-4">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 right-10 text-yellow-500 opacity-30">
+          <Sun size={60} />
+        </div>
+        <div className="absolute bottom-1/4 right-1/4 text-pink-300 opacity-30">
+          <Stars size={40} />
+        </div>
+        <div className="absolute top-1/4 left-1/4 text-purple-300 opacity-30">
+          <Moon size={50} />
+        </div>
+      </div>
 
-        {error && (
-          <div className="bg-red-100 border-l-4 border-red-500 p-3 mt-4 flex items-center">
-            <AlertCircle className="h-5 w-5 text-red-500" />
-            <p className="ml-3 text-sm text-red-700">{error}</p>
-          </div>
-        )}
-
-        {success && (
-          <div className="bg-green-100 border-l-4 border-green-500 p-3 mt-4">
-            <p className="text-sm text-green-700">Account created! Redirecting...</p>
-          </div>
-        )}
-
-        <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-sm font-medium text-[#921A40]">Full Name</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]" />
+      <div className="w-full max-w-md relative">
+        <div className="backdrop-blur-lg bg-white/30 p-8 rounded-2xl border border-white/20 shadow-2xl">
+          <div className="flex justify-center mb-6">
+            <Stars className="text-[#921a40] h-12 w-12" />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-[#921A40]">Email</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]" />
-          </div>
+          <h2 className="text-center text-3xl font-bold text-[#921a40] mb-2">
+            Begin Your Journey
+          </h2>
+          <p className="text-center text-gray-700 mb-6">
+            Already have an account?{" "}
+            <Link to="/login" className="text-[#921a40] hover:text-[#b22550]">
+              Log in
+            </Link>
+          </p>
 
-          <div>
-            <label className="block text-sm font-medium text-[#921A40]">Phone Number</label>
-            <input type="text" name="phoneno" value={formData.phone} onChange={handleChange} required className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]" />
-          </div>
+          {error && (
+            <div className="bg-red-200 border-l-4 border-red-500 p-4 mb-6 rounded-r">
+              <div className="flex">
+                <AlertCircle className="h-5 w-5 text-red-700" />
+                <p className="ml-3 text-sm text-red-700">{error}</p>
+              </div>
+            </div>
+          )}
 
-          <div>
-            <label className="block text-sm font-medium text-[#921A40]">Gender</label>
-            <select name="gender" value={formData.gender} onChange={handleChange} required className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]">
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+          {success && (
+            <div className="bg-green-200 border-l-4 border-green-500 p-4 mb-6 rounded-r">
+              <p className="text-sm text-green-700">
+                Account created! Redirecting...
+              </p>
+            </div>
+          )}
 
-          <div>
-            <label className="block text-sm font-medium text-[#921A40]">Password</label>
-            <input type="password" name="password" value={formData.password} onChange={handleChange} required minLength="8" className="w-full p-2 mt-1 border border-[#D9ABAB] rounded-md focus:ring-[#C75B7A] focus:border-[#C75B7A]" />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-800 mb-2">
+                Full Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900 placeholder-gray-400"
+                placeholder="Enter your name"
+              />
+            </div>
 
-          <button type="submit" disabled={loading} className="w-full p-2 text-white bg-[#921A40] hover:bg-[#C75B7A] rounded-md font-medium focus:ring-2 focus:ring-offset-2 focus:ring-[#C75B7A] disabled:opacity-50 flex justify-center">
-            {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Sign Up"}
-          </button>
-        </form>
+            <div>
+              <label className="block text-sm font-medium text-gray-800 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900 placeholder-gray-400"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-800 mb-2">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                name="phoneno"
+                value={formData.phoneno}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900 placeholder-gray-400"
+                placeholder="Enter your phone number"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-800 mb-2">
+                Gender
+              </label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-800 mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                minLength="8"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900 placeholder-gray-400"
+                placeholder="Create a password"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 px-4 rounded-lg text-white bg-[#921a40] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#921a40] focus:ring-offset-[#f9f3f5] transition-colors disabled:opacity-50 flex items-center justify-center"
+            >
+              {loading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                "Start Your Cosmic Journey"
+              )}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -1,14 +1,26 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { 
+  Star, 
+  Clock, 
+  Calendar, 
+  Award, 
+  BookOpen, 
+  Video, 
+  Users,
+  CheckCircle,
+  ShoppingCart,
+  User,
+  GraduationCap
+} from 'lucide-react';
 
 export default function CourseDetails() {
-  const { title } = useParams(); // Get title from URL
-  const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { title } = useParams();
+  const [course, setCourse] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState("");
 
-  useEffect(() => {
-    // Fetch course details by title
+  React.useEffect(() => {
     fetch(`http://localhost:4000/api/courses/${title}`)
       .then((res) => res.json())
       .then((data) => {
@@ -26,51 +38,145 @@ export default function CourseDetails() {
   }, [title]);
 
   if (loading) {
-    return <p className="text-center">Loading...</p>;
+    return (
+      <div className="min-h-screen bg-[#f9f3f5] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#921a40] border-t-transparent"></div>
+      </div>
+    );
   }
 
   if (error) {
-    return <p className="text-center text-red-500">{error}</p>;
+    return (
+      <div className="min-h-screen bg-[#f9f3f5] flex items-center justify-center">
+        <div className="text-[#921a40] text-center">
+          <Star className="w-16 h-16 mx-auto mb-4" />
+          <p className="text-xl">{error}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-4xl font-bold mb-4 text-blue-600">{course.title}</h1>
+    <div className="min-h-screen bg-[#f9f3f5]">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        {/* Title and Image Section */}
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#921a40] mb-8 text-center">
+            {course.title}
+          </h1>
+          <div className="rounded-3xl overflow-hidden shadow-xl">
+            <img
+              src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
+              alt={course.title}
+              className="w-full h-96 object-cover"
+            />
+          </div>
+        </div>
 
-      {course.image && (
-        <img
-          src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
-          alt={course.title}
-          className="w-full h-64 object-cover rounded-lg mb-4"
-        />
-      )}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Instructor Info */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#921a40] mb-6 flex items-center gap-2">
+                <User className="w-6 h-6" />
+                Course Instructor
+              </h2>
+              <div className="flex items-center gap-4">
+                <div className="bg-[#921a40] rounded-full p-4">
+                  <GraduationCap className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800">{course.instructor}</h3>
+                  <p className="text-gray-600">Expert Astrology Instructor</p>
+                </div>
+              </div>
+            </div>
 
-      <p className="text-gray-700 mb-4 text-lg">{course.description}</p>
+            {/* Course Overview */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#921a40] mb-6 flex items-center gap-2">
+                <BookOpen className="w-6 h-6" />
+                Course Overview
+              </h2>
+              <div className="prose max-w-none">
+                <p className="text-gray-600">{course.description}</p>
+              </div>
+            </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <p>
-          <strong>📚 Syllabus:</strong> {course.syllabus}
-        </p>
-        <p>
-          <strong>👨‍🏫 Instructor:</strong> {course.instructor}
-        </p>
-        <p>
-          <strong>⏰ Timing:</strong> {course.timing}
-        </p>
-        <p>
-          <strong>🛍️ Benefits:</strong> {course.benefits}
-        </p>
-        <p>
-          <strong>⌛ Duration:</strong> {course.duration} hours
-        </p>
-        <p>
-          <strong>💰 Price:</strong> ${course.price}
-        </p>
+            {/* Syllabus */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#921a40] mb-6 flex items-center gap-2">
+                <BookOpen className="w-6 h-6" />
+                Course Syllabus
+              </h2>
+              <ul className="list-disc list-inside space-y-2">
+                {course.syllabus.split('\n').map((item, index) => (
+                  <li key={index} className="text-gray-600">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* What's Included (Updated) */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#921a40] mb-6">What's Included</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center p-6 bg-[#921a40] rounded-xl">
+                  <Award className="w-12 h-12 text-white mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-white mb-2">Certification</h3>
+                  <p className="text-white">Receive an official certification upon completion</p>
+                </div>
+                <div className="text-center p-6 bg-[#921a40] rounded-xl">
+                  <Video className="w-12 h-12 text-white mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-white mb-2">Recordings</h3>
+                  <p className="text-white">Lifetime access to course recordings</p>
+                </div>
+                <div className="text-center p-6 bg-[#921a40] rounded-xl">
+                  <Users className="w-12 h-12 text-white mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-white mb-2">Live Sessions</h3>
+                  <p className="text-white">Interactive live sessions with experts</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl p-8 sticky top-8 shadow-lg">
+              <div className="text-center mb-8">
+                <div className="text-4xl font-bold text-[#921a40] mb-2">${course.price}</div>
+                <div className="text-gray-600">One-time payment</div>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3 text-gray-600">
+                  <Clock className="w-5 h-5 text-[#921a40]" />
+                  <span>{course.duration} hours of content</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-600">
+                  <Calendar className="w-5 h-5 text-[#921a40]" />
+                  <span>Starts {course.timing}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-600">
+                  <CheckCircle className="w-5 h-5 text-[#921a40]" />
+                  <span>Lifetime access</span>
+                </div>
+              </div>
+
+              <button className="w-full px-6 py-4 bg-[#921a40] hover:bg-[#921a40]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4">
+                Buy Now
+              </button>
+
+              <button className="w-full px-6 py-4 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2">
+                <ShoppingCart className="w-6 h-6" />
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <button className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
-        Enroll Now
-      </button>
     </div>
   );
 }

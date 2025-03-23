@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Loader2, AlertCircle, Moon, Sun, Stars } from "lucide-react";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    console.log("Sending email:", email);
+    setLoading(true);
     try {
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/forgot-password/",
@@ -23,41 +26,78 @@ const ForgotPassword = () => {
       setEmail("");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <section className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">
-          Forgot Password
-        </h3>
-        <p className="text-gray-600 text-center mb-6">
-          Enter your email, and we will send you a reset link.
-        </p>
-        <form onSubmit={handleForgotPassword} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Email Address
-            </label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-2 px-4 text-white font-medium bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md transition duration-200"
-          >
-            Send Reset Link
-          </button>
-        </form>
+    <div className="min-h-screen relative overflow-hidden bg-[#f9f3f5] flex items-center justify-center px-4">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 text-yellow-500 opacity-20">
+          <Sun size={60} />
+        </div>
+        <div className="absolute bottom-1/4 right-1/4 text-purple-700 opacity-20">
+          <Stars size={40} />
+        </div>
+        <div className="absolute top-1/4 left-1/4 text-gray-500 opacity-20">
+          <Moon size={50} />
+        </div>
       </div>
-    </section>
+
+      <div className="w-full max-w-md relative">
+        <div className="backdrop-blur-lg bg-white/80 p-8 rounded-2xl border border-gray-200 shadow-2xl">
+          <div className="flex justify-center mb-6">
+            <Stars className="text-[#921a40] h-12 w-12" />
+          </div>
+
+          <h2 className="text-center text-3xl font-bold text-[#921a40] mb-2">
+            Recover Your Path
+          </h2>
+          <p className="text-center text-gray-600 mb-6">
+            Enter your email, and we'll send you a reset link
+          </p>
+
+          <form onSubmit={handleForgotPassword} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-800 placeholder-gray-400"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 px-4 rounded-lg text-white bg-[#921a40] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#921a40] focus:ring-offset-[#f9f3f5] transition-colors disabled:opacity-50 flex items-center justify-center"
+            >
+              {loading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                "Send Reset Link"
+              )}
+            </button>
+
+            <div className="text-center">
+              <Link
+                to="/login"
+                className="text-sm text-gray-600 hover:text-[#921a40]"
+              >
+                Return to Login
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "/assets/aadishaktipng.png";
-import { useUser } from "../UserContext.jsx"; // Import the logo from your old code
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../UserContext";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); // For mobile menu
-  const [dropdownOpen, setDropdownOpen] = useState(false); // For login/signup dropdown
-  const { user } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,6 +15,20 @@ const Navbar = () => {
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  };
+
+  const handleDashboardClick = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -25,7 +40,7 @@ const Navbar = () => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
               <img
-                src={logo}
+                src="/assets/aadishaktipng.png"
                 alt="Gurukul Logo"
                 className="relative h-12 w-12 rounded-full border-2 border-white/50"
               />
@@ -33,7 +48,11 @@ const Navbar = () => {
             <span className="text-2xl font-bold bg-gradient-to-r from-white to-pink-200 text-transparent bg-clip-text">
               Gurukulin
             </span>
-            <h1>Welcome, {user ? user.name : "Guest"}!</h1>
+            {user && (
+              <span className="text-lg font-medium ml-4">
+                Welcome, {user.name}!
+              </span>
+            )}
           </div>
 
           {/* Desktop Menu */}
@@ -54,35 +73,50 @@ const Navbar = () => {
               <span className="relative z-10">CONTACT</span>
               <div className="absolute inset-0 h-full w-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-white/10 rounded-lg"></div>
             </a>
-            <a href="/dashboard" className="group relative px-2 py-1">
+            <button
+              onClick={handleDashboardClick}
+              className="group relative px-2 py-1"
+            >
               <span className="relative z-10">MY DASHBOARD</span>
               <div className="absolute inset-0 h-full w-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-white/10 rounded-lg"></div>
-            </a>
+            </button>
 
-            {/* Login/Signup Dropdown */}
+            {/* Login/Signup/Logout Button */}
             <div className="relative">
-              <button
-                onClick={toggleDropdown}
-                className="relative group px-6 py-2 overflow-hidden rounded-full bg-white/10 transition duration-300"
-              >
-                <div className="absolute inset-0 w-full h-full transition-all duration-300 scale-x-0 transform group-hover:scale-x-100 group-hover:bg-white/20"></div>
-                <span className="relative">LOGIN/SIGNUP</span>
-              </button>
-              {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg">
-                  <a
-                    href="/login"
-                    className="block px-4 py-2 text-[#921a40] hover:bg-gray-200"
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="relative group px-6 py-2 overflow-hidden rounded-full bg-white/10 transition duration-300"
+                >
+                  <div className="absolute inset-0 w-full h-full transition-all duration-300 scale-x-0 transform group-hover:scale-x-100 group-hover:bg-white/20"></div>
+                  <span className="relative">LOGOUT</span>
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={toggleDropdown}
+                    className="relative group px-6 py-2 overflow-hidden rounded-full bg-white/10 transition duration-300"
                   >
-                    Login
-                  </a>
-                  <a
-                    href="/signup"
-                    className="block px-4 py-2 text-[#921a40] hover:bg-gray-200"
-                  >
-                    Signup
-                  </a>
-                </div>
+                    <div className="absolute inset-0 w-full h-full transition-all duration-300 scale-x-0 transform group-hover:scale-x-100 group-hover:bg-white/20"></div>
+                    <span className="relative">LOGIN/SIGNUP</span>
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg">
+                      <a
+                        href="/login"
+                        className="block px-4 py-2 text-[#921a40] hover:bg-gray-200"
+                      >
+                        Login
+                      </a>
+                      <a
+                        href="/signup"
+                        className="block px-4 py-2 text-[#921a40] hover:bg-gray-200"
+                      >
+                        Signup
+                      </a>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -126,33 +160,44 @@ const Navbar = () => {
               >
                 CONTACT
               </a>
-              <a
-                href="/dashboard"
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 transition duration-300"
+              <button
+                onClick={handleDashboardClick}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-white/10 transition duration-300"
               >
                 MY DASHBOARD
-              </a>
-              <button
-                onClick={toggleDropdown}
-                className="w-full mt-4 mb-2 px-3 py-2 text-center rounded-md bg-white/10 hover:bg-white/20 transition duration-300"
-              >
-                LOGIN/SIGNUP
               </button>
-              {dropdownOpen && (
-                <div className="mt-2 space-y-1">
-                  <a
-                    href="/login"
-                    className="block px-4 py-2 text-white hover:bg-white/10 rounded-md"
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="block w-full px-3 py-2 text-left rounded-md text-base font-medium hover:bg-white/10 transition duration-300"
+                >
+                  LOGOUT
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={toggleDropdown}
+                    className="w-full mt-4 mb-2 px-3 py-2 text-center rounded-md bg-white/10 hover:bg-white/20 transition duration-300"
                   >
-                    Login
-                  </a>
-                  <a
-                    href="/signup"
-                    className="block px-4 py-2 text-white hover:bg-white/10 rounded-md"
-                  >
-                    Signup
-                  </a>
-                </div>
+                    LOGIN/SIGNUP
+                  </button>
+                  {dropdownOpen && (
+                    <div className="mt-2 space-y-1">
+                      <a
+                        href="/login"
+                        className="block px-4 py-2 text-white hover:bg-white/10 rounded-md"
+                      >
+                        Login
+                      </a>
+                      <a
+                        href="/signup"
+                        className="block px-4 py-2 text-white hover:bg-white/10 rounded-md"
+                      >
+                        Signup
+                      </a>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
