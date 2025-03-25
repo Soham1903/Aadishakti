@@ -1,6 +1,11 @@
 import express from "express";
 import multer from "multer";
-import { addCourse, getCourses, getCourseByTitle } from "../controller/courseController.js";
+import {
+  addCourse,
+  getCourses,
+  getCourseByTitle,
+} from "../controller/courseController.js";
+import verifyToken from "../middlewares/authmiddleware.js";
 
 const router = express.Router();
 
@@ -9,7 +14,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Course routes
-router.post("/add", upload.single("image"), addCourse);
+router.post("/add", verifyToken, upload.single("image"), addCourse);
 router.get("/get", getCourses);
 router.get("/:title", getCourseByTitle);
 

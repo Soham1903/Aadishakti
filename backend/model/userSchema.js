@@ -34,8 +34,11 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  role: {
+    type: String,
+    required: true,
+    enum: ["admin", "user"],
+  },
 });
 
 // Hash password before saving

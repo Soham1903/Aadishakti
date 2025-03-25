@@ -9,7 +9,7 @@ const isValidEmail = (email) => {
 
 const signup = async (req, res, next) => {
   try {
-    const { name, email, phoneno, gender, password } = req.body;
+    const { name, email, phoneno, gender, password, role = "user" } = req.body;
 
     // Validate required fields
     if (!name || !email || !phoneno || !gender || !password) {
@@ -36,11 +36,17 @@ const signup = async (req, res, next) => {
       phoneno,
       gender,
       password,
+      role, // Assigning default role as 'user' if not provided
     });
 
     return res.status(201).json({
       message: "✅ User registered successfully.",
-      user: { id: newUser._id, name: newUser.name, email: newUser.email },
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+      },
     });
   } catch (error) {
     console.error(error);

@@ -31,6 +31,8 @@ const LoginForm = () => {
       if (!response.ok) throw new Error(data.message || "Invalid credentials");
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      console.log(data.user);
       setUser(data.user);
       setSuccess(true);
       setTimeout(() => navigate("/"), 2000);

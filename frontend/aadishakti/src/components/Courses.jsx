@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Search, Filter } from 'lucide-react';
+import { ShoppingCart, Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Courses() {
@@ -112,9 +112,7 @@ export default function Courses() {
                     >
                       View Details
                     </button>
-                    <button
-                      className="w-full px-4 py-2 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2"
-                    >
+                    <button className="w-full px-4 py-2 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2">
                       <ShoppingCart className="w-5 h-5" />
                       Add to Cart
                     </button>
