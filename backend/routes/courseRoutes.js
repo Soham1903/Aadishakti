@@ -6,6 +6,7 @@ import {
   getCourseByTitle,
 } from "../controller/courseController.js";
 import verifyToken from "../middlewares/authmiddleware.js";
+import { loginLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
 
@@ -14,7 +15,13 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Course routes
-router.post("/add", verifyToken, upload.single("image"), addCourse);
+router.post(
+  "/add",
+  loginLimiter,
+  verifyToken,
+  upload.single("image"),
+  addCourse
+);
 router.get("/get", getCourses);
 router.get("/:title", getCourseByTitle);
 
