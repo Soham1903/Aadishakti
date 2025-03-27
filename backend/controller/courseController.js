@@ -75,21 +75,41 @@ export const getCourseByTitle = async (req, res) => {
   }
 };
 
+// controllers/courseController.js
 export const updateCourse = async (req, res) => {
   try {
-    const { id } = req.params;
-    const updates = req.body;
-
-    const course = await Course.findByIdAndUpdate(id, updates, { new: true });
-
+    const courseId = req.params.id;
+    
+    // Find the course
+    let course = await Course.findById(courseId);
     if (!course) {
-      return res.status(404).json({ error: "Course not found" });
+      return res.status(404).json({ message: 'Course not found' });
     }
 
-    res.json({ message: "Course updated successfully!", course });
+    // Update fields
+    course.title = req.body.title || course.title;
+    course.instructor = req.body.instructor || course.instructor;
+    course.description = req.body.description || course.description;
+    course.syllabus = req.body.syllabus || course.syllabus;
+    course.price = req.body.price || course.price;
+    course.duration = req.body.duration || course.duration;
+    course.timing = req.body.timing || course.timing;
+
+    // Handle image update if needed
+    if (req.file) {
+      course.image = {
+        contentType: req.file.mimetype,
+        imageBase64: req.file.buffer.toString('base64')
+      };
+    }
+
+    // Save the updated course
+    const updatedCourse = await course.save();
+
+    res.status(200).json(updatedCourse);
   } catch (error) {
-    console.error("Error updating course:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 

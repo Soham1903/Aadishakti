@@ -43,6 +43,50 @@ export default function CourseDetails() {
       });
   }, [title]);
 
+  const handleSaveChanges = async () => {
+    try {
+      const formData = new FormData();
+
+      // Append all editable fields to formData
+      formData.append("title", course.title);
+      formData.append("instructor", course.instructor);
+      formData.append("description", course.description);
+      formData.append("syllabus", course.syllabus);
+      formData.append("price", course.price);
+      formData.append("duration", course.duration);
+      formData.append("timing", course.timing);
+
+      // If you want to allow image updates, you'd need to add:
+      // if (imageFile) {
+      //   formData.append('image', imageFile);
+      // }
+
+      const response = await fetch(
+        `http://localhost:4000/api/courses/update/${course._id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Include auth token
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update course");
+      }
+
+      const updatedCourse = await response.json();
+      setCourse(updatedCourse);
+      setIsEditing(false);
+      alert("Course updated successfully!");
+    } catch (error) {
+      console.error("Error updating course:", error);
+      alert(error.message || "Error updating course");
+    }
+  };
+
   const handleAddToCart = () => {
     addToCart(course); // ✅ Call the addToCart with course data
   };
@@ -309,7 +353,7 @@ export default function CourseDetails() {
                         ? "bg-green-600 hover:bg-green-700" // Green for Save
                         : "bg-blue-600 hover:bg-blue-700" // Blue for Edit
                     }`}
-                    onClick={toggleEdit}
+                    onClick={isEditing ? handleSaveChanges : toggleEdit}
                   >
                     {isEditing ? "Save" : "Edit"}
                   </button>
