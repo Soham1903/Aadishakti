@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
+import { UserContext } from "../UserContext";
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
@@ -9,6 +10,7 @@ export default function Courses() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetch("http://localhost:4000/api/courses/get")

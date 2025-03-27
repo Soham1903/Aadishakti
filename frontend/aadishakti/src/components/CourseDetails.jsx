@@ -1,19 +1,21 @@
-import React from 'react';
+import React from "react";
 import { useCart } from "../contexts/CartContext";
-import { useParams } from 'react-router-dom';
-import { 
-  Star, 
-  Clock, 
-  Calendar, 
-  Award, 
-  BookOpen, 
-  Video, 
+import { useParams } from "react-router-dom";
+import { UserContext } from "../UserContext";
+import { useContext, useState } from "react";
+import {
+  Star,
+  Clock,
+  Calendar,
+  Award,
+  BookOpen,
+  Video,
   Users,
   CheckCircle,
   ShoppingCart,
   User,
-  GraduationCap
-} from 'lucide-react';
+  GraduationCap,
+} from "lucide-react";
 
 export default function CourseDetails() {
   const { title } = useParams();
@@ -21,6 +23,8 @@ export default function CourseDetails() {
   const [course, setCourse] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const { user } = useContext(UserContext);
 
   React.useEffect(() => {
     fetch(`http://localhost:4000/api/courses/${title}`)
@@ -41,6 +45,37 @@ export default function CourseDetails() {
 
   const handleAddToCart = () => {
     addToCart(course); // ✅ Call the addToCart with course data
+  };
+
+  const toggleEdit = () => {
+    setIsEditing((prev) => !prev);
+  };
+
+  const handleChange = (e) => {
+    setCourse({ ...course, [e.target.name]: e.target.value });
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this course?")) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/courses/${course.title}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        alert("Course deleted successfully!");
+        window.location.href = "/"; // Redirect to home or courses list
+      } else {
+        const data = await response.json();
+        alert(data.error || "Failed to delete course.");
+      }
+    } catch (error) {
+      alert("An error occurred while deleting the course.");
+    }
   };
 
   if (loading) {
@@ -68,7 +103,16 @@ export default function CourseDetails() {
         {/* Title and Image Section */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-[#921a40] mb-8 text-center">
-            {course.title}
+            {isEditing ? (
+              <input
+                className="border rounded p-2 w-full"
+                name="title"
+                value={course.title}
+                onChange={handleChange}
+              />
+            ) : (
+              course.title
+            )}
           </h1>
           <div className="rounded-3xl overflow-hidden shadow-xl">
             <img
@@ -93,7 +137,18 @@ export default function CourseDetails() {
                   <GraduationCap className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-800">{course.instructor}</h3>
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {isEditing ? (
+                      <input
+                        className="border rounded p-2 w-full"
+                        name="title"
+                        value={course.instructor}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      course.instructor
+                    )}
+                  </h3>
                   <p className="text-gray-600">Expert Astrology Instructor</p>
                 </div>
               </div>
@@ -106,7 +161,18 @@ export default function CourseDetails() {
                 Course Overview
               </h2>
               <div className="prose max-w-none">
-                <p className="text-gray-600">{course.description}</p>
+                <p className="text-gray-600">
+                  {isEditing ? (
+                    <textarea
+                      className="border rounded p-2 w-full"
+                      name="description"
+                      value={course.description}
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    course.description
+                  )}
+                </p>
               </div>
             </div>
 
@@ -116,33 +182,56 @@ export default function CourseDetails() {
                 <BookOpen className="w-6 h-6" />
                 Course Syllabus
               </h2>
-              <ul className="list-disc list-inside space-y-2">
-                {course.syllabus.split('\n').map((item, index) => (
-                  <li key={index} className="text-gray-600">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              {isEditing ? (
+                <textarea
+                  className="border rounded p-2 w-full"
+                  name="syllabus"
+                  value={course.syllabus}
+                  onChange={handleChange}
+                />
+              ) : (
+                <ul className="list-disc list-inside space-y-2">
+                  {course.syllabus.split("\n").map((item, index) => (
+                    <li key={index} className="text-gray-600">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* What's Included */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#921a40] mb-6">What's Included</h2>
+              <h2 className="text-2xl font-bold text-[#921a40] mb-6">
+                What's Included
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center p-6 bg-[#921a40] rounded-xl">
                   <Award className="w-12 h-12 text-white mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">Certification</h3>
-                  <p className="text-white">Receive an official certification upon completion</p>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    Certification
+                  </h3>
+                  <p className="text-white">
+                    Receive an official certification upon completion
+                  </p>
                 </div>
                 <div className="text-center p-6 bg-[#921a40] rounded-xl">
                   <Video className="w-12 h-12 text-white mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">Recordings</h3>
-                  <p className="text-white">Lifetime access to course recordings</p>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    Recordings
+                  </h3>
+                  <p className="text-white">
+                    Lifetime access to course recordings
+                  </p>
                 </div>
                 <div className="text-center p-6 bg-[#921a40] rounded-xl">
                   <Users className="w-12 h-12 text-white mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">Live Sessions</h3>
-                  <p className="text-white">Interactive live sessions with experts</p>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    Live Sessions
+                  </h3>
+                  <p className="text-white">
+                    Interactive live sessions with experts
+                  </p>
                 </div>
               </div>
             </div>
@@ -152,18 +241,47 @@ export default function CourseDetails() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl p-8 sticky top-8 shadow-lg">
               <div className="text-center mb-8">
-                <div className="text-4xl font-bold text-[#921a40] mb-2">${course.price}</div>
+                <div className="text-4xl font-bold text-[#921a40] mb-2">
+                  {isEditing ? (
+                    <input
+                      className="border rounded p-2 w-full"
+                      name="price"
+                      value={course.price}
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    `$${course.price}`
+                  )}
+                </div>
                 <div className="text-gray-600">One-time payment</div>
               </div>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-gray-600">
                   <Clock className="w-5 h-5 text-[#921a40]" />
-                  <span>{course.duration} hours of content</span>
+                  {isEditing ? (
+                    <input
+                      className="border rounded p-2 w-full"
+                      name="duration"
+                      value={course.duration}
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    <span>{course.duration} hours of content</span>
+                  )}
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
                   <Calendar className="w-5 h-5 text-[#921a40]" />
-                  <span>Starts {course.timing}</span>
+                  {isEditing ? (
+                    <input
+                      className="border rounded p-2 w-full"
+                      name="duration"
+                      value={course.timing}
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    <span>{course.timing} hours of content</span>
+                  )}
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
                   <CheckCircle className="w-5 h-5 text-[#921a40]" />
@@ -176,13 +294,33 @@ export default function CourseDetails() {
               </button>
 
               {/* ✅ "Add to Cart" button with onClick */}
-              <button 
+              <button
                 onClick={handleAddToCart}
                 className="w-full px-6 py-4 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
               >
                 <ShoppingCart className="w-6 h-6" />
                 Add to Cart
               </button>
+              {user?.role === "admin" && (
+                <>
+                  <button
+                    className={`w-full px-6 py-4 mt-5 text-white rounded-xl font-bold text-lg transition-all duration-200 ${
+                      isEditing
+                        ? "bg-green-600 hover:bg-green-700" // Green for Save
+                        : "bg-blue-600 hover:bg-blue-700" // Blue for Edit
+                    }`}
+                    onClick={toggleEdit}
+                  >
+                    {isEditing ? "Save" : "Edit"}
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className="w-full px-6 py-4 mt-5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-lg transition-all duration-200"
+                  >
+                    Delete
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -4,6 +4,8 @@ import {
   addCourse,
   getCourses,
   getCourseByTitle,
+  updateCourse,
+  deleteCourse,
 } from "../controller/courseController.js";
 import verifyToken from "../middlewares/authmiddleware.js";
 import { loginLimiter } from "../middlewares/rateLimiter.js";
@@ -24,5 +26,13 @@ router.post(
 );
 router.get("/get", getCourses);
 router.get("/:title", getCourseByTitle);
+router.put(
+  "/update/:id",
+  loginLimiter,
+  verifyToken,
+  upload.single("image"),
+  updateCourse
+);
+router.delete("/delete/:id", loginLimiter, verifyToken, deleteCourse);
 
 export default router;
