@@ -294,7 +294,7 @@ export default function CourseDetails() {
                       onChange={handleChange}
                     />
                   ) : (
-                    `$${course.price}`
+                    `₹${course.price}`
                   )}
                 </div>
                 <div className="text-gray-600">One-time payment</div>
