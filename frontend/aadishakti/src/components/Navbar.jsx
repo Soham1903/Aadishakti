@@ -65,29 +65,29 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex items-center space-x-6">
-              <a 
-                href="/" 
+              <a
+                href="/"
                 className="nav-link relative group px-3 py-2 transition-colors duration-300 hover:bg-white/10 rounded-md"
               >
                 <span className="relative z-10">HOME</span>
                 <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300"></div>
               </a>
-              <a 
-                href="/courses" 
+              <a
+                href="/courses"
                 className="nav-link relative group px-3 py-2 transition-colors duration-300 hover:bg-white/10 rounded-md"
               >
                 <span className="relative z-10">COURSES</span>
                 <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300"></div>
               </a>
-              <a 
-                href="/about" 
+              <a
+                href="/about"
                 className="nav-link relative group px-3 py-2 transition-colors duration-300 hover:bg-white/10 rounded-md"
               >
                 <span className="relative z-10">ABOUT</span>
                 <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300"></div>
               </a>
-              <a 
-                href="/contact" 
+              <a
+                href="/contact"
                 className="nav-link relative group px-3 py-2 transition-colors duration-300 hover:bg-white/10 rounded-md"
               >
                 <span className="relative z-10">CONTACT</span>
@@ -179,7 +179,11 @@ const Navbar = () => {
               onClick={toggleMenu}
               className="p-2 rounded-lg hover:bg-white/10 transition-colors"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>

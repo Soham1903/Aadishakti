@@ -47,7 +47,9 @@ export const applyPromoCode = async (req, res) => {
     const promo = await PromoCode.findOne({ code: code.toUpperCase() });
 
     if (!promo) {
-      return res.status(404).json({ error: "Invalid promo code" });
+      return res
+        .status(404)
+        .json({ error: "Invalid promo code", finalAmount: orderValue });
     }
 
     // Check if the promo code is active

@@ -104,7 +104,7 @@ export default function Courses() {
                     {course.title}
                   </h3>
                   <div className="text-xl font-semibold text-gray-800 mb-4">
-                  ₹ {course.price}
+                    ₹ {course.price}
                   </div>
 
                   <div className="space-y-3 mt-auto">

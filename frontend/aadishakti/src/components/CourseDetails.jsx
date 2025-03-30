@@ -235,11 +235,25 @@ export default function CourseDetails() {
                 />
               ) : (
                 <ul className="list-disc list-inside space-y-2">
-                  {course.syllabus.split("\n").map((item, index) => (
-                    <li key={index} className="text-gray-600">
-                      {item}
-                    </li>
-                  ))}
+                  {course.syllabus.split("\n").map((item, index, arr) => {
+                    const isAathvda = item.includes("आठवडा"); // Check if the line contains 'आठवडा'
+                    const previousHadAathvda =
+                      index > 0 && arr[index - 1].includes("आठवडा"); // Check if the previous line was also 'आठवडा'
+
+                    return (
+                      <React.Fragment key={index}>
+                        {/* Add empty space before "आठवडा" (except for the first occurrence) */}
+                        {isAathvda && index !== 0 && !previousHadAathvda && (
+                          <li className="h-4 list-none"></li>
+                        )}
+
+                        {/* Add the actual list item */}
+                        {item.trim() && (
+                          <li className="text-gray-600">{item}</li>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
                 </ul>
               )}
             </div>
