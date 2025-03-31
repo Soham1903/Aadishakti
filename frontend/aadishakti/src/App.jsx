@@ -18,6 +18,7 @@ import PromoCodeForm from "./components/PromoCodeForm.jsx";
 import { UserProvider } from "./UserContext.jsx";
 import { CartProvider } from "./contexts/CartContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BuyPage from "./components/BuyPage.jsx";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:title" element={<CourseDetails />} />
+            <Route path="/courses/:title/buy" element={<BuyPage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />

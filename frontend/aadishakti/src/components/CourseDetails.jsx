@@ -1,6 +1,6 @@
 import React from "react";
 import { useCart } from "../contexts/CartContext";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { useContext, useState } from "react";
 import {
@@ -25,6 +25,7 @@ export default function CourseDetails() {
   const [error, setError] = React.useState("");
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     fetch(`http://localhost:4000/api/courses/${title}`)
@@ -120,6 +121,10 @@ export default function CourseDetails() {
     } catch (error) {
       alert("An error occurred while deleting the course.");
     }
+  };
+
+  const handleBuyNow = () => {
+    navigate(`/courses/${course.title}/buy`); // Dynamically inserting title
   };
 
   if (loading) {
@@ -347,7 +352,10 @@ export default function CourseDetails() {
                 </div>
               </div>
 
-              <button className="w-full px-6 py-4 bg-[#921a40] hover:bg-[#921a40]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4">
+              <button
+                className="w-full px-6 py-4 bg-[#921a40] hover:bg-[#921a40]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4"
+                onClick={handleBuyNow}
+              >
                 Buy Now
               </button>
 

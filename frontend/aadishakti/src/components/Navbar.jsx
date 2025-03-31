@@ -90,7 +90,7 @@ const Navbar = () => {
                 />
               </div>
               <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-white to-pink-200 text-transparent bg-clip-text">
-                Gurukulin
+                Aadishakti Gurukul
               </span>
             </a>
           </div>
@@ -141,7 +141,9 @@ const Navbar = () => {
                       <>
                         <div className="px-3 py-2 text-sm text-gray-700 border-b">
                           <p className="font-medium truncate">{user.name}</p>
-                          <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                          <p className="text-xs text-gray-500 truncate">
+                            {user.email}
+                          </p>
                         </div>
                         <button
                           onClick={handleDashboardClick}

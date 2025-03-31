@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     enum: ["admin", "user"],
   },
+  courses: {
+    type: [String], // Array of strings to store course titles
+    default: [], // Default to an empty array
+  },
 });
 
 // Hash password before saving
@@ -57,4 +61,5 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+export default User;

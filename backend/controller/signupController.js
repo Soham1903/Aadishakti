@@ -1,5 +1,5 @@
 import ErrorHandler from "../error/error.js";
-import { User } from "../model/userSchema.js";
+import User from "../model/userSchema.js";
 
 // Email Validation Function
 const isValidEmail = (email) => {
