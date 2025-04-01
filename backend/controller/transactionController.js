@@ -80,3 +80,63 @@ export const createTransaction = async (req, res) => {
     });
   }
 };
+
+// controllers/transactionController.js
+
+// Get all transactions
+export const getAllTransactions = async (req, res) => {
+  try {
+    const transactions = await Transaction.find()
+      .sort({ createdAt: -1 })
+      .populate("courseId", "title");
+    res.json(transactions);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+// Toggle verification status
+// controllers/transactionController.js
+export const toggleVerification = async (req, res) => {
+  try {
+    // Basic validation
+
+    const { isVerified } = req.body;
+    const transactionId = req.params.id;
+
+    // Find the transaction
+    const transaction = await Transaction.findById(transactionId);
+    if (!transaction) {
+      return res.status(404).json({
+        success: false,
+        message: "Transaction not found",
+      });
+    }
+
+    // Verify the user owns this transaction
+
+    // Update transaction
+    const updatedTransaction = await Transaction.findByIdAndUpdate(
+      transactionId,
+      {
+        isVerified,
+        verifiedAt: isVerified ? new Date() : null,
+      },
+      { new: true }
+    );
+
+    // If verifying, add course to user's purchased courses
+
+    res.json({
+      success: true,
+      updatedTransaction,
+    });
+  } catch (error) {
+    console.error("Verification error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};

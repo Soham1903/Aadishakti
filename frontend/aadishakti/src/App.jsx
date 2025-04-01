@@ -20,6 +20,7 @@ import { CartProvider } from "./contexts/CartContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BuyPage from "./components/BuyPage.jsx";
 import CourseLinks from "./components/CourseLinks.jsx";
+import TransactionsDashboard from "./components/TransactionDashboard.jsx";
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/transactiondashboard"
+              element={<TransactionsDashboard />}
+            />
             <Route
               path="/courses/:courseId/details"
               element={<CourseLinks />}
