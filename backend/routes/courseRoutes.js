@@ -6,6 +6,7 @@ import {
   getCourseByTitle,
   updateCourse,
   deleteCourse,
+  getUserCourses,
 } from "../controller/courseController.js";
 import verifyToken from "../middlewares/authmiddleware.js";
 import { loginLimiter } from "../middlewares/rateLimiter.js";
@@ -34,5 +35,6 @@ router.put(
   updateCourse
 );
 router.delete("/delete/:id", loginLimiter, verifyToken, deleteCourse);
+router.get("/:userId/courses", getUserCourses);
 
 export default router;

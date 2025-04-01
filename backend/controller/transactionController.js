@@ -1,63 +1,82 @@
 import Transaction from "../model/transactionSchema.js";
 import User from "../model/userSchema.js";
+import Course from "../model/courseSchema.js";
 import { v4 as uuidv4 } from "uuid";
 
+// controllers/transactionController.js
+// controllers/transactionController.js
 export const createTransaction = async (req, res) => {
   try {
     const { customerName, phoneNumber, courseTitle } = req.body;
 
+    // Validate required fields
     if (!customerName || !phoneNumber || !courseTitle || !req.file) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({
+        success: false,
+        message: "All fields including screenshot are required",
+      });
     }
 
-    // Process the uploaded screenshot file
-    const screenshot = req.file
-      ? {
-          filename: req.file.originalname, // Store original filename
-          contentType: req.file.mimetype, // Store MIME type
-          imageBase64: req.file.buffer.toString("base64"), // Convert image to Base64
-        }
-      : null;
+    // 1. FIRST FIND THE COURSE BY TITLE
+    const course = await Course.findOne({ title: courseTitle });
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
 
-    // Generate a unique transaction ID
-    const transactionId = uuidv4();
+    // Process screenshot
+    const paymentProof = {
+      filename: req.file.originalname,
+      contentType: req.file.mimetype,
+      imageBase64: req.file.buffer.toString("base64"),
+    };
 
-    // Create the new transaction
+    // Create transaction
     const newTransaction = new Transaction({
       customerName,
       phoneNumber,
-      courseTitle,
-      screenshot, // Now stored in the same format as your image
-      transactionId,
+      courseId: course._id, // Store the found course ID
+      courseTitle, // Also store title for reference
+      paymentProof,
+      transactionId: uuidv4(),
     });
 
-    // Save the transaction to the database
-    await newTransaction.save();
-
+    // Find user
     const user = await User.findOne({ phoneno: phoneNumber });
-
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
 
-    // Add the purchased course to user's courses array
-    user.courses.push({
-      title: courseTitle,
-      transactionId,
-      screenshot, // Store the payment proof with the course
-    });
+    // Check if already purchased (using ID now)
+    if (user.courses.some((id) => id.equals(course._id))) {
+      return res.status(400).json({
+        success: false,
+        message: "Course already purchased",
+      });
+    }
 
-    await user.save();
+    // Add course ID to user's courses
+    user.courses.push(course._id);
 
-    // Respond with the newly created transaction data
+    // Save both
+    await Promise.all([newTransaction.save(), user.save()]);
+
     res.status(201).json({
-      message: "Transaction created successfully",
+      success: true,
+      message: "Course purchased successfully",
       transaction: newTransaction,
     });
   } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ message: "An error occurred", error: error.message });
+    console.error("Transaction error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
   }
 };

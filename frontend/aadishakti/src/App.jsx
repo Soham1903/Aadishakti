@@ -19,6 +19,7 @@ import { UserProvider } from "./UserContext.jsx";
 import { CartProvider } from "./contexts/CartContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BuyPage from "./components/BuyPage.jsx";
+import CourseLinks from "./components/CourseLinks.jsx";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/courses/:courseId/details"
+              element={<CourseLinks />}
+            />
 
             {/* Protected Admin Routes */}
             <Route
@@ -58,7 +63,7 @@ function App() {
             />
 
             <Route
-              path="/dashboard"
+              path="/dashboard/"
               element={
                 <ProtectedRoute>
                   <Dashboard />

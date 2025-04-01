@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema({
+  courseId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
+    required: true,
+  },
   customerName: {
     type: String,
     required: [true, "Customer name is required"],

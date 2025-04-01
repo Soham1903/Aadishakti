@@ -40,8 +40,13 @@ const userSchema = new mongoose.Schema({
     enum: ["admin", "user"],
   },
   courses: {
-    type: [String], // Array of strings to store course titles
-    default: [], // Default to an empty array
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course", // Reference to the Course model
+      },
+    ],
+    default: [],
   },
 });
 

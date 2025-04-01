@@ -1,4 +1,5 @@
 import Course from "../model/courseSchema.js";
+import User from "../model/userSchema.js";
 
 // Add Course
 export const addCourse = async (req, res) => {
@@ -79,11 +80,11 @@ export const getCourseByTitle = async (req, res) => {
 export const updateCourse = async (req, res) => {
   try {
     const courseId = req.params.id;
-    
+
     // Find the course
     let course = await Course.findById(courseId);
     if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
+      return res.status(404).json({ message: "Course not found" });
     }
 
     // Update fields
@@ -99,7 +100,7 @@ export const updateCourse = async (req, res) => {
     if (req.file) {
       course.image = {
         contentType: req.file.mimetype,
-        imageBase64: req.file.buffer.toString('base64')
+        imageBase64: req.file.buffer.toString("base64"),
       };
     }
 
@@ -109,7 +110,7 @@ export const updateCourse = async (req, res) => {
     res.status(200).json(updatedCourse);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -128,5 +129,34 @@ export const deleteCourse = async (req, res) => {
   } catch (error) {
     console.error("Error deleting course:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// controllers/userController.js
+export const getUserCourses = async (req, res) => {
+  console.log("Function invoked");
+  try {
+    console.log(req.params);
+    const user = await User.findById(req.params.userId).populate({
+      path: "courses",
+      select: "title description price duration instructor image",
+    });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      courses: user.courses,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
   }
 };
