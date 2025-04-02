@@ -5,7 +5,7 @@ import {
   getAllTransactions,
   toggleVerification,
 } from "../controller/transactionController.js";
-import verifyToken from "../middlewares/authmiddleware.js";
+import verifyToken from "../middlewares/authMiddleware.js";
 
 const upload = multer({
   storage: multer.memoryStorage(),
