@@ -16,7 +16,7 @@ dotenv.config({ path: "./config/.env" });
 
 app.use(
   cors({
-    origin: ["https://aadishakti-backend-ue51.onrender.com"],
+    origin: ["https://aadishakti-frontend.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
