@@ -8,7 +8,7 @@ import {
   deleteCourse,
   getUserCourses,
 } from "../controller/courseController.js";
-import verifyToken from "../middlewares/authmiddleware.js";
+import verifyToken from "../middlewares/authMiddleware.js";
 import { loginLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
