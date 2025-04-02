@@ -13,7 +13,9 @@ const Carousel = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/images");
+        const response = await axios.get(
+          "https://aadishakti-backend-ue51.onrender.com/api/images"
+        );
         setImages(response.data);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -21,7 +23,7 @@ const Carousel = () => {
     };
 
     fetchImages();
-  }, []); 
+  }, []);
 
   return (
     <div className="relative">
@@ -37,7 +39,6 @@ const Carousel = () => {
           }
         `}
       </style>
-
 
       <Swiper
         modules={[EffectFade, Autoplay, Navigation, Pagination]}
@@ -66,7 +67,8 @@ const Carousel = () => {
                     {image.title || "Discover Your Destiny"}
                   </h2>
                   <p className="text-xl text-center px-4 animate-fade-up animation-delay-200">
-                    {image.description || "Unlock the secrets written in the stars"}
+                    {image.description ||
+                      "Unlock the secrets written in the stars"}
                   </p>
                 </div>
               </div>

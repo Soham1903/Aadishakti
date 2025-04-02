@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
-import { Upload, Clock, DollarSign, User, Calendar, BookOpen, Award } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Upload,
+  Clock,
+  DollarSign,
+  User,
+  Calendar,
+  BookOpen,
+  Award,
+} from "lucide-react";
 
 function CourseForm() {
   const [course, setCourse] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     image: null,
-    price: '',
-    duration: '',
-    instructor: '',
-    timing: '',
-    benefits: '',
-    syllabus: '',
+    price: "",
+    duration: "",
+    instructor: "",
+    timing: "",
+    benefits: "",
+    syllabus: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +37,7 @@ function CourseForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitMessage('');
+    setSubmitMessage("");
 
     try {
       const formData = new FormData();
@@ -39,34 +47,37 @@ function CourseForm() {
         }
       });
 
-      const response = await fetch('http://localhost:4000/api/courses/add', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch(
+        "https://aadishakti-backend-ue51.onrender.com/api/courses/add",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        setSubmitMessage('Course submitted successfully!');
+        setSubmitMessage("Course submitted successfully!");
         setCourse({
-          title: '',
-          description: '',
+          title: "",
+          description: "",
           image: null,
-          price: '',
-          duration: '',
-          instructor: '',
-          timing: '',
-          benefits: '',
-          syllabus: '',
+          price: "",
+          duration: "",
+          instructor: "",
+          timing: "",
+          benefits: "",
+          syllabus: "",
         });
         const fileInput = document.querySelector('input[type="file"]');
-        if (fileInput) fileInput.value = '';
+        if (fileInput) fileInput.value = "";
       } else {
-        setSubmitMessage(`Error: ${data.error || 'Failed to submit course'}`);
+        setSubmitMessage(`Error: ${data.error || "Failed to submit course"}`);
       }
     } catch (error) {
-      console.error('Submission error:', error);
-      setSubmitMessage('Failed to submit course. Please try again.');
+      console.error("Submission error:", error);
+      setSubmitMessage("Failed to submit course. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -82,9 +93,9 @@ function CourseForm() {
       {submitMessage && (
         <div
           className={`p-4 rounded-lg mb-6 ${
-            submitMessage.includes('Error')
-              ? 'bg-red-50 text-red-700 border border-red-200'
-              : 'bg-green-50 text-green-700 border border-green-200'
+            submitMessage.includes("Error")
+              ? "bg-red-50 text-red-700 border border-red-200"
+              : "bg-green-50 text-green-700 border border-green-200"
           }`}
         >
           {submitMessage}
@@ -95,7 +106,9 @@ function CourseForm() {
         <div className="grid grid-cols-2 gap-6">
           {/* Course Title */}
           <div className="col-span-2">
-            <label className="block text-gray-700 font-medium mb-2">Course Title</label>
+            <label className="block text-gray-700 font-medium mb-2">
+              Course Title
+            </label>
             <input
               type="text"
               name="title"
@@ -109,7 +122,9 @@ function CourseForm() {
 
           {/* Image Upload */}
           <div className="col-span-2">
-            <label className="block text-gray-700 font-medium mb-2">Course Image</label>
+            <label className="block text-gray-700 font-medium mb-2">
+              Course Image
+            </label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
               <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
               <input
@@ -132,7 +147,9 @@ function CourseForm() {
 
           {/* Description */}
           <div className="col-span-2">
-            <label className="block text-gray-700 font-medium mb-2">Description</label>
+            <label className="block text-gray-700 font-medium mb-2">
+              Description
+            </label>
             <textarea
               name="description"
               value={course.description}
@@ -148,7 +165,9 @@ function CourseForm() {
           <div className="flex items-center gap-2">
             <User className="h-5 w-5 text-gray-400" />
             <div className="flex-1">
-              <label className="block text-gray-700 font-medium mb-2">Instructor</label>
+              <label className="block text-gray-700 font-medium mb-2">
+                Instructor
+              </label>
               <input
                 type="text"
                 name="instructor"
@@ -165,7 +184,9 @@ function CourseForm() {
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-gray-400" />
             <div className="flex-1">
-              <label className="block text-gray-700 font-medium mb-2">Timing</label>
+              <label className="block text-gray-700 font-medium mb-2">
+                Timing
+              </label>
               <input
                 type="time"
                 name="timing"
@@ -181,7 +202,9 @@ function CourseForm() {
           <div className="flex items-center gap-2">
             <DollarSign className="h-5 w-5 text-gray-400" />
             <div className="flex-1">
-              <label className="block text-gray-700 font-medium mb-2">Price ($)</label>
+              <label className="block text-gray-700 font-medium mb-2">
+                Price ($)
+              </label>
               <input
                 type="number"
                 name="price"
@@ -198,7 +221,9 @@ function CourseForm() {
           <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5 text-gray-400" />
             <div className="flex-1">
-              <label className="block text-gray-700 font-medium mb-2">Duration (months)</label>
+              <label className="block text-gray-700 font-medium mb-2">
+                Duration (months)
+              </label>
               <input
                 type="number"
                 name="duration"
@@ -213,7 +238,9 @@ function CourseForm() {
 
           {/* Benefits */}
           <div className="col-span-2">
-            <label className="block text-gray-700 font-medium mb-2">Benefits</label>
+            <label className="block text-gray-700 font-medium mb-2">
+              Benefits
+            </label>
             <textarea
               name="benefits"
               value={course.benefits}
@@ -227,7 +254,9 @@ function CourseForm() {
 
           {/* Syllabus */}
           <div className="col-span-2">
-            <label className="block text-gray-700 font-medium mb-2">Syllabus</label>
+            <label className="block text-gray-700 font-medium mb-2">
+              Syllabus
+            </label>
             <textarea
               name="syllabus"
               value={course.syllabus}
@@ -245,9 +274,7 @@ function CourseForm() {
           type="submit"
           disabled={isSubmitting}
           className={`w-full ${
-            isSubmitting
-              ? 'bg-[#921a40]/70'
-              : 'bg-[#921a40] hover:bg-[#7a1635]'
+            isSubmitting ? "bg-[#921a40]/70" : "bg-[#921a40] hover:bg-[#7a1635]"
           } text-white py-3 rounded-lg transition flex items-center justify-center gap-2 font-medium`}
         >
           {isSubmitting ? (

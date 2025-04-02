@@ -11,7 +11,6 @@ const Cart = () => {
   const { user } = useUser();
   const navigate = useNavigate();
 
-
   const [code, setCode] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState(totalPrice);
 
@@ -29,7 +28,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/promocode/apply",
+        "https://aadishakti-backend-ue51.onrender.com/api/promocode/apply",
         {
           method: "POST",
           headers: {
@@ -91,7 +90,9 @@ const Cart = () => {
           <div className="p-4 sm:p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <ShoppingCart className="w-8 h-8 text-[#921a40]" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Your Cart</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                Your Cart
+              </h2>
             </div>
 
             {cartItems.length === 0 ? (
@@ -131,15 +132,24 @@ const Cart = () => {
                       </div>
 
                       <button
-  onClick={() => removeFromCart(item.title)}
-  className="w-full sm:w-auto px-4 py-2 text-white border rounded-lg transition-all duration-300 font-medium text-center"
-  style={{ color: "#921a40", borderColor: "#921a40", backgroundColor: "transparent" }}
-  onMouseEnter={(e) => (e.target.style.backgroundColor = "#921a40", e.target.style.color = "white")}
-  onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent", e.target.style.color = "#921a40")}
->
-  Remove
-</button>
-
+                        onClick={() => removeFromCart(item.title)}
+                        className="w-full sm:w-auto px-4 py-2 text-white border rounded-lg transition-all duration-300 font-medium text-center"
+                        style={{
+                          color: "#921a40",
+                          borderColor: "#921a40",
+                          backgroundColor: "transparent",
+                        }}
+                        onMouseEnter={(e) => (
+                          (e.target.style.backgroundColor = "#921a40"),
+                          (e.target.style.color = "white")
+                        )}
+                        onMouseLeave={(e) => (
+                          (e.target.style.backgroundColor = "transparent"),
+                          (e.target.style.color = "#921a40")
+                        )}
+                      >
+                        Remove
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -178,7 +188,9 @@ const Cart = () => {
                     {discountedPrice < totalPrice && (
                       <div className="flex justify-between text-green-600 font-medium">
                         <span>Discount Applied</span>
-                        <span>-₹{(totalPrice - discountedPrice).toFixed(2)}</span>
+                        <span>
+                          -₹{(totalPrice - discountedPrice).toFixed(2)}
+                        </span>
                       </div>
                     )}
                     <div className="flex justify-between text-xl font-bold text-gray-800 pt-2 border-t">

@@ -18,7 +18,7 @@ const Dashboard = () => {
         try {
           // console.log(user.id);
           const response = await fetch(
-            `http://localhost:4000/api/courses/${user.id}/courses`,
+            `https://aadishakti-backend-ue51.onrender.com/api/courses/${user.id}/courses`,
             {
               headers: {
                 "Content-Type": "application/json",

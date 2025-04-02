@@ -37,7 +37,7 @@ function PromoCodeForm() {
 
       // Send request to backend API
       const response = await fetch(
-        "http://localhost:4000/api/promocode/create",
+        "https://aadishakti-backend-ue51.onrender.com/api/promocode/create",
         {
           method: "POST",
           headers: {

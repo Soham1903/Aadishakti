@@ -19,7 +19,7 @@ function BuyPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/courses/${title}`)
+    fetch(`https://aadishakti-backend-ue51.onrender.com/api/courses/${title}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch course");
         return res.json();
@@ -66,7 +66,7 @@ function BuyPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/transaction/create",
+        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,
