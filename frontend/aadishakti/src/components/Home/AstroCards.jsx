@@ -35,8 +35,7 @@ const GradientCards = () => {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Hide on mobile, show only on sm and larger screens */}
-        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card, index) => (
             <motion.div
               key={index}
