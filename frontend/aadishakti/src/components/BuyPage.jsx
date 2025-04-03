@@ -279,4 +279,4 @@ function BuyPage() {
   );
 }
 
-export default BuyPage;
+export default BuyPage
