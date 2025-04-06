@@ -33,6 +33,7 @@ const signup = async (req, res, next) => {
     // Check if user with same email or phone already exists
     const existingUserByEmail = await User.findOne({ email });
     const existingUserByPhone = await User.findOne({ phoneno });
+    console.log(existingUserByPhone);
 
     if (existingUserByEmail) {
       return next(new ErrorHandler("⚠️ Email already registered.", 400));
