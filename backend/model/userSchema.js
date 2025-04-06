@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
   },
   phoneno: {
     type: String,
+    unique: true,
     required: [true, "Please enter your phone number"],
     match: [/^[0-9]{10}$/, "Phone number must be exactly 10 digits"], // Ensuring 10-digit validation
   },

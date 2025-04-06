@@ -13,20 +13,33 @@ const signup = async (req, res, next) => {
 
     // Validate required fields
     if (!name || !email || !phoneno || !gender || !password) {
-      return res.status(400).json({ message: "⚠️ All fields are required." });
+      return next(new ErrorHandler("⚠️ All fields are required.", 400));
     }
 
     // Check if email format is valid
     if (!isValidEmail(email)) {
-      return res
-        .status(400)
-        .json({ message: "⚠️ Please enter a valid email address." });
+      return next(
+        new ErrorHandler("⚠️ Please enter a valid email address.", 400)
+      );
     }
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email, phoneno });
-    if (existingUser) {
-      return res.status(400).json({ message: "⚠️User already registered." });
+    // Check if phone number is valid (10 digits)
+    if (!/^[0-9]{10}$/.test(phoneno)) {
+      return next(
+        new ErrorHandler("⚠️ Phone number must be exactly 10 digits.", 400)
+      );
+    }
+
+    // Check if user with same email or phone already exists
+    const existingUserByEmail = await User.findOne({ email });
+    const existingUserByPhone = await User.findOne({ phoneno });
+
+    if (existingUserByEmail) {
+      return next(new ErrorHandler("⚠️ Email already registered.", 400));
+    }
+
+    if (existingUserByPhone) {
+      return next(new ErrorHandler("⚠️ Phone number already registered.", 400));
     }
 
     // Create new user
@@ -36,10 +49,11 @@ const signup = async (req, res, next) => {
       phoneno,
       gender,
       password,
-      role, // Assigning default role as 'user' if not provided
+      role,
     });
 
     return res.status(201).json({
+      success: true,
       message: "✅ User registered successfully.",
       user: {
         id: newUser._id,
@@ -49,10 +63,20 @@ const signup = async (req, res, next) => {
       },
     });
   } catch (error) {
+    // Handle duplicate key error (in case unique constraint fails)
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      const message =
+        field === "email"
+          ? "⚠️ Email already registered."
+          : "⚠️ Phone number already registered.";
+      return next(new ErrorHandler(message, 400));
+    }
+
     console.error(error);
-    res
-      .status(500)
-      .json({ message: "⚠️ Server error, please try again later." });
+    return next(
+      new ErrorHandler("⚠️ Server error, please try again later.", 500)
+    );
   }
 };
 
