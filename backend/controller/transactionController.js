@@ -97,15 +97,25 @@ export const getAllTransactions = async (req, res) => {
 
 // Toggle verification status
 // controllers/transactionController.js
+
 export const toggleVerification = async (req, res) => {
   try {
     // Basic validation
-
     const { isVerified } = req.body;
     const transactionId = req.params.id;
 
+    if (typeof isVerified !== "boolean") {
+      return res.status(400).json({
+        success: false,
+        message: "isVerified must be a boolean value",
+      });
+    }
+
     // Find the transaction
-    const transaction = await Transaction.findById(transactionId);
+    const transaction = await Transaction.findById(transactionId).populate(
+      "user",
+      "courses"
+    );
     if (!transaction) {
       return res.status(404).json({
         success: false,
@@ -113,7 +123,15 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // Verify the user owns this transaction
+    // Verify the user owns this transaction (if needed)
+    // You might want to add authorization check here
+    // For example, if only admins can verify:
+    // if (req.user.role !== 'admin') {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: "Unauthorized",
+    //   });
+    // }
 
     // Update transaction
     const updatedTransaction = await Transaction.findByIdAndUpdate(
@@ -126,6 +144,15 @@ export const toggleVerification = async (req, res) => {
     );
 
     // If verifying, add course to user's purchased courses
+    if (isVerified && transaction.course && transaction.user) {
+      const user = await User.findById(transaction.user._id);
+
+      // Check if the course is already in the user's courses to avoid duplicates
+      if (!user.courses.includes(transaction.course)) {
+        user.courses.push(transaction.course);
+        await user.save();
+      }
+    }
 
     res.json({
       success: true,
