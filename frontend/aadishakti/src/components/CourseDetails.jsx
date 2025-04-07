@@ -28,7 +28,7 @@ export default function CourseDetails() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    fetch(`https://aadishakti-backend-ue51.onrender.com/api/courses/${title}`)
+    fetch(`http://localhost:4000/api/courses/${title}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && !data.error) {
@@ -46,6 +46,12 @@ export default function CourseDetails() {
 
   const handleSaveChanges = async () => {
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login again");
+        navigate("/login");
+        return;
+      }
       const formData = new FormData();
 
       // Append all editable fields to formData
@@ -63,7 +69,7 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course._id}`,
+        `http://localhost:4000/api/courses/update/${course._id}`,
         {
           method: "PUT",
           headers: {
@@ -105,7 +111,7 @@ export default function CourseDetails() {
 
     try {
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/${course.title}`,
+        `http://localhost:4000/api/courses/${course.title}`,
         {
           method: "DELETE",
         }

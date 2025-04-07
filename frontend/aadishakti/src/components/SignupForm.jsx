@@ -24,17 +24,33 @@ const SignupForm = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setSuccess(false);
+
+    // Client-side validation
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phoneno ||
+      !formData.gender ||
+      !formData.password
+    ) {
+      setError("All fields are required");
+      setLoading(false);
+      return;
+    }
 
     if (!validateEmail(formData.email)) {
-      setError("Invalid email format");
+      setError("Please enter a valid email address");
       setLoading(false);
       return;
     }
+
     if (!validatePhone(formData.phoneno)) {
-      setError("Phone number must be 10 digits");
+      setError("Phone number must be exactly 10 digits");
       setLoading(false);
       return;
     }
+
     if (!validatePassword(formData.password)) {
       setError("Password must be at least 8 characters long");
       setLoading(false);
@@ -42,22 +58,26 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/v1/signup",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:4000/api/v1/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Something went wrong");
+
+      if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
 
       setSuccess(true);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      setError(err.message || "Failed to sign up");
+      // More user-friendly error messages
+      const errorMessage = err.message.includes("already")
+        ? err.message
+        : "Registration failed. Please try again.";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

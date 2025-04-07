@@ -13,7 +13,7 @@ export default function Courses() {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("https://aadishakti-backend-ue51.onrender.com/api/courses/get")
+    fetch("http://localhost:4000/api/courses/get")
       .then((res) => res.json())
       .then((data) => {
         setCourses(data);

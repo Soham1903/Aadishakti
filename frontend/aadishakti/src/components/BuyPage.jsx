@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUser } from "../UserContext";
+import { toast } from "react-toastify";
 
 function BuyPage() {
   const { title } = useParams();
@@ -17,15 +18,19 @@ function BuyPage() {
   const [screenshotPreview, setScreenshotPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [code, setCode] = useState(""); // For promo code input
+  // Original price
 
   useEffect(() => {
-    fetch(`https://aadishakti-backend-ue51.onrender.com/api/courses/${title}`)
+    fetch(`http://localhost:4000/api/courses/${title}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch course");
         return res.json();
       })
       .then((data) => {
         setCourse(data);
+        setTotalPrice(data.price);
+        setDiscountedPrice(data.price);
         setLoading(false);
       })
       .catch((err) => {
@@ -33,6 +38,9 @@ function BuyPage() {
         setLoading(false);
       });
   }, [title]);
+
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discountedPrice, setDiscountedPrice] = useState(totalPrice);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +60,46 @@ function BuyPage() {
     }
   };
 
+  const handleApplyCoupon = async () => {
+    if (!code) {
+      toast.error("⚠️ Please enter a promo code.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/promocode/apply",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            code,
+            orderValue: totalPrice,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Reset to original price if invalid code
+        setDiscountedPrice(totalPrice);
+        toast.error(`⚠️ ${data.message || "Invalid promo code"}`);
+        return;
+      }
+
+      // Update with discounted price
+      setDiscountedPrice(data.finalAmount);
+      toast.success(`✅ ${data.message}`);
+    } catch (err) {
+      setDiscountedPrice(totalPrice);
+      toast.error(`⚠️ ${err.message || "Failed to apply promo code"}`);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -60,13 +108,15 @@ function BuyPage() {
     formDataToSend.append("customerName", formData.customerName);
     formDataToSend.append("phoneNumber", formData.phoneNumber);
     formDataToSend.append("courseTitle", formData.courseTitle);
+    formDataToSend.append("promoCode", code);
+    formDataToSend.append("finalPrice", discountedPrice);
     if (screenshot) {
       formDataToSend.append("screenshot", screenshot);
     }
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
+        "http://localhost:4000/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,
@@ -86,6 +136,7 @@ function BuyPage() {
       });
       setScreenshot(null);
       setScreenshotPreview(null);
+      setCode("");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -93,19 +144,21 @@ function BuyPage() {
     }
   };
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#921a40]"></div>
-    </div>
-  );
-  
-  if (error) return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-red-100 p-4 rounded-lg">
-        <p className="text-red-600 font-medium">Error: {error}</p>
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#921a40]"></div>
       </div>
-    </div>
-  );
+    );
+
+  if (error)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="bg-red-100 p-4 rounded-lg">
+          <p className="text-red-600 font-medium">Error: {error}</p>
+        </div>
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -132,22 +185,98 @@ function BuyPage() {
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">
                   {course.title}
                 </h2>
-                <div className="text-2xl font-bold text-[#921a40] mb-4">
-                  ${course.price}
+                <div className="space-y-3 bg-gray-50 p-4 rounded-lg">
+                  <div className="flex justify-between text-gray-600">
+                    <span>Original Price</span>
+                    <span>₹{totalPrice.toFixed(2)}</span>
+                  </div>
+
+                  {discountedPrice < totalPrice && (
+                    <>
+                      <div className="flex justify-between text-green-600 font-medium">
+                        <span>Discount Applied</span>
+                        <span>
+                          -₹{(totalPrice - discountedPrice).toFixed(2)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-green-600 font-medium">
+                        <span>Promo Code</span>
+                        <span>{code}</span>
+                      </div>
+                    </>
+                  )}
+
+                  <div className="flex justify-between text-xl font-bold text-gray-800 pt-2 border-t">
+                    <span>Total Amount</span>
+                    <span
+                      className={
+                        discountedPrice < totalPrice ? "text-green-600" : ""
+                      }
+                    >
+                      ₹{discountedPrice.toFixed(2)}
+                    </span>
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5 text-[#921a40]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-5 h-5 text-[#921a40]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     <span>Lifetime Access</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5 text-[#921a40]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-5 h-5 text-[#921a40]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     <span>Certificate of Completion</span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 border-t pt-6">
+              <div className="mb-6">
+                <label
+                  htmlFor="coupon"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Promo Code
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    id="coupon"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-[#921a40] focus:border-[#921a40] px-4 py-2"
+                    placeholder="Enter promo code"
+                  />
+                  <button
+                    onClick={handleApplyCoupon}
+                    className="px-4 py-2 bg-[#921a40] text-white rounded-md hover:bg-[#7a1635] transition-colors"
+                  >
+                    Apply
+                  </button>
                 </div>
               </div>
             </div>
@@ -172,10 +301,22 @@ function BuyPage() {
             {submitSuccess && (
               <div className="mb-8 bg-green-50 border-l-4 border-green-500 p-4 rounded">
                 <div className="flex items-center">
-                  <svg className="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-6 h-6 text-green-500 mr-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
-                  <p className="text-green-700 font-medium">Transaction submitted successfully!</p>
+                  <p className="text-green-700 font-medium">
+                    Transaction submitted successfully!
+                  </p>
                 </div>
               </div>
             )}
@@ -219,8 +360,18 @@ function BuyPage() {
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-[#921a40] transition-colors">
                   <div className="space-y-1 text-center">
-                    <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg
+                      className="mx-auto h-12 w-12 text-gray-400"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                    >
+                      <path
+                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                     <div className="flex text-sm text-gray-600">
                       <label className="relative cursor-pointer bg-white rounded-md font-medium text-[#921a40] hover:text-[#921a40] focus-within:outline-none">
@@ -235,12 +386,16 @@ function BuyPage() {
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG, GIF up to 10MB
+                    </p>
                   </div>
                 </div>
                 {screenshotPreview && (
                   <div className="mt-4">
-                    <p className="text-sm text-gray-600 mb-2">Screenshot Preview:</p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      Screenshot Preview:
+                    </p>
                     <img
                       src={screenshotPreview}
                       alt="Screenshot Preview"
@@ -261,9 +416,25 @@ function BuyPage() {
               >
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Processing...
                   </div>
@@ -279,4 +450,4 @@ function BuyPage() {
   );
 }
 
-export default BuyPage
+export default BuyPage;

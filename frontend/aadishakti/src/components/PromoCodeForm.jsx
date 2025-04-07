@@ -3,21 +3,24 @@ import { useState } from "react";
 function PromoCodeForm() {
   const [promoData, setPromoData] = useState({
     code: "",
-    discountType: "percentage", // Default to percentage
+    discountType: "percentage",
     discountValue: "",
     minOrderValue: "",
     maxDiscount: "",
     usageLimit: "",
     expiryDate: "",
+    isActive: true,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
-  const [messageType, setMessageType] = useState(""); // "success" or "error"
+  const [messageType, setMessageType] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPromoData({ ...promoData, [name]: value });
+    // Auto-uppercase for promo code
+    const processedValue = name === "code" ? value.toUpperCase() : value;
+    setPromoData({ ...promoData, [name]: processedValue });
   };
 
   const handleSubmit = async (e) => {
@@ -26,33 +29,47 @@ function PromoCodeForm() {
     setSubmitMessage("");
 
     try {
-      // Format date properly for API
+      // Validate discount value
+      const discountValue = parseFloat(promoData.discountValue);
+      if (isNaN(discountValue) || discountValue <= 0) {
+        throw new Error("Invalid discount value");
+      }
+
+      // Prepare data for API
       const formattedData = {
-        ...promoData,
-        discountValue: parseFloat(promoData.discountValue),
-        minOrderValue: parseFloat(promoData.minOrderValue),
-        maxDiscount: parseFloat(promoData.maxDiscount),
-        usageLimit: parseInt(promoData.usageLimit),
+        code: promoData.code.trim(),
+        discountType: promoData.discountType,
+        discountValue,
+        minOrderValue: promoData.minOrderValue
+          ? parseFloat(promoData.minOrderValue)
+          : 0,
+        maxDiscount: promoData.maxDiscount
+          ? parseFloat(promoData.maxDiscount)
+          : null,
+        usageLimit: promoData.usageLimit ? parseInt(promoData.usageLimit) : 1,
+        expiryDate: new Date(promoData.expiryDate).toISOString(),
+        isActive: promoData.isActive,
       };
 
-      // Send request to backend API
-      const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/promocode/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formattedData),
-        }
-      );
+      // Specific validation for percentage discounts
+      if (formattedData.discountType === "percentage" && discountValue > 100) {
+        throw new Error("Percentage discount cannot exceed 100%");
+      }
+
+      const response = await fetch("http://localhost:4000/api/promocode/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(formattedData),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
         setSubmitMessage("Promo code created successfully!");
         setMessageType("success");
-
         // Reset form
         setPromoData({
           code: "",
@@ -62,16 +79,14 @@ function PromoCodeForm() {
           maxDiscount: "",
           usageLimit: "",
           expiryDate: "",
+          isActive: true,
         });
       } else {
-        setSubmitMessage(
-          `Error: ${data.error || "Failed to create promo code"}`
-        );
-        setMessageType("error");
+        throw new Error(data.message || "Failed to create promo code");
       }
     } catch (error) {
       console.error("Submission error:", error);
-      setSubmitMessage("Failed to create promo code. Please try again.");
+      setSubmitMessage(error.message);
       setMessageType("error");
     } finally {
       setIsSubmitting(false);
@@ -105,9 +120,11 @@ function PromoCodeForm() {
             name="code"
             value={promoData.code}
             onChange={handleChange}
-            placeholder="Enter promo code (e.g., SUMMER2025)"
+            placeholder="SUMMER25"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
             required
+            pattern="[A-Z0-9]+"
+            title="Uppercase letters and numbers only"
           />
         </div>
 
@@ -131,8 +148,9 @@ function PromoCodeForm() {
         {/* Discount Value */}
         <div>
           <label className="block text-gray-700 font-medium">
-            Discount Value{" "}
-            {promoData.discountType === "percentage" ? "(%)" : "($)"}
+            {promoData.discountType === "percentage"
+              ? "Percentage Discount"
+              : "Fixed Discount"}
           </label>
           <input
             type="number"
@@ -142,11 +160,6 @@ function PromoCodeForm() {
             name="discountValue"
             value={promoData.discountValue}
             onChange={handleChange}
-            placeholder={`Enter discount value ${
-              promoData.discountType === "percentage"
-                ? "(e.g., 15 for 15%)"
-                : "(e.g., 10.00 for $10)"
-            }`}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
             required
           />
@@ -164,42 +177,40 @@ function PromoCodeForm() {
             name="minOrderValue"
             value={promoData.minOrderValue}
             onChange={handleChange}
-            placeholder="Enter minimum order value (e.g., 50.00)"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-            required
           />
         </div>
 
-        {/* Maximum Discount */}
-        <div>
-          <label className="block text-gray-700 font-medium">
-            Maximum Discount ($)
-          </label>
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            name="maxDiscount"
-            value={promoData.maxDiscount}
-            onChange={handleChange}
-            placeholder="Enter maximum discount (e.g., 25.00)"
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-            required
-          />
-        </div>
+        {/* Max Discount (for percentage) */}
+        {promoData.discountType === "percentage" && (
+          <div>
+            <label className="block text-gray-700 font-medium">
+              Maximum Discount ($)
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              name="maxDiscount"
+              value={promoData.maxDiscount}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+          </div>
+        )}
 
         {/* Usage Limit */}
         <div>
-          <label className="block text-gray-700 font-medium">Usage Limit</label>
+          <label className="block text-gray-700 font-medium">
+            Usage Limit (leave empty for unlimited)
+          </label>
           <input
             type="number"
             min="1"
             name="usageLimit"
             value={promoData.usageLimit}
             onChange={handleChange}
-            placeholder="Enter maximum number of uses"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-            required
           />
         </div>
 
@@ -213,7 +224,22 @@ function PromoCodeForm() {
             onChange={handleChange}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
             required
+            min={new Date().toISOString().slice(0, 16)}
           />
+        </div>
+
+        {/* Active Status */}
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="isActive"
+            checked={promoData.isActive}
+            onChange={(e) =>
+              setPromoData({ ...promoData, isActive: e.target.checked })
+            }
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+          />
+          <label className="text-gray-700">Active</label>
         </div>
 
         {/* Submit Button */}
@@ -222,7 +248,7 @@ function PromoCodeForm() {
           disabled={isSubmitting}
           className={`w-full ${
             isSubmitting ? "bg-blue-400" : "bg-blue-500 hover:bg-blue-600"
-          } text-white py-2 rounded-lg transition`}
+          } text-white py-2 rounded-lg transition disabled:opacity-50`}
         >
           {isSubmitting ? "Creating..." : "Create Promo Code"}
         </button>

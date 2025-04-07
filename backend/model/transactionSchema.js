@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
-
+import User from "./userSchema.js";
+import Course from "./courseSchema.js";
 const transactionSchema = new mongoose.Schema({
-  courseId: {
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  course: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
     required: true,
@@ -25,7 +31,19 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: [true, "Course title is required"],
   },
-  screenshot: {
+  promoCode: {
+    type: String,
+    required: false,
+  },
+  originalPrice: {
+    type: Number,
+    required: true,
+  },
+  finalPrice: {
+    type: Number,
+    required: true,
+  },
+  paymentProof: {
     filename: String, // Name of the image file
     contentType: String, // MIME type of the image
     imageBase64: String, // Image stored as a base64 string

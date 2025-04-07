@@ -28,7 +28,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/promocode/apply",
+        "http://localhost:4000/api/promocode/apply",
         {
           method: "POST",
           headers: {

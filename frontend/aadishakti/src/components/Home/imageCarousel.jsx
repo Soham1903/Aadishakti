@@ -13,9 +13,7 @@ const Carousel = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get(
-          "https://aadishakti-backend-ue51.onrender.com/api/images"
-        );
+        const response = await axios.get("http://localhost:4000/api/images");
         setImages(response.data);
       } catch (error) {
         console.error("Error fetching images:", error);

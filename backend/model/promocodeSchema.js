@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "./userSchema.js";
 
 const promoCodeSchema = new mongoose.Schema(
   {
@@ -34,6 +35,12 @@ const promoCodeSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    redeemedBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     expiryDate: {
       type: Date,
       required: true,

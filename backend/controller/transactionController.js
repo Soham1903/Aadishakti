@@ -1,13 +1,15 @@
 import Transaction from "../model/transactionSchema.js";
 import User from "../model/userSchema.js";
 import Course from "../model/courseSchema.js";
+import PromoCode from "../model/promocodeSchema.js";
 import { v4 as uuidv4 } from "uuid";
 
 // controllers/transactionController.js
 // controllers/transactionController.js
 export const createTransaction = async (req, res) => {
   try {
-    const { customerName, phoneNumber, courseTitle } = req.body;
+    const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
+      req.body;
 
     // Validate required fields
     if (!customerName || !phoneNumber || !courseTitle || !req.file) {
@@ -17,8 +19,9 @@ export const createTransaction = async (req, res) => {
       });
     }
 
-    // 1. FIRST FIND THE COURSE BY TITLE
+    // 1. Find the course
     const course = await Course.findOne({ title: courseTitle });
+    const user = await User.findOne({ phoneno: phoneNumber });
     if (!course) {
       return res.status(404).json({
         success: false,
@@ -26,25 +29,39 @@ export const createTransaction = async (req, res) => {
       });
     }
 
-    // Process screenshot
+    // 2. Initialize price variables
+    let originalPrice = course.price;
+    let discountApplied = 0;
+    let validPromoCode = null;
+
+    // 3. Validate and apply promo code if provided
+
+    // 4. Process payment proof
     const paymentProof = {
       filename: req.file.originalname,
       contentType: req.file.mimetype,
       imageBase64: req.file.buffer.toString("base64"),
     };
 
-    // Create transaction
+    // 5. Create transaction record
     const newTransaction = new Transaction({
       customerName,
       phoneNumber,
-      courseId: course._id, // Store the found course ID
-      courseTitle, // Also store title for reference
+      course: course._id,
+      courseTitle,
       paymentProof,
       transactionId: uuidv4(),
+      promoCode: promoCode,
+      originalPrice,
+      finalPrice,
+      discountApplied,
+      transactionDate: new Date(),
+      user: user._id,
+      course: course._id,
     });
 
-    // Find user
-    const user = await User.findOne({ phoneno: phoneNumber });
+    // 6. Find and update user
+    // const user = await User.findOne({ phoneno: phoneNumber });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -52,24 +69,24 @@ export const createTransaction = async (req, res) => {
       });
     }
 
-    // Check if already purchased (using ID now)
-    if (user.courses.some((id) => id.equals(course._id))) {
-      return res.status(400).json({
-        success: false,
-        message: "Course already purchased",
-      });
-    }
-
-    // Add course ID to user's courses
-    user.courses.push(course._id);
-
-    // Save both
+    // 7. Save everything
     await Promise.all([newTransaction.save(), user.save()]);
 
+    // 8. Return success response
     res.status(201).json({
       success: true,
-      message: "Course purchased successfully",
-      transaction: newTransaction,
+      message: `Course purchased ${
+        validPromoCode ? "with discount" : "successfully"
+      }`,
+      transaction: {
+        id: newTransaction._id,
+        course: courseTitle,
+        originalPrice,
+        finalPrice,
+        discountApplied,
+        paymentProof,
+        promoCode: promoCode,
+      },
     });
   } catch (error) {
     console.error("Transaction error:", error);
@@ -88,19 +105,15 @@ export const getAllTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.find()
       .sort({ createdAt: -1 })
-      .populate("courseId", "title");
+      .populate("course", "title");
     res.json(transactions);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-// Toggle verification status
-// controllers/transactionController.js
-
 export const toggleVerification = async (req, res) => {
   try {
-    // Basic validation
     const { isVerified } = req.body;
     const transactionId = req.params.id;
 
@@ -111,7 +124,7 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // Find the transaction
+    // 1. Find transaction
     const transaction = await Transaction.findById(transactionId).populate(
       "user",
       "courses"
@@ -123,17 +136,7 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // Verify the user owns this transaction (if needed)
-    // You might want to add authorization check here
-    // For example, if only admins can verify:
-    // if (req.user.role !== 'admin') {
-    //   return res.status(403).json({
-    //     success: false,
-    //     message: "Unauthorized",
-    //   });
-    // }
-
-    // Update transaction
+    // 2. Update verification
     const updatedTransaction = await Transaction.findByIdAndUpdate(
       transactionId,
       {
@@ -143,14 +146,20 @@ export const toggleVerification = async (req, res) => {
       { new: true }
     );
 
-    // If verifying, add course to user's purchased courses
-    if (isVerified && transaction.course && transaction.user) {
-      const user = await User.findById(transaction.user._id);
+    // 3. If verified, update user and promocode
+    if (isVerified && transaction.course && transaction.phoneNumber) {
+      const user = await User.findOne({ phoneno: transaction.phoneNumber });
 
-      // Check if the course is already in the user's courses to avoid duplicates
-      if (!user.courses.includes(transaction.course)) {
+      if (user && !user.courses.includes(transaction.course)) {
         user.courses.push(transaction.course);
         await user.save();
+      }
+
+      if (transaction.promoCode) {
+        await PromoCode.findOneAndUpdate(
+          { code: transaction.promoCode },
+          { $inc: { totalRedemptions: 1 } }
+        );
       }
     }
 

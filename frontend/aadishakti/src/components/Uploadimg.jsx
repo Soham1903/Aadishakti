@@ -13,9 +13,7 @@ function Uploadimg() {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get(
-        "https://aadishakti-backend-ue51.onrender.com/api/images"
-      );
+      const response = await axios.get("http://localhost:4000/api/images");
       setImages(response.data);
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -41,13 +39,9 @@ function Uploadimg() {
     formData.append("image", selectedFile);
 
     try {
-      await axios.post(
-        "https://aadishakti-backend-ue51.onrender.com/api/images/upload",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post("http://localhost:4000/api/images/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setSelectedFile(null);
       fetchImages();
@@ -58,9 +52,7 @@ function Uploadimg() {
 
   const handleDeleteImage = async (imageId) => {
     try {
-      await axios.delete(
-        `https://aadishakti-backend-ue51.onrender.com/api/images/${imageId}`
-      );
+      await axios.delete(`http://localhost:4000/api/images/${imageId}`);
       fetchImages(); // Refresh the images after deletion
     } catch (error) {
       console.error("Error deleting image:", error);

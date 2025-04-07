@@ -10,7 +10,7 @@ const TransactionsDashboard = () => {
     const fetchTransactions = async () => {
       try {
         const response = await fetch(
-          "https://aadishakti-backend-ue51.onrender.com/api/transaction/get"
+          "http://localhost:4000/api/transaction/get"
         );
         const data = await response.json();
         setTransactions(data);
@@ -26,7 +26,7 @@ const TransactionsDashboard = () => {
   const toggleVerification = async (transactionId, currentStatus) => {
     try {
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/transaction/${transactionId}/verify`,
+        `http://localhost:4000/api/transaction/${transactionId}/verify`,
         {
           method: "PATCH",
           headers: {
@@ -66,6 +66,9 @@ const TransactionsDashboard = () => {
               <th className="py-3 px-4 text-left">Transaction ID</th>
               <th className="py-3 px-4 text-left">Customer</th>
               <th className="py-3 px-4 text-left">Course</th>
+              <th className="py-3 px-4 text-left">Original price</th>
+              <th className="py-3 px-4 text-left">Final Price</th>
+              <th className="py-3 px-4 text-left">Promocode</th>
               <th className="py-3 px-4 text-left">Payment Proof</th>
               <th className="py-3 px-4 text-left">Date</th>
               <th className="py-3 px-4 text-left">Verified</th>
@@ -78,16 +81,19 @@ const TransactionsDashboard = () => {
                 <td className="py-3 px-4">{transaction.transactionId}</td>
                 <td className="py-3 px-4">{transaction.customerName}</td>
                 <td className="py-3 px-4">{transaction.courseTitle}</td>
+                <td className="py-3 px-4">{transaction.originalPrice}</td>
+                <td className="py-3 px-4">{transaction.finalPrice}</td>
+                <td className="py-3 px-4">{transaction.promoCode}</td>
                 <td className="py-3 px-4">
-                  {transaction.screenshot?.imageBase64 ? (
+                  {transaction.paymentProof?.imageBase64 ? (
                     <>
                       <img
-                        src={`data:${transaction.screenshot.contentType};base64,${transaction.screenshot.imageBase64}`}
+                        src={`data:${transaction.paymentProof.contentType};base64,${transaction.paymentProof.imageBase64}`}
                         alt="Payment proof"
                         className="w-16 h-16 object-cover cursor-pointer rounded"
                         onClick={() =>
                           setExpandedImage({
-                            src: `data:${transaction.screenshot.contentType};base64,${transaction.screenshot.imageBase64}`,
+                            src: `data:${transaction.paymentProof.contentType};base64,${transaction.paymentProof.imageBase64}`,
                             alt: `Payment proof for ${transaction.customerName}`,
                           })
                         }
