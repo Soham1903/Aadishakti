@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { CheckCircle, XCircle, Search, RefreshCw, Eye } from "lucide-react";
+import { CheckCircle, XCircle, Search, RefreshCw, Eye, DollarSign, Calendar, User, Book } from "lucide-react";
 
 const TransactionsDashboard = () => {
   const [transactions, setTransactions] = useState([]);
@@ -92,114 +92,95 @@ const TransactionsDashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-[#921a40]">
-                <tr>
-                  {[
-                    "Transaction ID",
-                    "Customer",
-                    "Course",
-                    "Original price",
-                    "Final Price",
-                    "Promocode",
-                    "Payment Proof",
-                    "Date",
-                    "Status",
-                    "Actions",
-                  ].map((header) => (
-                    <th
-                      key={header}
-                      className="px-6 py-4 text-left text-xs font-medium text-white uppercase tracking-wider"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredTransactions.map((transaction) => (
-                  <tr
-                    key={transaction._id}
-                    className="hover:bg-[#f9f3f5] transition-colors"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {transaction.transactionId}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {transaction.customerName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {transaction.courseTitle}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      ${transaction.originalPrice}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      ${transaction.finalPrice}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {transaction.promoCode || "-"}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {transaction.paymentProof?.imageBase64 ? (
-                        <div className="relative group">
-                          <img
-                            src={`data:${transaction.paymentProof.contentType};base64,${transaction.paymentProof.imageBase64}`}
-                            alt="Payment proof"
-                            className="w-16 h-16 object-cover rounded-lg cursor-pointer transition-transform transform group-hover:scale-105"
-                            onClick={() =>
-                              setExpandedImage({
-                                src: `data:${transaction.paymentProof.contentType};base64,${transaction.paymentProof.imageBase64}`,
-                                alt: `Payment proof for ${transaction.customerName}`,
-                              })
-                            }
-                          />
-                          <Eye className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                      ) : (
-                        <span className="text-gray-400">No image</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {new Date(transaction.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {transaction.isVerified ? (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                          <CheckCircle className="w-4 h-4 mr-1" />
-                          Verified
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                          <XCircle className="w-4 h-4 mr-1" />
-                          Pending
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <button
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredTransactions.map((transaction) => (
+            <div
+              key={transaction._id}
+              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className="text-sm font-medium text-gray-500">
+                  ID: {transaction.transactionId}
+                </div>
+                {transaction.isVerified ? (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <CheckCircle className="w-4 h-4 mr-1" />
+                    Verified
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                    <XCircle className="w-4 h-4 mr-1" />
+                    Pending
+                  </span>
+                )}
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <User className="w-5 h-5 text-[#921a40] mr-2" />
+                  <span className="text-gray-700">{transaction.customerName}</span>
+                </div>
+
+                <div className="flex items-center">
+                  <Book className="w-5 h-5 text-[#921a40] mr-2" />
+                  <span className="text-gray-700">{transaction.courseTitle}</span>
+                </div>
+
+                <div className="flex items-center">
+                  <DollarSign className="w-5 h-5 text-[#921a40] mr-2" />
+                  <span className="text-gray-700">
+                    Original: ${transaction.originalPrice} | Final: ${transaction.finalPrice}
+                    {transaction.promoCode && (
+                      <span className="ml-2 text-sm text-gray-500">
+                        (Promo: {transaction.promoCode})
+                      </span>
+                    )}
+                  </span>
+                </div>
+
+                <div className="flex items-center">
+                  <Calendar className="w-5 h-5 text-[#921a40] mr-2" />
+                  <span className="text-gray-700">
+                    {new Date(transaction.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between mt-4">
+                  {transaction.paymentProof?.imageBase64 ? (
+                    <div className="relative group">
+                      <img
+                        src={`data:${transaction.paymentProof.contentType};base64,${transaction.paymentProof.imageBase64}`}
+                        alt="Payment proof"
+                        className="w-16 h-16 object-cover rounded-lg cursor-pointer transition-transform transform group-hover:scale-105"
                         onClick={() =>
-                          toggleVerification(
-                            transaction._id,
-                            transaction.isVerified
-                          )
+                          setExpandedImage({
+                            src: `data:${transaction.paymentProof.contentType};base64,${transaction.paymentProof.imageBase64}`,
+                            alt: `Payment proof for ${transaction.customerName}`,
+                          })
                         }
-                        className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                          transaction.isVerified
-                            ? "bg-yellow-500 hover:bg-yellow-600 text-white"
-                            : "bg-[#921a40] hover:bg-[#7a1635] text-white"
-                        }`}
-                      >
-                        {transaction.isVerified ? "Unverify" : "Verify"}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      />
+                      <Eye className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  ) : (
+                    <span className="text-gray-400">No payment proof</span>
+                  )}
+
+                  <button
+                    onClick={() =>
+                      toggleVerification(transaction._id, transaction.isVerified)
+                    }
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                      transaction.isVerified
+                        ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+                        : "bg-[#921a40] hover:bg-[#7a1635] text-white"
+                    }`}
+                  >
+                    {transaction.isVerified ? "Unverify" : "Verify"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Image Modal */}

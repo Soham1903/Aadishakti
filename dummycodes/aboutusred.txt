@@ -56,37 +56,59 @@ const services = [
   }
 ];
 
-// Featured videos array with actual YouTube links and thumbnails
+// Testimonials array
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80",
+    text: "The Reiki healing sessions transformed my life completely. I feel more balanced and energetic.",
+    role: "Spiritual Seeker"
+  },
+  {
+    name: "Michael Chen",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80",
+    text: "Vastu consultation helped improve the energy flow in my home and business dramatically.",
+    role: "Business Owner"
+  },
+  {
+    name: "Emma Williams",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80",
+    text: "The hypnotherapy sessions helped me overcome my anxieties and fears.",
+    role: "Wellness Coach"
+  }
+];
+
+// Featured videos array
 const featuredVideos = [
   {
-    title: "Reiki Healing Session",
-    thumbnail: "https://img.youtube.com/vi/ij-9A1lKUGQ/maxresdefault.jpg",
-    videoUrl: "https://youtu.be/ij-9A1lKUGQ?si=vzIniqNttb9inZUY"
+    title: "Introduction to Reiki Healing",
+    thumbnail: "https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&q=80",
+    videoId: "video1"
   },
   {
-    title: "Spiritual Guidance",
-    thumbnail: "https://img.youtube.com/vi/aN4drft6JJE/maxresdefault.jpg",
-    videoUrl: "https://youtu.be/aN4drft6JJE?si=6Eoi2JXLN8PPiBZ-"
+    title: "Understanding Vastu Shastra",
+    thumbnail: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80",
+    videoId: "video2"
   },
   {
-    title: "Meditation Practice",
-    thumbnail: "https://img.youtube.com/vi/xCRhaSaKvV4/maxresdefault.jpg",
-    videoUrl: "https://youtu.be/xCRhaSaKvV4?si=ORpbv_jflpm1Xzy2"
+    title: "Meditation for Beginners",
+    thumbnail: "https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?auto=format&fit=crop&q=80",
+    videoId: "video3"
   },
   {
-    title: "Energy Healing",
-    thumbnail: "https://img.youtube.com/vi/gbuJD-Vlidg/maxresdefault.jpg",
-    videoUrl: "https://youtu.be/gbuJD-Vlidg?si=f40u1JAs-5lcdGr5"
+    title: "Chakra Balancing Guide",
+    thumbnail: "https://images.unsplash.com/photo-1514395462725-fb4566210426?auto=format&fit=crop&q=80",
+    videoId: "video4"
   },
   {
-    title: "Chakra Balancing",
-    thumbnail: "https://img.youtube.com/vi/qTYN1OjBSB4/maxresdefault.jpg",
-    videoUrl: "https://youtu.be/qTYN1OjBSB4?si=nTsTJMeyuU1SehXj"
+    title: "Energy Healing Basics",
+    thumbnail: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80",
+    videoId: "video5"
   },
   {
-    title: "Spiritual Growth",
-    thumbnail: "https://img.youtube.com/vi/3UJZXqn3xC4/maxresdefault.jpg",
-    videoUrl: "https://youtu.be/3UJZXqn3xC4?si=_TVfKJYkVcRCsQwK"
+    title: "Spiritual Growth Journey",
+    thumbnail: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80",
+    videoId: "video6"
   }
 ];
 
@@ -146,8 +168,10 @@ const staggerContainer = {
 };
 
 export default function AboutUs() {
+  const [activeService, setActiveService] = useState(null);
   const [showAllVideos, setShowAllVideos] = useState(false);
   const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: true });
+  const { ref: testimonialsRef, inView: testimonialsInView } = useInView({ triggerOnce: true });
   const { ref: videosRef, inView: videosInView } = useInView({ triggerOnce: true });
   const { ref: astrologyRef, inView: astrologyInView } = useInView({ triggerOnce: true });
 
@@ -365,36 +389,96 @@ export default function AboutUs() {
             variants={staggerContainer}
             initial="hidden"
             animate={videosInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
           >
-            {featuredVideos.map((video, index) => (
-              <motion.a
+            {featuredVideos.slice(0, showAllVideos ? featuredVideos.length : 6).map((video, index) => (
+              <motion.div
                 key={index}
-                href={video.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 variants={fadeIn}
                 whileHover={{ y: -10 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-[#921a40]/10 
-                         hover:border-[#921a40]/30 transition-all duration-300"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-[#921a40]/10 hover:border-[#921a40]/30"
               >
-                <div className="relative aspect-video group">
+                <div className="relative aspect-video">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center
-                                group-hover:bg-black/60 transition-all duration-300">
-                    <Youtube className="w-12 h-12 md:w-16 md:h-16 text-white opacity-80 
-                                     group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <Youtube className="w-12 h-12 md:w-16 md:h-16 text-white opacity-80" />
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-[#921a40] mb-2">{video.title}</h3>
-                  <p className="text-gray-600">Click to watch on YouTube</p>
+                <div className="p-4 md:p-6">
+                  <h3 className="text-lg md:text-xl font-semibold text-[#921a40] mb-2">{video.title}</h3>
+                  <p className="text-sm md:text-base text-gray-600">Click to watch the full video</p>
                 </div>
-              </motion.a>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {featuredVideos.length > 6 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-center mt-12"
+            >
+              <button
+                onClick={() => setShowAllVideos(!showAllVideos)}
+                className="bg-[#921a40] text-white px-8 py-3 rounded-full hover:bg-[#7a1635] 
+                         transition-colors duration-300"
+              >
+                {showAllVideos ? "Show Less" : "Load More"}
+              </button>
+            </motion.div>
+          )}
+        </div>
+      </motion.section>
+
+      {/* Testimonials */}
+      <motion.section
+        ref={testimonialsRef}
+        className="py-24 bg-[#921a40]/5"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-6 text-[#921a40]">Transformative Experiences</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Hear from those who have experienced the power of our spiritual guidance and healing.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={testimonialsInView ? "visible" : "hidden"}
+          >
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn}
+                whileHover={{ y: -10 }}
+                className="bg-white p-8 rounded-2xl shadow-lg border-2 border-[#921a40]/10 hover:border-[#921a40]/30"
+              >
+                <div className="flex items-center mb-6">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-16 h-16 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-lg text-[#921a40]">{testimonial.name}</h4>
+                    <p className="text-gray-600">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 italic">"{testimonial.text}"</p>
+              </motion.div>
             ))}
           </motion.div>
         </div>
