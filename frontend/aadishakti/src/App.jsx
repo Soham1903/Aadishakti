@@ -40,10 +40,8 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />
-            <Route
-              path="/transactiondashboard"
-              element={<TransactionsDashboard />}
-            />
+            <Route path="/dashboard/"element={ <Dashboard />} />
+        
             <Route
               path="/courses/:courseId/details"
               element={<CourseLinks />}
@@ -59,6 +57,14 @@ function App() {
               }
             />
             <Route
+              path="/transactiondashboard"
+              element={
+                <ProtectedRoute>
+              <TransactionsDashboard />
+              </ProtectedRoute>
+              }
+            />
+            <Route
               path="/course-form"
               element={
                 <ProtectedRoute>
@@ -67,14 +73,7 @@ function App() {
               }
             />
 
-            <Route
-              path="/dashboard/"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
+            
             <Route
               path="/promocode-form"
               element={
