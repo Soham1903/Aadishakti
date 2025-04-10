@@ -1,0 +1,180 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { 
+  Youtube, Star, Users, Target, Clock, Sparkles, Heart, Brain, 
+  Bot as Lotus, Compass, Target as Goal, Gem, Zap, Book, Award,
+  Phone, MapPin, GraduationCap, Feather, Youtube as YoutubeIcon
+} from 'lucide-react';
+
+export default function AboutUs() {
+  const [showAllVideos, setShowAllVideos] = useState(false);
+  const { ref: bioRef, inView: bioInView } = useInView({ triggerOnce: true });
+  const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: true });
+  const { ref: videosRef, inView: videosInView } = useInView({ triggerOnce: true });
+  const { ref: astrologyRef, inView: astrologyInView } = useInView({ triggerOnce: true });
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#921a40]/5 via-[#921a40]/10 to-[#921a40]/5">
+      {/* Hero Biography Section */}
+      <section className="relative pt-24 pb-32 overflow-hidden bg-[#921a40]">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र
+            </h1>
+            <div className="text-3xl text-white/90 mb-4">
+              सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
+            </div>
+            <p className="text-xl text-white/80">
+              संस्थापक व अध्यक्ष
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20"
+            >
+              <div className="flex items-center mb-6">
+                <div className="p-3 bg-white/20 rounded-lg mr-4">
+                  <GraduationCap className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">शैक्षणिक पात्रता</h3>
+              </div>
+              <p className="text-white/90 text-lg leading-relaxed">
+                एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20"
+            >
+              <div className="flex items-center mb-6">
+                <div className="p-3 bg-white/20 rounded-lg mr-4">
+                  <Phone className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">संपर्क</h3>
+              </div>
+              <div className="space-y-2 text-white/90 text-lg">
+                <p>९६ ५७ १९६३ ३३</p>
+                <p>९१ ३० ७५ ५६ ३१</p>
+                <div className="flex items-center mt-4">
+                  <MapPin className="w-5 h-5 mr-2" />
+                  <p>ज्ञानलिला, ३३३-ड, सोपाननगर, सासवड, ता. पुरंदर, जि. पुणे - ४१२ ३०१</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Publications Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-6xl mx-auto"
+          >
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">प्रकाशित पुस्तके</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {[
+                "काव्यसंग्रह चारू मनीष",
+                "वास्तुशास्त्र फक्त विज्ञानच",
+                "अशक्य ते शक्य करतील स्वामी",
+                "यशस्वी भव",
+                "महिला उद्योजिका, एक राष्ट्रनिर्माती",
+                "रेकी लेवल १, २, ३",
+                "अंकशास्त्र आणि मोबाईल न्यूमरोलॉजी",
+                "विश्वाकर्षण लॉ ऑफ अट्रॅक्शन"
+              ].map((book, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/10 backdrop-blur-md p-4 rounded-lg border border-white/20"
+                >
+                  <Book className="w-6 h-6 text-white mb-2" />
+                  <p className="text-white/90">{book}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <motion.section
+        ref={bioRef}
+        className="py-24 bg-white"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={bioInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-6 text-[#921a40]">कार्यक्षेत्र आणि अनुभव</h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-[#921a40]/5 p-6 rounded-xl"
+            >
+              <h3 className="text-2xl font-bold text-[#921a40] mb-4">विशेषज्ञता क्षेत्रे</h3>
+              <ul className="space-y-3">
+                {[
+                  "वास्तु",
+                  "ज्योतिष",
+                  "रेकी",
+                  "हीलींग",
+                  "मोबाईल न्यूमरॉलॉजी",
+                  "डाउझिंग"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-center">
+                    <Star className="w-5 h-5 text-[#921a40] mr-2" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-[#921a40]/5 p-6 rounded-xl"
+            >
+              <h3 className="text-2xl font-bold text-[#921a40] mb-4">उद्देश</h3>
+              <ul className="space-y-3">
+                {[
+                  "ज्योतिष शास्त्राचा व इतर सर्व गुढ शास्त्रांचा प्रचार आणि प्रसार",
+                  "विद्यार्थ्यांना योग्य मार्गदर्शन",
+                  "वैज्ञानिक दृष्टिकोनातून समस्या निराकरण",
+                  "मोफत कार्यशाळांचे आयोजन"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <Target className="w-5 h-5 text-[#921a40] mr-2 mt-1 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+    </div>
+  );
+}

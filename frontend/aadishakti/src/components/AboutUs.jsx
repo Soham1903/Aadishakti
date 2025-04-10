@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Youtube, Star, Users, Target, Clock, Sparkles, Heart, Brain, Bot as Lotus, Compass, Target as Goal, Gem, Zap } from 'lucide-react';
+import { Youtube, Star, Users, Target, Clock, Sparkles, Heart, Brain, Bot as Lotus, Compass, Target as Goal, Gem, Zap, BookOpen, Award, GraduationCap } from 'lucide-react';
 
 // Services array
 const services = [
@@ -56,7 +56,7 @@ const services = [
   }
 ];
 
-// Featured videos array with actual YouTube links and thumbnails
+// Featured videos array
 const featuredVideos = [
   {
     title: "Reiki Healing Session",
@@ -90,46 +90,6 @@ const featuredVideos = [
   }
 ];
 
-// Astrology Services
-const astrologyServices = [
-  {
-    title: "Birth Chart Reading",
-    icon: <Star className="w-6 h-6" />,
-    description: "Comprehensive analysis of your natal chart",
-    price: "$150"
-  },
-  {
-    title: "Transit Predictions",
-    icon: <Compass className="w-6 h-6" />,
-    description: "Future forecasts based on planetary movements",
-    price: "$120"
-  },
-  {
-    title: "Relationship Compatibility",
-    icon: <Heart className="w-6 h-6" />,
-    description: "Synastry and composite chart analysis",
-    price: "$180"
-  },
-  {
-    title: "Career Guidance",
-    icon: <Target className="w-6 h-6" />,
-    description: "Professional path insights from your chart",
-    price: "$140"
-  },
-  {
-    title: "Spiritual Astrology",
-    icon: <Gem className="w-6 h-6" />,
-    description: "Karmic patterns and soul purpose reading",
-    price: "$200"
-  },
-  {
-    title: "Remedial Measures",
-    icon: <Zap className="w-6 h-6" />,
-    description: "Solutions to harmonize planetary energies",
-    price: "$160"
-  }
-];
-
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 }
@@ -146,217 +106,227 @@ const staggerContainer = {
 };
 
 export default function AboutUs() {
+  const [showAllServices, setShowAllServices] = useState(false);
   const [showAllVideos, setShowAllVideos] = useState(false);
+  const { ref: introRef, inView: introInView } = useInView({ triggerOnce: true });
   const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: true });
   const { ref: videosRef, inView: videosInView } = useInView({ triggerOnce: true });
-  const { ref: astrologyRef, inView: astrologyInView } = useInView({ triggerOnce: true });
+  const { ref: detailsRef, inView: detailsInView } = useInView({ triggerOnce: true });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#921a40]/5 via-[#921a40]/10 to-[#921a40]/5">
-      {/* Vision & Mission Section */}
-      <section className="relative pt-24 pb-32 overflow-hidden bg-[#921a40]">
+      {/* Compact Introduction Section */}
+      <section className="relative py-16 bg-[#921a40]">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Our Vision & Mission
-            </h1>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              Guiding souls through ancient wisdom and modern healing
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">परिचय</h1>
+            <div className="max-w-3xl mx-auto text-white">
+              <h2 className="text-2xl md:text-3xl mb-4">ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)</h2>
+              <p className="text-xl mb-4">आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड</p>
+              <p className="text-lg mb-4">(संस्थापक व अध्यक्ष)</p>
+              <p className="text-lg">एम. कॉम. वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p>
+            </div>
           </motion.div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {/* Detailed Information Section */}
+      <section ref={detailsRef} className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* कार्यक्षेत्र Card */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-200"
             >
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-white/20 rounded-lg mr-4">
-                  <Goal className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-white">Our Vision</h3>
+              <div className="flex items-center mb-4">
+                <Target className="w-8 h-8 text-[#921a40] mr-3" />
+                <h3 className="text-2xl font-bold text-[#921a40]">कार्यक्षेत्र</h3>
               </div>
-              <p className="text-white/90 text-lg leading-relaxed">
-                To empower individuals with sacred knowledge and healing techniques that illuminate their path 
-                to spiritual enlightenment, personal growth, and lasting prosperity.
+              <p className="text-gray-700 leading-relaxed">
+                वास्तु, ज्योतिष, रेकी, हीलींग, मोबाईल न्यूमरॉलॉजी, डाउझिंग, आणि या सारख्या अनेक विषयांच्या कार्यशाळा आणि मार्गदर्शन यामध्ये सलग २०१० पासून कार्यरत. वरील सर्व विषयांचा अभ्यास इ.स. २००० पासून आवड म्हणून सुरू केला. प्रत्येक शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून २०१० पासून या क्षेत्रात पदार्पण केले.
               </p>
             </motion.div>
 
+            {/* उद्देश Card */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-200"
             >
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-white/20 rounded-lg mr-4">
-                  <Compass className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-white">Our Mission</h3>
+              <div className="flex items-center mb-4">
+                <Goal className="w-8 h-8 text-[#921a40] mr-3" />
+                <h3 className="text-2xl font-bold text-[#921a40]">उद्देश</h3>
               </div>
-              <p className="text-white/90 text-lg leading-relaxed">
-                To provide authentic and transformative spiritual services that create profound positive changes 
-                in people's lives through the perfect blend of ancient wisdom and modern healing techniques.
-              </p>
+              <ul className="text-gray-700 space-y-2 list-disc list-inside">
+                <li>ज्योतिष शास्त्राचा व इतर सर्व गुढ शास्त्रांचा प्रचार आणि प्रसार</li>
+                <li>अनेकांना योग्य पद्धतीने शिक्षण देऊन चांगले विद्यार्थी घडवणे</li>
+                <li>विज्ञान आधारित दृष्टिकोन प्रस्थापित करणे</li>
+                <li>मोफत कार्यशाळांद्वारे ज्ञान वाटप</li>
+                <li>अंधश्रद्धेचा वापर न करता वैज्ञानिक दृष्टिकोनातून समस्या निराकारण</li>
+              </ul>
+            </motion.div>
+
+            {/* लेखन Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-200"
+            >
+              <div className="flex items-center mb-4">
+                <BookOpen className="w-8 h-8 text-[#921a40] mr-3" />
+                <h3 className="text-2xl font-bold text-[#921a40]">लेखन</h3>
+              </div>
+              <ul className="text-gray-700 space-y-2 list-disc list-inside">
+                <li>काव्यसंग्रह चारू मनीष</li>
+                <li>वास्तुशास्त्र फक्त विज्ञानच</li>
+                <li>अशक्य ते शक्य करतील स्वामी</li>
+                <li>यशस्वी भव</li>
+                <li>महिला उद्योजिका, एक राष्ट्रनिर्माती</li>
+                <li>विश्वाकर्षण लॉ ऑफ अट्रॅक्शन</li>
+                <li>रेकी लेवल १, २, ३</li>
+                <li>अंकशास्त्र आणि मोबाईल न्यूमरोलॉजी</li>
+              </ul>
             </motion.div>
           </div>
 
-          {/* Feature Cards */}
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16 max-w-6xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
+          {/* Achievements Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-12 bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border border-gray-200"
           >
-            {[
-              { icon: <Users />, title: "Expert Guides", desc: "Experienced Masters" },
-              { icon: <Star />, title: "Ancient Wisdom", desc: "Timeless Knowledge" },
-              { icon: <Heart />, title: "Healing Touch", desc: "Transformative Care" },
-              { icon: <Lotus />, title: "Divine Energy", desc: "Spiritual Growth" }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeIn}
-                className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20
-                         transform hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="text-white mb-4">{item.icon}</div>
-                <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                <p className="text-white/80 text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
+            <div className="flex items-center mb-6">
+              <Award className="w-10 h-10 text-[#921a40] mr-4" />
+              <h3 className="text-3xl font-bold text-[#921a40]">प्रमुख उपक्रम</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-xl font-semibold mb-3 text-gray-800">अधिवेशने</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 mt-2 mr-2 bg-[#921a40] rounded-full"></span>
+                    <span>5 मे 2024 - सासवड येथे राज्यस्तरीय भव्य वास्तु, ज्योतिष, आणि मनशक्ती अधिवेशन</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 mt-2 mr-2 bg-[#921a40] rounded-full"></span>
+                    <span>7 डिसेंबर 2024 - डोंबिवली येथे राज्यस्तरीय वास्तू अधिवेशन</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-xl font-semibold mb-3 text-gray-800">विशेष कार्य</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 mt-2 mr-2 bg-[#921a40] rounded-full"></span>
+                    <span>मोफत कार्यशाळांचे आयोजन</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 mt-2 mr-2 bg-[#921a40] rounded-full"></span>
+                    <span>आदिशक्ती गुरुकुल यूट्यूब चॅनेल</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 mt-2 mr-2 bg-[#921a40] rounded-full"></span>
+                    <span>वैज्ञानिक दृष्टिकोनातून समस्या निराकरण</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 mt-2 mr-2 bg-[#921a40] rounded-full"></span>
+                    <span>सकाळ व एग्रोवन पेपर मध्ये २००४ ते २००९ पर्यंत सलग ५ वर्ष लेखन</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Services Section */}
-      <motion.section 
-        ref={servicesRef}
-        className="py-24 bg-white"
-      >
+      <section ref={servicesRef} className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold mb-6 text-[#921a40]">Our Sacred Services</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#921a40]">Our Sacred Services</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Discover our comprehensive range of spiritual and healing services.
             </p>
           </motion.div>
 
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={staggerContainer}
             initial="hidden"
             animate={servicesInView ? "visible" : "hidden"}
           >
-            {services.map((service, index) => (
+            {services.slice(0, showAllServices ? services.length : 3).map((service, index) => (
               <motion.div
                 key={index}
                 variants={fadeIn}
-                whileHover={{ scale: 1.02 }}
-                className="group relative overflow-hidden rounded-2xl shadow-xl"
+                className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-[#921a40]/30 transition-all duration-300"
               >
-                <div className="relative h-64">
+                <div className="relative h-48">
                   <img 
                     src={service.image} 
                     alt={service.category}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-                    <div className="absolute bottom-0 p-6 text-white">
-                      <div className="mb-3">{service.icon}</div>
-                      <h3 className="text-2xl font-bold mb-2">{service.category}</h3>
-                      <p className="text-white/80">{service.description}</p>
-                    </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 flex flex-col justify-end">
+                    <div className="text-white mb-2">{service.icon}</div>
+                    <h3 className="text-xl font-bold text-white">{service.category}</h3>
+                    <p className="text-white/80 text-sm">{service.description}</p>
                   </div>
                 </div>
-                <div className="bg-white p-6">
-                  <ul className="space-y-2">
+                <div className="p-4">
+                  <div className="flex flex-wrap gap-2">
                     {service.items.map((item, idx) => (
-                      <li key={idx} className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-[#921a40] rounded-full mr-3" />
+                      <span key={idx} className="px-3 py-1 bg-[#921a40]/10 text-[#921a40] rounded-full text-sm">
                         {item}
-                      </li>
+                      </span>
                     ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Astrology Services Section */}
-      <motion.section
-        ref={astrologyRef}
-        className="py-24 bg-[#921a40]/5"
-      >
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={astrologyInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-6 text-[#921a40]">Astrology Services</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Unlock the secrets of the cosmos and discover your path with our expert astrology services.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate={astrologyInView ? "visible" : "hidden"}
-            className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
-          >
-            {astrologyServices.map((service, index) => (
-              <motion.div
-                key={index}
-                variants={fadeIn}
-                whileHover={{ y: -10 }}
-                className="bg-white p-4 md:p-8 rounded-2xl shadow-lg border-2 border-[#921a40]/10 hover:border-[#921a40]/30"
-              >
-                <div className="flex items-center justify-between mb-4 md:mb-6">
-                  <div className="p-2 md:p-3 bg-[#921a40]/10 rounded-lg">
-                    {service.icon}
                   </div>
-                  <span className="text-xl md:text-2xl font-bold text-[#921a40]">{service.price}</span>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-[#921a40] mb-2 md:mb-3">{service.title}</h3>
-                <p className="text-sm md:text-base text-gray-600">{service.description}</p>
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </motion.section>
 
-      {/* Video Grid Section */}
-      <motion.section
-        ref={videosRef}
-        className="py-24 bg-white"
-      >
+          {services.length > 3 && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAllServices(!showAllServices)}
+                className="px-6 py-3 bg-[#921a40] text-white rounded-full hover:bg-[#921a40]/90 transition-colors shadow-lg hover:shadow-xl"
+              >
+                {showAllServices ? 'Show Less' : 'View All Services'}
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Videos Section */}
+      <section ref={videosRef} className="py-16 bg-gradient-to-b from-white to-[#921a40]/5">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={videosInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold mb-6 text-[#921a40]">Featured Videos</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#921a40]">Featured Videos</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Explore our collection of spiritual guidance and healing sessions.
             </p>
           </motion.div>
@@ -367,7 +337,7 @@ export default function AboutUs() {
             animate={videosInView ? "visible" : "hidden"}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {featuredVideos.map((video, index) => (
+            {featuredVideos.slice(0, showAllVideos ? featuredVideos.length : 3).map((video, index) => (
               <motion.a
                 key={index}
                 href={video.videoUrl}
@@ -376,9 +346,9 @@ export default function AboutUs() {
                 variants={fadeIn}
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-[#921a40]/10 
-                         hover:border-[#921a40]/30 transition-all duration-300"
+                         hover:border-[#921a40]/30 transition-all duration-300 group"
               >
-                <div className="relative aspect-video group">
+                <div className="relative aspect-video">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
@@ -391,14 +361,25 @@ export default function AboutUs() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-[#921a40] mb-2">{video.title}</h3>
-                  <p className="text-gray-600">Click to watch on YouTube</p>
+                  <h3 className="text-xl font-semibold text-[#921a40] mb-2 group-hover:text-[#921a40]/90 transition-colors">{video.title}</h3>
+                  <p className="text-gray-600 group-hover:text-gray-800 transition-colors">Click to watch on YouTube</p>
                 </div>
               </motion.a>
             ))}
           </motion.div>
+
+          {featuredVideos.length > 3 && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAllVideos(!showAllVideos)}
+                className="px-6 py-3 bg-[#921a40] text-white rounded-full hover:bg-[#921a40]/90 transition-colors shadow-lg hover:shadow-xl"
+              >
+                {showAllVideos ? 'Show Less' : 'View All Videos'}
+              </button>
+            </div>
+          )}
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }

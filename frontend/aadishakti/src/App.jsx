@@ -21,6 +21,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import BuyPage from "./components/BuyPage.jsx";
 import CourseLinks from "./components/CourseLinks.jsx";
 import TransactionsDashboard from "./components/TransactionDashboard.jsx";
+import AdminRoutesDashboard from "./components/AdminRoutesDashboard.jsx";
 
 function App() {
   return (
@@ -40,11 +41,18 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/dashboard/"element={ <Dashboard />} />
-        
+            <Route path="/dashboard/" element={<Dashboard />} />
+
+            <Route path="/courses/:courseId/details" element={<CourseLinks />} />
+
+            {/* Admin Panel Route */}
             <Route
-              path="/courses/:courseId/details"
-              element={<CourseLinks />}
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminRoutesDashboard />
+                </ProtectedRoute>
+              }
             />
 
             {/* Protected Admin Routes */}
@@ -60,8 +68,8 @@ function App() {
               path="/transactiondashboard"
               element={
                 <ProtectedRoute>
-              <TransactionsDashboard />
-              </ProtectedRoute>
+                  <TransactionsDashboard />
+                </ProtectedRoute>
               }
             />
             <Route
@@ -72,8 +80,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
-            
             <Route
               path="/promocode-form"
               element={
