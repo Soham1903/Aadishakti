@@ -44,6 +44,8 @@ const Navbar = () => {
   const handleDashboardClick = () => {
     if (!user) {
       navigate("/login");
+    } else if (user.role === "admin") {
+      navigate("/admin");
     } else {
       navigate("/dashboard");
     }

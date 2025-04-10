@@ -43,12 +43,6 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard/" element={<Dashboard />} />
 
-<<<<<<< HEAD
-=======
-            <Route path="/courses/:courseId/details" element={<CourseLinks />} />
-
-            {/* Admin Panel Route */}
->>>>>>> 90c4eaaad752cfb2d822134d4431fc9ace1cfecd
             <Route
               path="/admin"
               element={
