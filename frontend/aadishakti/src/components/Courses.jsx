@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Search, Filter } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import { UserContext } from "../UserContext";
 

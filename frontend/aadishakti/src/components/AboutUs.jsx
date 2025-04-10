@@ -1,23 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
-  Youtube,
   Star,
-  Users,
   Target,
-  Clock,
   Sparkles,
   Heart,
   Brain,
   Bot as Lotus,
-  Compass,
   Target as Goal,
-  Gem,
-  Zap,
   BookOpen,
   Award,
-  GraduationCap,
 } from "lucide-react";
 
 // Services array
