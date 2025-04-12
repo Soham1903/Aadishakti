@@ -22,7 +22,7 @@ const TransactionsDashboard = () => {
     const fetchTransactions = async () => {
       try {
         const response = await fetch(
-          "https://aadishakti-backend-ue51.onrender.com//api/transaction/get"
+          "https://aadishakti-backend-ue51.onrender.com/api/transaction/get"
         );
         const data = await response.json();
         setTransactions(data);
@@ -38,7 +38,7 @@ const TransactionsDashboard = () => {
   const toggleVerification = async (transactionId, currentStatus) => {
     try {
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com//api/transaction/${transactionId}/verify`,
+        `https://aadishakti-backend-ue51.onrender.com/api/transaction/${transactionId}/verify`,
         {
           method: "PATCH",
           headers: {

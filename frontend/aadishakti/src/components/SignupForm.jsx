@@ -59,7 +59,7 @@ const SignupForm = () => {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com//api/v1/signup",
+        "https://aadishakti-backend-ue51.onrender.com/api/v1/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

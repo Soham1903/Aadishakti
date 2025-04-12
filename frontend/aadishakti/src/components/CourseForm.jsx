@@ -48,7 +48,7 @@ function CourseForm() {
       });
 
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com//api/courses/add",
+        "https://aadishakti-backend-ue51.onrender.com/api/courses/add",
         {
           method: "POST",
           body: formData,

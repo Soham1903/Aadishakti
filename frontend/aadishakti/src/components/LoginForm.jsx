@@ -22,7 +22,7 @@ const LoginForm = () => {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com//api/v1/login",
+        "https://aadishakti-backend-ue51.onrender.com/api/v1/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

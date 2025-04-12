@@ -39,7 +39,7 @@ const CourseForm = () => {
 
     try {
       const response = await axios.post(
-        "https://aadishakti-backend-ue51.onrender.com//api/courses/add",
+        "https://aadishakti-backend-ue51.onrender.com/api/courses/add",
         formDataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

@@ -54,7 +54,7 @@ function PromoCodeForm() {
       }
 
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com//api/promocode/add",
+        "https://aadishakti-backend-ue51.onrender.com/api/promocode/add",
         {
           method: "POST",
           headers: {
