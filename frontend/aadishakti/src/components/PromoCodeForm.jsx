@@ -53,14 +53,17 @@ function PromoCodeForm() {
         throw new Error("Percentage discount cannot exceed 100%");
       }
 
-      const response = await fetch("http://localhost:4000/api/promocode/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(formattedData),
-      });
+      const response = await fetch(
+        "https://aadishakti-backend-ue51.onrender.com//api/promocode/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(formattedData),
+        }
+      );
 
       const data = await response.json();
 

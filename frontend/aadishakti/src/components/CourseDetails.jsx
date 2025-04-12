@@ -28,7 +28,7 @@ export default function CourseDetails() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    fetch(`http://localhost:4000/api/courses/${title}`)
+    fetch(`https://aadishakti-backend-ue51.onrender.com//api/courses/${title}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && !data.error) {
@@ -69,7 +69,7 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `http://localhost:4000/api/courses/update/${course._id}`,
+        `https://aadishakti-backend-ue51.onrender.com//api/courses/update/${course._id}`,
         {
           method: "PUT",
           headers: {
@@ -111,7 +111,7 @@ export default function CourseDetails() {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/courses/${course.title}`,
+        `https://aadishakti-backend-ue51.onrender.com//api/courses/${course.title}`,
         {
           method: "DELETE",
         }
