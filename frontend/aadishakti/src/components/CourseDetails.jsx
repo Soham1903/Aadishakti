@@ -196,7 +196,7 @@ export default function CourseDetails() {
                     {isEditing ? (
                       <input
                         className="border rounded p-2 w-full"
-                        name="title"
+                        name="instructor"
                         value={course.instructor}
                         onChange={handleChange}
                       />

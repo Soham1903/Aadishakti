@@ -21,7 +21,6 @@ const upload = multer({ storage });
 router.post(
   "/add",
   loginLimiter,
-  verifyToken,
   upload.single("image"),
   addCourse
 );
@@ -30,11 +29,10 @@ router.get("/:title", getCourseByTitle);
 router.put(
   "/update/:id",
   loginLimiter,
-  verifyToken,
   upload.single("image"),
   updateCourse
 );
-router.delete("/delete/:id", loginLimiter, verifyToken, deleteCourse);
+router.delete("/delete/:id", loginLimiter,  deleteCourse);
 router.get("/:userId/courses", getUserCourses);
 
 export default router;

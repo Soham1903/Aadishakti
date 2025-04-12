@@ -14,7 +14,7 @@ function AdminRoutesDashboard() {
     <div className="min-h-screen p-8 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-[#921a40]">Admin Panel</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {adminRoutes.map((route) => (
             <button
               key={route.path}
