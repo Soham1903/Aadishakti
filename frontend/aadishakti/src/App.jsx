@@ -43,19 +43,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard/" element={<Dashboard />} />
 
-<<<<<<< HEAD
             {/* Newly added Course Links route */}
             <Route path="/courses/:courseId/details" element={<CourseLinks />} />
-=======
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminRoutesDashboard />
-                </ProtectedRoute>
-              }
-            />
->>>>>>> 970647d8fe6d7859b2e1e8be9d9b04e4f9afa946
 
             {/* Admin Panel Route */}
             <Route
