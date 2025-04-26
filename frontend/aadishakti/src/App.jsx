@@ -44,7 +44,14 @@ function App() {
             <Route path="/dashboard/" element={<Dashboard />} />
 
             {/* Newly added Course Links route */}
+<<<<<<< HEAD
             <Route path="/courses/:courseId/details" element={<CourseLinks />} />
+=======
+            <Route
+              path="/courses/:courseId/details"
+              element={<CourseLinks />}
+            />
+>>>>>>> a7e3c5ff7bf9602014a4dc3c8bc54a70646cf91b
 
             {/* Admin Panel Route */}
             <Route

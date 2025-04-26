@@ -13,7 +13,9 @@ function Uploadimg() {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/images");
+      const response = await axios.get(
+        "https://aadishakti-backend-ue51.onrender.com/api/images"
+      );
       setImages(response.data);
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -39,9 +41,13 @@ function Uploadimg() {
     formData.append("image", selectedFile);
 
     try {
-      await axios.post("http://localhost:4000/api/images/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://aadishakti-backend-ue51.onrender.com/api/images/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       setSelectedFile(null);
       fetchImages();
@@ -52,7 +58,9 @@ function Uploadimg() {
 
   const handleDeleteImage = async (imageId) => {
     try {
-      await axios.delete(`http://localhost:4000/api/images/${imageId}`);
+      await axios.delete(
+        `https://aadishakti-backend-ue51.onrender.com/api/images/${imageId}`
+      );
       fetchImages();
     } catch (error) {
       console.error("Error deleting image:", error);
@@ -62,7 +70,9 @@ function Uploadimg() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-8">
-      <h2 className="text-3xl font-bold mb-6 text-[#921a40] text-center">Image Upload Portal</h2>
+      <h2 className="text-3xl font-bold mb-6 text-[#921a40] text-center">
+        Image Upload Portal
+      </h2>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
         <input
@@ -78,7 +88,9 @@ function Uploadimg() {
         </button>
       </div>
 
-      <h3 className="text-2xl font-semibold mb-4 text-[#921a40]">Uploaded Images ({images.length}/8)</h3>
+      <h3 className="text-2xl font-semibold mb-4 text-[#921a40]">
+        Uploaded Images ({images.length}/8)
+      </h3>
 
       {images.length === 0 ? (
         <p className="text-gray-500 text-center">No images uploaded yet.</p>
