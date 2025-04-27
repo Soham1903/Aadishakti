@@ -79,9 +79,18 @@ export default function CourseDetails() {
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Include auth token
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          body: formData,
+          body: JSON.stringify({
+            title: course.title,
+            instructor: course.instructor,
+            description: course.description,
+            syllabus: course.syllabus,
+            price: course.price,
+            duration: course.duration,
+            timing: course.timing,
+          }),
         }
       );
 
