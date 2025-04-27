@@ -18,7 +18,9 @@ const Dashboard = () => {
         try {
           // console.log(user.id);
           const response = await fetch(
-            `https://aadishakti-backend-ue51.onrender.com/api/courses/${user.id}/courses`,
+            `https://dummy-blush.vercel.app/api/getusercourses/${encodeURIComponent(
+              user.id
+            )}`,
             {
               headers: {
                 "Content-Type": "application/json",
