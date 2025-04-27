@@ -28,7 +28,7 @@ export default function CourseDetails() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    fetch(`https://aadishakti-backend-ue51.onrender.com/api/courses/${title}`)
+    fetch(`https://dummy-blush.vercel.app/api/coursebytitle/${title}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && !data.error) {
@@ -69,7 +69,7 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course._id}`,
+        `https://dummy-blush.vercel.app/api/updatecourse/${course._id}`,
         {
           method: "PUT",
           headers: {
@@ -111,7 +111,7 @@ export default function CourseDetails() {
 
     try {
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/${course.title}`,
+        `https://dummy-blush.vercel.app/api/deletecourse/${course.title}`,
         {
           method: "DELETE",
         }

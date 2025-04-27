@@ -13,7 +13,7 @@ export default function Courses() {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("https://dummy-blush.vercel.app/api/hello")
+    fetch("https://dummy-blush.vercel.app/api/getcourses")
       .then((res) => res.json())
       .then((data) => {
         setCourses(data);
