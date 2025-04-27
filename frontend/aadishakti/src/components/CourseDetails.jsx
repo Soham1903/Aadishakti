@@ -28,7 +28,11 @@ export default function CourseDetails() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    fetch(`https://dummy-blush.vercel.app/api/coursebytitle/${title}`)
+    fetch(
+      `https://dummy-blush.vercel.app/api/coursebytitle/${encodeURIComponent(
+        title
+      )}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data && !data.error) {
