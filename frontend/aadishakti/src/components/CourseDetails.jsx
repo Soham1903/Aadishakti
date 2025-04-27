@@ -73,7 +73,9 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `https://dummy-blush.vercel.app/api/updatecourse/${course._id}`,
+        `https://dummy-blush.vercel.app/api/updatecourse/${encodeURIComponent(
+          title
+        )}`,
         {
           method: "PUT",
           headers: {
