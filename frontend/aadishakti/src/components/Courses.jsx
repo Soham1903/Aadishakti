@@ -13,7 +13,7 @@ export default function Courses() {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("https://dummy-blush.vercel.app/api/getcourses")
+    fetch("https://aadishakti-backend-ue51.onrender.com/api/courses/get")
       .then((res) => res.json())
       .then((data) => {
         setCourses(data);

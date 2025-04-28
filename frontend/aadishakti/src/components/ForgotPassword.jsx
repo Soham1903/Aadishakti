@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://dummy-blush.vercel.app//api/forgotpassword/",
+        "https://aadishakti-backend-ue51.onrender.com/api/v1/forgot-password/",
         { email },
         {
           headers: {
