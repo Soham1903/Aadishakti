@@ -11,6 +11,7 @@ const Navbar = () => {
   const { cartItems } = useCart();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const location = { pathname: window.location.pathname };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -63,18 +64,10 @@ const Navbar = () => {
 
   const handleNavLinkClick = () => {
     setIsOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const NavLink = ({ href, children }) => (
-    <a
-      href={href}
-      onClick={handleNavLinkClick}
-      className="relative group px-2 py-1.5 transition-colors duration-300 hover:bg-white/10 rounded-md text-sm font-medium"
-    >
-      <span className="relative z-10">{children}</span>
-      <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300"></div>
-    </a>
-  );
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="bg-[#921a40] text-white shadow-lg sticky top-0 z-50">
@@ -91,94 +84,96 @@ const Navbar = () => {
                   className="relative h-8 w-8 md:h-10 md:w-10 rounded-full border-2 border-white/50"
                 />
               </div>
-              <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-white to-pink-200 text-transparent bg-clip-text">
-                Aadishakti Gurukul
-              </span>
+              <img
+                src="/assets/Adishakti TEXT.png"
+                alt="Aadishakti Text"
+                className="h-6 md:h-8 w-auto"
+              />
             </a>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center">
-            <div className="flex items-center space-x-1 mr-4">
-              <NavLink href="/">HOME</NavLink>
-              <NavLink href="/courses">COURSES</NavLink>
-              <NavLink href="/about">ABOUT</NavLink>
-              <NavLink href="/contact">CONTACT</NavLink>
+          {/* Desktop Navigation - Circular Style */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <div className="flex space-x-1 bg-white/10 backdrop-blur-sm border border-white/20 px-1 py-1 rounded-full">
+              <NavItem href="/" isActive={isActive("/")}>HOME</NavItem>
+              <NavItem href="/courses" isActive={isActive("/courses")}>COURSES</NavItem>
+              <NavItem href="/about" isActive={isActive("/about")}>ABOUT</NavItem>
+              <NavItem href="/contact" isActive={isActive("/contact")}>CONTACT</NavItem>
             </div>
+          </div>
 
-            {/* Cart and User Icons */}
-            <div className="flex items-center space-x-2 pl-4 border-l border-white/20">
+          {/* Cart and User Icons */}
+          <div className="hidden md:flex items-center space-x-2 pl-4 border-l border-white/20">
+            <button
+              onClick={handleCartClick}
+              className="relative p-1.5 rounded-full hover:bg-white/10 transition-colors"
+              aria-label="Cart"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
+
+            <div className="relative" ref={dropdownRef}>
               <button
-                onClick={handleCartClick}
-                className="relative p-1.5 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Cart"
+                onClick={toggleDropdown}
+                className="flex items-center space-x-1 p-1.5 rounded-full hover:bg-white/10 transition-colors"
               >
-                <ShoppingCart className="w-5 h-5" />
-                {cartItems.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                    {cartItems.length}
-                  </span>
+                <UserCircle2 className="w-5 h-5" />
+                {user && (
+                  <>
+                    <span className="text-sm font-medium max-w-[80px] truncate">
+                      {user.name}
+                    </span>
+                    <ChevronDown className="w-4 h-4" />
+                  </>
                 )}
               </button>
 
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={toggleDropdown}
-                  className="flex items-center space-x-1 p-1.5 rounded-full hover:bg-white/10 transition-colors"
-                >
-                  <UserCircle2 className="w-5 h-5" />
-                  {user && (
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg py-1 z-50 animate-fadeIn">
+                  {user ? (
                     <>
-                      <span className="text-sm font-medium max-w-[80px] truncate">
-                        {user.name}
-                      </span>
-                      <ChevronDown className="w-4 h-4" />
+                      <div className="px-3 py-2 text-sm text-gray-700 border-b">
+                        <p className="font-medium truncate">{user.name}</p>
+                        <p className="text-xs text-gray-500 truncate">
+                          {user.email}
+                        </p>
+                      </div>
+                      <button
+                        onClick={handleDashboardClick}
+                        className="block w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Dashboard
+                      </button>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-3 py-1.5 text-sm text-red-600 hover:bg-red-50"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <a
+                        href="/login"
+                        className="block px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Login
+                      </a>
+                      <a
+                        href="/signup"
+                        className="block px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Sign up
+                      </a>
                     </>
                   )}
-                </button>
-
-                {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg py-1 z-50 animate-fadeIn">
-                    {user ? (
-                      <>
-                        <div className="px-3 py-2 text-sm text-gray-700 border-b">
-                          <p className="font-medium truncate">{user.name}</p>
-                          <p className="text-xs text-gray-500 truncate">
-                            {user.email}
-                          </p>
-                        </div>
-                        <button
-                          onClick={handleDashboardClick}
-                          className="block w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Dashboard
-                        </button>
-                        <button
-                          onClick={handleLogout}
-                          className="block w-full text-left px-3 py-1.5 text-sm text-red-600 hover:bg-red-50"
-                        >
-                          Logout
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <a
-                          href="/login"
-                          className="block px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Login
-                        </a>
-                        <a
-                          href="/signup"
-                          className="block px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Sign up
-                        </a>
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -293,5 +288,18 @@ const Navbar = () => {
     </nav>
   );
 };
+
+// NavItem component for circular navigation links
+const NavItem = ({ href, children, isActive }) => (
+  <a
+    href={href}
+    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    className={`flex relative py-1.5 px-5 rounded-full cursor-pointer text-sm font-medium transition-all duration-200 ${
+      isActive ? "bg-white/20" : "hover:bg-white/10"
+    }`}
+  >
+    {children}
+  </a>
+);
 
 export default Navbar;

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+    <section className="relative h-[60vh] min-h-[400px] overflow-hidden pt-[100px]">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80')] bg-cover bg-center">
         <div className="absolute inset-0 bg-gradient-to-r from-[#921a40]/90 to-[#921a40]/70"></div>

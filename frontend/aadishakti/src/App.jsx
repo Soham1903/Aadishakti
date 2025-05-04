@@ -22,7 +22,8 @@ import BuyPage from "./components/BuyPage.jsx";
 import CourseLinks from "./components/CourseLinks.jsx";
 import TransactionsDashboard from "./components/TransactionDashboard.jsx";
 import AdminRoutesDashboard from "./components/AdminRoutesDashboard.jsx";
-
+import './styles/animations.css';
+import Appointment from './pages/Appointment.jsx';
 function App() {
   return (
     <UserProvider>
@@ -42,16 +43,14 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard/" element={<Dashboard />} />
+            <Route path="/appointment" element={<Appointment />} />
 
             {/* Newly added Course Links route */}
-<<<<<<< HEAD
             <Route path="/courses/:courseId/details" element={<CourseLinks />} />
-=======
             <Route
               path="/courses/:courseId/details"
               element={<CourseLinks />}
             />
->>>>>>> a7e3c5ff7bf9602014a4dc3c8bc54a70646cf91b
 
             {/* Admin Panel Route */}
             <Route

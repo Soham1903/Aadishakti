@@ -1,0 +1,198 @@
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  UserCircle2,
+  Menu,
+  X,
+  ShoppingCart,
+  ChevronDown,
+} from "lucide-react";
+import { useUser } from "../UserContext";
+import { useCart } from "../contexts/CartContext";
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, setUser } = useUser();
+  const { cartItems } = useCart();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dropdownRef = useRef(null);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const isActive = (path) => location.pathname === path;
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => !prev);
+    setDropdownOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    setDropdownOpen(false);
+    setMobileMenuOpen(false);
+    navigate("/");
+  };
+
+  const handleDashboardClick = () => {
+    if (!user) {
+      navigate("/login");
+    } else if (user.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/dashboard");
+    }
+    setMobileMenuOpen(false);
+  };
+
+  const handleCartClick = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/cart");
+    }
+    setMobileMenuOpen(false);
+  };
+
+  const mobileNavLinksClicked = () => {
+    setMobileMenuOpen(false);
+    scrollToTop();
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleScroll = () => {
+      if (isMobileMenuOpen) setMobileMenuOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isMobileMenuOpen]);
+
+  return (
+    <nav className="top-0 w-full fixed z-50">
+      <div className="relative z-50">
+        <div className="max-w-full px-[20px] md:px-[20px] xl:px-[60px] py-4 bg-white shadow-md">
+          <div className="flex items-center justify-between h-16 pl-2">
+            {/* Logo */}
+            <div className="brand">
+              <Link to="/" onClick={scrollToTop}>
+                <img
+                  className="w-32 h-[68px] pb-4"
+                  src="/assets/LOGO.png"
+                  alt="Logo"
+                />
+              </Link>
+            </div>
+
+            {/* Desktop Nav Links */}
+            <div className="hidden lg:flex lg:justify-center">
+              <div className="flex space-x-2 xl:space-x-[20px] bg-[#F2F5FA] border border-[#DDE1EA] px-1 rounded-full">
+                <NavItem to="/" label="Home" isActive={isActive} />
+                <NavItem to="/shop" label="Shop" isActive={isActive} />
+                <NavItem to="/about" label="About" isActive={isActive} />
+                <NavItem to="/contact" label="Contact" isActive={isActive} />
+              </div>
+            </div>
+
+            {/* Right Side Icons */}
+            <div className="flex items-center space-x-4 pr-2">
+              {/* Cart Icon */}
+              <button
+                onClick={handleCartClick}
+                className="relative hidden lg:inline-flex"
+              >
+                <ShoppingCart />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full">
+                    {cartItems.length}
+                  </span>
+                )}
+              </button>
+
+              {/* User Dropdown */}
+              <div className="relative hidden lg:inline-block" ref={dropdownRef}>
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center space-x-1"
+                >
+                  <UserCircle2 />
+                  <ChevronDown size={16} />
+                </button>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md text-sm">
+                    <button
+                      onClick={handleDashboardClick}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    >
+                      Dashboard
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Toggle */}
+              <div className="lg:hidden">
+                <button onClick={toggleMobileMenu}>
+                  {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="xl:hidden z-50 bg-white px-5 py-2 font-semibold">
+          <Link to="/" onClick={mobileNavLinksClicked} className="block py-2 hover:text-newBlue">Home</Link>
+          <Link to="/shop" onClick={mobileNavLinksClicked} className="block py-2 hover:text-newBlue">Shop</Link>
+          <Link to="/about" onClick={mobileNavLinksClicked} className="block py-2 hover:text-newBlue">About</Link>
+          <Link to="/contact" onClick={mobileNavLinksClicked} className="block py-2 hover:text-newBlue">Contact</Link>
+          <div className="mt-4 flex flex-col space-y-3">
+            <button onClick={handleDashboardClick} className="flex justify-center border border-[#2A3059] px-4 py-2 rounded-full hover:bg-newBlue hover:text-white">Dashboard</button>
+            <button onClick={handleLogout} className="flex justify-center bg-newBlue text-white px-4 py-2 rounded-full hover:bg-gray-800">Logout</button>
+            <button onClick={handleCartClick} className="flex justify-center border border-gray-300 px-4 py-2 rounded-full hover:bg-gray-100">Cart ({cartItems.length})</button>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+// Helper component for Nav Items
+const NavItem = ({ to, label, isActive }) => (
+  <div className="each-item py-1">
+    <Link
+      to={to}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className={flex relative py-2 px-6 rounded-full cursor-pointer text-sm font-semibold ${
+        isActive(to) ? "bg-newBlue text-white" : "text-black"
+      }}
+    >
+      {label}
+    </Link>
+  </div>
+);
+

@@ -1,6 +1,7 @@
 import Carousel from "./imageCarousel";
-import GradientCards from "./AstroCards";
-import VideoSection from "./VideoSection";
+import QuoteSection from './QuoteSection';
+import MobileNumerology from "./MobileNumerology";
+import VastuSpecial from './VastuSpecial';
 import TopCourses from "./TopCourses";
 import Stats from "./Stats";
 import FAQ from "./FAQ";
@@ -13,8 +14,9 @@ const Home = () => {
       <div className="w-full">
         <Carousel />
         <About />
-        <GradientCards />
-        <VideoSection />
+        <QuoteSection />
+        <MobileNumerology/>
+        <VastuSpecial />
         <Stats />
         <TopCourses />
         <Reviews />
