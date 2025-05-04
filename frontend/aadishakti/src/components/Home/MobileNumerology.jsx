@@ -6,7 +6,7 @@ const MobileNumerology = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.href = `/appointment?number=${mobileNumber}`;
+    window.location.href = `/Appointment?number=${mobileNumber}`;
   };
 
   return (

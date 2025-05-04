@@ -35,7 +35,7 @@ function App() {
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:title" element={<CourseDetails />} />
             <Route path="/courses/:title/buy" element={<BuyPage />} />
@@ -45,8 +45,7 @@ function App() {
             <Route path="/dashboard/" element={<Dashboard />} />
             <Route path="/appointment" element={<Appointment />} />
 
-            {/* Newly added Course Links route */}
-            <Route path="/courses/:courseId/details" element={<CourseLinks />} />
+
             <Route
               path="/courses/:courseId/details"
               element={<CourseLinks />}

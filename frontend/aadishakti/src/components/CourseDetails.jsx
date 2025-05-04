@@ -69,13 +69,22 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course._id}`,
+        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course.id}`,
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Include auth token
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          body: formData,
+          body: JSON.stringify({
+            title: course.title,
+            instructor: course.instructor,
+            description: course.description,
+            syllabus: course.syllabus,
+            price: course.price,
+            duration: course.duration,
+            timing: course.timing,
+          }),
         }
       );
 
