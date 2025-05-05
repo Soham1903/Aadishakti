@@ -57,7 +57,7 @@ const About = () => {
           {/* Image Section - should come second on mobile */}
           <div className="order-2 md:order-2">
             <img 
-              src="assets/rekihome.jpg"
+              src="assets/astrobook.jpg"
               alt="Astrology Services"
               className="rounded-lg shadow-lg w-full h-48 md:h-[400px] object-cover"
             />
