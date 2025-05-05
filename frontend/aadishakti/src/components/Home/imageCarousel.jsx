@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Carousel = () => {
   const images = [
@@ -15,18 +15,18 @@ const Carousel = () => {
     },
     {
       url: '/assets/hero3.jpg',
-      // title: 'Spiritual Guidance',
-      // description: 'Find your path to enlightenment'
+      title: '',
+      description: ''
     },
     {
       url: '/assets/hero4.jpg',
-      // title: 'Divine Connection',
-      // description: 'Connect with your higher self'
+      title: '',
+      description: ''
     },
     {
       url: '/assets/hero5.jpg',
-      // title: 'Sacred Knowledge',
-      // description: 'Learn the mysteries of the universe'
+      title: '',
+      description: ''
     }
   ];
 
@@ -49,60 +49,78 @@ const Carousel = () => {
     return () => clearInterval(intervalId);
   }, [nextImageIndex, images.length]);
 
-  return (
-    <div className="px-5 lg:px-9 pt-9">
+  const handleDotClick = (index) => {
+    if (index === currentImageIndex) return;
+    
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentImageIndex(index);
+      setNextImageIndex((index + 1) % images.length);
+      setIsTransitioning(false);
+    }, 500);
+  };
 
-      <div className='relative bg-black rounded-3xl overflow-hidden'>
-        <div className='absolute inset-0 bg-black opacity-25 z-10'></div>
+  return (
+    <div className="px-2 sm:px-3 md:px-5 lg:px-9 pt-3 sm:pt-6 md:pt-9">
+      <div className='relative bg-black rounded-2xl md:rounded-3xl overflow-hidden shadow-lg'>
+        {/* Enhanced overlay with gradient for better text readability */}
+        <div className='absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-10'></div>
         
         {/* Current Image */}
         <img 
           src={images[currentImageIndex].url} 
-          className={`w-full h-[360px] md:h-[500px] lg:h-[600px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
+          className={`w-full h-[420px] md:h-[500px] lg:h-[600px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
             isTransitioning ? 'opacity-20' : 'opacity-100'
           }`}
-          alt={images[currentImageIndex].title}
+          alt={images[currentImageIndex].title || "Carousel image"}
         />
         
         {/* Placeholder to maintain layout */}
-        <div className='w-full h-[360px] md:h-[500px] lg:h-[600px]'></div>
+        <div className='w-full h-[420px] md:h-[500px] lg:h-[600px]'></div>
                 
-        <div className='absolute w-full top-1/2 -translate-y-1/2 flex flex-col space-y-3 justify-center items-center px-5 md:px-10 z-20'>
-          <motion.h2
-            className='text-white font-bold text-[28px] md:text-[36px] lg:text-[65px] leading-[36px] md:leading-[48px] lg:leading-[74px] text-center'
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentImageIndex}
+            className='absolute w-full top-1/2 -translate-y-1/2 flex flex-col space-y-4 md:space-y-5 justify-center items-center px-4 sm:px-6 md:px-10 z-20'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            {images[currentImageIndex].title}
-          </motion.h2>
+            {images[currentImageIndex].title && (
+              <motion.h2
+                className='text-white font-bold text-[32px] sm:text-[36px] md:text-[45px] lg:text-[65px] leading-[1.1] md:leading-[1.2] lg:leading-[1.15] text-center drop-shadow-md'
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                {images[currentImageIndex].title}
+              </motion.h2>
+            )}
 
-          <motion.p
-            className='text-white text-[12px] md:text-[14px] lg:text-[20px] w-full md:w-[60%] text-center pb-2 lg:pb-8'
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            {images[currentImageIndex].description}
-          </motion.p>
-        </div>
+            {images[currentImageIndex].description && (
+              <motion.p
+                className='text-white text-[16px] sm:text-[18px] md:text-[18px] lg:text-[20px] w-[92%] sm:w-[85%] md:w-[70%] lg:w-[60%] text-center pb-3 md:pb-5 lg:pb-8 drop-shadow-md'
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+              >
+                {images[currentImageIndex].description}
+              </motion.p>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Navigation Dots */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+        {/* Improved Navigation Dots */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
           {images.map((_, index) => (
             <button
               key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                currentImageIndex === index ? 'bg-white w-4' : 'bg-white/50'
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                currentImageIndex === index ? 'bg-white w-6' : 'bg-white/60 w-2.5 hover:bg-white/80'
               }`}
-              onClick={() => {
-                setIsTransitioning(true);
-                setTimeout(() => {
-                  setCurrentImageIndex(index);
-                  setNextImageIndex((index + 1) % images.length);
-                  setIsTransitioning(false);
-                }, 500);
-              }}
+              onClick={() => handleDotClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
