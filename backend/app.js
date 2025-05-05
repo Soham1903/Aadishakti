@@ -36,6 +36,7 @@ app.use("/api/images", imageRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/promocode", promocodeRoutes);
 app.use("/api/transaction", transactionRoutes);
+app.use("/uploads", express.static("public/uploads"));
 
 dbConnection();
 export default app;

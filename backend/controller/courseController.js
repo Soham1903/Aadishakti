@@ -15,13 +15,7 @@ export const addCourse = async (req, res) => {
       benefits,
     } = req.body;
 
-    const image = req.file
-      ? {
-          filename: req.file.originalname, // Store original filename
-          contentType: req.file.mimetype, // Store MIME type
-          imageBase64: req.file.buffer.toString("base64"), // Convert image to Base64
-        }
-      : null;
+    const image = req.file ? req.file.filename : null;
 
     console.log(req.body);
 

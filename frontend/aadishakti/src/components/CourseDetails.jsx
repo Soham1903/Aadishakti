@@ -180,9 +180,8 @@ export default function CourseDetails() {
           </h1>
           <div className="rounded-3xl overflow-hidden shadow-xl">
             <img
-              src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
+              src={`http://localhost:4000/uploads/${course.image}`}
               alt={course.title}
-              className="w-full h-96 object-cover"
             />
           </div>
         </div>
