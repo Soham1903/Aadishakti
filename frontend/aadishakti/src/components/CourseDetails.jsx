@@ -69,7 +69,7 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course.id}`,
+        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course._id}`,
         {
           method: "PUT",
           headers: {
