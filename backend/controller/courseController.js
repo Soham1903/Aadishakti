@@ -4,6 +4,21 @@ import User from "../model/userSchema.js";
 // Add Course
 export const addCourse = async (req, res) => {
   try {
+    console.log("1. Multer file object:", req.file); // Should show Cloudinary info
+    console.log("2. Request body:", req.body);
+    // Validate required fields
+    const requiredFields = ["title", "description", "price"];
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        return res.status(400).json({ error: `${field} is required` });
+      }
+    }
+
+    // Validate image exists
+    if (!req.file) {
+      return res.status(400).json({ error: "Course image is required" });
+    }
+
     const {
       title,
       description,
@@ -15,30 +30,38 @@ export const addCourse = async (req, res) => {
       benefits,
     } = req.body;
 
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
-
-    console.log(req.body);
-
     const newCourse = new Course({
       title,
       description,
-      price,
+      price: Number(price), // Ensure numeric type
       duration,
       syllabus,
       instructor,
       timing,
       benefits,
-      image: req.file.path,
+      image: req.file.secure_url || req.file.path, // Works with both Cloudinary and local
     });
 
     await newCourse.save();
-    console.log(newCourse);
-    res
-      .status(201)
-      .json({ message: "Course added successfully!", course: newCourse });
+
+    res.status(201).json({
+      message: "Course added successfully!",
+      course: {
+        id: newCourse._id,
+        title: newCourse.title,
+        image: newCourse.image,
+        // Include other fields you want to return
+      },
+    });
   } catch (error) {
     console.error("Error adding course:", error);
-    res.status(500).json({ error: "Server Error" });
+
+    // More specific error handling
+    if (error.name === "ValidationError") {
+      return res.status(400).json({ error: error.message });
+    }
+
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
