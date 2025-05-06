@@ -11,6 +11,7 @@ import transactionRoutes from "./routes/transactionRoute.js";
 import axios from "axios";
 const app = express();
 import multer from "multer";
+import path from "path";
 
 dotenv.config({ path: "./config/.env" });
 
@@ -36,7 +37,7 @@ app.use("/api/images", imageRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/promocode", promocodeRoutes);
 app.use("/api/transaction", transactionRoutes);
-app.use("/uploads", express.static("public/uploads"));
+app.use("/uploads", express.static(path.join("public", "uploads")));
 
 dbConnection();
 export default app;

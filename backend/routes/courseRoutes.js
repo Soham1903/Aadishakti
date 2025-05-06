@@ -17,7 +17,7 @@ const router = express.Router();
 // Configure Multer for memory storage (store image as buffer)
 
 // Course routes
-router.post("/add", loginLimiter, upload.single("image"), addCourse);
+router.post("/add",upload.single("image"), addCourse);
 router.get("/get", getCourses);
 router.get("/:title", getCourseByTitle);
 router.put("/update/:id", loginLimiter, upload.single("image"), updateCourse);
