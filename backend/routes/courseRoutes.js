@@ -10,7 +10,7 @@ import {
 } from "../controller/courseController.js";
 import verifyToken from "../middlewares/authMiddleware.js";
 import { loginLimiter } from "../middlewares/rateLimiter.js";
-import upload from "../middleware/upload.js";
+import upload from "../middlewares/upload.js";
 
 const router = express.Router();
 
