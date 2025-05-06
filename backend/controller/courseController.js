@@ -28,7 +28,7 @@ export const addCourse = async (req, res) => {
       instructor,
       timing,
       benefits,
-      image: imageUrl,
+      image: req.file.path,
     });
 
     await newCourse.save();

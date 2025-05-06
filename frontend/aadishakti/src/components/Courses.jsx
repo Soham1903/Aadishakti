@@ -93,12 +93,11 @@ export default function Courses() {
               >
                 <div className="relative">
                   <img
-                    src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
+                    src={course.image}
                     alt={course.title}
                     className="w-full h-56 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
                   />
                 </div>
-
                 <div className="p-6 flex flex-col justify-between flex-grow">
                   <h3 className="text-xl font-bold text-[#921a40] mb-2">
                     {course.title}
