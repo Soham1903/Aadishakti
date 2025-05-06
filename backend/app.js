@@ -21,6 +21,7 @@ app.use(
     origin: [
       "https://aadishakti-frontend.onrender.com",
       "http://localhost:5173",
+      "https://www.adishaktigurukul.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
