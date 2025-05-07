@@ -34,7 +34,7 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Begin Your Spiritual Journey
+              आपल्या आध्यात्मिक प्रवासाची सुरुवात करा
             </motion.h1>
             <motion.p
               className="text-xl text-gray-600 max-w-2xl mx-auto"
@@ -42,7 +42,7 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Take the first step towards transformation. Reach out to us for guidance and support on your path to spiritual enlightenment.
+              रूपांतराच्या दिशेने पहिला पाऊल टाका. मार्गदर्शन आणि समर्थनासाठी आमच्याशी संपर्क साधा.
             </motion.p>
           </div>
         </motion.div>
@@ -56,16 +56,15 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-            {/* Contact Information */}
             <div className="bg-white p-8 rounded-2xl shadow-lg space-y-8">
               {[{
-                Icon: Phone, title: "Phone", details: ["+1 (555) 123-4567", "+1 (555) 987-6543"]
+                Icon: Phone, title: "फोन", details: ["+91 9876543210", "+91 9123456789"]
               }, {
-                Icon: Mail, title: "Email", details: ["contact@astrologyhealing.com", "support@astrologyhealing.com"]
+                Icon: Mail, title: "ईमेल", details: ["contact@astrologyhealing.com", "support@astrologyhealing.com"]
               }, {
-                Icon: MapPin, title: "Location", details: ["123 Spiritual Lane", "Mystic City, MC 12345"]
+                Icon: MapPin, title: "पत्ता", details: ["१२३ आध्यात्मिक लेन", "मिस्टिक सिटी, एमसी १२३४५"]
               }, {
-                Icon: Clock, title: "Hours", details: ["Monday - Saturday: 9:00 AM - 7:00 PM", "Sunday: Closed"]
+                Icon: Clock, title: "कार्यालय वेळ", details: ["सोमवार - शनिवार: सकाळी ९ ते सायंकाळी ७", "रविवार: बंद"]
               }].map(({ Icon, title, details }, i) => (
                 <motion.div
                   key={i}
@@ -88,16 +87,16 @@ export default function ContactPage() {
 
             {/* Social Media */}
             <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-xl font-semibold mb-6">Connect With Us</h3>
+              <h3 className="text-xl font-semibold mb-6">आमच्याशी सोशल मीडियावर जोडा</h3>
               <div className="grid grid-cols-4 gap-4">
                 {[{
-                  icon: <Instagram />, label: "Instagram"
+                  icon: <Instagram />, label: "इंस्टाग्राम"
                 }, {
-                  icon: <Facebook />, label: "Facebook"
+                  icon: <Facebook />, label: "फेसबुक"
                 }, {
-                  icon: <Twitter />, label: "Twitter"
+                  icon: <Twitter />, label: "ट्विटर"
                 }, {
-                  icon: <Youtube />, label: "YouTube"
+                  icon: <Youtube />, label: "यूट्यूब"
                 }].map((social, index) => (
                   <motion.a
                     key={index}
@@ -121,12 +120,12 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-semibold mb-8 text-[#921a40]">Send us a Message</h3>
+              <h3 className="text-2xl font-semibold mb-8 text-[#921a40]">आम्हाला संदेश पाठवा</h3>
               <form className="space-y-6">
                 {[
-                  { label: "Full Name", type: "text", placeholder: "Your Name" },
-                  { label: "Email Address", type: "email", placeholder: "your@email.com" },
-                  { label: "Phone Number", type: "tel", placeholder: "Your Phone Number" }
+                  { label: "पूर्ण नाव", type: "text", placeholder: "तुमचं नाव" },
+                  { label: "ईमेल पत्ता", type: "email", placeholder: "tumcha@email.com" },
+                  { label: "फोन नंबर", type: "tel", placeholder: "तुमचा फोन नंबर" }
                 ].map((field, i) => (
                   <div key={i}>
                     <label className="block text-sm font-medium text-gray-700 mb-2">{field.label}</label>
@@ -140,25 +139,25 @@ export default function ContactPage() {
                 ))}
                 {/* Dropdown */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Service Interest</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">सेवेची आवड</label>
                   <motion.select
                     whileFocus={{ scale: 1.02 }}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent transition-all duration-300"
                   >
-                    <option value="">Select a Service</option>
-                    <option value="reiki">Reiki Healing</option>
-                    <option value="vastu">Vastu Shastra</option>
-                    <option value="hypno">Hypnotherapy</option>
-                    <option value="astro">Astrology</option>
+                    <option value="">सेवा निवडा</option>
+                    <option value="reiki">रेकी हिलिंग</option>
+                    <option value="vastu">वास्तुशास्त्र</option>
+                    <option value="hypno">हिप्नोथेरपी</option>
+                    <option value="astro">ज्योतिष</option>
                   </motion.select>
                 </div>
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">तुमचा संदेश</label>
                   <motion.textarea
                     whileFocus={{ scale: 1.02 }}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent transition-all duration-300 h-32"
-                    placeholder="How can we help you on your spiritual journey?"
+                    placeholder="आम्ही तुम्हाला कसा मदत करू शकतो?"
                   />
                 </div>
                 <motion.button
@@ -167,7 +166,7 @@ export default function ContactPage() {
                   type="submit"
                   className="w-full bg-gradient-to-r from-[#921a40] to-[#7a1635] text-white py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
-                  <span>Send Message</span>
+                  <span>संदेश पाठवा</span>
                   <Send className="w-5 h-5" />
                 </motion.button>
               </form>
