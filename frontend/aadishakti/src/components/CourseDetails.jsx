@@ -69,7 +69,7 @@ export default function CourseDetails() {
       // }
 
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course.id}`,
+        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course._id}`,
         {
           method: "PUT",
           headers: {
@@ -120,7 +120,7 @@ export default function CourseDetails() {
 
     try {
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/${course.title}`,
+        `https://aadishakti-backend-ue51.onrender.com/api/courses/delete/${course._id}`,
         {
           method: "DELETE",
         }
@@ -128,7 +128,7 @@ export default function CourseDetails() {
 
       if (response.ok) {
         alert("Course deleted successfully!");
-        window.location.href = "/"; // Redirect to home or courses list
+        window.location.href = "/courses"; // Redirect to home or courses list
       } else {
         const data = await response.json();
         alert(data.error || "Failed to delete course.");

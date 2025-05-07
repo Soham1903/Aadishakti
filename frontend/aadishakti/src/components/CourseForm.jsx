@@ -36,6 +36,7 @@ function CourseForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Selected file:", course.image);
     setIsSubmitting(true);
     setSubmitMessage("");
 
