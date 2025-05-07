@@ -12,7 +12,7 @@ const MobileNumerology = () => {
   return (
     <section className="w-full bg-white text-[#333] py-16 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-10 items-center">
+        <div className="flex flex-col md:flex-row items-center gap-12">
           {/* Left Content */}
           <div className="md:w-1/2 space-y-6">
             <div className="flex items-center gap-2">
@@ -21,23 +21,21 @@ const MobileNumerology = () => {
             </div>
 
             <div className="space-y-4 text-lg">
-              <p className="flex items-start gap-2">
-                <Star className="h-5 w-5 text-[#921a40] mt-1 flex-shrink-0" />
-                <span>जाणून घ्या तुमचा मोबाईल नंबर काय सांगतो?</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <Star className="h-5 w-5 text-[#921a40] mt-1 flex-shrink-0" />
-                <span>तुमच्या मोबाईल नंबर मुळे तुमच्या जीवनात काय घडत आहे!</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <Star className="h-5 w-5 text-[#921a40] mt-1 flex-shrink-0" />
-                <span>आणि मिळवा भाग्यकारक पॅटर्न लॉक पासवर्ड! भाग्यकारक पासवर्ड मुळे तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होते असा अनुभव आहे.</span>
-              </p>
+              {[
+                "जाणून घ्या तुमचा मोबाईल नंबर काय सांगतो?",
+                "तुमच्या मोबाईल नंबर मुळे तुमच्या जीवनात काय घडत आहे!",
+                "आणि मिळवा भाग्यकारक पॅटर्न लॉक पासवर्ड! भाग्यकारक पासवर्ड मुळे तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होते असा अनुभव आहे."
+              ].map((text, idx) => (
+                <p key={idx} className="flex items-start gap-2">
+                  <Star className="h-5 w-5 text-[#921a40] mt-1 flex-shrink-0" />
+                  <span>{text}</span>
+                </p>
+              ))}
               <p className="text-[#921a40] font-semibold mt-4">अपॉइन्टमेंट आवश्यक</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-              <div className="bg-gray-100 p-1 rounded-lg flex items-center">
+            <form onSubmit={handleSubmit} className="mt-6">
+              <div className="bg-gray-100 p-1 rounded-lg flex items-center shadow-inner">
                 <input
                   type="text"
                   placeholder="तुमचा मोबाईल नंबर टाका"
@@ -48,7 +46,7 @@ const MobileNumerology = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-[#921a40] text-white font-bold px-5 py-3 rounded-lg flex items-center gap-2 transition-transform hover:scale-105"
+                  className="bg-[#921a40] text-white font-bold px-5 py-3 rounded-lg flex items-center gap-2 hover:scale-105 transition-transform"
                 >
                   <span>शोधा</span>
                   <Search className="h-5 w-5" />
@@ -59,28 +57,31 @@ const MobileNumerology = () => {
 
           {/* Right Content */}
           <div className="md:w-1/2">
-            <div className="bg-gray-100 rounded-xl p-6 relative overflow-hidden">
-              <div className="absolute inset-0 opacity-10">
-                <PatternGrid />
-              </div>
+            <div className="bg-gray-100 rounded-xl overflow-hidden relative shadow-lg">
+              <img
+                src="/assets/number.jpg"
+                alt="Mobile Numerology"
+                className="w-full h-64 object-cover object-center"
+              />
 
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-6">
+              <div className="p-6 space-y-6 relative z-10">
+                <div className="flex items-center gap-2">
                   <Lock className="h-6 w-6 text-[#921a40]" />
                   <h3 className="text-2xl font-bold">भाग्यकारक पॅटर्न</h3>
                 </div>
 
-                <div className="grid grid-cols-3 gap-8 mb-8">
+                <div className="grid grid-cols-3 gap-6">
                   <PatternExample pattern={[1, 2, 3, 5, 7]} />
                   <PatternExample pattern={[1, 5, 9, 8, 7]} />
                   <PatternExample pattern={[2, 5, 8, 9, 6]} />
                 </div>
 
                 <div className="bg-white p-4 rounded-lg border border-[#921a40]/20">
-                  <p className="text-center">तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व, करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.</p>
-
+                  <p className="text-center">
+                    तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व, करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.
+                  </p>
                   <div className="flex justify-center mt-4">
-                    <button className="flex items-center gap-2 bg-[#921a40] text-white px-4 py-2 rounded-lg transition-all hover:bg-[#7a1736]">
+                    <button className="flex items-center gap-2 bg-[#921a40] text-white px-4 py-2 rounded-lg hover:bg-[#7a1736] transition-all">
                       <span>अधिक जाणून घ्या</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
@@ -93,7 +94,7 @@ const MobileNumerology = () => {
 
         {/* Floating Numbers */}
         <div className="mt-16 relative overflow-hidden py-4">
-          <div className="absolute inset-0 flex justify-around opacity-10">
+          <div className="absolute inset-0 flex justify-around opacity-10 pointer-events-none">
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
@@ -118,7 +119,7 @@ const MobileNumerology = () => {
   );
 };
 
-// Pattern Grid
+// Pattern Grid (Optional background grid)
 const PatternGrid = () => {
   return (
     <div className="grid grid-cols-9 gap-1 h-full w-full">
@@ -129,7 +130,7 @@ const PatternGrid = () => {
   );
 };
 
-// Pattern Example
+// Pattern Example Component
 const PatternExample = ({ pattern }) => {
   const positions = {
     1: { x: 0, y: 0 },
@@ -158,7 +159,7 @@ const PatternExample = ({ pattern }) => {
         ))}
       </div>
 
-      {/* Lines between dots */}
+      {/* Connecting Lines */}
       <svg className="w-full h-full absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         {pattern.map((num, i) => {
           if (i === pattern.length - 1) return null;
