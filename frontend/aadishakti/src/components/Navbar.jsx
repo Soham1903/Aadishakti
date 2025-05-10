@@ -82,7 +82,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-[#87161A] text-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-[#87161A] text-white shadow-lg fixed w-full top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo and Name */}
@@ -93,7 +93,7 @@ const Navbar = () => {
                 <img
                   src="/assets/aadishaktipng.png"
                   alt="Gurukul Logo"
-                  className="relative h-8 w-8 md:h-10 md:w-10 rounded-full border-2 border-white/50"
+                  className="relative h-8 w-8 md:h-10 md:w-10"
                 />
               </div>
               <img
@@ -113,7 +113,6 @@ const Navbar = () => {
               <NavItem href="/books" isActive={isActive("/books")}>BOOKS</NavItem>
               <NavItem href="/contact" isActive={isActive("/contact")}>CONTACT</NavItem>
               <NavItem href="/gallery" isActive={isActive("/gallery")}>GALLERY</NavItem>
-          
             </div>
           </div>
 
@@ -236,12 +235,11 @@ const Navbar = () => {
                 </div>
               )}
               <a href="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</a>
-                            <a href="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</a>
+              <a href="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</a>
               <a href="/courses" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">COURSES</a>
               <a href="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</a>
-                            <a href="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</a>
+              <a href="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</a>
               <a href="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</a>
-
 
               {user ? (
                 <>
