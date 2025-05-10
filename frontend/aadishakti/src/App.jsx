@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
+import Gallery from "./components/Gallery/gallery.jsx";
+
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
 import ForgotPassword from "./components/ForgotPassword";
@@ -24,6 +27,10 @@ import TransactionsDashboard from "./components/TransactionDashboard.jsx";
 import AdminRoutesDashboard from "./components/AdminRoutesDashboard.jsx";
 import './styles/animations.css';
 import Appointment from './pages/Appointment.jsx';
+import BooksList from './components/Books/BooksList';
+import BookDetails from './components/Books/BooksDetails';
+
+
 function App() {
   return (
     <UserProvider>
@@ -44,6 +51,11 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard/" element={<Dashboard />} />
             <Route path="/appointment" element={<Appointment />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/books" element={<BooksList />} />
+            <Route path="/book/:id" element={<BookDetails />} />
+            
+
 
 
             <Route
@@ -60,6 +72,9 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            
+ 
+    
 
             {/* Protected Admin Routes */}
             <Route

@@ -69,6 +69,18 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const NavItem = ({ href, isActive, children }) => (
+    <a
+      href={href}
+      className={`px-4 py-2 text-sm font-medium rounded-full ${
+        isActive ? "bg-white text-[#921a40]" : "text-white hover:bg-white/20"
+      } transition-colors`}
+      onClick={handleNavLinkClick}
+    >
+      {children}
+    </a>
+  );
+
   return (
     <nav className="bg-[#921a40] text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -92,11 +104,13 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation - Circular Style */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="flex space-x-1 bg-white/10 backdrop-blur-sm border border-white/20 px-1 py-1 rounded-full">
               <NavItem href="/" isActive={isActive("/")}>HOME</NavItem>
               <NavItem href="/courses" isActive={isActive("/courses")}>COURSES</NavItem>
+              <NavItem href="/books" isActive={isActive("/Books")}>BOOKS</NavItem>
+              <NavItem href="/gallery" isActive={isActive("/gallery")}>GALLERY</NavItem>
               <NavItem href="/about" isActive={isActive("/about")}>ABOUT</NavItem>
               <NavItem href="/contact" isActive={isActive("/contact")}>CONTACT</NavItem>
             </div>
@@ -220,34 +234,11 @@ const Navbar = () => {
                   </div>
                 </div>
               )}
-              <a
-                href="/"
-                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-                onClick={handleNavLinkClick}
-              >
-                HOME
-              </a>
-              <a
-                href="/courses"
-                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-                onClick={handleNavLinkClick}
-              >
-                COURSES
-              </a>
-              <a
-                href="/about"
-                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-                onClick={handleNavLinkClick}
-              >
-                ABOUT
-              </a>
-              <a
-                href="/contact"
-                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-                onClick={handleNavLinkClick}
-              >
-                CONTACT
-              </a>
+              <a href="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</a>
+              <a href="/courses" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">COURSES</a>
+              <a href="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</a>
+              <a href="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</a>
+              <a href="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</a>
               {user ? (
                 <>
                   <button
@@ -265,20 +256,8 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <a
-                    href="/login"
-                    className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-                    onClick={handleNavLinkClick}
-                  >
-                    Login
-                  </a>
-                  <a
-                    href="/signup"
-                    className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-                    onClick={handleNavLinkClick}
-                  >
-                    Sign up
-                  </a>
+                  <a href="/login" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Login</a>
+                  <a href="/signup" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Sign up</a>
                 </>
               )}
             </div>
@@ -288,18 +267,5 @@ const Navbar = () => {
     </nav>
   );
 };
-
-// NavItem component for circular navigation links
-const NavItem = ({ href, children, isActive }) => (
-  <a
-    href={href}
-    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    className={`flex relative py-1.5 px-5 rounded-full cursor-pointer text-sm font-medium transition-all duration-200 ${
-      isActive ? "bg-white/20" : "hover:bg-white/10"
-    }`}
-  >
-    {children}
-  </a>
-);
 
 export default Navbar;
