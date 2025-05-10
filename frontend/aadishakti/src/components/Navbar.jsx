@@ -109,7 +109,7 @@ const Navbar = () => {
             <div className="flex space-x-1 bg-white/10 backdrop-blur-sm border border-white/20 px-1 py-1 rounded-full">
               <NavItem href="/" isActive={isActive("/")}>HOME</NavItem>
               <NavItem href="/courses" isActive={isActive("/courses")}>COURSES</NavItem>
-              <NavItem href="/books" isActive={isActive("/Books")}>BOOKS</NavItem>
+              <NavItem href="/books" isActive={isActive("/books")}>BOOKS</NavItem>
               <NavItem href="/gallery" isActive={isActive("/gallery")}>GALLERY</NavItem>
               <NavItem href="/about" isActive={isActive("/about")}>ABOUT</NavItem>
               <NavItem href="/contact" isActive={isActive("/contact")}>CONTACT</NavItem>
@@ -236,6 +236,7 @@ const Navbar = () => {
               )}
               <a href="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</a>
               <a href="/courses" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">COURSES</a>
+              <a href="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</a>
               <a href="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</a>
               <a href="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</a>
               <a href="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</a>
