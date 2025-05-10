@@ -59,7 +59,7 @@ const MobileNumerology = () => {
           <div className="md:w-1/2">
             <div className="bg-gray-100 rounded-xl overflow-hidden relative shadow-lg">
               <img
-                src="/assets/number.jpg"
+                src="/assets/mobilenumber.jpg"
                 alt="Mobile Numerology"
                 className="w-full h-64 object-cover object-center"
               />
