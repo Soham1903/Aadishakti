@@ -16,7 +16,7 @@ const MobileNumerology = () => {
           {/* Left Content */}
           <div className="md:w-1/2 space-y-6">
             <div className="flex items-center gap-2">
-              <Phone className="h-7 w-7 text-[#921a40]" />
+              <Phone className="h-7 w-7 text-[#87161A]" />
               <h2 className="text-3xl md:text-4xl font-bold">मोबाईल नंबर न्यूमरोलॉजी</h2>
             </div>
 
@@ -27,7 +27,7 @@ const MobileNumerology = () => {
                 "आणि मिळवा भाग्यकारक पॅटर्न लॉक पासवर्ड! भाग्यकारक पासवर्ड मुळे तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होते असा अनुभव आहे."
               ].map((text, idx) => (
                 <p key={idx} className="flex items-start gap-2">
-                  <Star className="h-5 w-5 text-[#921a40] mt-1 flex-shrink-0" />
+                  <Star className="h-5 w-5 text-[#87161A] mt-1 flex-shrink-0" />
                   <span>{text}</span>
                 </p>
               ))}
@@ -46,7 +46,7 @@ const MobileNumerology = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-[#921a40] text-white font-bold px-5 py-3 rounded-lg flex items-center gap-2 hover:scale-105 transition-transform"
+                  className="bg-[#87161A] text-white font-bold px-5 py-3 rounded-lg flex items-center gap-2 hover:scale-105 transition-transform"
                 >
                   <span>शोधा</span>
                   <Search className="h-5 w-5" />
@@ -67,7 +67,7 @@ const MobileNumerology = () => {
 
               <div className="p-6 space-y-6 relative z-10">
                 <div className="flex items-center gap-2">
-                  <Lock className="h-6 w-6 text-[#921a40]" />
+                  <Lock className="h-6 w-6 text-[#87161A]" />
                   <h3 className="text-2xl font-bold">भाग्यकारक पॅटर्न</h3>
                 </div>
 
@@ -82,7 +82,7 @@ const MobileNumerology = () => {
                     तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व, करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.
                   </p>
                   <div className="flex justify-center mt-4">
-                    <button className="flex items-center gap-2 bg-[#921a40] text-white px-4 py-2 rounded-lg hover:bg-[#7a1736] transition-all">
+                    <button className="flex items-center gap-2 bg-[#87161A] text-white px-4 py-2 rounded-lg hover:bg-[#7a1736] transition-all">
                       <span>अधिक जाणून घ्या</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
@@ -152,7 +152,7 @@ const PatternExample = ({ pattern }) => {
           <div
             key={num}
             className={`rounded-full aspect-square flex items-center justify-center text-xs ${
-              pattern.includes(num) ? 'bg-[#921a40] text-white font-bold' : 'bg-[#921a40]/10 text-[#921a40]'
+              pattern.includes(num) ? 'bg-[#87161A] text-white font-bold' : 'bg-[#921a40]/10 text-[#87161A]'
             }`}
           >
             {num}
@@ -173,7 +173,7 @@ const PatternExample = ({ pattern }) => {
               y1={(start.y * 33.33) + 16.67}
               x2={(end.x * 33.33) + 16.67}
               y2={(end.y * 33.33) + 16.67}
-              stroke="#921a40"
+              stroke="#87161A"
               strokeWidth="2"
               opacity="0.6"
             />

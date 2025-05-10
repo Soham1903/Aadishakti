@@ -18,8 +18,8 @@ const TabNavigation = ({ activeTab, setActiveTab }) => {
               key={tab.id}
               className={`relative px-6 py-4 text-center flex-1 min-w-[200px] transition-colors duration-300 ${
                 activeTab === tab.id
-                  ? 'text-[#921a40] font-medium'
-                  : 'text-gray-600 hover:text-[#921a40]/80'
+                  ? 'text-[#87161a] font-medium'
+                  : 'text-gray-600 hover:text-[#87161a]/80'
               }`}
               onClick={() => setActiveTab(tab.id)}
               whileHover={{ y: -2 }}
@@ -31,7 +31,7 @@ const TabNavigation = ({ activeTab, setActiveTab }) => {
               </span>
               {activeTab === tab.id && (
                 <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#921a40]"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#87161a]"
                   layoutId="activeTab"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />

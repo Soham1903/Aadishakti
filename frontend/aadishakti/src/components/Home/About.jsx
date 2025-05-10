@@ -27,7 +27,7 @@ const About = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             आमच्या सशुल्क सेवा
           </h2>
-          <div className="w-24 h-1 bg-[#921a40] mx-auto"></div>
+          <div className="w-24 h-1 bg-[#791317] mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -35,7 +35,7 @@ const About = () => {
           <div className="space-y-8 order-1 md:order-1">
             {services.map((service, index) => (
               <div key={index} className="flex gap-4 group">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#921a40]/10 flex items-center justify-center text-[#921a40]">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#791317]/10 flex items-center justify-center text-[#791317]">
                   {service.icon}
                 </div>
                 <div>
@@ -49,7 +49,7 @@ const About = () => {
               </div>
             ))}
 
-            <button className="mt-8 px-8 py-3 bg-[#921a40] text-white rounded-lg hover:bg-[#7a1635] transition-colors">
+            <button className="mt-8 px-8 py-3 bg-[#791317] text-white rounded-lg hover:bg-[##791317] transition-colors">
               अपॉइन्टमेंट बुक करा
             </button>
           </div>

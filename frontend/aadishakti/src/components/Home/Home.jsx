@@ -2,9 +2,7 @@ import Carousel from "./imageCarousel";
 import QuoteSection from './QuoteSection';
 import MobileNumerology from "./MobileNumerology";
 import VastuSpecial from './VastuSpecial';
-// import TopCourses from "./TopCourses";
 import Stats from "./Stats";
-import FAQ from "./FAQ";
 import Reviews from "./Reviews";
 import About from "./About";
 
@@ -18,9 +16,9 @@ const Home = () => {
         <MobileNumerology/>
         <VastuSpecial />
         <Stats />
-        {/* <TopCourses /> */}
+        
         <Reviews />
-        <FAQ />
+       
       </div>
     </>
   );

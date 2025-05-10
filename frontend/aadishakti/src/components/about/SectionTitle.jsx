@@ -13,7 +13,7 @@ const SectionTitle = ({ title, subtitle }) => {
       <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800">{title}</h2>
       <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
       <div className="mt-4 flex justify-center">
-        <div className="w-16 h-1 bg-[#921a40] rounded-full"></div>
+        <div className="w-16 h-1 bg-[#87161a] rounded-full"></div>
       </div>
     </motion.div>
   );

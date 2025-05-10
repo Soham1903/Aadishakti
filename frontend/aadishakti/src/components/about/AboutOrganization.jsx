@@ -34,15 +34,15 @@ const AboutOrganization = () => {
             variants={fadeInUp}
             className="bg-white rounded-2xl shadow-xl p-8 overflow-hidden relative"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#921a40]/5 rounded-full -mr-16 -mt-16"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#921a40]/5 rounded-full -ml-20 -mb-20"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#87161a]/5 rounded-full -mr-16 -mt-16"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#87161a]/5 rounded-full -ml-20 -mb-20"></div>
             
             <div className="relative">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">संस्थेचा इतिहास</h3>
               
               <div className="space-y-4 text-gray-700">
                 <p>
-                  <span className="bg-[#921a40]/10 text-[#921a40] text-sm rounded-full px-3 py-1 font-medium mr-2">2011</span>
+                  <span className="bg-[#87161a]/10 text-[#87161a] text-sm rounded-full px-3 py-1 font-medium mr-2">2011</span>
                   आदिशक्ती गुरुकुल ज्योतिष संशोधन केंद्र, सासवड, जि. पुणे. ची स्थापना 2011 मध्ये केली.
                 </p>
                 
@@ -63,12 +63,12 @@ const AboutOrganization = () => {
             className="space-y-8"
           >
             {/* Mission Card */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#921a40] overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[#921a40]/5 rounded-full -mr-20 -mt-20"></div>
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#87161a] overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#87161a]/5 rounded-full -mr-20 -mt-20"></div>
               
               <div className="relative">
                 <div className="flex items-start mb-6">
-                  <Target className="w-8 h-8 text-[#921a40] mr-4" />
+                  <Target className="w-8 h-8 text-[#87161a] mr-4" />
                   <h3 className="text-2xl font-bold text-gray-800">उद्देश</h3>
                 </div>
                 
@@ -79,12 +79,12 @@ const AboutOrganization = () => {
             </div>
             
             {/* Vision Card */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#921a40] overflow-hidden relative">
-              <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#921a40]/5 rounded-full -mr-20 -mb-20"></div>
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#87161a] overflow-hidden relative">
+              <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#87161a]/5 rounded-full -mr-20 -mb-20"></div>
               
               <div className="relative">
                 <div className="flex items-start mb-6">
-                  <BookOpen className="w-8 h-8 text-[#921a40] mr-4" />
+                  <BookOpen className="w-8 h-8 text-[#87161a] mr-4" />
                   <h3 className="text-2xl font-bold text-gray-800">उद्दिष्ट</h3>
                 </div>
                 
@@ -127,7 +127,7 @@ const AboutOrganization = () => {
             >
               <div className="h-48 overflow-hidden relative">
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#921a40]/90 to-transparent opacity-80"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#87161a]/90 to-transparent opacity-80"></div>
                 <div className="absolute bottom-0 left-0 p-6 text-white">
                   <service.icon className="w-10 h-10 mb-3" />
                   <h3 className="text-xl font-bold">{service.title}</h3>

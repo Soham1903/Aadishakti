@@ -60,7 +60,7 @@ const Stats = () => {
 
   return (
     <section ref={ref} className="py-16 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#921a40]/5 transform -skew-y-6" />
+      <div className="absolute inset-0 bg-[#87161a]/5 transform -skew-y-6" />
       <div className="max-w-7xl mx-auto px-4 relative">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-12"
@@ -68,7 +68,7 @@ const Stats = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          Our Cosmic Achievements
+          आमची वैदिक कामगिरी
         </motion.h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <motion.div
@@ -78,10 +78,10 @@ const Stats = () => {
             animate={inView ? "visible" : "hidden"}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="text-4xl md:text-5xl font-bold text-[#921a40] mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.clients.toLocaleString()}+
             </div>
-            <p className="text-gray-600">Students</p>
+            <p className="text-gray-600">विद्यार्थी</p>
           </motion.div>
           <motion.div
             className="text-center"
@@ -90,10 +90,10 @@ const Stats = () => {
             animate={inView ? "visible" : "hidden"}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="text-4xl md:text-5xl font-bold text-[#921a40] mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.consultations.toLocaleString()}+
             </div>
-            <p className="text-gray-600">Consultations</p>
+            <p className="text-gray-600">सल्ला सत्रे</p>
           </motion.div>
           <motion.div
             className="text-center"
@@ -102,10 +102,10 @@ const Stats = () => {
             animate={inView ? "visible" : "hidden"}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="text-4xl md:text-5xl font-bold text-[#921a40] mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.accuracy}%
             </div>
-            <p className="text-gray-600">Prediction Accuracy</p>
+            <p className="text-gray-600">भविष्यवाणी अचूकता</p>
           </motion.div>
           <motion.div
             className="text-center"
@@ -114,10 +114,10 @@ const Stats = () => {
             animate={inView ? "visible" : "hidden"}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="text-4xl md:text-5xl font-bold text-[#921a40] mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.experts}+
             </div>
-            <p className="text-gray-600">Workshops</p>
+            <p className="text-gray-600">कार्यशाळा</p>
           </motion.div>
         </div>
       </div>

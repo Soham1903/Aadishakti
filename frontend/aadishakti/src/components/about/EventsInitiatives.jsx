@@ -37,7 +37,7 @@ const EventsInitiatives = () => {
             <div 
               key={index}
               className={`relative overflow-hidden rounded-2xl shadow-xl group ${
-                index % 2 === 0 ? 'bg-[#921a40]' : 'bg-white'
+                index % 2 === 0 ? 'bg-[#87161a]' : 'bg-white'
               }`}
             >
               {/* Background pattern */}
@@ -54,7 +54,7 @@ const EventsInitiatives = () => {
               
               <div className="p-8 relative z-10">
                 <div className={`text-4xl font-bold mb-4 ${
-                  index % 2 === 0 ? 'text-white' : 'text-[#921a40]'
+                  index % 2 === 0 ? 'text-white' : 'text-[#87161a]'
                 }`}>
                   {event.date}
                 </div>
@@ -73,8 +73,8 @@ const EventsInitiatives = () => {
                 
                 <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                   index % 2 === 0 
-                    ? 'bg-white text-[#921a40]' 
-                    : 'bg-[#921a40]/10 text-[#921a40]'
+                    ? 'bg-white text-[#87161a]' 
+                    : 'bg-[#87161a]/10 text-[#87161a]'
                 }`}>
                   <Calendar className="w-4 h-4 mr-1" />
                   {event.location}
@@ -83,7 +83,7 @@ const EventsInitiatives = () => {
               
               {/* Decorative element */}
               <div className={`absolute -bottom-10 -right-10 w-24 h-24 rounded-full transition-opacity duration-300 ${
-                index % 2 === 0 ? 'bg-white/10' : 'bg-[#921a40]/10'
+                index % 2 === 0 ? 'bg-white/10' : 'bg-[#87161a]/10'
               }`}></div>
             </div>
           ))}
@@ -131,7 +131,7 @@ const EventsInitiatives = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {initiatives.map((initiative, index) => (
                     <div key={index} className="flex">
-                      <initiative.icon className="w-8 h-8 text-[#921a40] shrink-0 mr-4 mt-1" />
+                      <initiative.icon className="w-8 h-8 text-[#87161a] shrink-0 mr-4 mt-1" />
                       <div>
                         <h4 className="font-medium text-gray-800 mb-2">{initiative.title}</h4>
                         <p className="text-gray-600 text-sm">{initiative.description}</p>
@@ -146,7 +146,7 @@ const EventsInitiatives = () => {
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="p-6 border-b border-gray-100">
                 <h3 className="text-xl font-bold text-gray-800 flex items-center">
-                  <Users className="w-5 h-5 text-[#921a40] mr-2" />
+                  <Users className="w-5 h-5 text-[#87161a] mr-2" />
                   आध्यात्मिक उपक्रम समिती
                 </h3>
               </div>
@@ -155,7 +155,7 @@ const EventsInitiatives = () => {
                 <ul className="space-y-6">
                   {teamMembers.map((member, index) => (
                     <li key={index} className="flex items-start">
-                      <div className="w-10 h-10 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-4">
+                      <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-4">
                         {member.name.charAt(0)}
                       </div>
                       <div>
@@ -178,10 +178,10 @@ const EventsInitiatives = () => {
         viewport={{ once: true }}
         variants={fadeIn}
       >
-        <div className="bg-gradient-to-r from-[#921a40]/10 to-[#921a40]/5 rounded-2xl p-8 md:p-12">
+        <div className="bg-gradient-to-r from-[#87161a]/10 to-[#87161a]/5 rounded-2xl p-8 md:p-12">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-              <Youtube className="w-16 h-16 text-[#921a40] mb-6" />
+              <Youtube className="w-16 h-16 text-[#87161a] mb-6" />
               <h3 className="text-2xl font-bold text-gray-800 mb-4">आदिशक्ती गुरुकुल यूट्यूब चॅनेल</h3>
               <p className="text-gray-700 mb-6">
                 अनेक अध्यात्मिक मार्गदर्शनपर व्हिडिओ, वास्तु, ज्योतिष, रेकी, अंकशास्त्र या विषयांवरील मोफत मार्गदर्शन व कार्यशाळा आमच्या यूट्यूब चॅनेलवर उपलब्ध आहेत.
@@ -190,7 +190,7 @@ const EventsInitiatives = () => {
                 href="https://www.youtube.com/channel/UCxxxxxx" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-5 py-3 bg-[#921a40] text-white rounded-full hover:bg-[#921a40]/90 transition-colors"
+                className="inline-flex items-center px-5 py-3 bg-[#87161a] text-white rounded-full hover:bg-[#87161a]/90 transition-colors"
               >
                 <Youtube className="w-5 h-5 mr-2" />
                 चॅनेलला भेट द्या
@@ -236,15 +236,15 @@ const EventsInitiatives = () => {
         
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Award Card 1 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#921a40]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#921a40] p-4 flex justify-center">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
+            <div className="bg-[#87161a] p-4 flex justify-center">
               <Trophy className="w-10 h-10 text-white" />
             </div>
             <div className="p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-2">उत्तम लेखक पुरस्कार</h3>
               <p className="text-gray-600 mb-4">अष्टक वर्ग महागुरु</p>
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-3">
+                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
                   <span className="font-medium">प्</span>
                 </div>
                 <div>
@@ -255,15 +255,15 @@ const EventsInitiatives = () => {
           </div>
           
           {/* Award Card 2 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#921a40]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#921a40] p-4 flex justify-center">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
+            <div className="bg-[#87161a] p-4 flex justify-center">
               <Award className="w-10 h-10 text-white" />
             </div>
             <div className="p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-2">ज्योतिष भूषण पुरस्कार</h3>
               <p className="text-gray-600 mb-4">ज्योतिषाचार्य</p>
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-3">
+                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
                   <span className="font-medium">दी</span>
                 </div>
                 <div>
@@ -274,15 +274,15 @@ const EventsInitiatives = () => {
           </div>
           
           {/* Award Card 3 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#921a40]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#921a40] p-4 flex justify-center">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
+            <div className="bg-[#87161a] p-4 flex justify-center">
               <Star className="w-10 h-10 text-white" />
             </div>
             <div className="p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-2">कार्यगौरव पुरस्कार</h3>
               <p className="text-gray-600 mb-4">सक्रिय सहभाग</p>
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-3">
+                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
                   <span className="font-medium">वी</span>
                 </div>
                 <div>
@@ -293,8 +293,8 @@ const EventsInitiatives = () => {
           </div>
           
           {/* Award Card 4 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#921a40]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#921a40] p-4 flex justify-center">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
+            <div className="bg-[#87161a] p-4 flex justify-center">
               <Gem className="w-10 h-10 text-white" />
             </div>
             <div className="p-6">
@@ -302,13 +302,13 @@ const EventsInitiatives = () => {
               <p className="text-gray-600 mb-4">समर्पित सेवा</p>
               <div className="space-y-3">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-2">
+                  <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
                     <span className="font-medium text-sm">व</span>
                   </div>
                   <h4 className="font-medium text-gray-800 text-sm">सौ. वर्षा सिध्दे</h4>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-2">
+                  <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
                     <span className="font-medium text-sm">न</span>
                   </div>
                   <h4 className="font-medium text-gray-800 text-sm">सौ. नयना बेलवलकर</h4>
@@ -319,10 +319,10 @@ const EventsInitiatives = () => {
         </div>
         
         {/* Special Recognition Card */}
-        <div className="mt-8 bg-gradient-to-r from-[#921a40]/5 to-[#921a40]/10 rounded-xl p-6 md:p-8 border border-[#921a40]/20">
+        <div className="mt-8 bg-gradient-to-r from-[#87161a]/5 to-[#87161a]/10 rounded-xl p-6 md:p-8 border border-[#87161a]/20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/4 flex justify-center mb-4 md:mb-0">
-              <div className="w-20 h-20 rounded-full bg-[#921a40] flex items-center justify-center text-white">
+              <div className="w-20 h-20 rounded-full bg-[#87161a] flex items-center justify-center text-white">
                 <Trophy className="w-10 h-10" />
               </div>
             </div>
@@ -333,7 +333,7 @@ const EventsInitiatives = () => {
               </p>
               <div className="flex justify-center md:justify-start">
                 <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
-                  <div className="w-8 h-8 rounded-full bg-[#921a40]/10 flex items-center justify-center text-[#921a40] mr-2">
+                  <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
                     <span className="font-medium">सु</span>
                   </div>
                   <h4 className="font-medium text-gray-800">सौ. सुधा सुळे</h4>
