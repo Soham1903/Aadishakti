@@ -6,13 +6,13 @@ const Footer = () => {
     <footer className="bg-[#87161A] text-white py-8">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
+          {/* Company Info - Logo section updated */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img
                 src="assets/logoo.jpeg"
                 alt="Company Logo"
-                className="w-12 h-12 rounded-full object-cover"
+                className="w-12 h-12 object-cover" // Removed rounded-full
               />
               <div className="flex flex-col">
                 <img 
@@ -27,6 +27,7 @@ const Footer = () => {
             </p>
           </div>
 
+          {/* Rest of the footer remains exactly the same */}
           {/* Quick Links */}
           <div>
             <h4 className="font-bold text-lg mb-4">क्विक लिंक्स</h4>

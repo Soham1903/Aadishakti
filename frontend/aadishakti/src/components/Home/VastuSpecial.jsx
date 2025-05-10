@@ -81,12 +81,12 @@ const VastuSpecial = () => {
             <div className="p-6 bg-gray-100 rounded-lg border border-gray-200 mb-8">
               <h3 className="text-xl font-bold mb-3 text-gray-900">वास्तू विशेष सेवा</h3>
               <p className="text-gray-700 mb-3">
-                तुमच्या घर किंवा कार्यालयासाठी संपूर्ण वास्तू परीक्षण आणि दोष निवारण मार्गदर्शन प्रति तास ₹1,999 पासून सुरू.
+                तुमच्या घर किंवा कार्यालयासाठी संपूर्ण वास्तू परीक्षण आणि दोष निवारणासाठी विशेष मार्गदर्शन सेवा उपलब्ध आहे..
               </p>
-              <div className="flex justify-between items-center">
+              {/* <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">सीमित कालावधीसाठी 20% सवलत</span>
                 <span className="font-bold text-[#87161a]">₹1,599</span>
-              </div>
+              </div> */}
             </div>
 
             <button className="px-8 py-3 bg-[#87161a] hover:bg-[#7a1535] text-white font-semibold rounded-lg transition-all flex items-center">
