@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award } from 'lucide-react';
 import SectionTitle from './SectionTitle';
@@ -27,7 +26,6 @@ const AboutFounder = () => {
       >
         <SectionTitle 
           title="संस्थापक अध्यक्षा परिचय"
-          subtitle="ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)"
         />
         
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -36,27 +34,26 @@ const AboutFounder = () => {
             variants={fadeIn}
             className="lg:col-span-1 flex justify-center"
           >
-            <div className="relative">
-              <div className="w-64 h-80 bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute -top-3 -left-3"></div>
-              <img
-                src="/assets/charushila1.png"
-                alt="सौ. चारुशीला कांबळे"
-                className="w-64 h-80 object-cover rounded-2xl relative z-10"
-              />
-              <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-lg shadow-xl z-20">
-                <p className="text-[#87161a] font-medium text-sm">संस्थापक अध्यक्षा</p>
-                <p className="text-gray-600 text-xs">स्थापना: 2011</p>
-              </div>
-            </div>
+            <div className="relative top-6">
+  {/* Gradient background - adjust top position to match new image position */}
+  <div className="w-64 h-80 bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute top-0 left-0"></div>
+  {/* Image with adjusted margin-top */}
+  <img
+    src="/assets/charushila1.png"
+    alt="सौ. चारुशीला कांबळे"
+    className="w-64 h-80 object-cover rounded-2xl relative z-10 mt-4"  // Added mt-2 here
+  />
+</div>
           </motion.div>
           
           {/* Right Content */}
           <motion.div variants={fadeIn} className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl p-8 h-full">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">व्यावसायिक परिचय</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)</h3>
+              <p className="text-gray-600 mb-6">संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे <br/>एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p>
+              {/* <p className="text-gray-600 mb-6">एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p> */}
               
               <div className="space-y-4 text-gray-700">
-             
                 <p>वास्तु, ज्योतिष, रेकी, हीलींग, टॅरॉकार्ड रिडर, रमल शास्त्री, मोबाईल न्यूमरॉलॉजी, डाउझिंग आणि या सारख्या अनेक विषयांचा अभ्यास २००० पासून आवड म्हणून सुरू केला. वरील सर्व प्रत्येक शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या कार्यशाळा आणि मार्गदर्शन सलग २०११ पासून करत आहे.</p>
                 
                 <p>अनेक विषयांच्या मोफत कार्यशाळा चालू असतात त्यामुळे हे ज्ञान अनेकांपर्यंत पोहोचवण्याचे कार्य हाती घेतले आहे. तसेच अनेक लोकांना समस्यामुक्त करण्यासाठी मार्गदर्शन करणे व अंधश्रद्धेचा वापर न करता वैज्ञानिक दृष्टिकोनातून रेकी, हीलिंग, संमोहन, यासारख्या विषयांमधून समस्या निराकारण करणे. आदिशक्ती गुरुकुल हे यूट्यूब चैनल सध्या कार्यान्वित आहे. विविध अधिवेशनांमध्ये वास्तु ज्योतिष आणि मोबाईल न्यूमरॉलॉजी या विषयांवर व्याख्याने दिली जातात.</p>
@@ -66,6 +63,7 @@ const AboutFounder = () => {
         </div>
       </motion.div>
       
+      {/* Rest of the component remains the same */}
       {/* Awards & Recognition */}
       <motion.div
         initial="hidden"
@@ -185,7 +183,8 @@ const AboutFounder = () => {
                     key={index}
                     className="flex items-start p-3 border border-gray-200 rounded-lg hover:border-[#87161a]/40 transition-colors"
                   >
-                    <div className="bg-[#87161a]/10 p-2 rounded-lg mr-3">
+                    <div className="bg-[#87161a]
+                     p-2 rounded-lg mr-3">
                       <book.icon className="h-5 w-5 text-[#87161a]" />
                     </div>
                     <div>

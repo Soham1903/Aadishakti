@@ -42,7 +42,7 @@ const AboutOrganization = () => {
               
               <div className="space-y-4 text-gray-700">
                 <p>
-                  <span className="bg-[#87161a]/10 text-[#87161a] text-sm rounded-full px-3 py-1 font-medium mr-2">2011</span>
+                  {/* <span className="bg-[#87161a] text-[#87161a] text-sm rounded-full px-3 py-1 font-medium mr-2">2011</span> */}
                   आदिशक्ती गुरुकुल ज्योतिष संशोधन केंद्र, सासवड, जि. पुणे. ची स्थापना 2011 मध्ये केली.
                 </p>
                 
