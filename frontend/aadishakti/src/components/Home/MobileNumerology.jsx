@@ -81,12 +81,12 @@ const MobileNumerology = () => {
                   <p className="text-center">
                     तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व, करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.
                   </p>
-                  <div className="flex justify-center mt-4">
+                  {/* <div className="flex justify-center mt-4">
                     <button className="flex items-center gap-2 bg-[#87161A] text-white px-4 py-2 rounded-lg hover:bg-[#7a1736] transition-all">
                       <span>अधिक जाणून घ्या</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
