@@ -33,13 +33,13 @@ const BooksList = () => {
                   {book.title}
                 </h3>
                 <p className="text-sm text-gray-600 mb-2">by {book.author}</p>
-                <p className="text-lg font-bold text-[#921a40] mb-4">
+                <p className="text-lg font-bold text-[#87161a] mb-4">
                   ₹{book.price}
                 </p>
               </div>
               <button
                 onClick={() => navigate(`/book/${book.id}`)}
-                className="w-full py-2 px-4 bg-[#921a40] text-white font-semibold rounded-md hover:bg-[#7a1634] transition-colors duration-300"
+                className="w-full py-2 px-4 bg-[#87161a] text-white font-semibold rounded-md hover:bg-[#7a1634] transition-colors duration-300"
               >
                 View Details
               </button>

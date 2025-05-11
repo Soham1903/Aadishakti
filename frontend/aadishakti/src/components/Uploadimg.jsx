@@ -70,7 +70,7 @@ function Uploadimg() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-8">
-      <h2 className="text-3xl font-bold mb-6 text-[#921a40] text-center">
+      <h2 className="text-3xl font-bold mb-6 text-[#87161a] text-center">
         Image Upload Portal
       </h2>
 
@@ -78,17 +78,17 @@ function Uploadimg() {
         <input
           type="file"
           onChange={handleFileChange}
-          className="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-[#921a40]"
+          className="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-[#87161a]"
         />
         <button
           onClick={handleUpload}
-          className="bg-[#921a40] text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#7a1536] transition duration-200"
+          className="bg-[#87161a] text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#7a1536] transition duration-200"
         >
           Upload
         </button>
       </div>
 
-      <h3 className="text-2xl font-semibold mb-4 text-[#921a40]">
+      <h3 className="text-2xl font-semibold mb-4 text-[#87161a]">
         Uploaded Images ({images.length}/8)
       </h3>
 

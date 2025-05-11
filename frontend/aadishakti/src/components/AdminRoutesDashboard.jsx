@@ -13,7 +13,7 @@ function AdminRoutesDashboard() {
   return (
     <div className="min-h-screen p-8 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-[#921a40]">Admin Panel</h1>
+        <h1 className="text-4xl font-bold mb-8 text-[#87161a]">Admin Panel</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {adminRoutes.map((route) => (
             <button
@@ -21,8 +21,8 @@ function AdminRoutesDashboard() {
               onClick={() => navigate(route.path)}
               className="bg-white relative overflow-hidden group rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-[#921a40] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              <div className="relative p-8 text-xl font-medium text-[#921a40] group-hover:text-white transition-colors duration-300 flex items-center justify-center min-h-[120px]">
+              <div className="absolute inset-0 bg-[#87161a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              <div className="relative p-8 text-xl font-medium text-[#87161a] group-hover:text-white transition-colors duration-300 flex items-center justify-center min-h-[120px]">
                 {route.label}
               </div>
             </button>

@@ -77,8 +77,8 @@ const TransactionsDashboard = () => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#f9f3f5]">
         <div className="flex items-center gap-2">
-          <RefreshCw className="w-6 h-6 text-[#921a40] animate-spin" />
-          <span className="text-lg font-medium text-[#921a40]">
+          <RefreshCw className="w-6 h-6 text-[#87161a] animate-spin" />
+          <span className="text-lg font-medium text-[#87161a]">
             Loading transactions...
           </span>
         </div>
@@ -89,7 +89,7 @@ const TransactionsDashboard = () => {
     <div className="min-h-screen bg-[#f9f3f5] py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#921a40] mb-4">
+          <h1 className="text-3xl font-bold text-[#87161a] mb-4">
             Transactions Dashboard
           </h1>
           <div className="relative">
@@ -98,7 +98,7 @@ const TransactionsDashboard = () => {
               placeholder="Search transactions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full md:w-96 pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+              className="w-full md:w-96 pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400 w-5 h-5" />
           </div>
@@ -129,21 +129,21 @@ const TransactionsDashboard = () => {
 
               <div className="space-y-3">
                 <div className="flex items-center">
-                  <User className="w-5 h-5 text-[#921a40] mr-2" />
+                  <User className="w-5 h-5 text-[#87161a] mr-2" />
                   <span className="text-gray-700">
                     {transaction.customerName}
                   </span>
                 </div>
 
                 <div className="flex items-center">
-                  <Book className="w-5 h-5 text-[#921a40] mr-2" />
+                  <Book className="w-5 h-5 text-[#87161a] mr-2" />
                   <span className="text-gray-700">
                     {transaction.courseTitle}
                   </span>
                 </div>
 
                 <div className="flex items-center">
-                  <DollarSign className="w-5 h-5 text-[#921a40] mr-2" />
+                  <DollarSign className="w-5 h-5 text-[#87161a] mr-2" />
                   <span className="text-gray-700">
                     Original: ${transaction.originalPrice} | Final: $
                     {transaction.finalPrice}
@@ -156,7 +156,7 @@ const TransactionsDashboard = () => {
                 </div>
 
                 <div className="flex items-center">
-                  <Calendar className="w-5 h-5 text-[#921a40] mr-2" />
+                  <Calendar className="w-5 h-5 text-[#87161a] mr-2" />
                   <span className="text-gray-700">
                     {new Date(transaction.createdAt).toLocaleDateString()}
                   </span>
@@ -192,7 +192,7 @@ const TransactionsDashboard = () => {
                     className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                       transaction.isVerified
                         ? "bg-yellow-500 hover:bg-yellow-600 text-white"
-                        : "bg-[#921a40] hover:bg-[#7a1635] text-white"
+                        : "bg-[#87161a] hover:bg-[#7a1635] text-white"
                     }`}
                   >
                     {transaction.isVerified ? "Unverify" : "Verify"}
@@ -216,7 +216,7 @@ const TransactionsDashboard = () => {
                 className="max-w-full max-h-[80vh] rounded-lg"
               />
               <button
-                className="absolute -top-4 -right-4 bg-[#921a40] text-white rounded-full p-2 shadow-lg hover:bg-[#7a1635] transition-colors"
+                className="absolute -top-4 -right-4 bg-[#87161a] text-white rounded-full p-2 shadow-lg hover:bg-[#7a1635] transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
                   setExpandedImage(null);

@@ -131,7 +131,7 @@ function PromoCodeForm() {
                 value={promoData.code}
                 onChange={handleChange}
                 placeholder="SUMMER25"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white placeholder-gray-400 transition-all duration-200"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white placeholder-gray-400 transition-all duration-200"
                 required
                 pattern="[A-Z0-9]+"
                 title="Uppercase letters and numbers only"
@@ -146,7 +146,7 @@ function PromoCodeForm() {
                 name="discountType"
                 value={promoData.discountType}
                 onChange={handleChange}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white transition-all duration-200"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white transition-all duration-200"
                 required
               >
                 <option value="percentage">Percentage (%)</option>
@@ -172,7 +172,7 @@ function PromoCodeForm() {
                 name="discountValue"
                 value={promoData.discountValue}
                 onChange={handleChange}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white transition-all duration-200"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white transition-all duration-200"
                 required
               />
             </div>
@@ -188,7 +188,7 @@ function PromoCodeForm() {
                 name="minOrderValue"
                 value={promoData.minOrderValue}
                 onChange={handleChange}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white transition-all duration-200"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white transition-all duration-200"
               />
             </div>
           </div>
@@ -206,7 +206,7 @@ function PromoCodeForm() {
                   name="maxDiscount"
                   value={promoData.maxDiscount}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white transition-all duration-200"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white transition-all duration-200"
                 />
               </div>
             )}
@@ -222,7 +222,7 @@ function PromoCodeForm() {
                 value={promoData.usageLimit}
                 onChange={handleChange}
                 placeholder="Leave empty for unlimited"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white transition-all duration-200 placeholder-gray-400"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white transition-all duration-200 placeholder-gray-400"
               />
             </div>
           </div>
@@ -236,7 +236,7 @@ function PromoCodeForm() {
               name="expiryDate"
               value={promoData.expiryDate}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent bg-white transition-all duration-200"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent bg-white transition-all duration-200"
               required
               min={new Date().toISOString().slice(0, 16)}
             />
@@ -250,7 +250,7 @@ function PromoCodeForm() {
               onChange={(e) =>
                 setPromoData({ ...promoData, isActive: e.target.checked })
               }
-              className="w-5 h-5 rounded border-gray-300 text-[#921a40] focus:ring-[#921a40] transition-colors duration-200"
+              className="w-5 h-5 rounded border-gray-300 text-[#87161a] focus:ring-[#87161a] transition-colors duration-200"
             />
             <label className="text-gray-700">Active</label>
           </div>
@@ -260,8 +260,8 @@ function PromoCodeForm() {
             disabled={isSubmitting}
             className={`w-full ${
               isSubmitting
-                ? "bg-[#921a40]/60"
-                : "bg-[#921a40] hover:bg-[#7c1635]"
+                ? "bg-[#87161a]/60"
+                : "bg-[#87161a] hover:bg-[#7c1635]"
             } text-white py-3 rounded-xl transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm`}
           >
             <Sparkles className="w-5 h-5" />

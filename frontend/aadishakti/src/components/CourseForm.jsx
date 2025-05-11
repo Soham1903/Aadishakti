@@ -87,7 +87,7 @@ function CourseForm() {
   return (
     <div className="bg-white rounded-lg shadow-md p-8">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
-        <BookOpen className="h-6 w-6 text-[#921a40]" />
+        <BookOpen className="h-6 w-6 text-[#87161a]" />
         Add New Course
       </h2>
 
@@ -116,7 +116,7 @@ function CourseForm() {
               value={course.title}
               onChange={handleChange}
               placeholder="Enter course title"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
               required
             />
           </div>
@@ -138,7 +138,7 @@ function CourseForm() {
               />
               <label
                 htmlFor="image-upload"
-                className="cursor-pointer text-[#921a40] hover:text-[#7a1635] font-medium"
+                className="cursor-pointer text-[#87161a] hover:text-[#7a1635] font-medium"
               >
                 Click to upload image
               </label>
@@ -156,7 +156,7 @@ function CourseForm() {
               value={course.description}
               onChange={handleChange}
               placeholder="Enter course description"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
               rows="4"
               required
             ></textarea>
@@ -175,7 +175,7 @@ function CourseForm() {
                 value={course.instructor}
                 onChange={handleChange}
                 placeholder="Enter instructor name"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                 required
               />
             </div>
@@ -193,7 +193,7 @@ function CourseForm() {
                 name="timing"
                 value={course.timing}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                 required
               />
             </div>
@@ -212,7 +212,7 @@ function CourseForm() {
                 value={course.price}
                 onChange={handleChange}
                 placeholder="Enter course price"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                 required
               />
             </div>
@@ -231,7 +231,7 @@ function CourseForm() {
                 value={course.duration}
                 onChange={handleChange}
                 placeholder="Enter course duration"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                 required
               />
             </div>
@@ -247,7 +247,7 @@ function CourseForm() {
               value={course.benefits}
               onChange={handleChange}
               placeholder="Enter benefits of the course"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
               rows="3"
               required
             ></textarea>
@@ -263,7 +263,7 @@ function CourseForm() {
               value={course.syllabus}
               onChange={handleChange}
               placeholder="Enter syllabus details"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
               rows="3"
               required
             ></textarea>
@@ -275,7 +275,7 @@ function CourseForm() {
           type="submit"
           disabled={isSubmitting}
           className={`w-full ${
-            isSubmitting ? "bg-[#921a40]/70" : "bg-[#921a40] hover:bg-[#7a1635]"
+            isSubmitting ? "bg-[#87161a]/70" : "bg-[#87161a] hover:bg-[#7a1635]"
           } text-white py-3 rounded-lg transition flex items-center justify-center gap-2 font-medium`}
         >
           {isSubmitting ? (

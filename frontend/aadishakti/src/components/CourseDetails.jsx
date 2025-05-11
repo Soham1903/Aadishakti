@@ -28,7 +28,8 @@ export default function CourseDetails() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    fetch(`https://aadishakti-backend-ue51.onrender.com/api/courses/${title}`)
+    fetch(`https://aadishakti-backend-ue51.onrender.com
+      /api/courses/${title}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && !data.error) {
@@ -145,7 +146,7 @@ export default function CourseDetails() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#f9f3f5] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#921a40] border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#87161a] border-t-transparent"></div>
       </div>
     );
   }
@@ -153,7 +154,7 @@ export default function CourseDetails() {
   if (error) {
     return (
       <div className="min-h-screen bg-[#f9f3f5] flex items-center justify-center">
-        <div className="text-[#921a40] text-center">
+        <div className="text-[#87161a] text-center">
           <Star className="w-16 h-16 mx-auto mb-4" />
           <p className="text-xl">{error}</p>
         </div>
@@ -166,7 +167,7 @@ export default function CourseDetails() {
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         {/* Title and Image Section */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#921a40] mb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#87161a] mb-8 text-center">
             {isEditing ? (
               <input
                 className="border rounded p-2 w-full"
@@ -191,12 +192,12 @@ export default function CourseDetails() {
           <div className="lg:col-span-2 space-y-8">
             {/* Instructor Info */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#921a40] mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
                 <User className="w-6 h-6" />
                 Course Instructor
               </h2>
               <div className="flex items-center gap-4">
-                <div className="bg-[#921a40] rounded-full p-4">
+                <div className="bg-[#87161a] rounded-full p-4">
                   <GraduationCap className="w-8 h-8 text-white" />
                 </div>
                 <div>
@@ -219,7 +220,7 @@ export default function CourseDetails() {
 
             {/* Course Overview */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#921a40] mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
                 Course Overview
               </h2>
@@ -241,7 +242,7 @@ export default function CourseDetails() {
 
             {/* Syllabus */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#921a40] mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
                 Course Syllabus
               </h2>
@@ -279,11 +280,11 @@ export default function CourseDetails() {
 
             {/* What's Included */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#921a40] mb-6">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-6">
                 What's Included
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-[#921a40] rounded-xl">
+                <div className="text-center p-6 bg-[#87161a] rounded-xl">
                   <Award className="w-12 h-12 text-white mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Certification
@@ -292,7 +293,7 @@ export default function CourseDetails() {
                     Receive an official certification upon completion
                   </p>
                 </div>
-                <div className="text-center p-6 bg-[#921a40] rounded-xl">
+                <div className="text-center p-6 bg-[#87161a] rounded-xl">
                   <Video className="w-12 h-12 text-white mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Recordings
@@ -301,7 +302,7 @@ export default function CourseDetails() {
                     Lifetime access to course recordings
                   </p>
                 </div>
-                <div className="text-center p-6 bg-[#921a40] rounded-xl">
+                <div className="text-center p-6 bg-[#87161a] rounded-xl">
                   <Users className="w-12 h-12 text-white mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Live Sessions
@@ -318,7 +319,7 @@ export default function CourseDetails() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl p-8 sticky top-8 shadow-lg">
               <div className="text-center mb-8">
-                <div className="text-4xl font-bold text-[#921a40] mb-2">
+                <div className="text-4xl font-bold text-[#87161a] mb-2">
                   {isEditing ? (
                     <input
                       className="border rounded p-2 w-full"
@@ -335,7 +336,7 @@ export default function CourseDetails() {
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Clock className="w-5 h-5 text-[#921a40]" />
+                  <Clock className="w-5 h-5 text-[#87161a]" />
                   {isEditing ? (
                     <input
                       className="border rounded p-2 w-full"
@@ -348,7 +349,7 @@ export default function CourseDetails() {
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Calendar className="w-5 h-5 text-[#921a40]" />
+                  <Calendar className="w-5 h-5 text-[#87161a]" />
                   {isEditing ? (
                     <input
                       className="border rounded p-2 w-full"
@@ -361,13 +362,13 @@ export default function CourseDetails() {
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
-                  <CheckCircle className="w-5 h-5 text-[#921a40]" />
+                  <CheckCircle className="w-5 h-5 text-[#87161a]" />
                   <span>Lifetime access</span>
                 </div>
               </div>
 
               <button
-                className="w-full px-6 py-4 bg-[#921a40] hover:bg-[#921a40]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4"
+                className="w-full px-6 py-4 bg-[#87161a] hover:bg-[#87161a]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4"
                 onClick={handleBuyNow}
               >
                 Buy Now
@@ -376,7 +377,7 @@ export default function CourseDetails() {
               {/* ✅ "Add to Cart" button with onClick */}
               <button
                 onClick={handleAddToCart}
-                className="w-full px-6 py-4 border-2 border-[#921a40] text-[#921a40] hover:bg-[#921a40] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
+                className="w-full px-6 py-4 border-2 border-[#87161a] text-[#87161a] hover:bg-[#87161a] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
               >
                 <ShoppingCart className="w-6 h-6" />
                 Add to Cart

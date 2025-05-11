@@ -14,7 +14,7 @@ const BookDetails = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Book not found</h2>
         <button 
           onClick={() => navigate('/')}
-          className="px-6 py-3 bg-[#921a40] text-white rounded-md hover:bg-[#7a1634]"
+          className="px-6 py-3 bg-[#87161a] text-white rounded-md hover:bg-[#7a1634]"
         >
           Back to Books
         </button>
@@ -26,7 +26,7 @@ const BookDetails = () => {
     <div className="container mx-auto px-4 py-8">
       <button 
         onClick={() => navigate('/')}
-        className="flex items-center text-[#921a40] mb-6 hover:underline"
+        className="flex items-center text-[#87161a] mb-6 hover:underline"
       >
         <ArrowLeft className="mr-2" />
         Back to Books
@@ -48,17 +48,17 @@ const BookDetails = () => {
           <div className="md:w-2/3">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">{book.title}</h1>
             <p className="text-xl text-gray-600 mb-4">by {book.author}</p>
-            <p className="text-3xl font-bold text-[#921a40] mb-6">₹{book.price}</p>
+            <p className="text-3xl font-bold text-[#87161a] mb-6">₹{book.price}</p>
             
             <div className="flex gap-4 mb-8">
               <button 
-                className="px-6 py-2 bg-[#921a40] text-white rounded-md hover:bg-[#7a1634]"
+                className="px-6 py-2 bg-[#87161a] text-white rounded-md hover:bg-[#7a1634]"
                 onClick={() => alert('Added to cart!')}
               >
                 Add to Cart
               </button>
               <button 
-                className="px-6 py-2 border border-[#921a40] text-[#921a40] rounded-md hover:bg-gray-50"
+                className="px-6 py-2 border border-[#87161a] text-[#87161a] rounded-md hover:bg-gray-50"
                 onClick={() => alert('Proceeding to checkout!')}
               >
                 Buy Now

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaUniversity, FaChalkboardTeacher, FaBullseye } from 'react-icons/fa'; // Imported nice icons
+import { FaUniversity, FaChalkboardTeacher, FaBullseye } from 'react-icons/fa';
 
 const TabNavigation = ({ activeTab, setActiveTab }) => {
   const tabs = [
@@ -31,7 +31,7 @@ const TabNavigation = ({ activeTab, setActiveTab }) => {
               </span>
               {activeTab === tab.id && (
                 <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#87161a]"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d4af37]"
                   layoutId="activeTab"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />

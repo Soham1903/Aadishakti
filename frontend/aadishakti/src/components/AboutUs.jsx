@@ -22,7 +22,7 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#921a40]/5 via-[#921a40]/10 to-[#921a40]/5">
+    <div className="min-h-screen bg-gradient-to-b from-[#87161a]/5 via-[#87161a]/10 to-[#87161a]/5">
       <Hero />
       <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="container mx-auto px-4 py-12">

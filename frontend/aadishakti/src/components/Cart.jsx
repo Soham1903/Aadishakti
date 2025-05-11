@@ -74,7 +74,7 @@ const Cart = () => {
           </p>
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#921a40] text-white px-6 py-2 rounded-md hover:bg-[#821636] transition-colors w-full sm:w-auto"
+            className="bg-[#87161a] text-white px-6 py-2 rounded-md hover:bg-[#821636] transition-colors w-full sm:w-auto"
           >
             Login
           </button>
@@ -89,7 +89,7 @@ const Cart = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-4 sm:p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
-              <ShoppingCart className="w-8 h-8 text-[#921a40]" />
+              <ShoppingCart className="w-8 h-8 text-[#87161a]" />
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
                 Your Cart
               </h2>
@@ -101,7 +101,7 @@ const Cart = () => {
                 <p className="text-gray-600 text-lg mb-6">Your cart is empty</p>
                 <button
                   onClick={() => navigate("/courses")}
-                  className="bg-[#921a40] text-white px-6 py-3 rounded-md hover:bg-[#821636] transition-colors w-full sm:w-auto"
+                  className="bg-[#87161a] text-white px-6 py-3 rounded-md hover:bg-[#821636] transition-colors w-full sm:w-auto"
                 >
                   Browse Courses
                 </button>
@@ -126,7 +126,7 @@ const Cart = () => {
                         <h3 className="text-lg font-semibold text-gray-800 mb-1 break-words">
                           {item.title}
                         </h3>
-                        <p className="text-lg text-[#921a40] font-medium">
+                        <p className="text-lg text-[#87161a] font-medium">
                           ₹{item.price}
                         </p>
                       </div>
@@ -135,17 +135,17 @@ const Cart = () => {
                         onClick={() => removeFromCart(item.title)}
                         className="w-full sm:w-auto px-4 py-2 text-white border rounded-lg transition-all duration-300 font-medium text-center"
                         style={{
-                          color: "#921a40",
-                          borderColor: "#921a40",
+                          color: "#87161a",
+                          borderColor: "#87161a",
                           backgroundColor: "transparent",
                         }}
                         onMouseEnter={(e) => (
-                          (e.target.style.backgroundColor = "#921a40"),
+                          (e.target.style.backgroundColor = "#87161a"),
                           (e.target.style.color = "white")
                         )}
                         onMouseLeave={(e) => (
                           (e.target.style.backgroundColor = "transparent"),
-                          (e.target.style.color = "#921a40")
+                          (e.target.style.color = "#87161a")
                         )}
                       >
                         Remove
@@ -168,12 +168,12 @@ const Cart = () => {
                         id="coupon"
                         value={code}
                         onChange={handleInputChange}
-                        className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-[#921a40] focus:border-[#921a40] px-4 py-2"
+                        className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-[#87161a] focus:border-[#87161a] px-4 py-2"
                         placeholder="Enter code"
                       />
                       <button
                         onClick={handleApplyCoupon}
-                        className="px-6 py-2 bg-[#921a40] text-white rounded-md hover:bg-[#821636] transition-colors whitespace-nowrap"
+                        className="px-6 py-2 bg-[#87161a] text-white rounded-md hover:bg-[#821636] transition-colors whitespace-nowrap"
                       >
                         Apply Code
                       </button>
@@ -199,7 +199,7 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <button className="mt-6 w-full bg-[#921a40] text-white py-3 rounded-md hover:bg-[#821636] transition-colors font-medium text-lg">
+                  <button className="mt-6 w-full bg-[#87161a] text-white py-3 rounded-md hover:bg-[#821636] transition-colors font-medium text-lg">
                     Proceed to Checkout
                   </button>
                 </div>

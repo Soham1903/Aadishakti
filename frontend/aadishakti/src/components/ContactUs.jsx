@@ -29,7 +29,7 @@ export default function ContactPage() {
         >
           <div className="text-center mb-20">
             <motion.h1
-              className="text-5xl font-bold text-[#921a40] mb-6"
+              className="text-5xl font-bold text-[#87161a] mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -73,7 +73,7 @@ export default function ContactPage() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-[#921a40]" />
+                    <Icon className="w-6 h-6 text-[#87161a]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">{title}</h3>
@@ -104,7 +104,7 @@ export default function ContactPage() {
                     whileHover={{ y: -5 }}
                     className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-purple-50 transition-colors duration-300"
                   >
-                    <div className="text-[#921a40] mb-2">{social.icon}</div>
+                    <div className="text-[#87161a] mb-2">{social.icon}</div>
                     <span className="text-sm text-gray-600">{social.label}</span>
                   </motion.a>
                 ))}
@@ -120,7 +120,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-semibold mb-8 text-[#921a40]">आम्हाला संदेश पाठवा</h3>
+              <h3 className="text-2xl font-semibold mb-8 text-[#87161a]">आम्हाला संदेश पाठवा</h3>
               <form className="space-y-6">
                 {[
                   { label: "पूर्ण नाव", type: "text", placeholder: "तुमचं नाव" },
@@ -133,7 +133,7 @@ export default function ContactPage() {
                       whileFocus={{ scale: 1.02 }}
                       type={field.type}
                       placeholder={field.placeholder}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-all duration-300"
                     />
                   </div>
                 ))}
@@ -142,7 +142,7 @@ export default function ContactPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">सेवेची आवड</label>
                   <motion.select
                     whileFocus={{ scale: 1.02 }}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-all duration-300"
                   >
                     <option value="">सेवा निवडा</option>
                     <option value="reiki">रेकी हिलिंग</option>
@@ -156,7 +156,7 @@ export default function ContactPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">तुमचा संदेश</label>
                   <motion.textarea
                     whileFocus={{ scale: 1.02 }}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent transition-all duration-300 h-32"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-all duration-300 h-32"
                     placeholder="आम्ही तुम्हाला कसा मदत करू शकतो?"
                   />
                 </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#921a40] to-[#7a1635] text-white py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-[#87161a] to-[#7a1635] text-white py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>संदेश पाठवा</span>
                   <Send className="w-5 h-5" />

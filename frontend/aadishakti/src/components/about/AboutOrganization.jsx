@@ -38,11 +38,10 @@ const AboutOrganization = () => {
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#87161a]/5 rounded-full -ml-20 -mb-20"></div>
             
             <div className="relative">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">संस्थेचा इतिहास</h3>
+              <h3 className="text-2xl font-bold text-[#87161a] mb-6">संस्थेचा इतिहास</h3>
               
               <div className="space-y-4 text-gray-700">
                 <p>
-                  {/* <span className="bg-[#87161a] text-[#87161a] text-sm rounded-full px-3 py-1 font-medium mr-2">2011</span> */}
                   आदिशक्ती गुरुकुल ज्योतिष संशोधन केंद्र, सासवड, जि. पुणे. ची स्थापना 2011 मध्ये केली.
                 </p>
                 
@@ -63,13 +62,13 @@ const AboutOrganization = () => {
             className="space-y-8"
           >
             {/* Mission Card */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#87161a] overflow-hidden relative">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#d4af37] overflow-hidden relative">
               <div className="absolute top-0 right-0 w-40 h-40 bg-[#87161a]/5 rounded-full -mr-20 -mt-20"></div>
               
               <div className="relative">
                 <div className="flex items-start mb-6">
                   <Target className="w-8 h-8 text-[#87161a] mr-4" />
-                  <h3 className="text-2xl font-bold text-gray-800">उद्देश</h3>
+                  <h3 className="text-2xl font-bold text-[#87161a]">उद्देश</h3>
                 </div>
                 
                 <p className="text-gray-700 ml-12">
@@ -79,13 +78,13 @@ const AboutOrganization = () => {
             </div>
             
             {/* Vision Card */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#87161a] overflow-hidden relative">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#d4af37] overflow-hidden relative">
               <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#87161a]/5 rounded-full -mr-20 -mb-20"></div>
               
               <div className="relative">
                 <div className="flex items-start mb-6">
-                  <BookOpen className="w-8 h-8 text-[#87161a] mr-4" />
-                  <h3 className="text-2xl font-bold text-gray-800">उद्दिष्ट</h3>
+                  <BookOpen className="w-8 h-8 text-[#d4af37] mr-4" />
+                  <h3 className="text-2xl font-bold text-[#87161a]">उद्दिष्ट</h3>
                 </div>
                 
                 <p className="text-gray-700 ml-12">
@@ -116,7 +115,6 @@ const AboutOrganization = () => {
           title="आमची सेवा क्षेत्रे"
           subtitle="विविध विषयांच्या कार्यशाळा व मार्गदर्शन"
         />
-        
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {services.map((service, index) => (
@@ -207,6 +205,5 @@ const services = [
     )
   }
 ];
-
 
 export default AboutOrganization;

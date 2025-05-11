@@ -64,7 +64,7 @@ const LoginForm = () => {
       <div className="w-full max-w-md relative">
         <div className="backdrop-blur-lg bg-white/70 p-8 rounded-2xl border border-gray-200 shadow-2xl">
           <div className="flex justify-center mb-6">
-            <Stars className="text-[#921a40] h-12 w-12" />
+            <Stars className="text-[#87161a] h-12 w-12" />
           </div>
 
           <h2 className="text-center text-3xl font-bold text-gray-900 mb-2">
@@ -72,7 +72,7 @@ const LoginForm = () => {
           </h2>
           <p className="text-center text-gray-600 mb-6">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-[#921a40] hover:text-[#b22550]">
+            <Link to="/signup" className="text-[#87161a] hover:text-[#b22550]">
               Sign up
             </Link>
           </p>
@@ -105,7 +105,7 @@ const LoginForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
                 placeholder="Enter your email"
               />
             </div>
@@ -120,7 +120,7 @@ const LoginForm = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#921a40] focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
                 placeholder="Enter your password"
               />
             </div>
@@ -128,7 +128,7 @@ const LoginForm = () => {
             <div className="flex justify-end">
               <Link
                 to="/forgot-password"
-                className="text-sm text-gray-600 hover:text-[#921a40]"
+                className="text-sm text-gray-600 hover:text-[#87161a]"
               >
                 Forgot password?
               </Link>
@@ -137,7 +137,7 @@ const LoginForm = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 rounded-lg text-white bg-[#921a40] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#921a40] focus:ring-offset-[#f9f3f5] transition-colors disabled:opacity-50 flex items-center justify-center"
+              className="w-full py-3 px-4 rounded-lg text-white bg-[#87161a] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#87161a] focus:ring-offset-[#f9f3f5] transition-colors disabled:opacity-50 flex items-center justify-center"
             >
               {loading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />

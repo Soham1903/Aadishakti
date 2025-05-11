@@ -35,7 +35,7 @@ function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            <div className="w-32 h-[2px] bg-[#87161a]/80 mx-auto mb-10"></div>
+            <div className="w-32 h-[2px] bg-[#d4af37] mx-auto mb-10"></div>
             
             <p className="text-2xl md:text-3xl font-medium mb-6 text-[#000000] drop-shadow-sm">
               ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)

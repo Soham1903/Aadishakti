@@ -142,29 +142,31 @@ const EventsInitiatives = () => {
               </div>
             </div>
             
-            {/* Team card */}
+            {/* Team card with scrollable list */}
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="p-6 border-b border-gray-100">
-                <h3 className="text-xl font-bold text-gray-800 flex items-center">
-                  <Users className="w-5 h-5 text-[#87161a] mr-2" />
+                <h3 className="text-xl font-bold text-[#87161a] flex items-center">
+                  <Users className="w-5 h-5 text-[#d4af37] mr-2" />
                   आध्यात्मिक उपक्रम समिती
                 </h3>
               </div>
               
               <div className="p-6">
-                <ul className="space-y-6">
-                  {teamMembers.map((member, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-4">
-                        {member.name.charAt(0)}
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-800">{member.name}</h4>
-                        <p className="text-sm text-gray-600">{member.role}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <div className="max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                  <ul className="space-y-4">
+                    {teamMembers.map((member, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-4">
+                          {member.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-800">{member.name}</h4>
+                          <p className="text-sm text-gray-600">{member.role}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -350,19 +352,19 @@ const EventsInitiatives = () => {
 // Data
 const events = [
   {
-    // date: "5 मे 2024",
+    date: "5 मे 2024",
     title: "राज्यस्तरीय वास्तु, ज्योतिष आणि मनशक्ती अधिवेशन",
     description: "आचार्य अत्रे प्रतिष्ठान सासवड, जिल्हा पुणे येथे भव्य दिव्य राज्यस्तरीय अधिवेशन",
     location: "सासवड, पुणे"
   },
   {
-    // date: "7 डिसें 2024",
+    date: "7 डिसें 2024",
     title: "राज्यस्तरीय वास्तू अधिवेशन",
     description: "डोंबिवली येथे वास्तुशास्त्राच्या वैज्ञानिक अंगावर आधारित राज्यस्तरीय अधिवेशन",
     location: "डोंबिवली"
   },
   {
-    // date: "8 मार्च 2024",
+    date: "8 मार्च 2024",
     title: "महिला दिन आणि आनंद मेळा",
     description: "महिला दिनानिमित्त महिलांसाठी अध्यात्मिक मार्गदर्शन व उपक्रम",
     location: "पुणे"
@@ -405,7 +407,13 @@ const teamMembers = [
   { name: "सौ. वर्षा सिध्दे", role: "सहकार्याध्यक्ष आणि सुगम संगीत विभाग प्रमुख" },
   { name: "श्री. दीनानाथ जोशी", role: "मार्गदर्शक" },
   { name: "सौ. सुधा सुळे", role: "मार्गदर्शक" },
-  { name: "श्रीमती नयनाताई बेलवलकर", role: "भजन विभाग प्रमुख" }
+  { name: "श्रीमती नयनाताई बेलवलकर", role: "भजन विभाग प्रमुख" },
+  { name: "सौ. ज्योती िानवे", role: "योगा विभाग प्रमुख" },
+  { name: "श्री. कमलाकर कहाने", role: "सदस्य" },
+  { name: "सौ. चंद्रकला कहाने", role: "सदस्य" },
+  { name: "सौ. रोदहणी लभडे", role: "सदस्य" },
+  { name: "श्री सुधीर लभडे", role: "सदस्य" },
+  { name: "सौ. पद्मिा कुलकणी", role: "सदस्य" }
 ];
 
 const youtubeVideos = [

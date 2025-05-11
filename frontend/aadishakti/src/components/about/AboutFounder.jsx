@@ -35,23 +35,22 @@ const AboutFounder = () => {
             className="lg:col-span-1 flex justify-center"
           >
             <div className="relative top-6">
-  {/* Gradient background - adjust top position to match new image position */}
-  <div className="w-64 h-80 bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute top-0 left-0"></div>
-  {/* Image with adjusted margin-top */}
-  <img
-    src="/assets/charushila1.png"
-    alt="सौ. चारुशीला कांबळे"
-    className="w-64 h-80 object-cover rounded-2xl relative z-10 mt-4"  // Added mt-2 here
-  />
-</div>
+              {/* Gradient background */}
+              <div className="w-64 h-80 bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute top-0 left-0"></div>
+              {/* Image with adjusted margin-top */}
+              <img
+                src="/assets/charushila1.png"
+                alt="सौ. चारुशीला कांबळे"
+                className="w-64 h-80 object-cover rounded-2xl relative z-10 mt-4"
+              />
+            </div>
           </motion.div>
           
           {/* Right Content */}
           <motion.div variants={fadeIn} className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl p-8 h-full">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)</h3>
+              <h3 className="text-2xl font-bold text-[#87161a] mb-2">ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)</h3>
               <p className="text-gray-600 mb-6">संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे <br/>एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p>
-              {/* <p className="text-gray-600 mb-6">एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p> */}
               
               <div className="space-y-4 text-gray-700">
                 <p>वास्तु, ज्योतिष, रेकी, हीलींग, टॅरॉकार्ड रिडर, रमल शास्त्री, मोबाईल न्यूमरॉलॉजी, डाउझिंग आणि या सारख्या अनेक विषयांचा अभ्यास २००० पासून आवड म्हणून सुरू केला. वरील सर्व प्रत्येक शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या कार्यशाळा आणि मार्गदर्शन सलग २०११ पासून करत आहे.</p>
@@ -63,7 +62,6 @@ const AboutFounder = () => {
         </div>
       </motion.div>
       
-      {/* Rest of the component remains the same */}
       {/* Awards & Recognition */}
       <motion.div
         initial="hidden"
@@ -84,23 +82,23 @@ const AboutFounder = () => {
         />
         
         <motion.div variants={fadeIn} className="mt-12">
-          <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a]">
-            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
-              <Award className="h-5 w-5 text-[#87161a] mr-2" />
+          <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37]">
+            <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
+              <Award className="h-5 w-5 text-[#d4af37] mr-2" />
               मानद पदव्या
             </h3>
             
             <ul className="space-y-4 ml-8">
               <li className="flex items-start">
-                <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                 <span>ओम सिंडिकेट, नाशिक यांच्यातर्फे <span className="font-medium">ज्योतिषाचार्य पुरस्कार</span> ही मानद पदवी</span>
               </li>
               <li className="flex items-start">
-                <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                 <span>योगीराज वास्तू ज्योतिष अनुसंधान, छ. संभाजीनगर या संस्थेकडून - <span className="font-medium">वास्तु ज्योतिष महागुरु</span> ही मानद पदवी</span>
               </li>
               <li className="flex items-start">
-                <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                 <span>श्री ज्योतीष संशोधन केंद्र, जळगाव यांच्याकडून <span className="font-medium">वास्तु न्यूमरो महागुरू</span> ही मानद पदवी</span>
               </li>
             </ul>
@@ -108,39 +106,39 @@ const AboutFounder = () => {
         </motion.div>
         
         <motion.div variants={fadeIn} className="mt-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a]">
-            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
-              <Award className="h-5 w-5 text-[#87161a] mr-2" />
+          <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37]">
+            <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
+              <Award className="h-5 w-5 text-[#d4af37] mr-2" />
               वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ul className="space-y-4 ml-8">
                 <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                   <span>श्री आदिनाथ साळवी यांच्या विधीलिखित या संस्थेतर्फे त्रिदशकोत्तर या सोहळ्या निमित्ताने</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                   <span>श्री स्वामी समर्थ गणेश चॅरिटेबल ट्रस्ट, सातारा आणि मराठी ज्योतिष मंडळ महाराष्ट्र राज्य अधिवेशना निमित्ताने</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                   <span>भालचंद्र जोर्तिविद्यालय आणि रमणलाल शहा ज्योतिष अकॅडमी अधिवेशना निमित्ताने</span>
                 </li>
               </ul>
               
               <ul className="space-y-4 ml-8">
                 <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                   <span>स्वप्नल फाउंडेशन यांच्यातर्फे महिला दिनानिमित्त राज्यस्तरीय पुरस्कार</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                   <span>यश एज्युकेशन सोसायटी यांच्यातर्फे यशस्वी उद्योजिका पुरस्कार</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
                   <span>भारतीय कृषक समाज नवी दिल्ली क्रांतीज्योती महिला पुरस्कार</span>
                 </li>
               </ul>
@@ -172,19 +170,18 @@ const AboutFounder = () => {
           <div className="bg-white rounded-2xl shadow-xl p-6">
             {/* Published Books - Compact Cards */}
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
+              <h3 className="text-xl font-bold text-[#87161a] mb-4 flex items-center">
+                <BookOpen className="h-5 w-5 text-[#d4af37] mr-2" />
                 प्रकाशित पुस्तके
               </h3>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {books.map((book, index) => (
                   <div 
                     key={index}
                     className="flex items-start p-3 border border-gray-200 rounded-lg hover:border-[#87161a]/40 transition-colors"
                   >
-                    <div className="bg-[#87161a]
-                     p-2 rounded-lg mr-3">
+                    <div className="bg-[#87161a]/10 p-2 rounded-lg mr-3">
                       <book.icon className="h-5 w-5 text-[#87161a]" />
                     </div>
                     <div>
@@ -192,23 +189,26 @@ const AboutFounder = () => {
                       {book.publisher && (
                         <p className="text-xs text-gray-500 mt-1">{book.publisher}</p>
                       )}
+                      {book.author && (
+                        <p className="text-xs text-gray-500 mt-1">- {book.author}</p>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             
-            {/* Upcoming Publications - Compact List */}
+            {/* Upcoming Publications - Side by Side */}
             <div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-                <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
+              <h3 className="text-xl font-bold text-[#87161a] mb-3 flex items-center">
+                <BookOpen className="h-5 w-5 text-[#d4af37] mr-2" />
                 आगामी प्रकाशने
               </h3>
               
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {['संमोहन', 'मॅजिक मनी मंत्रा', 'ज्योतिष शास्त्रानुसार वैवाहिक जीवन'].map((title, index) => (
-                  <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                    <span className="w-2 h-2 bg-[#87161a] rounded-full mr-3"></span>
+                  <div key={index} className="flex items-center p-3 border border-gray-200 rounded-lg">
+                    <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3"></span>
                     <span className="text-gray-700">{title}</span>
                   </div>
                 ))}
@@ -291,6 +291,16 @@ const books = [
     icon: (props) => (
       <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    )
+  },
+  {
+    title: "ज्येष्ठ नागररकांसाठी उद्योग",
+    // author: "अदिती गुप्ता",
+    publisher: " व्यवसाय प्रशिक्षण पुणे स्टडी मटेरियल",
+    icon: (props) => (
+      <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
     )
   }

@@ -147,7 +147,7 @@ function BuyPage() {
   if (loading)
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#921a40]"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#87161a]"></div>
       </div>
     );
 
@@ -165,7 +165,7 @@ function BuyPage() {
       <div className="max-w-4xl mx-auto">
         <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
           {/* Course Header */}
-          <div className="bg-[#921a40] text-white p-8">
+          <div className="bg-[#87161a] text-white p-8">
             <h1 className="text-3xl font-bold text-center">
               Complete Your Purchase
             </h1>
@@ -220,7 +220,7 @@ function BuyPage() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <svg
-                      className="w-5 h-5 text-[#921a40]"
+                      className="w-5 h-5 text-[#87161a]"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -236,7 +236,7 @@ function BuyPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <svg
-                      className="w-5 h-5 text-[#921a40]"
+                      className="w-5 h-5 text-[#87161a]"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -268,12 +268,12 @@ function BuyPage() {
                     id="coupon"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-[#921a40] focus:border-[#921a40] px-4 py-2"
+                    className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-[#87161a] focus:border-[#87161a] px-4 py-2"
                     placeholder="Enter promo code"
                   />
                   <button
                     onClick={handleApplyCoupon}
-                    className="px-4 py-2 bg-[#921a40] text-white rounded-md hover:bg-[#7a1635] transition-colors"
+                    className="px-4 py-2 bg-[#87161a] text-white rounded-md hover:bg-[#7a1635] transition-colors"
                   >
                     Apply
                   </button>
@@ -333,7 +333,7 @@ function BuyPage() {
                     value={formData.customerName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -348,7 +348,7 @@ function BuyPage() {
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#921a40] focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                     placeholder="Enter your phone number"
                   />
                 </div>
@@ -358,7 +358,7 @@ function BuyPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Payment Screenshot
                 </label>
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-[#921a40] transition-colors">
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-[#87161a] transition-colors">
                   <div className="space-y-1 text-center">
                     <svg
                       className="mx-auto h-12 w-12 text-gray-400"
@@ -374,7 +374,7 @@ function BuyPage() {
                       />
                     </svg>
                     <div className="flex text-sm text-gray-600">
-                      <label className="relative cursor-pointer bg-white rounded-md font-medium text-[#921a40] hover:text-[#921a40] focus-within:outline-none">
+                      <label className="relative cursor-pointer bg-white rounded-md font-medium text-[#87161a] hover:text-[#87161a] focus-within:outline-none">
                         <span>Upload a file</span>
                         <input
                           type="file"
@@ -399,7 +399,7 @@ function BuyPage() {
                     <img
                       src={screenshotPreview}
                       alt="Screenshot Preview"
-                      className="w-40 h-40 object-cover rounded-lg border-2 border-[#921a40]"
+                      className="w-40 h-40 object-cover rounded-lg border-2 border-[#87161a]"
                     />
                   </div>
                 )}
@@ -410,8 +410,8 @@ function BuyPage() {
                 disabled={isSubmitting}
                 className={`w-full py-4 px-6 rounded-lg text-lg font-semibold text-white transition-all duration-200 ${
                   isSubmitting
-                    ? "bg-opacity-75 cursor-not-allowed bg-[#921a40]"
-                    : "bg-[#921a40] hover:bg-[#7a1635] transform hover:-translate-y-1"
+                    ? "bg-opacity-75 cursor-not-allowed bg-[#87161a]"
+                    : "bg-[#87161a] hover:bg-[#7a1635] transform hover:-translate-y-1"
                 }`}
               >
                 {isSubmitting ? (

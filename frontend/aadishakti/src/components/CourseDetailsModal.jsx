@@ -38,7 +38,7 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
                 <Clock className="h-5 w-5" />
                 <span>{course.schedule}</span>
               </div>
-              <span className="text-2xl font-bold text-[#921a40]">
+              <span className="text-2xl font-bold text-[#87161a]">
                 ${course.price}
               </span>
             </div>
@@ -48,7 +48,7 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
               <ul className="space-y-2">
                 {course.benefits?.map((benefit, index) => (
                   <li key={index} className="flex items-start space-x-2">
-                    <Star className="h-5 w-5 text-[#921a40] flex-shrink-0 mt-1" />
+                    <Star className="h-5 w-5 text-[#87161a] flex-shrink-0 mt-1" />
                     <span>{benefit}</span>
                   </li>
                 ))}
@@ -60,7 +60,7 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
               <ul className="space-y-2">
                 {course.includes?.map((item, index) => (
                   <li key={index} className="flex items-start space-x-2">
-                    <Book className="h-5 w-5 text-[#921a40] flex-shrink-0 mt-1" />
+                    <Book className="h-5 w-5 text-[#87161a] flex-shrink-0 mt-1" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -77,7 +77,7 @@ function CourseDetailsModal({ course, onClose, onAddToCart }) {
                 onAddToCart(course);
                 onClose();
               }}
-              className="w-full bg-[#921a40] text-white py-3 rounded-lg hover:bg-[#7d1636] transition-colors font-semibold flex items-center justify-center space-x-2"
+              className="w-full bg-[#87161a] text-white py-3 rounded-lg hover:bg-[#7d1636] transition-colors font-semibold flex items-center justify-center space-x-2"
             >
               <FaShoppingCart className="h-5 w-5" />
               <span>Add to Cart</span>
