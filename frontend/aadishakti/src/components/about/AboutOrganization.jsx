@@ -67,7 +67,7 @@ const AboutOrganization = () => {
               
               <div className="relative">
                 <div className="flex items-start mb-6">
-                  <Target className="w-8 h-8 text-[#87161a] mr-4" />
+                  <Target className="w-8 h-8 text-[#d4af37] mr-4" />
                   <h3 className="text-2xl font-bold text-[#87161a]">उद्देश</h3>
                 </div>
                 

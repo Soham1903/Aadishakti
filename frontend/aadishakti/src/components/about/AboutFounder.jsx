@@ -62,7 +62,7 @@ const AboutFounder = () => {
         </div>
       </motion.div>
       
-      {/* Awards & Recognition */}
+      {/* Awards & Recognition - REDESIGNED SECTION */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -81,73 +81,91 @@ const AboutFounder = () => {
           subtitle="विविध मान्यवर संस्थांकडून प्राप्त पुरस्कार"
         />
         
-        <motion.div variants={fadeIn} className="mt-12">
-          <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37]">
-            <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-              <Award className="h-5 w-5 text-[#d4af37] mr-2" />
-              मानद पदव्या
-            </h3>
-            
-            <ul className="space-y-4 ml-8">
-              <li className="flex items-start">
-                <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                <span>ओम सिंडिकेट, नाशिक यांच्यातर्फे <span className="font-medium">ज्योतिषाचार्य पुरस्कार</span> ही मानद पदवी</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                <span>योगीराज वास्तू ज्योतिष अनुसंधान, छ. संभाजीनगर या संस्थेकडून - <span className="font-medium">वास्तु ज्योतिष महागुरु</span> ही मानद पदवी</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                <span>श्री ज्योतीष संशोधन केंद्र, जळगाव यांच्याकडून <span className="font-medium">वास्तु न्यूमरो महागुरू</span> ही मानद पदवी</span>
-              </li>
-            </ul>
-          </div>
-        </motion.div>
-        
-        <motion.div variants={fadeIn} className="mt-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37]">
-            <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-              <Award className="h-5 w-5 text-[#d4af37] mr-2" />
-              वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ul className="space-y-4 ml-8">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                  <span>श्री आदिनाथ साळवी यांच्या विधीलिखित या संस्थेतर्फे त्रिदशकोत्तर या सोहळ्या निमित्ताने</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                  <span>श्री स्वामी समर्थ गणेश चॅरिटेबल ट्रस्ट, सातारा आणि मराठी ज्योतिष मंडळ महाराष्ट्र राज्य अधिवेशना निमित्ताने</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                  <span>भालचंद्र जोर्तिविद्यालय आणि रमणलाल शहा ज्योतिष अकॅडमी अधिवेशना निमित्ताने</span>
-                </li>
-              </ul>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Honorary Titles - Left column */}
+          <motion.div variants={fadeIn}>
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37] h-full">
+              <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
+                <Award className="h-5 w-5 text-[#d4af37] mr-2" />
+                मानद पदव्या
+              </h3>
               
-              <ul className="space-y-4 ml-8">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                  <span>स्वप्नल फाउंडेशन यांच्यातर्फे महिला दिनानिमित्त राज्यस्तरीय पुरस्कार</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                  <span>यश एज्युकेशन सोसायटी यांच्यातर्फे यशस्वी उद्योजिका पुरस्कार</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 mt-2 bg-[#d4af37] rounded-full mr-3"></span>
-                  <span>भारतीय कृषक समाज नवी दिल्ली क्रांतीज्योती महिला पुरस्कार</span>
-                </li>
-              </ul>
+              <div className="space-y-6">
+                {honoraryTitles.map((title, index) => (
+                  <div 
+                    key={index} 
+                    className="flex group"
+                  >
+                    <div className="flex-shrink-0 w-10 h-10 bg-[#87161a]/10 rounded-full flex items-center justify-center mr-4 group-hover:bg-[#87161a]/20 transition-colors">
+                      <span className="text-xl font-bold text-[#87161a]">{index + 1}</span>
+                    </div>
+                    <div className="border-b border-dashed border-gray-200 pb-4 flex-1">
+                      <p className="text-gray-800">
+                        {title.organization} यांच्यातर्फे
+                        <span className="font-semibold block mt-1 text-[#87161a]">{title.title}</span> 
+                        <span className="text-gray-600 text-sm">{title.description}</span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+          
+          {/* Speaker Recognition - Right column */}
+          <motion.div variants={fadeIn}>
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37] h-full">
+              <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
+                <Award className="h-5 w-5 text-[#d4af37] mr-2" />
+                वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार
+              </h3>
+              
+              <div className="grid grid-cols-1 gap-4">
+                {speakerRecognitions.map((recognition, index) => (
+                  <div 
+                    key={index} 
+                    className="bg-gradient-to-r from-[#87161a]/5 to-transparent p-4 rounded-lg border-l-2 border-[#87161a] hover:from-[#87161a]/10 transition-colors"
+                  >
+                    <div className="flex items-center">
+                      <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3 flex-shrink-0"></span>
+                      <span className="text-gray-700">{recognition}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Awards - Full Width Section */}
+          <motion.div variants={fadeIn} className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37]">
+              <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
+                <Award className="h-5 w-5 text-[#d4af37] mr-2" />
+                प्रमुख पुरस्कार
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {awards.map((award, index) => (
+                  <div 
+                    key={index} 
+                    className="relative overflow-hidden bg-white border border-gray-100 rounded-xl shadow-sm group hover:shadow-md transition-shadow"
+                  >
+                    {/* Gold accent corner */}
+                    <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#d4af37] rotate-12 transform"></div>
+                    
+                    <div className="p-5">
+                      <h4 className="font-medium text-[#87161a] mb-2 text-lg">{award.title}</h4>
+                      <p className="text-gray-600 text-sm">{award.organization}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
       
-      {/* Publications - Redesigned Section */}
+      {/* Publications Section */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -296,13 +314,57 @@ const books = [
   },
   {
     title: "ज्येष्ठ नागररकांसाठी उद्योग",
-    // author: "अदिती गुप्ता",
     publisher: " व्यवसाय प्रशिक्षण पुणे स्टडी मटेरियल",
     icon: (props) => (
       <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
     )
+  }
+];
+
+// Honorary Titles data
+const honoraryTitles = [
+  {
+    organization: "ओम सिंडिकेट, नाशिक",
+    title: "ज्योतिषाचार्य पुरस्कार",
+    description: "ही मानद पदवी"
+  },
+  {
+    organization: "योगीराज वास्तू ज्योतिष अनुसंधान, छ. संभाजीनगर",
+    title: "वास्तु ज्योतिष महागुरु",
+    description: "ही मानद पदवी"
+  },
+  {
+    organization: "श्री ज्योतीष संशोधन केंद्र, जळगाव",
+    title: "वास्तु न्यूमरो महागुरू",
+    description: "ही मानद पदवी"
+  }
+];
+
+// Speaker recognitions data
+const speakerRecognitions = [
+  "श्री आदिनाथ साळवी यांच्या विधीलिखित या संस्थेतर्फे त्रिदशकोत्तर या सोहळ्या निमित्ताने",
+  "श्री स्वामी समर्थ गणेश चॅरिटेबल ट्रस्ट, सातारा आणि मराठी ज्योतिष मंडळ महाराष्ट्र राज्य अधिवेशना निमित्ताने",
+  "भालचंद्र जोर्तिविद्यालय आणि रमणलाल शहा ज्योतिष अकॅडमी अधिवेशना निमित्ताने",
+  "स्वप्नल फाउंडेशन यांच्यातर्फे महिला दिनानिमित्त राज्यस्तरीय पुरस्कार",
+  "यश एज्युकेशन सोसायटी यांच्यातर्फे यशस्वी उद्योजिका पुरस्कार",
+  "भारतीय कृषक समाज नवी दिल्ली क्रांतीज्योती महिला पुरस्कार"
+];
+
+// Awards data
+const awards = [
+  {
+    title: "यशस्वी उद्योजिका पुरस्कार",
+    organization: "यश एज्युकेशन सोसायटी"
+  },
+  {
+    title: "राज्यस्तरीय पुरस्कार",
+    organization: "स्वप्नल फाउंडेशन"
+  },
+  {
+    title: "क्रांतीज्योती महिला पुरस्कार",
+    organization: "भारतीय कृषक समाज, नवी दिल्ली"
   }
 ];
 

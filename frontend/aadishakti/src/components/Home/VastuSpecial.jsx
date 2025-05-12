@@ -38,9 +38,9 @@ const VastuSpecial = () => {
               </div>
 
               <div className="absolute -bottom-10 -right-10 bg-white rounded-full p-6 shadow-xl">
-                <div className="relative w-20 h-20 flex items-center justify-center bg-[#87161a] rounded-full">
+                <div className="relative w-20 h-20 flex items-center justify-center bg-[#d4af37] rounded-full">
                   <Home className="h-10 w-10 text-white" />
-                  <div className="absolute inset-0 bg-[#87161a] rounded-full animate-ping opacity-20"></div>
+                  <div className="absolute inset-0 bg-[#d13a3f] rounded-full animate-ping opacity-20"></div>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@ const VastuSpecial = () => {
               </div> */}
             </div>
 
-            <button className="px-8 py-3 bg-[#87161a] hover:bg-[#7a1535] text-white font-semibold rounded-lg transition-all flex items-center">
+            <button className="px-8 py-3 bg-[#87161a] hover:bg-[#87161a] text-white font-semibold rounded-lg transition-all flex items-center">
               अपॉइन्टमेंट बुक करा
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>
