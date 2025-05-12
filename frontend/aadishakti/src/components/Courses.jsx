@@ -3,28 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import { UserContext } from "../UserContext";
+import coursesData from "../data/courses.json"; // Import your local JSON file
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("priceLowHigh"); // Set default to price low to high
+  const [sortOption, setSortOption] = useState("priceLowHigh");
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("https://aadishakti-backend-ue51.onrender.com/api/courses/get")
-      .then((res) => res.json())
-      .then((data) => {
-        setCourses(data);
-        setFilteredCourses(data);
-      })
-      .catch((err) => console.error("Error fetching courses:", err));
+    // Load data directly from imported JSON
+    setCourses(coursesData);
+    setFilteredCourses(coursesData);
   }, []);
 
   useEffect(() => {
     handleSearchAndSort();
-  }, [searchTerm, sortOption]);
+  }, [searchTerm, sortOption, courses]);
 
   const handleCourseClick = (title) => {
     navigate(`/courses/${title}`);
@@ -46,7 +43,7 @@ export default function Courses() {
     } else if (sortOption === "free") {
       tempCourses = tempCourses.filter((course) => course.price === 0);
     }
-    
+
     setFilteredCourses(tempCourses);
   };
 
@@ -86,7 +83,9 @@ export default function Courses() {
         {/* Courses Grid */}
         {filteredCourses.length === 0 ? (
           <div className="text-center text-gray-600">
-            <p className="text-lg">No courses found. Try different search criteria.</p>
+            <p className="text-lg">
+              No courses found. Try different search criteria.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -95,7 +94,7 @@ export default function Courses() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                key={course._id}
+                key={course.courseId} // Changed from _id to courseId
                 className="bg-white rounded-2xl overflow-hidden shadow-xl border border-[#87161a]/10 flex flex-col justify-between"
               >
                 <div className="relative">

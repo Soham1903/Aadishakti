@@ -1,8 +1,8 @@
-import React from "react";
-import { useCart } from "../contexts/CartContext";
+import React, { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { useContext, useState } from "react";
+import { useCart } from "../contexts/CartContext";
+import coursesData from "../data/courses.json";
 import {
   Star,
   Clock,
@@ -19,93 +19,21 @@ import {
 
 export default function CourseDetails() {
   const { title } = useParams();
-  const { addToCart } = useCart(); // ✅ Import the addToCart function
-  const [course, setCourse] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const { user } = useContext(UserContext);
+  const { addToCart } = useCart();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const [isEditing, setIsEditing] = useState(false);
 
-  React.useEffect(() => {
-    fetch(`https://aadishakti-backend-ue51.onrender.com
-      /api/courses/${title}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && !data.error) {
-          setCourse(data);
-        } else {
-          setError(data.error || "Course not found.");
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch course details.");
-        setLoading(false);
-      });
-  }, [title]);
+  // Find the course in the JSON data that matches the title parameter
+  const courseFromData = coursesData.find(
+    (course) => course.title.toLowerCase() === title.toLowerCase()
+  );
 
-  const handleSaveChanges = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("Please login again");
-        navigate("/login");
-        return;
-      }
-      const formData = new FormData();
-
-      // Append all editable fields to formData
-      formData.append("title", course.title);
-      formData.append("instructor", course.instructor);
-      formData.append("description", course.description);
-      formData.append("syllabus", course.syllabus);
-      formData.append("price", course.price);
-      formData.append("duration", course.duration);
-      formData.append("timing", course.timing);
-
-      // If you want to allow image updates, you'd need to add:
-      // if (imageFile) {
-      //   formData.append('image', imageFile);
-      // }
-
-      const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/update/${course._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            title: course.title,
-            instructor: course.instructor,
-            description: course.description,
-            syllabus: course.syllabus,
-            price: course.price,
-            duration: course.duration,
-            timing: course.timing,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update course");
-      }
-
-      const updatedCourse = await response.json();
-      setCourse(updatedCourse);
-      setIsEditing(false);
-      alert("Course updated successfully!");
-    } catch (error) {
-      console.error("Error updating course:", error);
-      alert(error.message || "Error updating course");
-    }
-  };
+  // Use state to manage editable course data
+  const [course, setCourse] = useState(courseFromData);
 
   const handleAddToCart = () => {
-    addToCart(course); // ✅ Call the addToCart with course data
+    addToCart(course);
   };
 
   const toggleEdit = () => {
@@ -116,51 +44,22 @@ export default function CourseDetails() {
     setCourse({ ...course, [e.target.name]: e.target.value });
   };
 
-  const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this course?")) return;
+  const handleSaveChanges = () => {
+    // In a static version, we just update the local state
+    setIsEditing(false);
+    alert("Changes saved locally (no backend in static version)");
+  };
 
-    try {
-      const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/courses/delete/${course._id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (response.ok) {
-        alert("Course deleted successfully!");
-        window.location.href = "/courses"; // Redirect to home or courses list
-      } else {
-        const data = await response.json();
-        alert(data.error || "Failed to delete course.");
-      }
-    } catch (error) {
-      alert("An error occurred while deleting the course.");
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this course?")) {
+      alert("Course deleted (no backend in static version)");
+      navigate("/courses");
     }
   };
 
   const handleBuyNow = () => {
-    navigate(`/courses/${course.title}/buy`); // Dynamically inserting title
+    navigate(`/courses/${course.title}/buy`);
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#f9f3f5] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#87161a] border-t-transparent"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-[#f9f3f5] flex items-center justify-center">
-        <div className="text-[#87161a] text-center">
-          <Star className="w-16 h-16 mx-auto mb-4" />
-          <p className="text-xl">{error}</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#f9f3f5]">
@@ -181,8 +80,9 @@ export default function CourseDetails() {
           </h1>
           <div className="rounded-3xl overflow-hidden shadow-xl">
             <img
-              src={`http://localhost:4000/uploads/${course.image}`}
+              src={course.image}
               alt={course.title}
+              className="w-full h-auto"
             />
           </div>
         </div>
@@ -222,19 +122,19 @@ export default function CourseDetails() {
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
-                Course Overview
+                Course Benefits
               </h2>
               <div className="prose max-w-none">
                 <p className="text-gray-600">
                   {isEditing ? (
                     <textarea
                       className="border rounded p-2 w-full"
-                      name="description"
-                      value={course.description}
+                      name="benefits"
+                      value={course.benefits}
                       onChange={handleChange}
                     />
                   ) : (
-                    course.description
+                    course.benefits
                   )}
                 </p>
               </div>
@@ -256,18 +156,15 @@ export default function CourseDetails() {
               ) : (
                 <ul className="list-disc list-inside space-y-2">
                   {course.syllabus.split("\n").map((item, index, arr) => {
-                    const isAathvda = item.includes("आठवडा"); // Check if the line contains 'आठवडा'
+                    const isAathvda = item.includes("आठवडा");
                     const previousHadAathvda =
-                      index > 0 && arr[index - 1].includes("आठवडा"); // Check if the previous line was also 'आठवडा'
+                      index > 0 && arr[index - 1].includes("आठवडा");
 
                     return (
                       <React.Fragment key={index}>
-                        {/* Add empty space before "आठवडा" (except for the first occurrence) */}
                         {isAathvda && index !== 0 && !previousHadAathvda && (
                           <li className="h-4 list-none"></li>
                         )}
-
-                        {/* Add the actual list item */}
                         {item.trim() && (
                           <li className="text-gray-600">{item}</li>
                         )}
@@ -345,7 +242,7 @@ export default function CourseDetails() {
                       onChange={handleChange}
                     />
                   ) : (
-                    <span>{course.duration} hours of content</span>
+                    <span>{course.duration}</span>
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
@@ -353,12 +250,12 @@ export default function CourseDetails() {
                   {isEditing ? (
                     <input
                       className="border rounded p-2 w-full"
-                      name="duration"
+                      name="timing"
                       value={course.timing}
                       onChange={handleChange}
                     />
                   ) : (
-                    <span>{course.timing} hours of content</span>
+                    <span>{course.timing}</span>
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
@@ -374,7 +271,6 @@ export default function CourseDetails() {
                 Buy Now
               </button>
 
-              {/* ✅ "Add to Cart" button with onClick */}
               <button
                 onClick={handleAddToCart}
                 className="w-full px-6 py-4 border-2 border-[#87161a] text-[#87161a] hover:bg-[#87161a] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
@@ -382,13 +278,14 @@ export default function CourseDetails() {
                 <ShoppingCart className="w-6 h-6" />
                 Add to Cart
               </button>
+
               {user?.role === "admin" && (
                 <>
                   <button
                     className={`w-full px-6 py-4 mt-5 text-white rounded-xl font-bold text-lg transition-all duration-200 ${
                       isEditing
-                        ? "bg-green-600 hover:bg-green-700" // Green for Save
-                        : "bg-blue-600 hover:bg-blue-700" // Blue for Edit
+                        ? "bg-green-600 hover:bg-green-700"
+                        : "bg-blue-600 hover:bg-blue-700"
                     }`}
                     onClick={isEditing ? handleSaveChanges : toggleEdit}
                   >
