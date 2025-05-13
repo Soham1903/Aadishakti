@@ -97,7 +97,7 @@ const Navbar = () => {
                 />
               </div>
               <img
-                src="/assets/Adhiveshan TXT (1).svg"
+                src="/assets/Adishakti TEXT logo.png"
                 alt="Aadishakti Text"
                 className="h-6 md:h-8 w-auto"
               />

@@ -15,16 +15,16 @@ const QuoteSection = () => {
           </div>
           
           <blockquote className="text-center px-4 md:px-6 lg:px-8 py-2 animate-[fadeIn_0.6s_ease-in]">
-            <p className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed text-gray-800 mb-4 md:mb-6">
+            <p className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed text-slate-700 mb-4 md:mb-6">
               ज्योतिष शास्त्र, वास्तुशास्त्र, अंकशास्त्र, मोबाईल न्यूमरॉलॉजी, टॅरो कार्ड, रेकी हे आणि यासारखे 
               <span className="text-[#791317] font-semibold"> <br/>सर्व शास्त्र म्हणजे एकाच नाण्याच्या अनेक बाजू आहेत.</span>
             </p>
-            <p className="text-base md:text-lg lg:text-xl text-gray-600 mt-3 md:mt-4">
+            <p className="text-base md:text-lg lg:text-xl text-slate-600 mt-3 md:mt-4">
               या सर्व शास्त्रांच्या आधारावर मनुष्य योग्य निर्णय योग्य उत्तर आणि योग्य मार्गदर्शन मिळवू शकतो.
             </p>
             <footer className="mt-6 md:mt-8">
-              <div className="w-12 md:w-16 h-1 bg-[] mx-auto mb-3 md:mb-4"></div>
-              <p className="text-base md:text-lg font-semibold">अशा या गुढ शास्त्रांना आदिशक्ती गुरुकुलचा नमस्कार असो!</p>
+              <div className="w-12 md:w-16 h-1 bg-[#791317] mx-auto mb-3 md:mb-4"></div>
+              <p className="text-base md:text-lg font-semibold text-slate-700">अशा या गुढ शास्त्रांना आदिशक्ती गुरुकुलचा नमस्कार असो!</p>
             </footer>
           </blockquote>
         </div>

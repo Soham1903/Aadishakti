@@ -24,7 +24,7 @@ const About = () => {
     <section className="py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-700 mb-4">
             आमच्या सशुल्क सेवा
           </h2>
           <div className="w-24 h-1 bg-[#d4af37] mx-auto"></div>
@@ -39,10 +39,10 @@ const About = () => {
                   {service.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 text-black">
+                  <h3 className="text-xl font-semibold mb-2 text-slate-700">
                     {service.title}
                   </h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-slate-700 leading-relaxed">
                     {service.description}
                   </p>
                 </div>

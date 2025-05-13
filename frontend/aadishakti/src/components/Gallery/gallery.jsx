@@ -95,7 +95,7 @@ function ImageModal({ item, onClose }) {
             />
           </div>
           <div className="w-full md:w-1/3 p-6 overflow-y-auto max-h-[40vh] md:max-h-[90vh]">
-            <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+            <h3 className="text-xl font-bold mb-4 text-slate-700">{item.title}</h3>
             <p className="text-gray-700">{item.description}</p>
           </div>
         </div>
@@ -121,11 +121,11 @@ function Gallery() {
     <div className="bg-gray-50 min-h-screen pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our Achievements & Awards
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-700 mb-4">
+            आमची पुरस्कारप्राप्त क्षणचित्रे
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            A showcase of our recognition and notable moments across various conferences and events.
+            विविध अधिवेशनांमधील मान्यता व गौरवाचे क्षण येथे मांडले आहेत.
           </p>
         </div>
 
@@ -144,7 +144,7 @@ function Gallery() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-1">
+                <h3 className="font-semibold text-lg text-slate-700 mb-2 line-clamp-1">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 line-clamp-3">{item.description}</p>

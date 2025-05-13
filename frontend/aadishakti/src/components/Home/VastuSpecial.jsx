@@ -49,14 +49,14 @@ const VastuSpecial = () => {
           <div className="order-1 lg:order-2">
             <div className="inline-flex items-center mb-4 bg-[#87161a]/10 px-4 py-1 rounded-full text-[#87161a]">
               <Home className="h-4 w-4 mr-2" />
-              <span className="text-sm font-medium">वास्तुशास्त्र विशेष</span>
+              <span className="text-sm font-medium text-slate-700">वास्तुशास्त्र विशेष</span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-slate-800">
               वास्तुशास्त्र - <span className="text-[#87161a]">सल्ला व मार्गदर्शन</span>
             </h2>
 
-            <p className="text-lg text-gray-700 mb-6">
+            <p className="text-lg text-slate-700 mb-6">
               तुमच्या वास्तू मध्ये थोडेसे सहज होणारे विना तोडफोड बदल करा. आणि सुख समृद्धी आनंद मिळवा! समजून घ्या वास्तुशास्त्रामागील विज्ञान तेही वैज्ञानिक पद्धतीने!
             </p>
 
@@ -73,20 +73,16 @@ const VastuSpecial = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-gray-700">{feature}</span>
+                  <span className="text-slate-700">{feature}</span>
                 </div>
               ))}
             </div>
 
             <div className="p-6 bg-gray-100 rounded-lg border border-gray-200 mb-8">
-              <h3 className="text-xl font-bold mb-3 text-gray-900">वास्तू विशेष सेवा</h3>
-              <p className="text-gray-700 mb-3">
+              <h3 className="text-xl font-bold mb-3 text-slate-800">वास्तू विशेष सेवा</h3>
+              <p className="text-slate-700 mb-3">
                 तुमच्या घर किंवा कार्यालयासाठी संपूर्ण वास्तू परीक्षण आणि दोष निवारणासाठी विशेष मार्गदर्शन सेवा उपलब्ध आहे..
               </p>
-              {/* <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500">सीमित कालावधीसाठी 20% सवलत</span>
-                <span className="font-bold text-[#87161a]">₹1,599</span>
-              </div> */}
             </div>
 
             <button className="px-8 py-3 bg-[#87161a] hover:bg-[#87161a] text-white font-semibold rounded-lg transition-all flex items-center">

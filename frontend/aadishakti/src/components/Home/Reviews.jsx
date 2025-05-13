@@ -56,15 +56,11 @@ const Reviews = () => {
   return (
     <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800">
           आमच्या विद्यार्थ्यांचा अभिप्राय
         </h2>
 
         <div className="relative">
-          {/* <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-[#87161a] opacity-20">
-            <Quote size={80} />
-          </div> */}
-
           <div className="overflow-hidden relative">
             <div
               className="flex transition-transform duration-500 ease-in-out"
@@ -86,11 +82,11 @@ const Reviews = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-gray-600 text-lg italic mb-6">
+                    <p className="text-slate-700 text-lg italic mb-6">
                       {review.text}
                     </p>
-                    <h4 className="font-semibold text-lg">{review.name}</h4>
-                    <p className="text-gray-500">{review.position}</p>
+                    <h4 className="font-semibold text-lg text-slate-800">{review.name}</h4>
+                    <p className="text-slate-600">{review.position}</p>
                   </div>
                 </div>
               ))}
@@ -119,7 +115,7 @@ const Reviews = () => {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? "bg-[#87161a]" : "bg-gray-300"
+                  index === currentIndex ? "bg-[#87161a]" : "bg-slate-300"
                 }`}
               />
             ))}

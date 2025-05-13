@@ -86,30 +86,35 @@ export default function ContactPage() {
             </div>
 
             {/* Social Media */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-xl font-semibold mb-6">आमच्याशी सोशल मीडियावर जोडा</h3>
-              <div className="grid grid-cols-4 gap-4">
-                {[{
-                  icon: <Instagram />, label: "इंस्टाग्राम"
-                }, {
-                  icon: <Facebook />, label: "फेसबुक"
-                }, {
-                  icon: <Twitter />, label: "ट्विटर"
-                }, {
-                  icon: <Youtube />, label: "यूट्यूब"
-                }].map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href="#"
-                    whileHover={{ y: -5 }}
-                    className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-purple-50 transition-colors duration-300"
-                  >
-                    <div className="text-[#87161a] mb-2">{social.icon}</div>
-                    <span className="text-sm text-gray-600">{social.label}</span>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+            {/* Social Media Section */}
+<motion.div
+  className="bg-white p-6 rounded-2xl shadow-lg mt-4 text-center"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.6 }}
+>
+  <h3 className="text-xl font-semibold text-[#87161a] mb-4">सोशल मिडिया</h3>
+  <div className="flex justify-center space-x-6">
+    <a
+      href="https://www.facebook.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-12 h-12 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-all duration-300"
+    >
+      <Facebook className="text-blue-600 w-6 h-6" />
+    </a>
+    <a
+      href="https://www.youtube.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-12 h-12 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-all duration-300"
+    >
+      <Youtube className="text-red-600 w-6 h-6" />
+    </a>
+  </div>
+</motion.div>
+
+           
           </motion.div>
 
           {/* Right Column: Contact Form */}

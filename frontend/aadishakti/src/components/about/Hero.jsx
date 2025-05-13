@@ -37,11 +37,11 @@ function Hero() {
           >
             <div className="w-32 h-[2px] bg-[#d4af37] mx-auto mb-10"></div>
             
-            <p className="text-2xl md:text-3xl font-medium mb-6 text-[#000000] drop-shadow-sm">
+            <p className="text-2xl md:text-3xl font-medium mb-6 text-slate-800 drop-shadow-sm">
               ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
             </p>
             
-            <p className="text-xl md:text-2xl font-light text-[#000000] drop-shadow-sm">
+            <p className="text-xl md:text-2xl font-light text-slate-700 drop-shadow-sm">
               आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे
             </p>
           </motion.div>

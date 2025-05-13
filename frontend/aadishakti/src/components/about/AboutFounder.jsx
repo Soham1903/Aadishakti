@@ -50,9 +50,9 @@ const AboutFounder = () => {
           <motion.div variants={fadeIn} className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl p-8 h-full">
               <h3 className="text-2xl font-bold text-[#87161a] mb-2">ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)</h3>
-              <p className="text-gray-600 mb-6">संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे <br/>एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p>
+              <p className="text-slate-600 mb-6">संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे <br/>एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ, अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ</p>
               
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-4 text-slate-700">
                 <p>वास्तु, ज्योतिष, रेकी, हीलींग, टॅरॉकार्ड रिडर, रमल शास्त्री, मोबाईल न्यूमरॉलॉजी, डाउझिंग आणि या सारख्या अनेक विषयांचा अभ्यास २००० पासून आवड म्हणून सुरू केला. वरील सर्व प्रत्येक शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या कार्यशाळा आणि मार्गदर्शन सलग २०११ पासून करत आहे.</p>
                 
                 <p>अनेक विषयांच्या मोफत कार्यशाळा चालू असतात त्यामुळे हे ज्ञान अनेकांपर्यंत पोहोचवण्याचे कार्य हाती घेतले आहे. तसेच अनेक लोकांना समस्यामुक्त करण्यासाठी मार्गदर्शन करणे व अंधश्रद्धेचा वापर न करता वैज्ञानिक दृष्टिकोनातून रेकी, हीलिंग, संमोहन, यासारख्या विषयांमधून समस्या निराकारण करणे. आदिशक्ती गुरुकुल हे यूट्यूब चैनल सध्या कार्यान्वित आहे. विविध अधिवेशनांमध्ये वास्तु ज्योतिष आणि मोबाईल न्यूमरॉलॉजी या विषयांवर व्याख्याने दिली जातात.</p>
@@ -100,10 +100,10 @@ const AboutFounder = () => {
                       <span className="text-xl font-bold text-[#87161a]">{index + 1}</span>
                     </div>
                     <div className="border-b border-dashed border-gray-200 pb-4 flex-1">
-                      <p className="text-gray-800">
+                      <p className="text-slate-700">
                         {title.organization} यांच्यातर्फे
                         <span className="font-semibold block mt-1 text-[#87161a]">{title.title}</span> 
-                        <span className="text-gray-600 text-sm">{title.description}</span>
+                        <span className="text-slate-600 text-sm">{title.description}</span>
                       </p>
                     </div>
                   </div>
@@ -128,7 +128,7 @@ const AboutFounder = () => {
                   >
                     <div className="flex items-center">
                       <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700">{recognition}</span>
+                      <span className="text-slate-700">{recognition}</span>
                     </div>
                   </div>
                 ))}
@@ -155,7 +155,7 @@ const AboutFounder = () => {
                     
                     <div className="p-5">
                       <h4 className="font-medium text-[#87161a] mb-2 text-lg">{award.title}</h4>
-                      <p className="text-gray-600 text-sm">{award.organization}</p>
+                      <p className="text-slate-600 text-sm">{award.organization}</p>
                     </div>
                   </div>
                 ))}
@@ -203,12 +203,12 @@ const AboutFounder = () => {
                       <book.icon className="h-5 w-5 text-[#87161a]" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-800">{book.title}</h4>
+                      <h4 className="font-medium text-slate-700">{book.title}</h4>
                       {book.publisher && (
-                        <p className="text-xs text-gray-500 mt-1">{book.publisher}</p>
+                        <p className="text-xs text-slate-500 mt-1">{book.publisher}</p>
                       )}
                       {book.author && (
-                        <p className="text-xs text-gray-500 mt-1">- {book.author}</p>
+                        <p className="text-xs text-slate-500 mt-1">- {book.author}</p>
                       )}
                     </div>
                   </div>
@@ -227,7 +227,7 @@ const AboutFounder = () => {
                 {['संमोहन', 'मॅजिक मनी मंत्रा', 'ज्योतिष शास्त्रानुसार वैवाहिक जीवन'].map((title, index) => (
                   <div key={index} className="flex items-center p-3 border border-gray-200 rounded-lg">
                     <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3"></span>
-                    <span className="text-gray-700">{title}</span>
+                    <span className="text-slate-700">{title}</span>
                   </div>
                 ))}
               </div>
@@ -349,7 +349,7 @@ const speakerRecognitions = [
   "भालचंद्र जोर्तिविद्यालय आणि रमणलाल शहा ज्योतिष अकॅडमी अधिवेशना निमित्ताने",
   "स्वप्नल फाउंडेशन यांच्यातर्फे महिला दिनानिमित्त राज्यस्तरीय पुरस्कार",
   "यश एज्युकेशन सोसायटी यांच्यातर्फे यशस्वी उद्योजिका पुरस्कार",
-  "भारतीय कृषक समाज नवी दिल्ली क्रांतीज्योती महिला पुरस्कार"
+  "भारतीय कृषक समाज नवी दिल्ली क्रांति��्योती महिला पुरस्कार"
 ];
 
 // Awards data

@@ -10,14 +10,14 @@ const MobileNumerology = () => {
   };
 
   return (
-    <section className="w-full bg-white text-[#333] py-16 px-4 md:px-8">
+    <section className="w-full bg-white text-slate-700 py-16 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center gap-12">
           {/* Left Content */}
           <div className="md:w-1/2 space-y-6">
             <div className="flex items-center gap-2">
               <Phone className="h-7 w-7 text-[#87161A]" />
-              <h2 className="text-3xl md:text-4xl font-bold">मोबाईल नंबर न्यूमरोलॉजी</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-700">मोबाईल नंबर न्यूमरोलॉजी</h2>
             </div>
 
             <div className="space-y-4 text-lg">
@@ -26,7 +26,7 @@ const MobileNumerology = () => {
                 "तुमच्या मोबाईल नंबर मुळे तुमच्या जीवनात काय घडत आहे!",
                 "आणि मिळवा भाग्यकारक पॅटर्न लॉक पासवर्ड! भाग्यकारक पासवर्ड मुळे तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होते असा अनुभव आहे."
               ].map((text, idx) => (
-                <p key={idx} className="flex items-start gap-2">
+                <p key={idx} className="flex items-start gap-2 text-slate-700">
                   <Star className="h-5 w-5 text-[#87161A] mt-1 flex-shrink-0" />
                   <span>{text}</span>
                 </p>
@@ -39,7 +39,7 @@ const MobileNumerology = () => {
                 <input
                   type="text"
                   placeholder="तुमचा मोबाईल नंबर टाका"
-                  className="bg-transparent border-none outline-none px-4 py-3 w-full text-black placeholder-gray-500"
+                  className="bg-transparent border-none outline-none px-4 py-3 w-full text-slate-700 placeholder-slate-500"
                   value={mobileNumber}
                   onChange={(e) => setMobileNumber(e.target.value)}
                   maxLength={10}
@@ -64,11 +64,10 @@ const MobileNumerology = () => {
                 className="w-full h-64 object-cover object-center"
               />
 
-
               <div className="p-6 space-y-6 relative z-10">
                 <div className="flex items-center gap-2">
                   <Lock className="h-6 w-6 text-[#87161A]" />
-                  <h3 className="text-2xl font-bold">भाग्यकारक पॅटर्न</h3>
+                  <h3 className="text-2xl font-bold text-slate-700">भाग्यकारक पॅटर्न</h3>
                 </div>
 
                 <div className="grid grid-cols-3 gap-6">
@@ -78,15 +77,9 @@ const MobileNumerology = () => {
                 </div>
 
                 <div className="bg-white p-4 rounded-lg border border-[#921a40]/20">
-                  <p className="text-center">
+                  <p className="text-center text-slate-700">
                     तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व, करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.
                   </p>
-                  {/* <div className="flex justify-center mt-4">
-                    <button className="flex items-center gap-2 bg-[#87161A] text-white px-4 py-2 rounded-lg hover:bg-[#7a1736] transition-all">
-                      <span>अधिक जाणून घ्या</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -111,23 +104,12 @@ const MobileNumerology = () => {
             ))}
           </div>
           <div className="text-center relative z-10">
-            <p className="text-xl">तुमचे भाग्य तुमच्या अंकांमध्ये दडलेले आहे</p>
-            <p className="text-sm mt-2 opacity-75">आज नंबर शोधून तुमच्या जीवनात सकारात्मक बदल घडवून आणा</p>
+            <p className="text-xl text-slate-700">तुमचे भाग्य तुमच्या अंकांमध्ये दडलेले आहे</p>
+            <p className="text-sm mt-2 opacity-75 text-slate-700">आज नंबर शोधून तुमच्या जीवनात सकारात्मक बदल घडवून आणा</p>
           </div>
         </div>
       </div>
     </section>
-  );
-};
-
-// Pattern Grid (Optional background grid)
-const PatternGrid = () => {
-  return (
-    <div className="grid grid-cols-9 gap-1 h-full w-full">
-      {Array.from({ length: 81 }).map((_, i) => (
-        <div key={i} className="bg-[#921a40]/10 rounded-full aspect-square"></div>
-      ))}
-    </div>
   );
 };
 

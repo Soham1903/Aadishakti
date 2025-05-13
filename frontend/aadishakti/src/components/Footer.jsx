@@ -16,7 +16,7 @@ const Footer = () => {
               />
               <div className="flex flex-col">
                 <img 
-                  src="assets/Adishakti TEXT.png"
+                  src="assets/Adishakti TEXT logo.png"
                   alt="Numerology Text"
                   className="w-40 object-contain rounded-lg mt-1"
                 />

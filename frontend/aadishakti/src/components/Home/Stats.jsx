@@ -63,7 +63,7 @@ const Stats = () => {
       <div className="absolute inset-0 bg-[#87161a]/5 transform -skew-y-6" />
       <div className="max-w-7xl mx-auto px-4 relative">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-12"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-700"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -81,7 +81,7 @@ const Stats = () => {
             <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.clients.toLocaleString()}+
             </div>
-            <p className="text-gray-600">विद्यार्थी</p>
+            <p className="text-slate-600">विद्यार्थी</p>
           </motion.div>
           <motion.div
             className="text-center"
@@ -93,7 +93,7 @@ const Stats = () => {
             <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.consultations.toLocaleString()}+
             </div>
-            <p className="text-gray-600">सल्ला सत्रे</p>
+            <p className="text-slate-600">सल्ला सत्रे</p>
           </motion.div>
           <motion.div
             className="text-center"
@@ -105,7 +105,7 @@ const Stats = () => {
             <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.accuracy}%
             </div>
-            <p className="text-gray-600">भविष्यवाणी अचूकता</p>
+            <p className="text-slate-600">भविष्यवाणी अचूकता</p>
           </motion.div>
           <motion.div
             className="text-center"
@@ -117,7 +117,7 @@ const Stats = () => {
             <div className="text-4xl md:text-5xl font-bold text-[#87161a] mb-2">
               {counts.experts}+
             </div>
-            <p className="text-gray-600">कार्यशाळा</p>
+            <p className="text-slate-600">कार्यशाळा</p>
           </motion.div>
         </div>
       </div>
