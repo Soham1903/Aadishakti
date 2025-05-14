@@ -179,13 +179,13 @@ const Navbar = () => {
                       ))}
                     </div>
                     <div className="px-3 py-2 border-t">
-                      <a 
-                        href="/courses"
+                      <Link 
+                        to="/courses"
                         className="block text-center text-sm font-medium text-[#87161A] hover:underline"
                         onClick={handleNavLinkClick}
                       >
                         View All Courses
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -253,18 +253,20 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <a
-                        href="/login"
+                      <Link
+                        to="/login"
                         className="block px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={handleNavLinkClick}
                       >
                         Login
-                      </a>
-                      <a
-                        href="/signup"
+                      </Link>
+                      <Link
+                        to="/signup"
                         className="block px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={handleNavLinkClick}
                       >
                         Sign up
-                      </a>
+                      </Link>
                     </>
                   )}
                 </div>
@@ -315,8 +317,8 @@ const Navbar = () => {
                   </div>
                 </div>
               )}
-              <a href="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</a>
-              <a href="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</a>
+              <Link to="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</Link>
+              <Link to="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</Link>
               
               {/* Mobile Courses Dropdown */}
               <div>
@@ -329,7 +331,7 @@ const Navbar = () => {
                 </button>
                 
                 {coursesDropdownOpen && (
-                  <div className="ml-4 mt-1 space-y-1 border-l border-white/20 pl-4">
+                  <div className="ml-4 mt-1 space-y-1 border-l border-white/20 pl-4 max-h-48 overflow-y-auto">
                     {coursesData.map((course) => (
                       <button
                         key={course.courseId}
@@ -346,20 +348,20 @@ const Navbar = () => {
                         </div>
                       </button>
                     ))}
-                    <a 
-                      href="/courses" 
+                    <Link 
+                      to="/courses" 
                       onClick={handleNavLinkClick} 
                       className="block px-3 py-1.5 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors rounded-md"
                     >
                       View All Courses
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
               
-              <a href="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</a>
-              <a href="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</a>
-              <a href="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</a>
+              <Link to="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</Link>
+              <Link to="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</Link>
+              <Link to="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</Link>
 
               {user ? (
                 <>
@@ -378,8 +380,8 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <a href="/login" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Login</a>
-                  <a href="/signup" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Sign up</a>
+                  <Link to="/login" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Login</Link>
+                  <Link to="/signup" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Sign up</Link>
                 </>
               )}
             </div>

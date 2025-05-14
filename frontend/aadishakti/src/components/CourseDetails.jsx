@@ -4,7 +4,6 @@ import { UserContext } from "../UserContext";
 import { useCart } from "../contexts/CartContext";
 import coursesData from "../data/courses.json";
 import {
-  Star,
   Clock,
   Calendar,
   Award,
@@ -24,11 +23,19 @@ export default function CourseDetails() {
 
   // Find the course in the JSON data that matches the title parameter
   const courseFromData = coursesData.find(
-    (course) => course.title.toLowerCase() === title.toLowerCase()
+    (course) => course.title.toLowerCase() === title?.toLowerCase()
   );
 
   // Use state to manage editable course data
   const [course, setCourse] = useState(courseFromData);
+
+  if (!course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-600">Course not found</p>
+      </div>
+    );
+  }
 
   const handleAddToCart = () => {
     addToCart(course);
@@ -43,7 +50,6 @@ export default function CourseDetails() {
   };
 
   const handleSaveChanges = () => {
-    // In a static version, we just update the local state
     setIsEditing(false);
     alert("Changes saved locally (no backend in static version)");
   };
@@ -59,19 +65,11 @@ export default function CourseDetails() {
     navigate(`/courses/${course.title}/buy`);
   };
 
-  if (!course) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600">Course not found</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-[#f9f3f5] pt-16 md:pt-20">
+    <div className="min-h-screen bg-[#f9f3f5] pt-20 md:pt-24">
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Title Section */}
-        <h1 className="text-3xl md:text-4xl font-bold text-[#87161a] mb-6 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#87161a] mb-8 text-center">
           {isEditing ? (
             <input
               className="border rounded p-2 w-full"
@@ -88,11 +86,11 @@ export default function CourseDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Course Image */}
           <div className="lg:col-span-2">
-            <div className="rounded-xl overflow-hidden shadow-lg mb-8 max-h-[400px]">
+            <div className="rounded-xl overflow-hidden shadow-lg mb-8">
               <img
                 src={course.image}
                 alt={course.title}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-[300px] object-cover object-center"
               />
             </div>
 
