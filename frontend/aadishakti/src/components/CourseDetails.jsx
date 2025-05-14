@@ -13,8 +13,6 @@ import {
   Users,
   CheckCircle,
   ShoppingCart,
-  User,
-  GraduationCap,
 } from "lucide-react";
 
 export default function CourseDetails() {
@@ -61,66 +59,46 @@ export default function CourseDetails() {
     navigate(`/courses/${course.title}/buy`);
   };
 
-  return (
-    <div className="min-h-screen bg-[#f9f3f5]">
-      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        {/* Title and Image Section */}
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#87161a] mb-8 text-center">
-            {isEditing ? (
-              <input
-                className="border rounded p-2 w-full"
-                name="title"
-                value={course.title}
-                onChange={handleChange}
-              />
-            ) : (
-              course.title
-            )}
-          </h1>
-          <div className="rounded-3xl overflow-hidden shadow-xl">
-            <img
-              src={course.image}
-              alt={course.title}
-              className="w-full h-auto"
-            />
-          </div>
-        </div>
+  if (!course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-600">Course not found</p>
+      </div>
+    );
+  }
 
+  return (
+    <div className="min-h-screen bg-[#f9f3f5] pt-16 md:pt-20">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        {/* Title Section */}
+        <h1 className="text-3xl md:text-4xl font-bold text-[#87161a] mb-6 text-center">
+          {isEditing ? (
+            <input
+              className="border rounded p-2 w-full"
+              name="title"
+              value={course.title}
+              onChange={handleChange}
+            />
+          ) : (
+            course.title
+          )}
+        </h1>
+
+        {/* Main Content with Improved Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Instructor Info */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
-                <User className="w-6 h-6" />
-                Course Instructor
-              </h2>
-              <div className="flex items-center gap-4">
-                <div className="bg-[#87161a] rounded-full p-4">
-                  <GraduationCap className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {isEditing ? (
-                      <input
-                        className="border rounded p-2 w-full"
-                        name="instructor"
-                        value={course.instructor}
-                        onChange={handleChange}
-                      />
-                    ) : (
-                      course.instructor
-                    )}
-                  </h3>
-                  <p className="text-gray-600">Expert Astrology Instructor</p>
-                </div>
-              </div>
+          {/* Course Image */}
+          <div className="lg:col-span-2">
+            <div className="rounded-xl overflow-hidden shadow-lg mb-8 max-h-[400px]">
+              <img
+                src={course.image}
+                alt={course.title}
+                className="w-full h-full object-cover object-center"
+              />
             </div>
 
             {/* Course Overview */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-2xl p-6 shadow-lg mb-8">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-4 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
                 Course Benefits
               </h2>
@@ -141,8 +119,8 @@ export default function CourseDetails() {
             </div>
 
             {/* Syllabus */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#87161a] mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-2xl p-6 shadow-lg mb-8">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-4 flex items-center gap-2">
                 <BookOpen className="w-6 h-6" />
                 Course Syllabus
               </h2>
@@ -176,35 +154,35 @@ export default function CourseDetails() {
             </div>
 
             {/* What's Included */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#87161a] mb-6">
+            <div className="bg-white rounded-2xl p-6 shadow-lg">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-4">
                 What's Included
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-[#87161a] rounded-xl">
-                  <Award className="w-12 h-12 text-white mx-auto mb-4" />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-[#87161a] rounded-xl">
+                  <Award className="w-10 h-10 text-white mx-auto mb-3" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Certification
                   </h3>
-                  <p className="text-white">
+                  <p className="text-white text-sm">
                     Receive an official certification upon completion
                   </p>
                 </div>
-                <div className="text-center p-6 bg-[#87161a] rounded-xl">
-                  <Video className="w-12 h-12 text-white mx-auto mb-4" />
+                <div className="text-center p-4 bg-[#87161a] rounded-xl">
+                  <Video className="w-10 h-10 text-white mx-auto mb-3" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Recordings
                   </h3>
-                  <p className="text-white">
+                  <p className="text-white text-sm">
                     Lifetime access to course recordings
                   </p>
                 </div>
-                <div className="text-center p-6 bg-[#87161a] rounded-xl">
-                  <Users className="w-12 h-12 text-white mx-auto mb-4" />
+                <div className="text-center p-4 bg-[#87161a] rounded-xl">
+                  <Users className="w-10 h-10 text-white mx-auto mb-3" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Live Sessions
                   </h3>
-                  <p className="text-white">
+                  <p className="text-white text-sm">
                     Interactive live sessions with experts
                   </p>
                 </div>
@@ -214,9 +192,9 @@ export default function CourseDetails() {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl p-8 sticky top-8 shadow-lg">
-              <div className="text-center mb-8">
-                <div className="text-4xl font-bold text-[#87161a] mb-2">
+            <div className="bg-white rounded-2xl p-6 sticky top-24 shadow-lg">
+              <div className="text-center mb-6">
+                <div className="text-3xl font-bold text-[#87161a] mb-2">
                   {isEditing ? (
                     <input
                       className="border rounded p-2 w-full"
@@ -231,7 +209,7 @@ export default function CourseDetails() {
                 <div className="text-gray-600">One-time payment</div>
               </div>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3 text-gray-600">
                   <Clock className="w-5 h-5 text-[#87161a]" />
                   {isEditing ? (
@@ -265,7 +243,7 @@ export default function CourseDetails() {
               </div>
 
               <button
-                className="w-full px-6 py-4 bg-[#87161a] hover:bg-[#87161a]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4"
+                className="w-full px-5 py-3 bg-[#87161a] hover:bg-[#87161a]/90 text-white rounded-xl font-bold text-lg transition-all duration-200 mb-4"
                 onClick={handleBuyNow}
               >
                 Buy Now
@@ -273,16 +251,16 @@ export default function CourseDetails() {
 
               <button
                 onClick={handleAddToCart}
-                className="w-full px-6 py-4 border-2 border-[#87161a] text-[#87161a] hover:bg-[#87161a] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
+                className="w-full px-5 py-3 border-2 border-[#87161a] text-[#87161a] hover:bg-[#87161a] hover:text-white rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2"
               >
-                <ShoppingCart className="w-6 h-6" />
+                <ShoppingCart className="w-5 h-5" />
                 Add to Cart
               </button>
 
               {user?.role === "admin" && (
                 <>
                   <button
-                    className={`w-full px-6 py-4 mt-5 text-white rounded-xl font-bold text-lg transition-all duration-200 ${
+                    className={`w-full px-5 py-3 mt-4 text-white rounded-xl font-bold text-lg transition-all duration-200 ${
                       isEditing
                         ? "bg-green-600 hover:bg-green-700"
                         : "bg-blue-600 hover:bg-blue-700"
@@ -293,7 +271,7 @@ export default function CourseDetails() {
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="w-full px-6 py-4 mt-5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-lg transition-all duration-200"
+                    className="w-full px-5 py-3 mt-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-lg transition-all duration-200"
                   >
                     Delete
                   </button>

@@ -1,22 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import { UserCircle2, Menu, X, ShoppingCart, ChevronDown } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { useCart } from "../contexts/CartContext";
+import coursesData from "../data/courses.json";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
   const { user, setUser } = useUser();
   const { cartItems } = useCart();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const coursesDropdownRef = useRef(null);
   const location = { pathname: window.location.pathname };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
+      }
+      if (coursesDropdownRef.current && !coursesDropdownRef.current.contains(event.target)) {
+        setCoursesDropdownOpen(false);
       }
     };
 
@@ -27,10 +33,15 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     if (dropdownOpen) setDropdownOpen(false);
+    if (coursesDropdownOpen) setCoursesDropdownOpen(false);
   };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const toggleCoursesDropdown = () => {
+    setCoursesDropdownOpen(!coursesDropdownOpen);
   };
 
   const handleLogout = () => {
@@ -67,18 +78,34 @@ const Navbar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const isActive = (path) => location.pathname === path;
+  const handleCourseClick = (courseTitle) => {
+    navigate(`/courses/${courseTitle}`);
+    setCoursesDropdownOpen(false);
+    setIsOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  const NavItem = ({ href, isActive, children }) => (
-    <a
-      href={href}
-      className={`px-4 py-2 text-sm font-medium rounded-full ${
-        isActive ? "bg-white text-[#921a40]" : "text-white hover:bg-white/20"
-      } transition-colors`}
-      onClick={handleNavLinkClick}
+  const isActive = (path) => location.pathname === path;
+  const isCoursePage = location.pathname.includes('/courses');
+
+  const NavItem = ({ href, isActive, children, hasDropdown, onMouseEnter, onMouseLeave, dropdownRef }) => (
+    <div 
+      className="relative" 
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      ref={dropdownRef}
     >
-      {children}
-    </a>
+      <a
+        href={href}
+        className={`px-4 py-2 text-sm font-medium rounded-full flex items-center ${
+          isActive ? "bg-white text-[#921a40]" : "text-white hover:bg-white/20"
+        } transition-colors`}
+        onClick={hasDropdown ? (e) => e.preventDefault() : handleNavLinkClick}
+      >
+        {children}
+        {hasDropdown && <ChevronDown className="w-4 h-4 ml-1" />}
+      </a>
+    </div>
   );
 
   return (
@@ -109,7 +136,61 @@ const Navbar = () => {
             <div className="flex space-x-1 bg-white/10 backdrop-blur-sm border border-white/20 px-1 py-1 rounded-full">
               <NavItem href="/" isActive={isActive("/")}>HOME</NavItem>
               <NavItem href="/about" isActive={isActive("/about")}>ABOUT</NavItem>
-              <NavItem href="/courses" isActive={isActive("/courses")}>COURSES</NavItem>
+              
+              {/* Courses Dropdown */}
+              <div 
+                className="relative" 
+                onMouseEnter={() => setCoursesDropdownOpen(true)}
+                onMouseLeave={() => setCoursesDropdownOpen(false)}
+                ref={coursesDropdownRef}
+              >
+                <a
+                  href="/courses"
+                  className={`px-4 py-2 text-sm font-medium rounded-full flex items-center ${
+                    isCoursePage ? "bg-white text-[#921a40]" : "text-white hover:bg-white/20"
+                  } transition-colors`}
+                  onClick={handleNavLinkClick}
+                >
+                  COURSES <ChevronDown className="w-4 h-4 ml-1" />
+                </a>
+                
+                {/* Courses Dropdown Menu */}
+                {coursesDropdownOpen && (
+                  <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 z-50 animate-fadeIn">
+                    <div className="px-3 py-2 text-[#87161A] font-semibold border-b">
+                      All Courses
+                    </div>
+                    <div className="max-h-72 overflow-y-auto">
+                      {coursesData.map((course) => (
+                        <button
+                          key={course.courseId}
+                          onClick={() => handleCourseClick(course.title)}
+                          className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                        >
+                          <div className="flex items-center">
+                            <img 
+                              src={course.image} 
+                              alt={course.title} 
+                              className="w-8 h-8 rounded object-cover mr-2"
+                            />
+                            <span className="truncate">{course.title}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="px-3 py-2 border-t">
+                      <a 
+                        href="/courses"
+                        className="block text-center text-sm font-medium text-[#87161A] hover:underline"
+                        onClick={handleNavLinkClick}
+                      >
+                        View All Courses
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <NavItem href="/books" isActive={isActive("/books")}>BOOKS</NavItem>
               <NavItem href="/contact" isActive={isActive("/contact")}>CONTACT</NavItem>
               <NavItem href="/gallery" isActive={isActive("/gallery")}>GALLERY</NavItem>
@@ -236,7 +317,46 @@ const Navbar = () => {
               )}
               <a href="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</a>
               <a href="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</a>
-              <a href="/courses" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">COURSES</a>
+              
+              {/* Mobile Courses Dropdown */}
+              <div>
+                <button 
+                  onClick={toggleCoursesDropdown}
+                  className="flex w-full items-center justify-between px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+                >
+                  <span>COURSES</span>
+                  <ChevronDown className={`w-4 h-4 transform transition-transform ${coursesDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {coursesDropdownOpen && (
+                  <div className="ml-4 mt-1 space-y-1 border-l border-white/20 pl-4">
+                    {coursesData.map((course) => (
+                      <button
+                        key={course.courseId}
+                        onClick={() => handleCourseClick(course.title)}
+                        className="block w-full text-left px-3 py-1.5 text-sm text-white/90 hover:bg-white/10 transition-colors rounded-md"
+                      >
+                        <div className="flex items-center">
+                          <img 
+                            src={course.image} 
+                            alt={course.title} 
+                            className="w-6 h-6 rounded object-cover mr-2"
+                          />
+                          <span className="truncate text-xs">{course.title}</span>
+                        </div>
+                      </button>
+                    ))}
+                    <a 
+                      href="/courses" 
+                      onClick={handleNavLinkClick} 
+                      className="block px-3 py-1.5 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors rounded-md"
+                    >
+                      View All Courses
+                    </a>
+                  </div>
+                )}
+              </div>
+              
               <a href="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</a>
               <a href="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</a>
               <a href="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</a>
