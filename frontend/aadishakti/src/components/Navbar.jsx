@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { UserCircle2, Menu, X, ShoppingCart, ChevronDown } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { useCart } from "../contexts/CartContext";
 import coursesData from "../data/courses.json";
@@ -12,9 +12,9 @@ const Navbar = () => {
   const { user, setUser } = useUser();
   const { cartItems } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const dropdownRef = useRef(null);
   const coursesDropdownRef = useRef(null);
-  const location = { pathname: window.location.pathname };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -30,6 +30,13 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Close menus when route changes
+  useEffect(() => {
+    setIsOpen(false);
+    setDropdownOpen(false);
+    setCoursesDropdownOpen(false);
+  }, [location.pathname]);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     if (dropdownOpen) setDropdownOpen(false);
@@ -42,6 +49,11 @@ const Navbar = () => {
 
   const toggleCoursesDropdown = () => {
     setCoursesDropdownOpen(!coursesDropdownOpen);
+    
+    // Navigate to courses page when opening dropdown on mobile
+    if (!coursesDropdownOpen && window.innerWidth < 768) {
+      navigate("/courses");
+    }
   };
 
   const handleLogout = () => {
@@ -79,10 +91,17 @@ const Navbar = () => {
   };
 
   const handleCourseClick = (courseTitle) => {
-    navigate(`/courses/${courseTitle}`);
-    setCoursesDropdownOpen(false);
-    setIsOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Use correct casing from the actual data
+    const course = coursesData.find(
+      c => c.title.toLowerCase() === courseTitle.toLowerCase()
+    );
+    
+    if (course) {
+      navigate(`/courses/${course.title}`);
+      setCoursesDropdownOpen(false);
+      setIsOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const isActive = (path) => location.pathname === path;
@@ -114,7 +133,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo and Name */}
           <div className="flex items-center space-x-2">
-            <a href="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2" onClick={handleNavLinkClick}>
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                 <img
@@ -128,7 +147,7 @@ const Navbar = () => {
                 alt="Aadishakti Text"
                 className="h-6 md:h-8 w-auto"
               />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -144,15 +163,15 @@ const Navbar = () => {
                 onMouseLeave={() => setCoursesDropdownOpen(false)}
                 ref={coursesDropdownRef}
               >
-                <a
-                  href="/courses"
+                <Link
+                  to="/courses"
                   className={`px-4 py-2 text-sm font-medium rounded-full flex items-center ${
                     isCoursePage ? "bg-white text-[#921a40]" : "text-white hover:bg-white/20"
                   } transition-colors`}
                   onClick={handleNavLinkClick}
                 >
                   COURSES <ChevronDown className="w-4 h-4 ml-1" />
-                </a>
+                </Link>
                 
                 {/* Courses Dropdown Menu */}
                 {coursesDropdownOpen && (
