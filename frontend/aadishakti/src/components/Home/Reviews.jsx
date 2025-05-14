@@ -27,7 +27,7 @@ const Reviews = () => {
       image: "/users/female.jpg",
       rating: 4,
       text: "स्पर्श रेकी आणि दुसऱ्यांवर रेकी देण्याचे व्हिडीओ देखील खूपच प्रभावी आहेत. अद्याप मी त्यांची प्रत्यक्ष प्रॅक्टिस केलेली नाही, पण लवकरच करून अनुभव घेणार आहे. तुमचं मार्गदर्शन, शिकवलेली पद्धत आणि दिलेली उर्जा यासाठी तुम्हाला मनापासून धन्यवाद!",
-      position: "गृहिणी",
+      position: "ज्योतिषी",
     },
   ];
 
@@ -85,7 +85,9 @@ const Reviews = () => {
                     <p className="text-slate-700 text-lg italic mb-6">
                       {review.text}
                     </p>
-                    <h4 className="font-semibold text-lg text-slate-800">{review.name}</h4>
+                    <h4 className="font-semibold text-lg text-slate-800">
+                      {review.name}
+                    </h4>
                     <p className="text-slate-600">{review.position}</p>
                   </div>
                 </div>
