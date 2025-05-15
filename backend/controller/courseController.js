@@ -93,6 +93,10 @@ export const getCourseByTitle = async (req, res) => {
   }
 };
 
+export const getCourseById = async (req, res) => {
+  
+}
+
 // controllers/courseController.js
 export const updateCourse = async (req, res) => {
   try {

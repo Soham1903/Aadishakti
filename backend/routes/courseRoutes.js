@@ -19,7 +19,7 @@ const router = express.Router();
 // Course routes
 router.post("/add", upload.single("image"), addCourse);
 router.get("/get", getCourses);
-router.get("/:title", getCourseByTitle);
+router.get("/:courseId", getCourseByTitle);
 router.put("/update/:id", loginLimiter, upload.single("image"), updateCourse);
 router.delete("/delete/:id", loginLimiter, deleteCourse);
 router.get("/:userId/courses", getUserCourses);

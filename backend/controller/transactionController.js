@@ -11,6 +11,11 @@ export const createTransaction = async (req, res) => {
     const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
       req.body;
 
+    console.log("Received transaction data:");
+    console.log("Customer:", courseTitle);
+    console.log("Phone:", phoneNumber);
+    console.log("Promo Code:", promoCode);
+    console.log("Final Price:", finalPrice);
     // Validate required fields
     if (!customerName || !phoneNumber || !courseTitle || !req.file) {
       return res.status(400).json({
@@ -20,17 +25,17 @@ export const createTransaction = async (req, res) => {
     }
 
     // 1. Find the course
-    const course = await Course.findOne({ title: courseTitle });
-    const user = await User.findOne({ phoneno: phoneNumber });
-    if (!course) {
-      return res.status(404).json({
-        success: false,
-        message: "Course not found",
-      });
-    }
+    // const course = await Course.findOne({ title: courseTitle });
+    // const user = await User.findOne({ phoneno: phoneNumber });
+    // if (!course) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Course not found",
+    //   });
+    // }
 
     // 2. Initialize price variables
-    let originalPrice = course.price;
+    let originalPrice = finalPrice || 0;
     let discountApplied = 0;
     let validPromoCode = null;
 
@@ -47,7 +52,6 @@ export const createTransaction = async (req, res) => {
     const newTransaction = new Transaction({
       customerName,
       phoneNumber,
-      course: course._id,
       courseTitle,
       paymentProof,
       transactionId: uuidv4(),
@@ -57,7 +61,6 @@ export const createTransaction = async (req, res) => {
       discountApplied,
       transactionDate: new Date(),
       user: user._id,
-      course: course._id,
     });
 
     // 6. Find and update user
@@ -90,6 +93,7 @@ export const createTransaction = async (req, res) => {
     });
   } catch (error) {
     console.error("Transaction error:", error);
+    console.error("Transaction error:", error.stack);
     res.status(500).json({
       success: false,
       message: "Internal server error",
