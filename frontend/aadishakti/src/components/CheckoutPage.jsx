@@ -61,23 +61,28 @@ function CheckoutPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const transactionId = `TXN-${Date.now()}-${Math.floor(
-      Math.random() * 1000
-    )}`;
-
     const formDataToSend = new FormData();
     formDataToSend.append("customerName", formData.customerName);
     formDataToSend.append("phoneNumber", formData.phoneNumber);
-    formDataToSend.append("transactionId", transactionId);
+    // Send each course title as an array item
+    if (Array.isArray(formData.courseTitle)) {
+      formData.courseTitle.forEach((title) => {
+        formDataToSend.append("courseTitle", title);
+      });
+    } else {
+      formDataToSend.append("courseTitle", formData.courseTitle);
+    }
     formDataToSend.append("promoCode", code);
     formDataToSend.append("finalPrice", discountedPrice);
+    console.log(courseTitle);
+    
     if (screenshot) {
       formDataToSend.append("screenshot", screenshot);
     }
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
+        "http://localhost:4000/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,

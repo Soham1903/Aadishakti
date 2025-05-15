@@ -7,11 +7,6 @@ const transactionSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  course: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Course",
-    required: true,
-  },
   customerName: {
     type: String,
     required: [true, "Customer name is required"],
@@ -28,7 +23,7 @@ const transactionSchema = new mongoose.Schema({
     match: [/^[0-9]{10}$/, "Phone number must be exactly 10 digits"],
   },
   courseTitle: {
-    type: String,
+    type: [String],
     required: [true, "Course title is required"],
   },
   promoCode: {
