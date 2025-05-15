@@ -14,6 +14,17 @@ const Cart = () => {
   const [code, setCode] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState(totalPrice);
 
+  const handleCheckout = () => {
+    navigate("/checkout", {
+      state: {
+        items: cartItems,
+        totalPrice,
+        discountedPrice,
+        promoCode: code,
+      },
+    });
+  };
+
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -199,7 +210,10 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <button className="mt-6 w-full bg-[#87161a] text-white py-3 rounded-md hover:bg-[#821636] transition-colors font-medium text-lg">
+                  <button
+                    onClick={handleCheckout}
+                    className="mt-6 w-full bg-[#87161a] text-white py-3 rounded-md hover:bg-[#821636] transition-colors font-medium text-lg"
+                  >
                     Proceed to Checkout
                   </button>
                 </div>

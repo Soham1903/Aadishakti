@@ -64,7 +64,7 @@ export const createTransaction = async (req, res) => {
     });
 
     // 6. Find and update user
-    // const user = await User.findOne({ phoneno: phoneNumber });
+    const user = await User.findOne({ phoneno: phoneNumber });
     if (!user) {
       return res.status(404).json({
         success: false,

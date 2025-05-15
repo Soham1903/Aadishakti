@@ -21,7 +21,10 @@ const Navbar = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
-      if (coursesDropdownRef.current && !coursesDropdownRef.current.contains(event.target)) {
+      if (
+        coursesDropdownRef.current &&
+        !coursesDropdownRef.current.contains(event.target)
+      ) {
         setCoursesDropdownOpen(false);
       }
     };
@@ -49,7 +52,7 @@ const Navbar = () => {
 
   const toggleCoursesDropdown = () => {
     setCoursesDropdownOpen(!coursesDropdownOpen);
-    
+
     // Remove the navigation, simply toggle the dropdown
     // No need to navigate to /courses on mobile
   };
@@ -91,9 +94,9 @@ const Navbar = () => {
   const handleCourseClick = (courseTitle) => {
     // Use correct casing from the actual data
     const course = coursesData.find(
-      c => c.title.toLowerCase() === courseTitle.toLowerCase()
+      (c) => c.title.toLowerCase() === courseTitle.toLowerCase()
     );
-    
+
     if (course) {
       navigate(`/courses/${course.title}`);
       setCoursesDropdownOpen(false);
@@ -103,11 +106,19 @@ const Navbar = () => {
   };
 
   const isActive = (path) => location.pathname === path;
-  const isCoursePage = location.pathname.includes('/courses');
+  const isCoursePage = location.pathname.includes("/courses");
 
-  const NavItem = ({ href, isActive, children, hasDropdown, onMouseEnter, onMouseLeave, dropdownRef }) => (
-    <div 
-      className="relative" 
+  const NavItem = ({
+    href,
+    isActive,
+    children,
+    hasDropdown,
+    onMouseEnter,
+    onMouseLeave,
+    dropdownRef,
+  }) => (
+    <div
+      className="relative"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       ref={dropdownRef}
@@ -131,7 +142,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo and Name */}
           <div className="flex items-center space-x-2">
-            <Link to="/" className="flex items-center space-x-2" onClick={handleNavLinkClick}>
+            <Link
+              to="/"
+              className="flex items-center space-x-2"
+              onClick={handleNavLinkClick}
+            >
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                 <img
@@ -151,66 +166,28 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="flex space-x-1 bg-white/10 backdrop-blur-sm border border-white/20 px-1 py-1 rounded-full">
-              <NavItem href="/" isActive={isActive("/")}>HOME</NavItem>
-              <NavItem href="/about" isActive={isActive("/about")}>ABOUT</NavItem>
-              
-              {/* Courses Dropdown */}
-              <div 
-                className="relative" 
-                onMouseEnter={() => setCoursesDropdownOpen(true)}
-                onMouseLeave={() => setCoursesDropdownOpen(false)}
-                ref={coursesDropdownRef}
+              <NavItem href="/" isActive={isActive("/")}>
+                HOME
+              </NavItem>
+              <NavItem href="/about" isActive={isActive("/about")}>
+                ABOUT
+              </NavItem>
+              <NavItem
+                href="/courses"
+                isActive={isActive("/courses")}
+                hasDropdown={true}
               >
-                <Link
-                  to="/courses"
-                  className={`px-4 py-2 text-sm font-medium rounded-full flex items-center ${
-                    isCoursePage ? "bg-white text-[#921a40]" : "text-white hover:bg-white/20"
-                  } transition-colors`}
-                  onClick={handleNavLinkClick}
-                >
-                  COURSES <ChevronDown className="w-4 h-4 ml-1" />
-                </Link>
-                
-                {/* Courses Dropdown Menu */}
-                {coursesDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 z-50 animate-fadeIn">
-                    <div className="px-3 py-2 text-[#87161A] font-semibold border-b">
-                      All Courses
-                    </div>
-                    <div className="max-h-72 overflow-y-auto">
-                      {coursesData.map((course) => (
-                        <button
-                          key={course.courseId}
-                          onClick={() => handleCourseClick(course.title)}
-                          className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        >
-                          <div className="flex items-center">
-                            <img 
-                              src={course.image} 
-                              alt={course.title} 
-                              className="w-8 h-8 rounded object-cover mr-2"
-                            />
-                            <span className="truncate">{course.title}</span>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                    <div className="px-3 py-2 border-t">
-                      <Link 
-                        to="/courses"
-                        className="block text-center text-sm font-medium text-[#87161A] hover:underline"
-                        onClick={handleNavLinkClick}
-                      >
-                        View All Courses
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              <NavItem href="/books" isActive={isActive("/books")}>BOOKS</NavItem>
-              <NavItem href="/contact" isActive={isActive("/contact")}>CONTACT</NavItem>
-              <NavItem href="/gallery" isActive={isActive("/gallery")}>GALLERY</NavItem>
+                COURSES
+              </NavItem>
+              <NavItem href="/books" isActive={isActive("/books")}>
+                BOOKS
+              </NavItem>
+              <NavItem href="/contact" isActive={isActive("/contact")}>
+                CONTACT
+              </NavItem>
+              <NavItem href="/gallery" isActive={isActive("/gallery")}>
+                GALLERY
+              </NavItem>
             </div>
           </div>
 
@@ -334,21 +311,48 @@ const Navbar = () => {
                   </div>
                 </div>
               )}
-              <Link to="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</Link>
-              <Link to="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</Link>
-              
-              {/* Simple Courses Link for Mobile */}
-              <Link 
-                to="/courses" 
-                onClick={handleNavLinkClick} 
+              <a
+                href="/"
+                onClick={handleNavLinkClick}
+                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+              >
+                HOME
+              </a>
+              <a
+                href="/about"
+                onClick={handleNavLinkClick}
+                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+              >
+                ABOUT
+              </a>
+              <a
+                href="/courses"
+                onClick={handleNavLinkClick}
                 className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
               >
                 COURSES
-              </Link>
-              
-              <Link to="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</Link>
-              <Link to="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</Link>
-              <Link to="/gallery" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">GALLERY</Link>
+              </a>
+              <a
+                href="/books"
+                onClick={handleNavLinkClick}
+                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+              >
+                BOOKS
+              </a>
+              <a
+                href="/contact"
+                onClick={handleNavLinkClick}
+                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+              >
+                CONTACT
+              </a>
+              <a
+                href="/gallery"
+                onClick={handleNavLinkClick}
+                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+              >
+                GALLERY
+              </a>
 
               {user ? (
                 <>
@@ -367,8 +371,20 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/login" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Login</Link>
-                  <Link to="/signup" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">Sign up</Link>
+                  <a
+                    href="/login"
+                    onClick={handleNavLinkClick}
+                    className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+                  >
+                    Login
+                  </a>
+                  <a
+                    href="/signup"
+                    onClick={handleNavLinkClick}
+                    className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+                  >
+                    Sign up
+                  </a>
                 </>
               )}
             </div>

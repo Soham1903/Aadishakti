@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { toast } from "react-toastify";
+import coursesData from "../data/courses.json"; // Import the static JSON file
+
+// Use them in your component
 
 function BuyPage() {
   const { title } = useParams();
+  console.log("title", title);
+  const location = useLocation();
+  const { courseTitle } = location.state || {};
+  const decodedTitle = decodeURIComponent(title);
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,35 +19,35 @@ function BuyPage() {
   const [formData, setFormData] = useState({
     customerName: user ? user.name : "",
     phoneNumber: "",
-    courseTitle: title,
+    courseTitle: decodedTitle,
   });
   const [screenshot, setScreenshot] = useState(null);
   const [screenshotPreview, setScreenshotPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [code, setCode] = useState(""); // For promo code input
-  // Original price
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discountedPrice, setDiscountedPrice] = useState(0);
 
   useEffect(() => {
-    fetch(`https://aadishakti-backend-ue51.onrender.com/api/courses/${title}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch course");
-        return res.json();
-      })
-      .then((data) => {
-        setCourse(data);
-        setTotalPrice(data.price);
-        setDiscountedPrice(data.price);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [title]);
+    // Find the course in the static JSON data instead of fetching from API
+    try {
+      const foundCourse = coursesData.find((c) => c.courseId);
+      console.log(foundCourse);
 
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [discountedPrice, setDiscountedPrice] = useState(totalPrice);
+      if (foundCourse) {
+        setCourse(foundCourse);
+        setTotalPrice(foundCourse.price);
+        setDiscountedPrice(foundCourse.finalPrice || foundCourse.price);
+      } else {
+        setError("Course not found");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [decodedTitle]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -176,7 +183,7 @@ function BuyPage() {
             <div className="flex flex-col md:flex-row gap-8 bg-gray-50 rounded-xl p-6 border border-gray-100">
               <div className="w-full md:w-1/3 aspect-video rounded-lg overflow-hidden">
                 <img
-                  src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
+                  src={course.image}
                   alt={course.title}
                   className="w-full h-full object-cover transform transition hover:scale-105"
                 />

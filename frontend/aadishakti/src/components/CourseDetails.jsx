@@ -21,9 +21,11 @@ export default function CourseDetails() {
   const { user } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Find the course in the JSON data that matches the title parameter
+  const decodedTitle = decodeURIComponent(title);
+
+  // Find the course with decoded title
   const courseFromData = coursesData.find(
-    (course) => course.title.toLowerCase() === title?.toLowerCase()
+    (course) => course.title.toLowerCase() === decodedTitle.toLowerCase()
   );
 
   // Use state to manage editable course data
@@ -62,7 +64,11 @@ export default function CourseDetails() {
   };
 
   const handleBuyNow = () => {
-    navigate(`/courses/${course.title}/buy`);
+    navigate(`/courses/${course.title}/buy`, {
+      state: {
+        title: course.title,
+      },
+    });
   };
 
   return (

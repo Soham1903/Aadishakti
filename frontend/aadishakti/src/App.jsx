@@ -25,11 +25,13 @@ import BuyPage from "./components/BuyPage.jsx";
 import CourseLinks from "./components/CourseLinks.jsx";
 import TransactionsDashboard from "./components/TransactionDashboard.jsx";
 import AdminRoutesDashboard from "./components/AdminRoutesDashboard.jsx";
-import './styles/animations.css';
-import Appointment from './pages/Appointment.jsx';
-import BooksList from './components/Books/BooksList';
-import BookDetails from './components/Books/BooksDetails';
-
+import "./styles/animations.css";
+import Appointment from "./pages/Appointment.jsx";
+import BooksList from "./components/Books/BooksList";
+import BookDetails from "./components/Books/BooksDetails";
+import CheckoutPage from "./components/Checkoutpage.jsx";
+import courseList from "./data/courses.json";
+import NewBuyCourse from "./components/NewBuyCourse.jsx";
 
 function App() {
   return (
@@ -49,14 +51,12 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/dashboard/" element={<Dashboard />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/books" element={<BooksList />} />
             <Route path="/book/:id" element={<BookDetails />} />
-            
-
-
 
             <Route
               path="/courses/:courseId/details"
@@ -72,9 +72,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            
- 
-    
 
             {/* Protected Admin Routes */}
             <Route
