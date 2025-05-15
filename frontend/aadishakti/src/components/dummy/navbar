@@ -337,14 +337,44 @@ const Navbar = () => {
               <Link to="/" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">HOME</Link>
               <Link to="/about" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">ABOUT</Link>
               
-              {/* Simple Courses Link for Mobile */}
-              <Link 
-                to="/courses" 
-                onClick={handleNavLinkClick} 
-                className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
-              >
-                COURSES
-              </Link>
+              {/* Mobile Courses Dropdown */}
+              <div>
+                <button 
+                  onClick={toggleCoursesDropdown}
+                  className="flex w-full items-center justify-between px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md"
+                >
+                  <span>COURSES</span>
+                  <ChevronDown className={`w-4 h-4 transform transition-transform ${coursesDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {coursesDropdownOpen && (
+                  <div className="ml-4 mt-1 space-y-1 border-l border-white/20 pl-4 max-h-48 overflow-y-auto">
+                    {coursesData.map((course) => (
+                      <button
+                        key={course.courseId}
+                        onClick={() => handleCourseClick(course.title)}
+                        className="block w-full text-left px-3 py-1.5 text-sm text-white/90 hover:bg-white/10 transition-colors rounded-md"
+                      >
+                        <div className="flex items-center">
+                          <img 
+                            src={course.image} 
+                            alt={course.title} 
+                            className="w-6 h-6 rounded object-cover mr-2"
+                          />
+                          <span className="truncate text-xs">{course.title}</span>
+                        </div>
+                      </button>
+                    ))}
+                    <Link 
+                      to="/courses" 
+                      onClick={handleNavLinkClick} 
+                      className="block px-3 py-1.5 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors rounded-md"
+                    >
+                      View All Courses
+                    </Link>
+                  </div>
+                )}
+              </div>
               
               <Link to="/books" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">BOOKS</Link>
               <Link to="/contact" onClick={handleNavLinkClick} className="block px-4 py-2 text-sm font-medium hover:bg-white/10 transition-colors rounded-md">CONTACT</Link>

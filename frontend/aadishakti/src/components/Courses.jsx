@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import { UserContext } from "../UserContext";
@@ -11,6 +11,7 @@ export default function Courses() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("priceLowHigh");
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -23,8 +24,27 @@ export default function Courses() {
     handleSearchAndSort();
   }, [searchTerm, sortOption, courses]);
 
+  // Update page title when component mounts
+  useEffect(() => {
+    document.title = "Courses - Aadishakti";
+    
+    // Scroll to top when navigating to this page
+    window.scrollTo(0, 0);
+    
+    return () => {
+      document.title = "Aadishakti";
+    };
+  }, [location]);
+
   const handleCourseClick = (title) => {
-    navigate(`/courses/${title}`);
+    // Find the exact course with correct casing
+    const course = coursesData.find(
+      c => c.title.toLowerCase() === title.toLowerCase()
+    );
+    
+    if (course) {
+      navigate(`/courses/${course.title}`);
+    }
   };
 
   const handleSearchAndSort = () => {
@@ -50,6 +70,10 @@ export default function Courses() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f9f3f5] to-[#ffffff] pt-[80px] sm:pt-[90px] md:pt-[100px] pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#87161a] mb-6 text-center">
+          Our Courses
+        </h1>
+        
         {/* Search & Sort Controls */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
           <div className="relative w-full md:w-1/2">
@@ -94,7 +118,7 @@ export default function Courses() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                key={course.courseId} // Changed from _id to courseId
+                key={course.courseId}
                 className="bg-white rounded-2xl overflow-hidden shadow-xl border border-[#87161a]/10 flex flex-col justify-between"
               >
                 <div className="relative">
