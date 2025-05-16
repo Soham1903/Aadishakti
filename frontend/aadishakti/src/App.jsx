@@ -29,7 +29,7 @@ import "./styles/animations.css";
 import Appointment from "./pages/Appointment.jsx";
 import BooksList from "./components/Books/BooksList";
 import BookDetails from "./components/Books/BooksDetails";
-import CheckoutPage from "./components/Checkoutpage";
+import CheckoutPage from "./components/CheckoutPage.jsx";
 import BuyBook from "./components/Books/BuyBook.jsx";
 
 function App() {
