@@ -22,7 +22,7 @@ const TransactionsDashboard = () => {
     const fetchTransactions = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/transaction/get"
+          "https://aadishakti-backend-ue51.onrender.com/api/transaction/get"
         );
         const data = await response.json();
         setTransactions(data);

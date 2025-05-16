@@ -30,6 +30,10 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  address: {
+    type: String,
+    required: false,
+  },
   originalPrice: {
     type: Number,
     required: true,

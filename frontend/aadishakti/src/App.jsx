@@ -32,6 +32,7 @@ import BookDetails from "./components/Books/BooksDetails";
 import CheckoutPage from "./components/Checkoutpage.jsx";
 import courseList from "./data/courses.json";
 import NewBuyCourse from "./components/NewBuyCourse.jsx";
+import BuyBook from "./components/Books/BuyBook.jsx";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/books" element={<BooksList />} />
+            <Route path="/buybook" element={<BuyBook />} />
             <Route path="/book/:id" element={<BookDetails />} />
 
             <Route

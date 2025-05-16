@@ -9,7 +9,7 @@ const BooksList = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Our Books</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
         {books.map((book) => (
           <div
             key={book.id}
@@ -32,9 +32,9 @@ const BooksList = () => {
                 <h3 className="text-lg font-bold text-gray-900">
                   {book.title}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">by {book.author}</p>
-                <p className="text-lg font-bold text-[#87161a] mb-4">
-                  ₹{book.price}
+                <p className="text-sm text-gray-600 mb-2">{book.author}</p>
+                <p className="text-lg font-bolder text-[#87161a] mb-4">
+                  ₹ {book.price}
                 </p>
               </div>
               <button
