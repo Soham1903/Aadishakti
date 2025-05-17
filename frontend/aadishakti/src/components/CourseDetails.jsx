@@ -117,6 +117,9 @@ export default function CourseDetails() {
                     />
                   ) : (
                     course.benefits
+                      .split("\n")
+                      .filter(Boolean)
+                      .map((point, idx) => <div key={idx}>{point.trim()}</div>)
                   )}
                 </p>
               </div>
@@ -203,11 +206,11 @@ export default function CourseDetails() {
                     <input
                       className="border rounded p-2 w-full"
                       name="price"
-                      value={course.price}
+                      value={course.finalPrice}
                       onChange={handleChange}
                     />
                   ) : (
-                    `₹${course.price}`
+                    `₹${course.finalPrice}`
                   )}
                 </div>
                 <div className="text-gray-600">One-time payment</div>

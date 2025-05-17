@@ -60,7 +60,7 @@ const Stats = () => {
 
   return (
     <section ref={ref} className="py-16 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#87161a]/5 transform -skew-y-6" />
+      {/* <div className="absolute inset-0 bg-[#87161a]/5 transform -skew-y-6" /> */}
       <div className="max-w-7xl mx-auto px-4 relative">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-700"

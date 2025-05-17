@@ -37,7 +37,7 @@ function BuyPage() {
 
       if (foundCourse) {
         setCourse(foundCourse);
-        setTotalPrice(foundCourse.price);
+        setTotalPrice(foundCourse.finalPrice);
         setDiscountedPrice(foundCourse.finalPrice || foundCourse.price);
       } else {
         setError("Course not found");
@@ -180,9 +180,9 @@ function BuyPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
+        <div className="bg-white shadow-xl rounded-2xl ">
           {/* Course Header */}
-          <div className="bg-[#87161a] text-white p-8">
+          <div className="bg-[#87161a] text-white p-8 mt-11 rounded-lg">
             <h1 className="text-3xl font-bold text-center">
               Complete Your Purchase
             </h1>

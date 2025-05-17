@@ -27,10 +27,10 @@ export default function Courses() {
   // Update page title when component mounts
   useEffect(() => {
     document.title = "Courses - Aadishakti";
-    
+
     // Scroll to top when navigating to this page
     window.scrollTo(0, 0);
-    
+
     return () => {
       document.title = "Aadishakti";
     };
@@ -39,9 +39,9 @@ export default function Courses() {
   const handleCourseClick = (title) => {
     // Find the exact course with correct casing
     const course = coursesData.find(
-      c => c.title.toLowerCase() === title.toLowerCase()
+      (c) => c.title.toLowerCase() === title.toLowerCase()
     );
-    
+
     if (course) {
       navigate(`/courses/${course.title}`);
     }
@@ -61,7 +61,7 @@ export default function Courses() {
     } else if (sortOption === "priceHighLow") {
       tempCourses.sort((a, b) => b.price - a.price);
     } else if (sortOption === "free") {
-      tempCourses = tempCourses.filter((course) => course.price === 0);
+      tempCourses = tempCourses.filter((course) => course.finalPrice === 0);
     }
 
     setFilteredCourses(tempCourses);
@@ -73,7 +73,7 @@ export default function Courses() {
         <h1 className="text-3xl md:text-4xl font-bold text-[#87161a] mb-6 text-center">
           Our Courses
         </h1>
-        
+
         {/* Search & Sort Controls */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
           <div className="relative w-full md:w-1/2">
@@ -133,8 +133,30 @@ export default function Courses() {
                     {course.title}
                   </h3>
                   <div className="text-xl font-semibold text-gray-800 mb-4">
-                    {course.price > 0 ? `₹ ${course.price}` : "Free"}
+                    {course.finalPrice === 0 ? (
+                      "Free"
+                    ) : course.originalPrice > course.finalPrice ? (
+                      <>
+                        <span className="text-gray-500 line-through mr-2">
+                          ₹ {course.originalPrice}
+                        </span>
+                        <span>₹ {course.finalPrice}</span>
+                      </>
+                    ) : (
+                      <span>₹ {course.finalPrice}</span>
+                    )}
                   </div>
+                  {course.benefits && (
+                    <p className="text-sm text-gray-600 mb-2">
+                      {course.benefits
+                        .split("•")
+                        .filter(Boolean)
+                        .slice(0, 2)
+                        .map((point, idx) => (
+                          <div key={idx}>• {point.trim()}.</div>
+                        ))}
+                    </p>
+                  )}
 
                   <div className="space-y-3 mt-auto">
                     <button

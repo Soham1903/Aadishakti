@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 function Hero() {
   return (
@@ -7,7 +7,10 @@ function Hero() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: "url('https://images.pexels.com/photos/2078126/pexels-photo-2078126.jpeg?auto=compress&cs=tinysrgb&w=1280')" }}
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/2078126/pexels-photo-2078126.jpeg?auto=compress&cs=tinysrgb&w=1280')",
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95"></div>
       </div>
@@ -29,18 +32,18 @@ function Hero() {
               आदिशक्ती गुरुकुल
             </h1>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
             <div className="w-32 h-[2px] bg-[#d4af37] mx-auto mb-10"></div>
-            
+
             <p className="text-2xl md:text-3xl font-medium mb-6 text-slate-800 drop-shadow-sm">
               ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
             </p>
-            
+
             <p className="text-xl md:text-2xl font-light text-slate-700 drop-shadow-sm">
               आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे
             </p>
