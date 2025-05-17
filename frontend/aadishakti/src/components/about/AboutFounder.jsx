@@ -30,23 +30,26 @@ const AboutFounder = () => {
           {/* Left Profile Image */}
           <motion.div
             variants={fadeIn}
-            className="lg:col-span-1 flex justify-center"
+            className="lg:col-span-1 flex justify-center items-stretch"
           >
-            <div className="relative top-6">
+            <div className="relative">
               {/* Gradient background */}
-              <div className="w-64 h-80 bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute top-0 left-0"></div>
-              {/* Image with adjusted margin-top */}
+              <div className="w-64 h-full bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute top-0 left-0"></div>
+              {/* Image */}
               <img
                 src="/assets/charushila1.png"
                 alt="सौ. चारुशीला कांबळे"
-                className="w-64 h-80 object-cover rounded-2xl relative z-10 mt-4"
+                className="w-64 h-full object-cover rounded-2xl relative z-10"
               />
             </div>
           </motion.div>
 
           {/* Right Content */}
-          <motion.div variants={fadeIn} className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-xl p-8 h-full">
+          <motion.div
+            variants={fadeIn}
+            className="lg:col-span-2 flex items-stretch"
+          >
+            <div className="bg-white rounded-2xl shadow-xl p-8 w-full">
               <h3 className="text-2xl font-bold text-[#87161a] mb-2">
                 ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
               </h3>
@@ -125,9 +128,9 @@ const AboutFounder = () => {
                         <span className="font-semibold block mt-1 text-[#87161a]">
                           {title.title}
                         </span>
-                        <span className="text-slate-600 text-sm">
+                        {/* <span className="text-slate-600 text-sm">
                           {title.description}
-                        </span>
+                        </span> */}
                       </p>
                     </div>
                   </div>
@@ -148,10 +151,10 @@ const AboutFounder = () => {
                 {speakerRecognitions.map((recognition, index) => (
                   <div
                     key={index}
-                    className="bg-gradient-to-r from-[#87161a]/5 to-transparent p-4 rounded-lg border-l-2 border-[#87161a] hover:from-[#87161a]/10 transition-colors"
+                    className="bg-white p-4 rounded-lg border-l-2 border-[#87161a] hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center">
-                      <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3 flex-shrink-0"></span>
+                      {/* <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3 flex-shrink-0"></span> */}
                       <span className="text-slate-700">{recognition}</span>
                     </div>
                   </div>
@@ -228,11 +231,11 @@ const AboutFounder = () => {
                       <book.icon className="h-5 w-5 text-[#87161a]" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-slate-700">
+                      <h4 className="font-medium text-slate-700 text-xl">
                         {book.title}
                       </h4>
                       {book.publisher && (
-                        <p className="text-xs text-slate-500 mt-1">
+                        <p className="text-s text-slate-500 mt-1">
                           {book.publisher}
                         </p>
                       )}
@@ -264,7 +267,7 @@ const AboutFounder = () => {
                     key={index}
                     className="flex items-center p-3 border border-gray-200 rounded-lg"
                   >
-                    <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3"></span>
+                    {/* <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3"></span> */}
                     <span className="text-slate-700">{title}</span>
                   </div>
                 ))}
@@ -281,6 +284,7 @@ const AboutFounder = () => {
 const books = [
   {
     title: "काव्यसंग्रह चारू मनीष",
+    publisher: "चंद्रवल्लभ प्रकाशन, पुणे",
     icon: (props) => (
       <svg
         {...props}
@@ -318,7 +322,7 @@ const books = [
   },
   {
     title: "अशक्य ते शक्य करतील स्वामी",
-    publisher: "चद्रवल्लभ प्रकाशन, पुणे",
+    publisher: "चंद्रवल्लभ प्रकाशन, पुणे",
     icon: (props) => (
       <svg
         {...props}
