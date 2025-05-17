@@ -10,6 +10,7 @@ import {
   Award,
   Star,
   Gem,
+  User,
 } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
@@ -175,7 +176,7 @@ const EventsInitiatives = () => {
                     {teamMembers.map((member, index) => (
                       <li key={index} className="flex items-start">
                         <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-4">
-                          {member.name.charAt(0)}
+                          <User className="w-5 h-5" />
                         </div>
                         <div>
                           <h4 className="font-medium text-gray-800">
@@ -260,7 +261,7 @@ const EventsInitiatives = () => {
           subtitle="आदिशक्ती गुरुकुलचे प्रतिष्ठित पुरस्कार"
         />
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Award Card 1 */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
             <div className="bg-[#87161a] p-4 flex justify-center">
@@ -273,7 +274,7 @@ const EventsInitiatives = () => {
               <p className="text-gray-600 mb-4">अष्टक वर्ग महागुरु</p>
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <span className="font-medium">प्</span>
+                  <User className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-800">
@@ -296,7 +297,7 @@ const EventsInitiatives = () => {
               <p className="text-gray-600 mb-4">ज्योतिषाचार्य</p>
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <span className="font-medium">दी</span>
+                  <User className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-800">
@@ -319,7 +320,7 @@ const EventsInitiatives = () => {
               <p className="text-gray-600 mb-4">सक्रिय सहभाग</p>
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <span className="font-medium">वी</span>
+                  <User className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-800">सौ. वीणा जोशी</h4>
@@ -341,7 +342,7 @@ const EventsInitiatives = () => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
-                    <span className="font-medium text-sm">व</span>
+                    <User className="w-4 h-4" />
                   </div>
                   <h4 className="font-medium text-gray-800 text-sm">
                     सौ. वर्षा सिध्दे
@@ -349,7 +350,7 @@ const EventsInitiatives = () => {
                 </div>
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
-                    <span className="font-medium text-sm">न</span>
+                    <User className="w-4 h-4" />
                   </div>
                   <h4 className="font-medium text-gray-800 text-sm">
                     सौ. नयना बेलवलकर
@@ -358,29 +359,24 @@ const EventsInitiatives = () => {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Special Recognition Card */}
-        <div className="mt-8 bg-gradient-to-r from-[#87161a]/5 to-[#87161a]/10 rounded-xl p-6 md:p-8 border border-[#87161a]/20">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/4 flex justify-center mb-4 md:mb-0">
-              <div className="w-20 h-20 rounded-full bg-[#87161a] flex items-center justify-center text-white">
-                <Trophy className="w-10 h-10" />
-              </div>
+          {/* Award Card 5 (जीवनगौरव पुरस्कार) */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
+            <div className="bg-[#87161a] p-4 flex justify-center">
+              <Trophy className="w-10 h-10 text-white" />
             </div>
-            <div className="md:w-3/4 md:pl-8 text-center md:text-left">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
+            <div className="p-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-2">
                 जीवनगौरव पुरस्कार
               </h3>
-              <p className="text-gray-700 mb-4">
-                सामाजिक कार्यकर्त्या आणि आदिशक्ती गुरुकुलच्या सल्लागार
-              </p>
-              <div className="flex justify-center md:justify-start">
-                <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
-                  <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
-                    <span className="font-medium">सु</span>
-                  </div>
+              <p className="text-gray-600 mb-4">सामाजिक कार्यकर्त्या</p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
+                  <User className="w-5 h-5" />
+                </div>
+                <div>
                   <h4 className="font-medium text-gray-800">सौ. सुधा सुळे</h4>
+                  <p className="text-sm text-gray-600">आदिशक्ती गुरुकुलच्या सल्लागार</p>
                 </div>
               </div>
             </div>

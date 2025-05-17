@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const BuyBook = () => {
   const location = useLocation();
@@ -19,12 +20,12 @@ const BuyBook = () => {
 
   if (!book) {
     return (
-      <div className="p-10 text-center">
+      <div className="container mx-auto px-4 py-16 text-center">
         <h2 className="text-2xl font-bold text-red-600 mb-4">
           No book data found!
         </h2>
         <button
-          className="px-6 py-2 bg-[#87161a] text-white rounded-md hover:bg-[#7a1634]"
+          className="px-6 py-3 bg-[#87161a] text-white rounded-xl hover:bg-[#7a1634] transition-colors duration-300"
           onClick={() => navigate("/")}
         >
           Back to Books
@@ -56,13 +57,12 @@ const BuyBook = () => {
     formDataToSend.append("customerName", formData.customerName);
     formDataToSend.append("phoneNumber", formData.phoneNumber);
     formDataToSend.append("address", formData.address);
-    formDataToSend.append("courseTitle", book.title); // sending book title as course
+    formDataToSend.append("courseTitle", book.title);
     formDataToSend.append("finalPrice", book.price);
 
     if (screenshot) {
       formDataToSend.append("screenshot", screenshot);
     } else {
-      console.error("No screenshot selected!");
       setError("Please upload a payment screenshot.");
       setIsSubmitting(false);
       return;
@@ -98,90 +98,113 @@ const BuyBook = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6 text-[#87161a]">Buy Book</h1>
-      <div className="flex flex-col md:flex-row gap-8">
-        <img
-          src={book.coverImage}
-          alt={book.title}
-          className="w-64 rounded-lg shadow-lg"
-        />
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold">{book.title}</h2>
-          <p className="text-lg text-gray-700 mb-2">{book.author}</p>
-          <p className="text-xl text-[#87161a] mb-4">₹ {book.price}</p>
+    <div className="container mx-auto px-4 py-12">
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center text-[#87161a] mb-8 hover:underline font-medium"
+      >
+        <ArrowLeft className="mr-2 h-5 w-5" />
+        Back to Book Details
+      </button>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block font-semibold">Full Name</label>
-              <input
-                type="text"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 p-2 rounded-md"
+      <div className="bg-white rounded-2xl shadow-lg p-8">
+        <h1 className="text-3xl font-bold mb-8 text-[#87161a]">Complete Your Purchase</h1>
+        
+        <div className="flex flex-col lg:flex-row gap-12">
+          <div className="lg:w-1/3">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <img
+                src={book.coverImage}
+                alt={book.title}
+                className="w-full rounded-lg shadow-md mb-6"
               />
+              <h2 className="text-xl font-bold text-gray-900 mb-2">{book.title}</h2>
+              <p className="text-gray-600 mb-2 italic">{book.author}</p>
+              <p className="text-2xl font-bold text-[#87161a]">₹ {book.price}</p>
             </div>
+          </div>
 
-            <div>
-              <label className="block font-semibold">Phone Number</label>
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 p-2 rounded-md"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold">Address</label>
-              <textarea
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 p-2 rounded-md"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold">
-                Upload Payment Screenshot
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleScreenshotChange}
-                required
-                className="w-full"
-              />
-              {screenshotPreview && (
-                <img
-                  src={screenshotPreview}
-                  alt="Screenshot Preview"
-                  className="mt-2 w-48 rounded shadow"
+          <div className="lg:w-2/3">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
+                <input
+                  type="text"
+                  name="customerName"
+                  value={formData.customerName}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
+                  placeholder="Enter your full name"
                 />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">Delivery Address</label>
+                <textarea
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent h-32"
+                  placeholder="Enter your complete delivery address"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">
+                  Upload Payment Screenshot
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleScreenshotChange}
+                  required
+                  className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
+                />
+                {screenshotPreview && (
+                  <img
+                    src={screenshotPreview}
+                    alt="Screenshot Preview"
+                    className="mt-4 max-w-xs rounded-lg shadow"
+                  />
+                )}
+              </div>
+
+              {error && (
+                <div className="bg-red-50 text-red-600 p-4 rounded-xl font-medium">
+                  {error}
+                </div>
               )}
-            </div>
+              
+              {submitSuccess && (
+                <div className="bg-green-50 text-green-600 p-4 rounded-xl font-medium">
+                  Purchase submitted successfully!
+                </div>
+              )}
 
-            {error && <p className="text-red-600 font-medium">{error}</p>}
-            {submitSuccess && (
-              <p className="text-green-600 font-semibold">
-                Purchase submitted successfully!
-              </p>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-6 py-2 bg-[#87161a] text-white rounded-md hover:bg-[#7a1634] disabled:opacity-50"
-            >
-              {isSubmitting ? "Submitting..." : "Submit Order"}
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-[#87161a] text-white rounded-xl hover:bg-[#7a1634] transition-colors duration-300 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Processing..." : "Complete Purchase"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

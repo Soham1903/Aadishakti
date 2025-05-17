@@ -13,24 +13,24 @@ const VastuSpecial = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <img
-                    src="https://images.pexels.com/photos/7214326/pexels-photo-7214326.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    src="assets/vastu/directiona.png"
                     alt="Vastu design"
                     className="rounded-lg shadow-lg mb-4 h-48 w-full object-cover"
                   />
                   <img
-                    src="https://images.pexels.com/photos/8134828/pexels-photo-8134828.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    src="assets/vastu/home.jpg"
                     alt="Home interior"
                     className="rounded-lg shadow-lg h-64 w-full object-cover"
                   />
                 </div>
                 <div className="mt-8">
                   <img
-                    src="https://images.pexels.com/photos/4450337/pexels-photo-4450337.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    src="assets/vastu/home2.jpg"
                     alt="Vastu elements"
                     className="rounded-lg shadow-lg mb-4 h-64 w-full object-cover"
                   />
                   <img
-                    src="https://images.pexels.com/photos/3760529/pexels-photo-3760529.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    src="assets/vastu/home3.jpg"
                     alt="Interior design"
                     className="rounded-lg shadow-lg h-48 w-full object-cover"
                   />

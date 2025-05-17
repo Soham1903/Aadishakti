@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Lock, Phone, Star, ArrowRight } from 'lucide-react';
+import { Search, Lock, Phone, Star } from 'lucide-react';
 
 const MobileNumerology = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -86,26 +86,15 @@ const MobileNumerology = () => {
           </div>
         </div>
 
-        {/* Floating Numbers */}
-        <div className="mt-16 relative overflow-hidden py-4">
-          <div className="absolute inset-0 flex justify-around opacity-10 pointer-events-none">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <div
-                key={i}
-                className="text-6xl font-bold animate-float"
-                style={{
-                  animationDelay: `${i * 0.3}s`,
-                  transform: `translateY(${Math.sin(i) * 20}px)`,
-                  color: '#921a40'
-                }}
-              >
-                {(i % 9) + 1}
-              </div>
-            ))}
-          </div>
+        {/* Updated Ending Section Without Floating Numbers */}
+        <div className="mt-16 relative py-4">
           <div className="text-center relative z-10">
-            <p className="text-xl text-slate-700">तुमचे भाग्य तुमच्या अंकांमध्ये दडलेले आहे</p>
-            <p className="text-sm mt-2 opacity-75 text-slate-700">आज नंबर शोधून तुमच्या जीवनात सकारात्मक बदल घडवून आणा</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-[#921a40]">
+              तुमचे भाग्य तुमच्या अंकांमध्ये दडलेले आहे
+            </p>
+            <p className="text-lg md:text-xl font-bold mt-2 text-slate-700">
+              आज नंबर शोधून तुमच्या जीवनात सकारात्मक बदल घडवून आणा
+            </p>
           </div>
         </div>
       </div>
@@ -134,7 +123,9 @@ const PatternExample = ({ pattern }) => {
           <div
             key={num}
             className={`rounded-full aspect-square flex items-center justify-center text-xs ${
-              pattern.includes(num) ? 'bg-[#87161A] text-white font-bold' : 'bg-[#921a40]/10 text-[#87161A]'
+              pattern.includes(num)
+                ? 'bg-[#87161A] text-white font-bold'
+                : 'bg-[#921a40]/10 text-[#87161A]'
             }`}
           >
             {num}

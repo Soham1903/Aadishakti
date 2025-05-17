@@ -7,7 +7,6 @@ const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const book = books.find((b) => b.id === Number(id));
-  console.log(book.coverImage);
 
   const handleBuy = () => {
     navigate("/buybook", { state: { book } });
@@ -21,7 +20,7 @@ const BookDetails = () => {
         </h2>
         <button
           onClick={() => navigate("/")}
-          className="px-6 py-3 bg-[#87161a] text-white rounded-md hover:bg-[#7a1634]"
+          className="px-6 py-3 bg-[#87161a] text-white rounded-xl hover:bg-[#7a1634] transition-colors duration-300"
         >
           Back to Books
         </button>
@@ -30,58 +29,73 @@ const BookDetails = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-12">
       <button
         onClick={() => navigate("/")}
-        className="flex items-center text-[#87161a] mb-6 hover:underline"
+        className="flex items-center text-[#87161a] mb-8 hover:underline font-medium"
       >
-        <ArrowLeft className="mr-2" />
+        <ArrowLeft className="mr-2 h-5 w-5" />
         Back to Books
       </button>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="md:flex gap-8">
-          <div className="md:w-1/3 mb-6 md:mb-0">
-            <img
-              src={book.coverImage}
-              alt={book.title}
-              className="w-full rounded-lg shadow-md"
-            />
+      <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="md:flex gap-12">
+          <div className="md:w-1/3 mb-8 md:mb-0">
+            <div className="sticky top-8">
+              <img
+                src={book.coverImage}
+                alt={book.title}
+                className="w-full rounded-xl shadow-md"
+              />
+            </div>
           </div>
 
           <div className="md:w-2/3">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">
               {book.title}
             </h1>
-            <p className="text-xl text-gray-600 mb-4">{book.author}</p>
-            <p className="text-3xl font-bolder text-[#87161a] mb-6">
+            <p className="text-2xl text-gray-600 mb-4 italic">{book.author}</p>
+            <p className="text-3xl font-bold text-[#87161a] mb-8">
               ₹ {book.price}
             </p>
 
-            <div className="flex gap-4 mb-8">
-              <button
-                className="px-6 py-2 bg-[#87161a] text-white rounded-md hover:bg-[#7a1634]"
-                onClick={handleBuy}
-              >
-                Buy Now
-              </button>
-            </div>
+            <button
+              className="px-8 py-4 bg-[#87161a] text-white rounded-xl hover:bg-[#7a1634] transition-colors duration-300 font-semibold text-lg mb-12 w-full md:w-auto"
+              onClick={handleBuy}
+            >
+              Buy Now
+            </button>
 
-            <div className="mb-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-2">
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 Description
               </h2>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed text-lg">
                 {book.description}
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 text-gray-700">
-              <p>Pages: {book.pages}</p>
-              <p>Language: {book.language}</p>
-              <p>Publisher: {book.publisher}</p>
-              <p>Format: {book.format}</p>
-              <p>ISBN: {book.isbn}</p>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
+                Book Details
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+                <div className="flex items-center">
+                  <span className="font-medium mr-2">Pages:</span> {book.pages}
+                </div>
+                <div className="flex items-center">
+                  <span className="font-medium mr-2">Language:</span> {book.language}
+                </div>
+                <div className="flex items-center">
+                  <span className="font-medium mr-2">Publisher:</span> {book.publisher}
+                </div>
+                <div className="flex items-center">
+                  <span className="font-medium mr-2">Format:</span> {book.format}
+                </div>
+                <div className="flex items-center col-span-2">
+                  <span className="font-medium mr-2">ISBN:</span> {book.isbn}
+                </div>
+              </div>
             </div>
           </div>
         </div>

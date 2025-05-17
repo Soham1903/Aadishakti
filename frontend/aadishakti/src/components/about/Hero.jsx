@@ -9,10 +9,10 @@ function Hero() {
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage:
-            "url('https://images.pexels.com/photos/2078126/pexels-photo-2078126.jpeg?auto=compress&cs=tinysrgb&w=1280')",
+            "url('https://vedicfeed.com/wp-content/uploads/2018/12/Jyotish-Shastra-Facts.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/60 to-black/70"></div>
       </div>
 
       {/* Content */}
@@ -28,7 +28,7 @@ function Hero() {
             animate={{ scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight font-serif text-[#87161a] drop-shadow-sm">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight font-serif text-white drop-shadow-lg">
               आदिशक्ती गुरुकुल
             </h1>
           </motion.div>
@@ -40,11 +40,11 @@ function Hero() {
           >
             <div className="w-32 h-[2px] bg-[#d4af37] mx-auto mb-10"></div>
 
-            <p className="text-2xl md:text-3xl font-medium mb-6 text-slate-800 drop-shadow-sm">
+            <p className="text-2xl md:text-3xl font-semibold mb-6 text-white drop-shadow-md">
               ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
             </p>
 
-            <p className="text-xl md:text-2xl font-light text-slate-700 drop-shadow-sm">
+            <p className="text-xl md:text-2xl font-light text-white drop-shadow-md">
               आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे
             </p>
           </motion.div>
