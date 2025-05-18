@@ -25,7 +25,7 @@ const VastuSpecial = () => {
                 </div>
                 <div className="mt-8">
                   <img
-                    src="assets/vastu/home2.jpg"
+                    src="assets/vastuimg.jpg"
                     alt="Vastu elements"
                     className="rounded-lg shadow-lg mb-4 h-64 w-full object-cover"
                   />
