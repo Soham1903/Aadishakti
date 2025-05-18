@@ -36,13 +36,16 @@ const ResetPassword = () => {
   };
 
   if (isPasswordReset) {
-    return <Navigate to="/login" />; // Redirect to the login page
+    return <Navigate to="/login" />;
   }
 
   return (
-    <section className="flex justify-center items-center min-h-screen bg-gray-100">
+    <section className="flex justify-center items-center min-h-screen bg-white">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
-        <h3 className="text-2xl font-bold mb-6 text-center">Reset Password</h3>
+        <div className="text-center mb-2">
+          <span className="text-red-800 text-2xl">✦</span>
+        </div>
+        <h3 className="text-2xl font-bold mb-4 text-center text-red-800">Reset Password</h3>
         <form onSubmit={handleResetPassword}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -72,11 +75,14 @@ const ResetPassword = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-3 bg-red-800 text-white font-semibold rounded-lg hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800"
           >
-            Reset Password
+            Send Reset Link
           </button>
         </form>
+        <div className="text-center mt-4">
+          <a href="/login" className="text-gray-600 hover:text-red-800">Return to Login</a>
+        </div>
       </div>
     </section>
   );

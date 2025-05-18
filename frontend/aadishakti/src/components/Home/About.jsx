@@ -42,7 +42,7 @@ const About = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-700 mb-4">
             आमच्या सशुल्क सेवा
           </h2>
-          <div className="w-24 h-1 bg-[#d4af37] mx-auto"></div>
+          <div className="w-24 h-1 bg-[#87161A] mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">

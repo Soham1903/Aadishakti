@@ -91,7 +91,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-[#f9f3f5] flex items-center justify-center  px-4">
+    <div className="min-h-screen relative overflow-hidden bg-white flex items-center justify-center px-4 py-20">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-10 right-10 text-yellow-500 opacity-30">
