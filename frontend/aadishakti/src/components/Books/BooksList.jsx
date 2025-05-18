@@ -6,20 +6,21 @@ const BooksList = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Our Books</h1>
+    <div className="container mx-auto px-4 py-8 pt-32">
+      <h1 className="text-3xl font-bold text-[#87161a] mb-2 text-center">आमची पुस्तके विक्रीसाठी उपलब्ध</h1>
+      <div className="w-24 h-1 bg-[#87161a] mx-auto mb-8"></div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+      <div className="flex flex-wrap justify-center gap-8">
         {books.map((book) => (
           <div
             key={book.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
+            className="bg-white rounded-xl shadow-md overflow-hidden w-72 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-lg"
           >
-            <div className="relative pt-[120%]">
+            <div className="h-64 p-4 flex items-center justify-center bg-gray-50">
               <img
                 src={book.coverImage}
                 alt={book.title}
-                className="absolute top-0 left-0 w-full h-full object-contain"
+                className="h-full object-contain"
                 onError={(e) => {
                   const target = e.target;
                   target.src =
@@ -27,19 +28,19 @@ const BooksList = () => {
                 }}
               />
             </div>
-            <div className="p-4 flex-grow flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-bold text-gray-900">
-                  {book.title}
-                </h3>
-                <p className="text-sm text-gray-600 mb-2">{book.author}</p>
-                <p className="text-lg font-bolder text-[#87161a] mb-4">
-                  ₹ {book.price}
-                </p>
-              </div>
+            <div className="p-4 flex-grow flex flex-col">
+              <h3 className="text-lg font-bold text-slate-700 line-clamp-2 mb-1 h-14">
+                {book.title}
+              </h3>
+              <p className="text-sm text-slate-600 mb-2 italic line-clamp-1">
+                {book.author}
+              </p>
+              <p className="text-lg font-bold text-[#87161a] mb-4">
+                ₹ {book.price}
+              </p>
               <button
                 onClick={() => navigate(`/book/${book.id}`)}
-                className="w-full py-2 px-4 bg-[#87161a] text-white font-semibold rounded-md hover:bg-[#7a1634] transition-colors duration-300"
+                className="mt-auto w-full py-2 px-4 bg-[#87161a] text-white font-semibold rounded-md hover:bg-[#7a1634] transition-colors duration-300"
               >
                 View Details
               </button>

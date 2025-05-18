@@ -14,8 +14,8 @@ const BookDetails = () => {
 
   if (!book) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="container mx-auto px-4 py-16 pt-24 text-center">
+        <h2 className="text-2xl font-bold text-slate-700 mb-4">
           Book not found
         </h2>
         <button
@@ -29,7 +29,7 @@ const BookDetails = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 pt-24">
       <button
         onClick={() => navigate("/")}
         className="flex items-center text-[#87161a] mb-8 hover:underline font-medium"
@@ -51,10 +51,10 @@ const BookDetails = () => {
           </div>
 
           <div className="md:w-2/3">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">
+            <h1 className="text-4xl font-bold text-[#87161a] mb-3">
               {book.title}
             </h1>
-            <p className="text-2xl text-gray-600 mb-4 italic">{book.author}</p>
+            <p className="text-2xl text-slate-600 mb-4 italic">{book.author}</p>
             <p className="text-3xl font-bold text-[#87161a] mb-8">
               ₹ {book.price}
             </p>
@@ -67,19 +67,19 @@ const BookDetails = () => {
             </button>
 
             <div className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-[#87161a] mb-4">
                 Description
               </h2>
-              <p className="text-gray-700 leading-relaxed text-lg">
+              <p className="text-slate-700 leading-relaxed text-lg">
                 {book.description}
               </p>
             </div>
 
             <div className="bg-gray-50 rounded-xl p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold text-[#87161a] mb-4">
                 Book Details
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-700">
                 <div className="flex items-center">
                   <span className="font-medium mr-2">Pages:</span> {book.pages}
                 </div>

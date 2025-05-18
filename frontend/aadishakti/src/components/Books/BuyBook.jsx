@@ -20,8 +20,8 @@ const BuyBook = () => {
 
   if (!book) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold text-red-600 mb-4">
+      <div className="container mx-auto px-4 py-16 pt-24 text-center">
+        <h2 className="text-2xl font-bold text-slate-700 mb-4">
           No book data found!
         </h2>
         <button
@@ -98,7 +98,7 @@ const BuyBook = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 pt-24">
       <button
         onClick={() => navigate(-1)}
         className="flex items-center text-[#87161a] mb-8 hover:underline font-medium"
@@ -118,8 +118,8 @@ const BuyBook = () => {
                 alt={book.title}
                 className="w-full rounded-lg shadow-md mb-6"
               />
-              <h2 className="text-xl font-bold text-gray-900 mb-2">{book.title}</h2>
-              <p className="text-gray-600 mb-2 italic">{book.author}</p>
+              <h2 className="text-xl font-bold text-[#87161a] mb-2">{book.title}</h2>
+              <p className="text-slate-600 mb-2 italic">{book.author}</p>
               <p className="text-2xl font-bold text-[#87161a]">₹ {book.price}</p>
             </div>
           </div>
@@ -127,7 +127,7 @@ const BuyBook = () => {
           <div className="lg:w-2/3">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
+                <label className="block text-slate-700 font-semibold mb-2">Full Name</label>
                 <input
                   type="text"
                   name="customerName"
@@ -140,7 +140,7 @@ const BuyBook = () => {
               </div>
 
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                <label className="block text-slate-700 font-semibold mb-2">Phone Number</label>
                 <input
                   type="tel"
                   name="phoneNumber"
@@ -153,7 +153,7 @@ const BuyBook = () => {
               </div>
 
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">Delivery Address</label>
+                <label className="block text-slate-700 font-semibold mb-2">Delivery Address</label>
                 <textarea
                   name="address"
                   value={formData.address}
@@ -165,7 +165,7 @@ const BuyBook = () => {
               </div>
 
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">
+                <label className="block text-slate-700 font-semibold mb-2">
                   Upload Payment Screenshot
                 </label>
                 <input
