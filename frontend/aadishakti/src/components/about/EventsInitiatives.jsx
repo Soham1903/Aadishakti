@@ -165,7 +165,7 @@ const EventsInitiatives = () => {
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="p-6 border-b border-gray-100">
                 <h3 className="text-xl font-bold text-[#87161a] flex items-center">
-                  <Users className="w-5 h-5 text-[#d4af37] mr-2" />
+                  <Users className="w-5 h-5 text-[#87161a] mr-2" />
                   आध्यात्मिक उपक्रम समिती
                 </h3>
               </div>

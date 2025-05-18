@@ -108,9 +108,9 @@ const AboutFounder = () => {
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Honorary Titles - Left column */}
           <motion.div variants={fadeIn}>
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37] h-full">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a] h-full">
               <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-                <Award className="h-5 w-5 text-[#d4af37] mr-2" />
+                <Award className="h-5 w-5 text-[#87161a] mr-2" />
                 मानद पदव्या
               </h3>
 
@@ -141,9 +141,9 @@ const AboutFounder = () => {
 
           {/* Speaker Recognition - Right column */}
           <motion.div variants={fadeIn}>
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37] h-full">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a] h-full">
               <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-                <Award className="h-5 w-5 text-[#d4af37] mr-2" />
+                <Award className="h-5 w-5 text-[#87161a] mr-2" />
                 वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार
               </h3>
 
@@ -154,7 +154,7 @@ const AboutFounder = () => {
                     className="bg-white p-4 rounded-lg border-l-2 border-[#87161a] hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center">
-                      {/* <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3 flex-shrink-0"></span> */}
+                      {/* <span className="w-2 h-2 bg-[#87161a] rounded-full mr-3 flex-shrink-0"></span> */}
                       <span className="text-slate-700">{recognition}</span>
                     </div>
                   </div>
@@ -165,9 +165,9 @@ const AboutFounder = () => {
 
           {/* Awards - Full Width Section */}
           <motion.div variants={fadeIn} className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#d4af37]">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a]">
               <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-                <Award className="h-5 w-5 text-[#d4af37] mr-2" />
+                <Award className="h-5 w-5 text-[#87161a] mr-2" />
                 प्रमुख पुरस्कार
               </h3>
 
@@ -178,7 +178,7 @@ const AboutFounder = () => {
                     className="relative overflow-hidden bg-white border border-gray-100 rounded-xl shadow-sm group hover:shadow-md transition-shadow"
                   >
                     {/* Gold accent corner */}
-                    {/* <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#d4af37] rotate-12 transform"></div> */}
+                    {/* <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#87161a] rotate-12 transform"></div> */}
 
                     <div className="p-5">
                       <h4 className="font-medium text-[#87161a] mb-2 text-lg">
@@ -217,7 +217,7 @@ const AboutFounder = () => {
             {/* Published Books - Compact Cards */}
             <div className="mb-8">
               <h3 className="text-xl font-bold text-[#87161a] mb-4 flex items-center">
-                <BookOpen className="h-5 w-5 text-[#d4af37] mr-2" />
+                <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
                 प्रकाशित पुस्तके
               </h3>
 
@@ -253,7 +253,7 @@ const AboutFounder = () => {
             {/* Upcoming Publications - Side by Side */}
             <div>
               <h3 className="text-xl font-bold text-[#87161a] mb-3 flex items-center">
-                <BookOpen className="h-5 w-5 text-[#d4af37] mr-2" />
+                <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
                 आगामी प्रकाशने
               </h3>
 
@@ -267,7 +267,7 @@ const AboutFounder = () => {
                     key={index}
                     className="flex items-center p-3 border border-gray-200 rounded-lg"
                   >
-                    {/* <span className="w-2 h-2 bg-[#d4af37] rounded-full mr-3"></span> */}
+                    {/* <span className="w-2 h-2 bg-[#87161a] rounded-full mr-3"></span> */}
                     <span className="text-slate-700">{title}</span>
                   </div>
                 ))}
