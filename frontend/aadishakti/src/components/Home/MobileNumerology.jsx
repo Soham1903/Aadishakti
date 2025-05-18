@@ -17,7 +17,8 @@ const MobileNumerology = () => {
           <div className="md:w-1/2 space-y-6">
             <div className="flex items-center gap-2">
               <Phone className="h-7 w-7 text-[#87161A]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-700">मोबाईल नंबर न्यूमरोलॉजी</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-700">मोबाईल नंबर न्यूमरॉलॉजी
+</h2>
             </div>
 
             <div className="space-y-4 text-lg">
