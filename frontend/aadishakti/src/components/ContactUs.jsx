@@ -140,7 +140,7 @@ export default function ContactPage() {
                   <Facebook className="text-blue-600 w-6 h-6" />
                 </a>
                 <a
-                  href="https://www.youtube.com"
+                  href="https://www.youtube.com/@aadishaktigurukul8441"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-all duration-300"
