@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Search, Lock, Phone, Star } from 'lucide-react';
+import React, { useState } from "react";
+import { Search, Lock, Phone, Star } from "lucide-react";
 
 const MobileNumerology = () => {
-  const [mobileNumber, setMobileNumber] = useState('');
+  const [mobileNumber, setMobileNumber] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,25 +17,28 @@ const MobileNumerology = () => {
           <div className="md:w-1/2 space-y-6">
             <div className="flex items-center gap-2">
               <Phone className="h-7 w-7 text-[#87161A]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-700">मोबाईल नंबर न्यूमरॉलॉजी
-</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-700">
+                मोबाईल नंबर न्यूमरॉलॉजी
+              </h2>
             </div>
 
             <div className="space-y-4 text-lg">
               {[
                 "जाणून घ्या तुमचा मोबाईल नंबर काय सांगतो?",
                 "तुमच्या मोबाईल नंबर मुळे तुमच्या जीवनात काय घडत आहे!",
-                "आणि मिळवा भाग्यकारक पॅटर्न लॉक पासवर्ड! भाग्यकारक पासवर्ड मुळे तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होते असा अनुभव आहे."
+                "आणि मिळवा भाग्यकारक पॅटर्न लॉक पासवर्ड! भाग्यकारक पासवर्ड मुळे तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होते असा अनुभव आहे.",
               ].map((text, idx) => (
                 <p key={idx} className="flex items-start gap-2 text-slate-700">
                   <Star className="h-5 w-5 text-[#87161A] mt-1 flex-shrink-0" />
                   <span>{text}</span>
                 </p>
               ))}
-              <p className="text-[#921a40] font-semibold mt-4">अपॉइन्टमेंट आवश्यक</p>
+              <p className="text-[#921a40] font-semibold mt-4">
+                अपॉइन्टमेंट आवश्यक
+              </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6">
+            {/* <form onSubmit={handleSubmit} className="mt-6">
               <div className="bg-gray-100 p-1 rounded-lg flex items-center shadow-inner">
                 <input
                   type="text"
@@ -53,7 +56,16 @@ const MobileNumerology = () => {
                   <Search className="h-5 w-5" />
                 </button>
               </div>
-            </form>
+            </form> */}
+
+            <a
+              href="https://wa.me/919130755631?text=Hi%20I%20would%20like%20to%20book%20an%20appointment!"
+              target="_blank"
+            >
+              <button className="mt-8 px-8 py-3 bg-[#791317] text-white rounded-lg hover:bg-[#87161A] transition-colors">
+                अपॉइन्टमेंट बुक करा
+              </button>
+            </a>
           </div>
 
           {/* Right Content */}
@@ -68,7 +80,9 @@ const MobileNumerology = () => {
               <div className="p-6 space-y-6 relative z-10">
                 <div className="flex items-center gap-2">
                   <Lock className="h-6 w-6 text-[#87161A]" />
-                  <h3 className="text-2xl font-bold text-slate-700">भाग्यकारक पॅटर्न</h3>
+                  <h3 className="text-2xl font-bold text-slate-700">
+                    भाग्यकारक पॅटर्न
+                  </h3>
                 </div>
 
                 <div className="grid grid-cols-3 gap-6">
@@ -79,7 +93,8 @@ const MobileNumerology = () => {
 
                 <div className="bg-white p-4 rounded-lg border border-[#921a40]/20">
                   <p className="text-center text-slate-700">
-                    तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व, करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.
+                    तुमच्या मोबाईल नंबर मधील अंकांच्या आधारे तुमचे व्यक्तिमत्व,
+                    करिअर आणि आरोग्य याबद्दल महत्वपूर्ण माहिती मिळू शकते.
                   </p>
                 </div>
               </div>
@@ -114,7 +129,7 @@ const PatternExample = ({ pattern }) => {
     6: { x: 2, y: 1 },
     7: { x: 0, y: 2 },
     8: { x: 1, y: 2 },
-    9: { x: 2, y: 2 }
+    9: { x: 2, y: 2 },
   };
 
   return (
@@ -125,8 +140,8 @@ const PatternExample = ({ pattern }) => {
             key={num}
             className={`rounded-full aspect-square flex items-center justify-center text-xs ${
               pattern.includes(num)
-                ? 'bg-[#87161A] text-white font-bold'
-                : 'bg-[#921a40]/10 text-[#87161A]'
+                ? "bg-[#87161A] text-white font-bold"
+                : "bg-[#921a40]/10 text-[#87161A]"
             }`}
           >
             {num}
@@ -135,7 +150,10 @@ const PatternExample = ({ pattern }) => {
       </div>
 
       {/* Connecting Lines */}
-      <svg className="w-full h-full absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+      <svg
+        className="w-full h-full absolute inset-0 pointer-events-none"
+        style={{ zIndex: 1 }}
+      >
         {pattern.map((num, i) => {
           if (i === pattern.length - 1) return null;
           const start = positions[num];
@@ -143,10 +161,10 @@ const PatternExample = ({ pattern }) => {
           return (
             <line
               key={i}
-              x1={(start.x * 33.33) + 16.67}
-              y1={(start.y * 33.33) + 16.67}
-              x2={(end.x * 33.33) + 16.67}
-              y2={(end.y * 33.33) + 16.67}
+              x1={start.x * 33.33 + 16.67}
+              y1={start.y * 33.33 + 16.67}
+              x2={end.x * 33.33 + 16.67}
+              y2={end.y * 33.33 + 16.67}
               stroke="#87161A"
               strokeWidth="2"
               opacity="0.6"

@@ -105,10 +105,15 @@ const VastuSpecial = () => {
               </p>
             </div>
 
-            <button className="px-8 py-3 bg-[#87161a] hover:bg-[#87161a] text-white font-semibold rounded-lg transition-all flex items-center">
-              अपॉइन्टमेंट बुक करा
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            <a
+              href="https://wa.me/919130755631?text=Hi%20I%20would%20like%20to%20book%20an%20appointment"
+              target="_blank"
+            >
+              <button className="px-8 py-3 bg-[#87161a] hover:bg-[#87161a] text-white font-semibold rounded-lg transition-all flex items-center">
+                अपॉइन्टमेंट बुक करा
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </button>
+            </a>
           </div>
         </div>
       </div>
