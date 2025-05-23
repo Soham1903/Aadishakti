@@ -3,16 +3,16 @@ import { motion } from "framer-motion";
 
 function Hero() {
   return (
-    <section className="relative h-[80vh] min-h-[500px] overflow-hidden">
+    <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://vedicfeed.com/wp-content/uploads/2018/12/Jyotish-Shastra-Facts.jpg')",
+            "url('https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/60 to-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900/80"></div>
       </div>
 
       {/* Content */}
@@ -28,7 +28,7 @@ function Hero() {
             animate={{ scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight font-serif text-white drop-shadow-lg">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-white">
               आदिशक्ती गुरुकुल
             </h1>
           </motion.div>
@@ -38,13 +38,13 @@ function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            <div className="w-32 h-[2px] bg-[#d4af37] mx-auto mb-10"></div>
+            <div className="w-32 h-[1px] bg-white/40 mx-auto mb-8"></div>
 
-            <p className="text-2xl md:text-3xl font-semibold mb-6 text-white drop-shadow-md">
+            <p className="text-xl md:text-2xl font-medium mb-4 text-white">
               ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
             </p>
 
-            <p className="text-xl md:text-2xl font-light text-white drop-shadow-md">
+            <p className="text-lg md:text-xl font-normal text-white/90">
               आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे
             </p>
           </motion.div>

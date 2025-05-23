@@ -1,281 +1,248 @@
+import React from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Award } from "lucide-react";
-import SectionTitle from "./SectionTitle";
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+import { Award, BookOpen } from "lucide-react";
+import { SectionHeading } from "./SectionHeading";
+import { FadeInSection } from "./FadeInSection";
 
 const AboutFounder = () => {
   return (
     <div className="space-y-16">
       {/* Profile Section */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
-        className="mb-16"
-      >
-        <SectionTitle title="संस्थापक अध्यक्षा परिचय" />
+      <FadeInSection>
+        <SectionHeading title="संस्थापक अध्यक्षा परिचय" />
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Profile Image */}
           <motion.div
-            variants={fadeIn}
-            className="lg:col-span-1 flex justify-center items-stretch"
+            variants={{
+              hidden: { opacity: 0, scale: 0.95 },
+              visible: { opacity: 1, scale: 1 }
+            }}
+            className="lg:col-span-4 flex justify-center"
           >
             <div className="relative">
-              {/* Gradient background */}
-              <div className="w-64 h-full bg-gradient-to-br from-[#87161a] to-[#87161a]/70 rounded-2xl absolute top-0 left-0"></div>
-              {/* Image */}
-              <img
-                src="/assets/charushila1.png"
-                alt="सौ. चारुशीला कांबळे"
-                className="w-64 h-full object-cover rounded-2xl relative z-10"
-              />
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#87161a]/10 to-[#87161a]/30 rounded-xl blur"></div>
+              <div className="relative overflow-hidden rounded-xl bg-white p-1.5 shadow-sm">
+                <img
+                  src="/assets/charushila1.png"
+                  alt="सौ. चारुशीला कांबळे"
+                  className="w-full aspect-[3/4] object-cover rounded-lg"
+                />
+              </div>
             </div>
           </motion.div>
 
           {/* Right Content */}
           <motion.div
-            variants={fadeIn}
-            className="lg:col-span-2 flex items-stretch"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            className="lg:col-span-8"
           >
-            <div className="bg-white rounded-2xl shadow-xl p-8 w-full">
-              <h3 className="text-2xl font-bold text-[#87161a] mb-2">
-                ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
-              </h3>
-              <p className="text-slate-600 mb-6">
-                संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड,
-                जि. पुणे <br />
-                एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ,
-                अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ
-              </p>
-
-              <div className="space-y-4 text-slate-700">
-                <p>
-                  वास्तु, ज्योतिष, रेकी, हीलींग, टॅरॉकार्ड रिडर, रमल शास्त्री,
-                  मोबाईल न्यूमरॉलॉजी, डाउझिंग आणि या सारख्या अनेक विषयांचा
-                  अभ्यास २००० पासून आवड म्हणून सुरू केला. वरील सर्व प्रत्येक
-                  शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून
-                  २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या कार्यशाळा
-                  आणि मार्गदर्शन सलग २०११ पासून करत आहे.
+            <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-100 h-full">
+              <div className="space-y-4">
+                <h3 className="text-2xl font-semibold text-slate-800 mb-2">
+                  ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
+                </h3>
+                <p className="text-[#87161a]/80 text-lg mb-4">
+                  संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड,
+                  जि. पुणे <br />
+                  एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ,
+                  अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ
                 </p>
 
-                <p>
-                  अनेक विषयांच्या मोफत कार्यशाळा चालू असतात त्यामुळे हे ज्ञान
-                  अनेकांपर्यंत पोहोचवण्याचे कार्य हाती घेतले आहे. तसेच अनेक
-                  लोकांना समस्यामुक्त करण्यासाठी मार्गदर्शन करणे व अंधश्रद्धेचा
-                  वापर न करता वैज्ञानिक दृष्टिकोनातून रेकी, हीलिंग, संमोहन,
-                  यासारख्या विषयांमधून समस्या निराकारण करणे. आदिशक्ती गुरुकुल हे
-                  यूट्यूब चैनल सध्या कार्यान्वित आहे. विविध अधिवेशनांमध्ये
-                  वास्तु ज्योतिष आणि मोबाईल न्यूमरॉलॉजी या विषयांवर व्याख्याने
-                  दिली जातात.
-                </p>
+                <div className="space-y-4 text-slate-600 leading-relaxed">
+                  <p>
+                    वास्तु, ज्योतिष, रेकी, हीलींग, टॅरॉकार्ड रिडर, रमल शास्त्री,
+                    मोबाईल न्यूमरॉलॉजी, डाउझिंग आणि या सारख्या अनेक विषयांचा
+                    अभ्यास २००० पासून आवड म्हणून सुरू केला. वरील सर्व प्रत्येक
+                    शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून
+                    २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या कार्यशाळा
+                    आणि मार्गदर्शन सलग २०११ पासून करत आहे.
+                  </p>
+
+                  <p>
+                    अनेक विषयांच्या मोफत कार्यशाळा चालू असतात त्यामुळे हे ज्ञान
+                    अनेकांपर्यंत पोहोचवण्याचे कार्य हाती घेतले आहे. तसेच अनेक
+                    लोकांना समस्यामुक्त करण्यासाठी मार्गदर्शन करणे व अंधश्रद्धेचा
+                    वापर न करता वैज्ञानिक दृष्टिकोनातून रेकी, हीलिंग, संमोहन,
+                    यासारख्या विषयांमधून समस्या निराकारण करणे. आदिशक्ती गुरुकुल हे
+                    यूट्यूब चैनल सध्या कार्यान्वित आहे. विविध अधिवेशनांमध्ये
+                    वास्तु ज्योतिष आणि मोबाईल न्यूमरॉलॉजी या विषयांवर व्याख्याने
+                    दिली जातात.
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </FadeInSection>
 
-      {/* Awards & Recognition - REDESIGNED SECTION */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
-      >
-        <SectionTitle
+      {/* Awards & Recognition */}
+      <FadeInSection>
+        <SectionHeading
           title="पुरस्कार आणि सन्मान"
           subtitle="विविध मान्यवर संस्थांकडून प्राप्त पुरस्कार"
         />
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Honorary Titles - Left column */}
-          <motion.div variants={fadeIn}>
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a] h-full">
-              <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-                <Award className="h-5 w-5 text-[#87161a] mr-2" />
-                मानद पदव्या
-              </h3>
-
-              <div className="space-y-6">
-                {honoraryTitles.map((title, index) => (
-                  <div key={index} className="flex group">
-                    <div className="flex-shrink-0 w-10 h-10 bg-[#87161a]/10 rounded-full flex items-center justify-center mr-4 group-hover:bg-[#87161a]/20 transition-colors">
-                      <span className="text-xl font-bold text-[#87161a]">
-                        {index + 1}
-                      </span>
-                    </div>
-                    <div className="border-b border-dashed border-gray-200 pb-4 flex-1">
-                      <p className="text-slate-700">
-                        {title.organization} यांच्यातर्फे
-                        <span className="font-semibold block mt-1 text-[#87161a]">
-                          {title.title}
-                        </span>
-                        {/* <span className="text-slate-600 text-sm">
-                          {title.description}
-                        </span> */}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          <div className="lg:col-span-4">
+            <AwardsCard 
+              title="मानद पदव्या" 
+              icon={<Award className="h-5 w-5 text-[#87161a]" />}
+              items={honoraryTitles.map(title => ({
+                organization: title.organization,
+                title: title.title
+              }))}
+            />
+          </div>
 
           {/* Speaker Recognition - Right column */}
-          <motion.div variants={fadeIn}>
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a] h-full">
-              <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
-                <Award className="h-5 w-5 text-[#87161a] mr-2" />
-                वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार
-              </h3>
-
-              <div className="grid grid-cols-1 gap-4">
-                {speakerRecognitions.map((recognition, index) => (
-                  <div
-                    key={index}
-                    className="bg-white p-4 rounded-lg border-l-2 border-[#87161a] hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-center">
-                      {/* <span className="w-2 h-2 bg-[#87161a] rounded-full mr-3 flex-shrink-0"></span> */}
-                      <span className="text-slate-700">{recognition}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          <div className="lg:col-span-8">
+            <AwardsCard
+              title="वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार"
+              icon={<Award className="h-5 w-5 text-[#87161a]" />}
+              items={speakerRecognitions.map(recognition => ({
+                title: recognition
+              }))}
+            />
+          </div>
 
           {/* Awards - Full Width Section */}
-          <motion.div variants={fadeIn} className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#87161a]">
-              <h3 className="text-xl font-bold text-[#87161a] mb-6 flex items-center">
+          <div className="lg:col-span-12">
+            <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-100">
+              <h3 className="text-xl font-medium text-slate-800 mb-6 flex items-center">
                 <Award className="h-5 w-5 text-[#87161a] mr-2" />
                 प्रमुख पुरस्कार
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {awards.map((award, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="relative overflow-hidden bg-white border border-gray-100 rounded-xl shadow-sm group hover:shadow-md transition-shadow"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow transition-shadow"
                   >
-                    {/* Gold accent corner */}
-                    {/* <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#87161a] rotate-12 transform"></div> */}
-
-                    <div className="p-5">
-                      <h4 className="font-medium text-[#87161a] mb-2 text-lg">
-                        {award.title}
-                      </h4>
-                      <p className="text-slate-600 text-sm">
-                        {award.organization}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Publications Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
-      >
-        <SectionTitle title="लेखन" subtitle="प्रकाशित साहित्य" />
-
-        <motion.div variants={fadeIn} className="mt-8">
-          <div className="bg-white rounded-2xl shadow-xl p-6">
-            {/* Published Books - Compact Cards */}
-            <div className="mb-8">
-              <h3 className="text-xl font-bold text-[#87161a] mb-4 flex items-center">
-                <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
-                प्रकाशित पुस्तके
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {books.map((book, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start p-3 border border-gray-200 rounded-lg hover:border-[#87161a]/40 transition-colors"
-                  >
-                    <div className="bg-[#87161a]/10 p-2 rounded-lg mr-3">
-                      <book.icon className="h-5 w-5 text-[#87161a]" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-slate-700 text-xl">
-                        {book.title}
-                      </h4>
-                      {book.publisher && (
-                        <p className="text-s text-slate-500 mt-1">
-                          {book.publisher}
-                        </p>
-                      )}
-                      {book.author && (
-                        <p className="text-xs text-slate-500 mt-1">
-                          - {book.author}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Upcoming Publications - Side by Side */}
-            <div>
-              <h3 className="text-xl font-bold text-[#87161a] mb-3 flex items-center">
-                <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
-                आगामी प्रकाशने
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  "संमोहन",
-                  "मॅजिक मनी मंत्रा",
-                  "ज्योतिष शास्त्रानुसार वैवाहिक जीवन",
-                ].map((title, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center p-3 border border-gray-200 rounded-lg"
-                  >
-                    {/* <span className="w-2 h-2 bg-[#87161a] rounded-full mr-3"></span> */}
-                    <span className="text-slate-700">{title}</span>
-                  </div>
+                    <h4 className="font-medium text-slate-800 mb-2 text-lg">
+                      {award.title}
+                    </h4>
+                    <p className="text-slate-500 text-sm">
+                      {award.organization}
+                    </p>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </FadeInSection>
+
+      {/* Publications Section */}
+      <FadeInSection>
+        <SectionHeading title="लेखन" subtitle="प्रकाशित साहित्य" />
+
+        <div className="mt-8 bg-white rounded-xl shadow-sm p-8 border border-slate-100">
+          {/* Published Books */}
+          <div className="mb-10">
+            <h3 className="text-xl font-medium text-slate-800 mb-6 flex items-center">
+              <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
+              प्रकाशित पुस्तके
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {books.map((book, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="flex items-start bg-slate-50/50 p-4 rounded-lg hover:bg-slate-50 transition-colors"
+                >
+                  <div className="bg-white p-2 rounded-lg mr-3 shadow-sm">
+                    <book.icon className="h-6 w-6 text-[#87161a]" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-slate-800">
+                      {book.title}
+                    </h4>
+                    {book.publisher && (
+                      <p className="text-sm text-slate-500 mt-1">
+                        {book.publisher}
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Upcoming Publications */}
+          <div>
+            <h3 className="text-xl font-medium text-slate-800 mb-4 flex items-center">
+              <BookOpen className="h-5 w-5 text-[#87161a] mr-2" />
+              आगामी प्रकाशने
+            </h3>
+
+            <div className="flex flex-wrap gap-3">
+              {[
+                "संमोहन",
+                "मॅजिक मनी मंत्रा",
+                "ज्योतिष शास्त्रानुसार वैवाहिक जीवन",
+              ].map((title, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-slate-50 py-2 px-4 rounded-full text-slate-700 text-sm border border-slate-200"
+                >
+                  {title}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </FadeInSection>
+    </div>
+  );
+};
+
+const AwardsCard = ({ title, icon, items }) => {
+  return (
+    <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-100 h-full">
+      <h3 className="text-xl font-medium text-slate-800 mb-6 flex items-center">
+        {icon}
+        <span className="ml-2">{title}</span>
+      </h3>
+
+      <div className="space-y-4">
+        {items.map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="p-3 border-l-2 border-[#87161a]/20 hover:border-[#87161a] pl-4 transition-colors"
+          >
+            {item.organization && (
+              <p className="text-slate-500 text-sm">
+                {item.organization} यांच्यातर्फे
+              </p>
+            )}
+            <p className="font-medium text-slate-700 mt-1">
+              {item.title}
+            </p>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -460,17 +427,14 @@ const honoraryTitles = [
   {
     organization: "ओम सिंडिकेट, नाशिक",
     title: "ज्योतिषाचार्य पुरस्कार",
-    description: "ही मानद पदवी",
   },
   {
     organization: "योगीराज वास्तू ज्योतिष अनुसंधान, छ. संभाजीनगर",
     title: "वास्तु ज्योतिष महागुरु",
-    description: "ही मानद पदवी",
   },
   {
     organization: "श्री ज्योतीष संशोधन केंद्र, जळगाव",
     title: "वास्तु न्यूमरो महागुरू",
-    description: "ही मानद पदवी",
   },
 ];
 

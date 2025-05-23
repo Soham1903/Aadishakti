@@ -1,140 +1,49 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Calendar,
-  Users,
-  BookOpen,
-  Music,
-  Youtube,
-  Trophy,
-  Award,
-  Star,
-  Gem,
-  User,
-} from "lucide-react";
-import SectionTitle from "./SectionTitle";
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+import { Calendar, Users, Youtube, Trophy, Award, User } from "lucide-react";
+import { SectionHeading } from "./SectionHeading";
+import { FadeInSection } from "./FadeInSection";
 
 const EventsInitiatives = () => {
   return (
     <div className="space-y-16">
       {/* Events Section */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
-      >
-        <SectionTitle
+      <FadeInSection>
+        <SectionHeading
           title="अधिवेशन"
           subtitle="आदिशक्ती गुरुकुलचे प्रमुख अधिवेशने"
         />
 
-        <motion.div
-          variants={fadeIn}
-          className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
           {events.map((event, index) => (
-            <div
-              key={index}
-              className="relative overflow-hidden rounded-2xl shadow-xl group bg-white"
-            >
-              {/* Background pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 100 100"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <pattern
-                      id="grid"
-                      width="10"
-                      height="10"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <path
-                        d="M 10 0 L 0 0 0 10"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#grid)" />
-                </svg>
-              </div>
-
-              <div className="p-8 relative z-10">
-                <div className="text-4xl font-bold mb-4 text-[#87161a]">
-                  {event.date}
-                </div>
-
-                <h3 className="text-xl font-bold mb-3 text-gray-800">
-                  {event.title}
-                </h3>
-
-                <p className="mb-4 text-gray-600">{event.description}</p>
-
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#87161a]/10 text-[#87161a]">
-                  <Calendar className="w-4 h-4 mr-1" />
-                  {event.location}
-                </div>
-              </div>
-
-              {/* Decorative element */}
-              <div className="absolute -bottom-10 -right-10 w-24 h-24 rounded-full bg-[#87161a]/10 transition-opacity duration-300"></div>
-            </div>
+            <EventCard key={index} event={event} index={index} />
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </FadeInSection>
 
       {/* Social Initiatives */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
-      >
-        <SectionTitle
+      <FadeInSection>
+        <SectionHeading
           title="सामाजिक उपक्रम"
           subtitle="आदिशक्ती गुरुकुलचे अध्यात्मिक व सामाजिक उपक्रम"
         />
 
-        <motion.div variants={fadeIn} className="mt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main card */}
-            <div className="lg:col-span-2 bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Main initiatives card */}
+          <div className="lg:col-span-8">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
               <div className="h-64 relative">
                 <img
                   src="https://images.pexels.com/photos/7640033/pexels-photo-7640033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="Spiritual Workshop"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent flex items-end">
                   <div className="p-6 text-white">
-                    <h3 className="text-2xl font-bold mb-2">
+                    <h3 className="text-2xl font-medium mb-2">
                       अध्यात्मिक उपक्रम
                     </h3>
-                    <p className="text-white/80">
+                    <p className="text-white/90">
                       2019 पासून अनेक वर्ष महिलांसाठी विविध मोफत अध्यात्मिक आणि
                       सामाजिक उपक्रम.
                     </p>
@@ -143,72 +52,81 @@ const EventsInitiatives = () => {
               </div>
 
               <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {initiatives.map((initiative, index) => (
-                    <div key={index} className="flex">
-                      <initiative.icon className="w-8 h-8 text-[#87161a] shrink-0 mr-4 mt-1" />
+                    <motion.div 
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-start"
+                    >
+                      <initiative.icon className="w-6 h-6 text-[#87161a]/80 shrink-0 mr-4 mt-1" />
                       <div>
-                        <h4 className="font-medium text-gray-800 mb-2">
+                        <h4 className="font-medium text-slate-800 mb-2">
                           {initiative.title}
                         </h4>
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-slate-600 text-sm">
                           {initiative.description}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Team card with scrollable list */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              <div className="p-6 border-b border-gray-100">
-                <h3 className="text-xl font-bold text-[#87161a] flex items-center">
-                  <Users className="w-5 h-5 text-[#87161a] mr-2" />
+          {/* Team card */}
+          <div className="lg:col-span-4">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 h-full">
+              <div className="p-5 border-b border-slate-100">
+                <h3 className="text-xl font-medium text-slate-800 flex items-center">
+                  <Users className="w-5 h-5 text-[#87161a]/80 mr-2" />
                   आध्यात्मिक उपक्रम समिती
                 </h3>
               </div>
 
-              <div className="p-6">
-                <div className="max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                  <ul className="space-y-4">
-                    {teamMembers.map((member, index) => (
-                      <li key={index} className="flex items-start">
-                        <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-4">
-                          <User className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-800">
-                            {member.name}
-                          </h4>
-                          <p className="text-sm text-gray-600">{member.role}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="p-4 max-h-[400px] overflow-y-auto">
+                <ul className="space-y-3">
+                  {teamMembers.map((member, index) => (
+                    <motion.li 
+                      key={index}
+                      initial={{ opacity: 0, x: -5 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex items-start p-2 hover:bg-slate-50 rounded-lg transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#87161a]/80 mr-3 shrink-0">
+                        <User className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-slate-800 text-sm">
+                          {member.name}
+                        </h4>
+                        <p className="text-xs text-slate-500">{member.role}</p>
+                      </div>
+                    </motion.li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </FadeInSection>
 
       {/* YouTube Channel */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-      >
-        <div className="bg-white rounded-2xl p-8 md:p-12">
+      <FadeInSection>
+        <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-              <Youtube className="w-16 h-16 text-[#87161a] mb-6" />
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+              <Youtube className="w-12 h-12 text-[#87161a]/80 mb-6" />
+              <h3 className="text-2xl font-medium text-slate-800 mb-4">
                 आदिशक्ती गुरुकुल यूट्यूब चॅनेल
               </h3>
-              <p className="text-gray-700 mb-6">
+              <p className="text-slate-600 mb-6 leading-relaxed">
                 अनेक अध्यात्मिक मार्गदर्शनपर व्हिडिओ, वास्तु, ज्योतिष, रेकी,
                 अंकशास्त्र या विषयांवरील मोफत मार्गदर्शन व कार्यशाळा आमच्या
                 यूट्यूब चॅनेलवर उपलब्ध आहेत.
@@ -217,200 +135,139 @@ const EventsInitiatives = () => {
                 href="https://www.youtube.com/channel/UCxxxxxx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-5 py-3 bg-[#87161a] text-white rounded-full hover:bg-[#87161a]/90 transition-colors"
+                className="inline-flex items-center px-5 py-2 bg-[#87161a]/80 text-white rounded-full hover:bg-[#87161a] transition-colors text-sm"
               >
-                <Youtube className="w-5 h-5 mr-2" />
+                <Youtube className="w-4 h-4 mr-2" />
                 चॅनेलला भेट द्या
               </a>
             </div>
 
             <div className="md:w-1/2 grid grid-cols-2 gap-4">
               {youtubeVideos.map((video, index) => (
-                <a
+                <motion.a
                   key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.03 }}
                   href={video.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative rounded-lg overflow-hidden aspect-video group"
+                  className="relative rounded-lg overflow-hidden aspect-video group shadow-sm"
                 >
                   <img
                     src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 flex items-center justify-center transition-colors">
+                  <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/60 flex items-center justify-center transition-colors">
                     <Youtube className="w-8 h-8 text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
                   </div>
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
         </div>
-      </motion.div>
+      </FadeInSection>
 
       {/* Awards Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-        className="mt-16"
-      >
-        <SectionTitle
+      <FadeInSection>
+        <SectionHeading
           title="विविध पुरस्कारांचे वितरण"
           subtitle="आदिशक्ती गुरुकुलचे प्रतिष्ठित पुरस्कार"
         />
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {/* Award Card 1 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#87161a] p-4 flex justify-center">
-              <Trophy className="w-10 h-10 text-white" />
-            </div>
-            <div className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                उत्तम लेखक पुरस्कार
-              </h3>
-              <p className="text-gray-600 mb-4">अष्टक वर्ग महागुरु</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <User className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">
-                    श्री. प्रदीप पंडित
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
+          {awardRecipients.map((award, index) => (
+            <AwardCard key={index} award={award} index={index} />
+          ))}
+        </div>
+      </FadeInSection>
+    </div>
+  );
+};
 
-          {/* Award Card 2 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#87161a] p-4 flex justify-center">
-              <Award className="w-10 h-10 text-white" />
-            </div>
-            <div className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                ज्योतिष भूषण पुरस्कार
-              </h3>
-              <p className="text-gray-600 mb-4">ज्योतिषाचार्य</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <User className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">
-                    श्री. दीनानाथ जोशी
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
+const EventCard = ({ event, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 hover:shadow transition-shadow"
+    >
+      <div className="p-6">
+        <h3 className="text-xl font-medium text-slate-800 mb-3">
+          {event.title}
+        </h3>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          {event.description}
+        </p>
+        <div className="inline-flex items-center px-3 py-1.5 rounded-full text-sm bg-slate-100 text-slate-700">
+          <Calendar className="w-4 h-4 mr-1.5" />
+          {event.location}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
-          {/* Award Card 3 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#87161a] p-4 flex justify-center">
-              <Star className="w-10 h-10 text-white" />
-            </div>
-            <div className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                कार्यगौरव पुरस्कार
-              </h3>
-              <p className="text-gray-600 mb-4">सक्रिय सहभाग</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <User className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">सौ. वीणा जोशी</h4>
-                </div>
-              </div>
-            </div>
+const AwardCard = ({ award, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 hover:shadow transition-shadow"
+    >
+      <div className="p-4 bg-slate-50 flex justify-center">
+        <award.icon className="w-8 h-8 text-[#87161a]/80" />
+      </div>
+      <div className="p-5">
+        <h3 className="text-lg font-medium text-slate-800 mb-2">
+          {award.title}
+        </h3>
+        <p className="text-slate-500 text-sm mb-4">{award.subtitle}</p>
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#87161a]/80 mr-3">
+            <User className="w-4 h-4" />
           </div>
-
-          {/* Award Card 4 */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#87161a] p-4 flex justify-center">
-              <Gem className="w-10 h-10 text-white" />
-            </div>
-            <div className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                सेवा गौरव पुरस्कार
-              </h3>
-              <p className="text-gray-600 mb-4">समर्पित सेवा</p>
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
-                    <User className="w-4 h-4" />
-                  </div>
-                  <h4 className="font-medium text-gray-800 text-sm">
-                    सौ. वर्षा सिध्दे
-                  </h4>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-2">
-                    <User className="w-4 h-4" />
-                  </div>
-                  <h4 className="font-medium text-gray-800 text-sm">
-                    सौ. नयना बेलवलकर
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Award Card 5 (जीवनगौरव पुरस्कार) */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#87161a]/20 hover:shadow-xl transition-shadow">
-            <div className="bg-[#87161a] p-4 flex justify-center">
-              <Trophy className="w-10 h-10 text-white" />
-            </div>
-            <div className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                जीवनगौरव पुरस्कार
-              </h3>
-              <p className="text-gray-600 mb-4">सामाजिक कार्यकर्त्या</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#87161a]/10 flex items-center justify-center text-[#87161a] mr-3">
-                  <User className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-800">सौ. सुधा सुळे</h4>
-                  <p className="text-sm text-gray-600">आदिशक्ती गुरुकुलच्या सल्लागार</p>
-                </div>
-              </div>
-            </div>
+          <div>
+            <h4 className="font-medium text-slate-700 text-sm">
+              {award.recipient}
+            </h4>
+            {award.role && (
+              <p className="text-xs text-slate-500">{award.role}</p>
+            )}
           </div>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
 // Data
 const events = [
   {
-    // date: "5 मे 2024",
     title: "राज्यस्तरीय वास्तु, ज्योतिष आणि मनशक्ती अधिवेशन",
     description:
       "आचार्य अत्रे प्रतिष्ठान सासवड, जिल्हा पुणे येथे भव्य दिव्य राज्यस्तरीय अधिवेशन",
     location: "सासवड, पुणे",
   },
   {
-    // date: "7 डिसें 2024",
     title: "राज्यस्तरीय वास्तू अधिवेशन",
     description:
       "डोंबिवली येथे वास्तुशास्त्राच्या वैज्ञानिक अंगावर आधारित राज्यस्तरीय अधिवेशन",
     location: "डोंबिवली",
   },
   {
-    // date: "8 मार्च 2024",
     title: "महिला दिन आणि आनंद मेळा",
     description: "महिला दिनानिमित्त महिलांसाठी अध्यात्मिक मार्गदर्शन व उपक्रम",
     location: "पुणे",
   },
   {
-    // date: "नियमित",
     title: "ऑनलाईन मोफत कार्यशाळा",
     description: "अनेक विषयांवर ऑनलाईन स्वरूपात नियमित आयोजित मोफत कार्यशाळा",
     location: "ऑनलाईन",
@@ -422,19 +279,19 @@ const initiatives = [
     title: "श्री सूक्त आवर्तन",
     description:
       "प्रत्येक पोर्णिमा आणि चतुर्थी या दिवशी ऑनलाइन पद्धतीने श्री सूक्त आवर्तन आणि अथर्वशीर्ष आवर्तनं",
-    icon: BookOpen,
+    icon: Calendar,
   },
   {
     title: "भजन प्रशिक्षण",
     description:
       "महिलांसाठी मोफत ऑनलाईन भजन प्रशिक्षण आणि सुगम संगीत प्रशिक्षण आणि स्पर्धा",
-    icon: Music,
+    icon: Users,
   },
   {
     title: "सामूहिक सप्तशती वाचन",
     description:
       "प्रत्येक नवरात्रात सामूहिक सप्तशती वाचन सेवा व मोफत सप्तशती वाचन प्रशिक्षण",
-    icon: BookOpen,
+    icon: Calendar,
   },
   {
     title: "यूट्यूब व्हिडिओ",
@@ -447,10 +304,7 @@ const teamMembers = [
   { name: "सौ. चारुशीला कांबळे", role: "संस्थापक अध्यक्ष" },
   { name: "श्री. श्रीकांत कांबळे", role: "खजिनदार" },
   { name: "सौ. वीणा जोशी", role: "कार्याध्यक्ष" },
-  {
-    name: "सौ. वर्षा सिध्दे",
-    role: "सहकार्याध्यक्ष आणि सुगम संगीत विभाग प्रमुख",
-  },
+  { name: "सौ. वर्षा सिध्दे", role: "सहकार्याध्यक्ष" },
   { name: "श्री. दीनानाथ जोशी", role: "मार्गदर्शक" },
   { name: "सौ. सुधा सुळे", role: "मार्गदर्शक" },
   { name: "श्रीमती नयनाताई बेलवलकर", role: "भजन विभाग प्रमुख" },
@@ -482,6 +336,40 @@ const youtubeVideos = [
     title: "अंकशास्त्र",
     thumbnail: "https://img.youtube.com/vi/gbuJD-Vlidg/maxresdefault.jpg",
     url: "https://youtu.be/gbuJD-Vlidg?si=f40u1JAs-5lcdGr5",
+  },
+];
+
+const awardRecipients = [
+  {
+    title: "उत्तम लेखक पुरस्कार",
+    subtitle: "अष्टक वर्ग महागुरु",
+    recipient: "श्री. प्रदीप पंडित",
+    icon: Trophy
+  },
+  {
+    title: "ज्योतिष भूषण पुरस्कार",
+    subtitle: "ज्योतिषाचार्य",
+    recipient: "श्री. दीनानाथ जोशी",
+    icon: Award
+  },
+  {
+    title: "कार्यगौरव पुरस्कार",
+    subtitle: "सक्रिय सहभाग",
+    recipient: "सौ. वीणा जोशी",
+    icon: Trophy
+  },
+  {
+    title: "सेवा गौरव पुरस्कार",
+    subtitle: "समर्पित सेवा",
+    recipient: "सौ. वर्षा सिध्दे",
+    icon: Award
+  },
+  {
+    title: "जीवनगौरव पुरस्कार",
+    subtitle: "सामाजिक कार्यकर्त्या",
+    recipient: "सौ. सुधा सुळे",
+    role: "आदिशक्ती गुरुकुलच्या सल्लागार",
+    icon: Trophy
   },
 ];
 

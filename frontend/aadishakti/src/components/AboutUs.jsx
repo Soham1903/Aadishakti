@@ -22,11 +22,13 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#87161a]/5 via-[#87161a]/10 to-[#87161a]/5">
+    <div className="min-h-screen bg-slate-50">
       <Hero />
-      <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="container mx-auto px-4 py-12">
-        {renderTabContent()}
+      <div className="container mx-auto px-4 max-w-6xl">
+        <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className="py-12">
+          {renderTabContent()}
+        </div>
       </div>
     </div>
   );
