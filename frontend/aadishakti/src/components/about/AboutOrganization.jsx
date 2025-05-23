@@ -179,7 +179,7 @@ const services = [
   {
     title: "ज्योतिष",
     description: "वैज्ञानिक दृष्टिकोनातून ज्योतिष शास्त्राचे मार्गदर्शन",
-    image: "https://images.pexels.com/photos/2098428/pexels-photo-2098428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "assets/AboutOrganization/Jyotish.jpg",
     icon: Star
   },
   {
@@ -192,19 +192,19 @@ const services = [
   {
     title: "संमोहन",
     description: "स्वसंमोहन, क्लिनिकल हिप्नोसिस आणि मॅजिकल हिप्नोसिस",
-    image: "https://images.pexels.com/photos/268941/pexels-photo-268941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "assets/AboutOrganization/samohan.jpg",
     icon: BookText
   },
   {
     title: "अंकशास्त्र",
     description: "अंकशास्त्र आणि मोबाईल न्यूमरॉलॉजी",
-    image: "https://images.pexels.com/photos/907607/pexels-photo-907607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "assets/AboutOrganization/mobilenumber.jpg",
     icon: Calculator
   },
   {
     title: "मोबाईल न्यूमरॉलॉजी",
     description: "मोबाईल नंबर विश्लेषण आणि त्याचे प्रभाव",
-    image: "https://images.pexels.com/photos/111967/pexels-photo-111967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "assets/AboutOrganization/numero.png",
     icon: Phone
   }
 ];
