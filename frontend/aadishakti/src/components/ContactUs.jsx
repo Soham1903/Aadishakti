@@ -1,16 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  Instagram,
-  Facebook,
-  Twitter,
-  Youtube,
-  Send
-} from 'react-feather';
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { Phone, Mail, MapPin, Clock, Facebook, Youtube } from "react-feather";
+import { Send } from "lucide-react";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -18,6 +10,28 @@ const fadeIn = {
 };
 
 export default function ContactPage() {
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_ers13hl", // Replace with your EmailJS Service ID
+        "template_cbuncbk", // Replace with your EmailJS Template ID
+        form.current,
+        "Q7Dti8zuYpQUGtgPS" // Replace with your EmailJS Public Key
+      )
+      .then(
+        () => {
+          alert("संदेश यशस्वीरित्या पाठविला गेला!");
+          form.current.reset();
+        },
+        (error) => {
+          alert("संदेश पाठवताना काहीतरी चुकले. कृपया पुन्हा प्रयत्न करा.");
+          console.error(error);
+        }
+      );
+  };
   return (
     <div className="min-h-screen bg-gray-50 pt-32 pb-20">
       <div className="container mx-auto px-4">
@@ -42,7 +56,8 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              रूपांतराच्या दिशेने पहिला पाऊल टाका. मार्गदर्शन आणि समर्थनासाठी आमच्याशी संपर्क साधा.
+              रूपांतराच्या दिशेने पहिला पाऊल टाका. मार्गदर्शन आणि समर्थनासाठी
+              आमच्याशी संपर्क साधा.
             </motion.p>
           </div>
         </motion.div>
@@ -57,15 +72,32 @@ export default function ContactPage() {
             className="space-y-8"
           >
             <div className="bg-white p-8 rounded-2xl shadow-lg space-y-8">
-              {[{
-                Icon: Phone, title: "फोन", details: ["+91 9876543210", "+91 9123456789"]
-              }, {
-                Icon: Mail, title: "ईमेल", details: ["contact@astrologyhealing.com", "support@astrologyhealing.com"]
-              }, {
-                Icon: MapPin, title: "पत्ता", details: ["१२३ आध्यात्मिक लेन", "मिस्टिक सिटी, एमसी १२३४५"]
-              }, {
-                Icon: Clock, title: "कार्यालय वेळ", details: ["सोमवार - शनिवार: सकाळी ९ ते सायंकाळी ७", "रविवार: बंद"]
-              }].map(({ Icon, title, details }, i) => (
+              {[
+                {
+                  Icon: Phone,
+                  title: "फोन",
+                  details: ["+91 9130755631", "+91 96571 96333"],
+                },
+                {
+                  Icon: Mail,
+                  title: "ईमेल",
+                  details: ["adishaktigurukul@gmail.com"],
+                },
+                {
+                  Icon: MapPin,
+                  title: "पत्ता",
+                  details: ["333, डी, सोपाननगर", "सासवड, महाराष्ट्र 412301"],
+                },
+
+                {
+                  Icon: Clock,
+                  title: "कार्यालय वेळ",
+                  details: [
+                    "सोमवार - शनिवार: सकाळी ९ ते सायंकाळी ७",
+                    "रविवार: बंद",
+                  ],
+                },
+              ].map(({ Icon, title, details }, i) => (
                 <motion.div
                   key={i}
                   className="flex items-start space-x-6"
@@ -78,7 +110,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">{title}</h3>
                     {details.map((line, i) => (
-                      <p key={i} className="text-gray-600">{line}</p>
+                      <p key={i} className="text-gray-600">
+                        {line}
+                      </p>
                     ))}
                   </div>
                 </motion.div>
@@ -87,34 +121,34 @@ export default function ContactPage() {
 
             {/* Social Media */}
             {/* Social Media Section */}
-<motion.div
-  className="bg-white p-6 rounded-2xl shadow-lg mt-4 text-center"
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.6 }}
->
-  <h3 className="text-xl font-semibold text-[#87161a] mb-4">सोशल मिडिया</h3>
-  <div className="flex justify-center space-x-6">
-    <a
-      href="https://www.facebook.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-12 h-12 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-all duration-300"
-    >
-      <Facebook className="text-blue-600 w-6 h-6" />
-    </a>
-    <a
-      href="https://www.youtube.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-12 h-12 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-all duration-300"
-    >
-      <Youtube className="text-red-600 w-6 h-6" />
-    </a>
-  </div>
-</motion.div>
-
-           
+            <motion.div
+              className="bg-white p-6 rounded-2xl shadow-lg mt-4 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <h3 className="text-xl font-semibold text-[#87161a] mb-4">
+                सोशल मिडिया
+              </h3>
+              <div className="flex justify-center space-x-6">
+                <a
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-all duration-300"
+                >
+                  <Facebook className="text-blue-600 w-6 h-6" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@aadishaktigurukul8441"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-all duration-300"
+                >
+                  <Youtube className="text-red-600 w-6 h-6" />
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column: Contact Form */}
@@ -125,46 +159,78 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-semibold mb-8 text-[#87161a]">आम्हाला संदेश पाठवा</h3>
-              <form className="space-y-6">
+              <h3 className="text-2xl font-semibold mb-8 text-[#87161a]">
+                आम्हाला संदेश पाठवा
+              </h3>
+              <form ref={form} onSubmit={sendEmail} className="space-y-6">
                 {[
-                  { label: "पूर्ण नाव", type: "text", placeholder: "तुमचं नाव" },
-                  { label: "ईमेल पत्ता", type: "email", placeholder: "tumcha@email.com" },
-                  { label: "फोन नंबर", type: "tel", placeholder: "तुमचा फोन नंबर" }
+                  {
+                    label: "पूर्ण नाव",
+                    type: "text",
+                    placeholder: "तुमचं नाव",
+                    name: "name",
+                  },
+                  {
+                    label: "ईमेल पत्ता",
+                    type: "email",
+                    placeholder: "tumcha@email.com",
+                    name: "email",
+                  },
+                  {
+                    label: "फोन नंबर",
+                    type: "tel",
+                    placeholder: "तुमचा फोन नंबर",
+                    name: "phone",
+                  },
                 ].map((field, i) => (
                   <div key={i}>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">{field.label}</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {field.label}
+                    </label>
                     <motion.input
                       whileFocus={{ scale: 1.02 }}
                       type={field.type}
                       placeholder={field.placeholder}
+                      name={field.name}
+                      required
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-all duration-300"
                     />
                   </div>
                 ))}
                 {/* Dropdown */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">सेवेची आवड</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    सेवेची आवड
+                  </label>
                   <motion.select
+                    name="service"
+                    required
                     whileFocus={{ scale: 1.02 }}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-all duration-300"
                   >
                     <option value="">सेवा निवडा</option>
-                    <option value="reiki">रेकी हिलिंग</option>
-                    <option value="vastu">वास्तुशास्त्र</option>
-                    <option value="hypno">हिप्नोथेरपी</option>
-                    <option value="astro">ज्योतिष</option>
+                    <option value="रेकी हिलिंग">रेकी हिलिंग</option>
+                    <option value="वास्तुशास्त्र">वास्तुशास्त्र</option>
+                    <option value="हिप्नोथेरपी">हिप्नोथेरपी</option>
+                    <option value="ज्योतिष">ज्योतिष</option>
                   </motion.select>
                 </div>
+
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">तुमचा संदेश</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    तुमचा संदेश
+                  </label>
                   <motion.textarea
+                    name="message"
+                    required
                     whileFocus={{ scale: 1.02 }}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-all duration-300 h-32"
                     placeholder="आम्ही तुम्हाला कसा मदत करू शकतो?"
                   />
                 </div>
+
+                {/* Submit Button */}
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
