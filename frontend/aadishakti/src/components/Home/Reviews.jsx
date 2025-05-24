@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { SectionHeading } from "./SectionHeading";
 
 const Reviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,13 +55,14 @@ const Reviews = () => {
   };
 
   return (
-    <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800">
-          आमच्या विद्यार्थ्यांचा अभिप्राय
-        </h2>
+    <section className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <SectionHeading
+          title="आमच्या विद्यार्थ्यांचा अभिप्राय"
+          subtitle="विद्यार्थ्यांच्या अनुभवातून जाणून घ्या आमच्या सेवांची गुणवत्ता"
+        />
 
-        <div className="relative">
+        <div className="mt-12 relative">
           <div className="overflow-hidden relative">
             <div
               className="flex transition-transform duration-500 ease-in-out"
@@ -68,24 +70,28 @@ const Reviews = () => {
             >
               {reviews.map((review) => (
                 <div key={review.id} className="w-full flex-shrink-0 px-4">
-                  <div className="max-w-2xl mx-auto text-center">
+                  <div className="max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-sm border border-slate-100 text-center">
                     <img
                       src={review.image}
                       alt={review.name}
-                      className="w-[110px] h-[110px] rounded-full mx-auto mb-4 object-cover"
+                      className="w-24 h-24 rounded-full mx-auto mb-6 object-cover border-4 border-[#87161A]/10"
                     />
                     <div className="flex justify-center mb-4">
-                      {[...Array(review.rating)].map((_, i) => (
+                      {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className="w-5 h-5 text-yellow-400 fill-current"
+                          className={`w-5 h-5 ${
+                            i < review.rating 
+                              ? "text-yellow-400 fill-current" 
+                              : "text-gray-300"
+                          }`}
                         />
                       ))}
                     </div>
-                    <p className="text-slate-700 text-lg italic mb-6">
-                      {review.text}
+                    <p className="text-slate-700 text-lg italic mb-6 leading-relaxed">
+                      "{review.text}"
                     </p>
-                    <h4 className="font-semibold text-lg text-slate-800">
+                    <h4 className="font-medium text-lg text-slate-800">
                       {review.name}
                     </h4>
                     <p className="text-slate-600">{review.position}</p>
@@ -98,14 +104,14 @@ const Reviews = () => {
           {/* Navigation Arrows */}
           <button
             onClick={prevReview}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors z-10"
           >
             <ChevronLeft className="w-6 h-6 text-[#87161a]" />
           </button>
 
           <button
             onClick={nextReview}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors z-10"
           >
             <ChevronRight className="w-6 h-6 text-[#87161a]" />
           </button>
@@ -116,9 +122,10 @@ const Reviews = () => {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? "bg-[#87161a]" : "bg-slate-300"
+                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                  index === currentIndex ? "bg-[#87161a] w-6" : "bg-slate-300"
                 }`}
+                aria-label={`Go to review ${index + 1}`}
               />
             ))}
           </div>

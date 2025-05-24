@@ -1,11 +1,18 @@
 import React from "react";
 import { Home, ArrowRight } from "lucide-react";
+import { SectionHeading } from "./SectionHeading";
 
 const VastuSpecial = () => {
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="py-16 md:py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <SectionHeading
+          title="वास्तुशास्त्र मार्गदर्शन"
+          subtitle="वैज्ञानिक पद्धतीचे वास्तुशास्त्र - विना तोडफोड सुख समृद्धी"
+        />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 items-center">
+          {/* Left Side - Image Grid */}
           <div className="order-2 lg:order-1">
             <div className="relative">
               <div className="absolute -z-10 -top-10 -left-10 w-64 h-64 bg-[#87161a]/10 rounded-full blur-3xl"></div>
@@ -36,30 +43,17 @@ const VastuSpecial = () => {
                   />
                 </div>
               </div>
-
-              {/* <div className="absolute -bottom-10 -right-10 bg-white rounded-full p-6 shadow-xl">
-                <div className="relative w-20 h-20 flex items-center justify-center bg-[#d4af37] rounded-full">
-                  <Home className="h-10 w-10 text-white" />
-                  <div className="absolute inset-0 bg-[#d13a3f] rounded-full animate-ping opacity-20"></div>
-                </div>
-              </div> */}
             </div>
           </div>
 
+          {/* Right Side - Content */}
           <div className="order-1 lg:order-2">
-            {/* <div className="inline-flex items-center mb-4 bg-[#87161a]/10 px-4 py-1 rounded-full text-[#87161a]">
-              <Home className="h-4 w-4 mr-2" />
-              <span className="text-sm font-medium text-slate-700">
-                वास्तुशास्त्र विशेष
-              </span>
-            </div> */}
+            <h3 className="text-2xl font-medium text-slate-800 mb-6 flex items-center">
+              <span className="w-1.5 h-8 bg-[#87161a]/80 rounded-full mr-3 inline-block"></span>
+              सुख समृद्धी आनंद मिळवा
+            </h3>
 
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-slate-800">
-              वास्तुशास्त्र -{" "}
-              <span className="text-[#87161a]">सल्ला व मार्गदर्शन</span>
-            </h2>
-
-            <p className="text-xl text-slate-700 mb-6">
+            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
               तुमच्या वास्तू मध्ये थोडेसे सहज होणारे विना तोडफोड बदल करा. आणि
               सुख समृद्धी आनंद मिळवा! समजून घ्या वास्तुशास्त्रामागील विज्ञान
               तेही वैज्ञानिक पद्धतीने!
@@ -93,23 +87,25 @@ const VastuSpecial = () => {
               ))}
             </div>
 
-            <div className="p-8 bg-white rounded-2xl border border-gray-200 shadow-md mb-10 max-w-3xl mx-auto">
-              <h3 className="text-2xl font-extrabold text-[#87161a] mb-4">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 mb-8">
+              <h3 className="text-xl font-medium text-slate-800 mb-3 flex items-center">
+                <Home className="h-5 w-5 text-[#87161a] mr-2" />
                 वास्तू विशेष सेवा
               </h3>
-              <p className="text-lg leading-relaxed text-gray-800">
-                1. आपल्या घर किंवा कार्यालयासाठी संपूर्ण वास्तु परीक्षण, दोष शोध
-                आणि निवारणासाठी तज्ज्ञ मार्गदर्शनाची खास सेवा उपलब्ध आहे.{" "}
-                <br className="hidden sm:inline" />
-                2. सकारात्मक ऊर्जा, समृद्धी आणि शांततेसाठी आजच संपर्क साधा.
+              <p className="text-slate-600 leading-relaxed">
+                आपल्या घर किंवा कार्यालयासाठी संपूर्ण वास्तु परीक्षण, दोष शोध
+                आणि निवारणासाठी तज्ज्ञ मार्गदर्शनाची खास सेवा उपलब्ध आहे.
+                सकारात्मक ऊर्जा, समृद्धी आणि शांततेसाठी आजच संपर्क साधा.
               </p>
             </div>
 
             <a
               href="https://wa.me/919130755631?text=Hi%20I%20would%20like%20to%20book%20an%20appointment"
               target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex"
             >
-              <button className="px-8 py-3 bg-[#87161a] hover:bg-[#87161a] text-white font-semibold rounded-lg transition-all flex items-center">
+              <button className="px-8 py-3 bg-[#791317] hover:bg-[#87161a] text-white font-medium rounded-lg transition-all flex items-center">
                 अपॉइन्टमेंट बुक करा
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>

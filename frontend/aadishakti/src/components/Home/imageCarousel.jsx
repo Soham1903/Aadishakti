@@ -69,14 +69,14 @@ const Carousel = () => {
         {/* Current Image */}
         <img 
           src={images[currentImageIndex].url} 
-          className={`w-full h-[420px] md:h-[500px] lg:h-[600px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
+          className={`w-full h-[500px] md:h-[550px] lg:h-[650px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
             isTransitioning ? 'opacity-20' : 'opacity-100'
           }`}
           alt={images[currentImageIndex].title || "Carousel image"}
         />
         
         {/* Placeholder to maintain layout */}
-        <div className='w-full h-[420px] md:h-[500px] lg:h-[600px]'></div>
+        <div className='w-full h-[500px] md:h-[550px] lg:h-[650px]'></div>
                 
         <AnimatePresence mode="wait">
           <motion.div 

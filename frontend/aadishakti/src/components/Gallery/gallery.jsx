@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+import { SectionHeading } from '../Home/SectionHeading';
 
 const galleryItems = [
   {
@@ -66,7 +67,7 @@ const galleryItems = [
     id: 11,
     imageUrl: "/assets/GalleryPhotos/11.jfif",
     title: "विधीलिखित संस्था सन्मान",
-    description: "विधीलिखित संस्थेचे सर्वेसर्वा श्री आदिनाथ साळवी यांच्या हस्ते सन्मानचिन्ह स्वीकारताना."
+    description: "विधीलिखित संस्था कडून ज्योतिषाचार्य चारुशीला कांबळे यांना दिला गेलेला सन्मान."
   },
   {
     id: 12,
@@ -82,7 +83,7 @@ function ImageModal({ item, onClose }) {
       <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 p-2 bg-black bg-opacity-50 rounded-full text-white hover:bg-opacity-70 transition-colors z-10"
+          className="absolute top-4 right-4 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors z-10"
         >
           <X size={24} />
         </button>
@@ -94,9 +95,9 @@ function ImageModal({ item, onClose }) {
               className="w-full h-full object-contain"
             />
           </div>
-          <div className="w-full md:w-1/3 p-6 overflow-y-auto max-h-[40vh] md:max-h-[90vh]">
-            <h3 className="text-xl font-bold mb-4 text-slate-700">{item.title}</h3>
-            <p className="text-gray-700">{item.description}</p>
+          <div className="w-full md:w-1/3 p-8 overflow-y-auto max-h-[40vh] md:max-h-[90vh]">
+            <h3 className="text-xl font-semibold mb-4 text-slate-800">{item.title}</h3>
+            <p className="text-slate-600">{item.description}</p>
           </div>
         </div>
       </div>
@@ -118,37 +119,32 @@ function Gallery() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-         <h1 className="text-3xl md:text-4xl font-bold text-[#87161a] mb-4">
-  आमची पुरस्कारप्राप्त क्षणचित्रे
-</h1>
+    <div className="bg-gray-50 min-h-screen py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          title="आमची पुरस्कारप्राप्त क्षणचित्रे"
+          subtitle="विविध अधिवेशनांमधील मान्यता व गौरवाचे क्षण येथे मांडले आहेत"
+        />
 
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            विविध अधिवेशनांमधील मान्यता व गौरवाचे क्षण येथे मांडले आहेत.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
-          {galleryItems.map((item, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          {galleryItems.map((item) => (
             <div
-              key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer transform hover:scale-[1.01] transition-transform"
+              key={item.id}
+              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer group"
               onClick={() => openModal(item)}
             >
-              <div className="aspect-auto h-64 overflow-hidden bg-gray-100">
+              <div className="aspect-[4/3] overflow-hidden bg-gray-100">
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-lg text-slate-700 mb-2 line-clamp-1">
+              <div className="p-6">
+                <h3 className="font-medium text-lg text-slate-800 mb-2 line-clamp-1">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 line-clamp-3">{item.description}</p>
+                <p className="text-slate-600 line-clamp-2">{item.description}</p>
               </div>
             </div>
           ))}
