@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { FadeInSection } from "../Home/FadeInSection";
+import { SectionHeading } from "../Home/SectionHeading";
 
 const BuyBook = () => {
   const location = useLocation();
@@ -12,6 +14,7 @@ const BuyBook = () => {
     phoneNumber: "",
     address: "",
   });
+
   const [screenshot, setScreenshot] = useState(null);
   const [screenshotPreview, setScreenshotPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,8 +43,8 @@ const BuyBook = () => {
 
   const handleScreenshotChange = (e) => {
     const file = e.target.files[0];
-    setScreenshot(file);
     if (file) {
+      setScreenshot(file);
       const reader = new FileReader();
       reader.onloadend = () => setScreenshotPreview(reader.result);
       reader.readAsDataURL(file);
@@ -50,8 +53,22 @@ const BuyBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setError("");
+    setSubmitSuccess(false);
+    setIsSubmitting(true);
+
+    // Basic phone number validation (Indian format)
+    if (!/^[6-9]\d{9}$/.test(formData.phoneNumber)) {
+      setError("Please enter a valid 10-digit Indian phone number.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!screenshot) {
+      setError("Please upload a payment screenshot.");
+      setIsSubmitting(false);
+      return;
+    }
 
     const formDataToSend = new FormData();
     formDataToSend.append("customerName", formData.customerName);
@@ -59,14 +76,7 @@ const BuyBook = () => {
     formDataToSend.append("address", formData.address);
     formDataToSend.append("courseTitle", book.title);
     formDataToSend.append("finalPrice", book.price);
-
-    if (screenshot) {
-      formDataToSend.append("screenshot", screenshot);
-    } else {
-      setError("Please upload a payment screenshot.");
-      setIsSubmitting(false);
-      return;
-    }
+    formDataToSend.append("screenshot", screenshot);
 
     try {
       const response = await fetch(
@@ -78,7 +88,7 @@ const BuyBook = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to submit transaction");
+        throw new Error("Failed to submit transaction. Please try again.");
       }
 
       await response.json();
@@ -109,8 +119,9 @@ const BuyBook = () => {
 
       <div className="bg-white rounded-2xl shadow-lg p-8">
         <h1 className="text-3xl font-bold mb-8 text-[#87161a]">Complete Your Purchase</h1>
-        
+
         <div className="flex flex-col lg:flex-row gap-12">
+          {/* Book Details */}
           <div className="lg:w-1/3">
             <div className="bg-gray-50 rounded-xl p-6">
               <img
@@ -124,6 +135,7 @@ const BuyBook = () => {
             </div>
           </div>
 
+          {/* Purchase Form */}
           <div className="lg:w-2/3">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -134,6 +146,7 @@ const BuyBook = () => {
                   value={formData.customerName}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                   placeholder="Enter your full name"
                 />
@@ -147,8 +160,9 @@ const BuyBook = () => {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
-                  placeholder="Enter your phone number"
+                  placeholder="Enter 10-digit mobile number"
                 />
               </div>
 
@@ -159,6 +173,7 @@ const BuyBook = () => {
                   value={formData.address}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent h-32"
                   placeholder="Enter your complete delivery address"
                 />
@@ -172,7 +187,7 @@ const BuyBook = () => {
                   type="file"
                   accept="image/*"
                   onChange={handleScreenshotChange}
-                  required
+                  disabled={isSubmitting}
                   className="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-[#87161a] focus:border-transparent"
                 />
                 {screenshotPreview && (
@@ -189,7 +204,7 @@ const BuyBook = () => {
                   {error}
                 </div>
               )}
-              
+
               {submitSuccess && (
                 <div className="bg-green-50 text-green-600 p-4 rounded-xl font-medium">
                   Purchase submitted successfully!
