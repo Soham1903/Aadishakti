@@ -3,10 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import { UserContext } from "../UserContext";
-import coursesData from "../data/courses.json"; // Import your local JSON file
+import coursesData from "../data/courses.json";
 import { FadeInSection } from "./Home/FadeInSection";
 import { SectionHeading } from "./Home/SectionHeading";
-
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
@@ -18,7 +17,6 @@ export default function Courses() {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    // Load data directly from imported JSON
     setCourses(coursesData);
     setFilteredCourses(coursesData);
   }, []);
@@ -27,24 +25,18 @@ export default function Courses() {
     handleSearchAndSort();
   }, [searchTerm, sortOption, courses]);
 
-  // Update page title when component mounts
   useEffect(() => {
     document.title = "Courses - Aadishakti";
-
-    // Scroll to top when navigating to this page
     window.scrollTo(0, 0);
-
     return () => {
       document.title = "Aadishakti";
     };
   }, [location]);
 
   const handleCourseClick = (title) => {
-    // Find the exact course with correct casing
     const course = coursesData.find(
       (c) => c.title.toLowerCase() === title.toLowerCase()
     );
-
     if (course) {
       navigate(`/courses/${course.title}`);
     }
@@ -60,9 +52,9 @@ export default function Courses() {
     }
 
     if (sortOption === "priceLowHigh") {
-      tempCourses.sort((a, b) => a.price - b.price);
+      tempCourses.sort((a, b) => a.finalPrice - b.finalPrice);
     } else if (sortOption === "priceHighLow") {
-      tempCourses.sort((a, b) => b.price - a.price);
+      tempCourses.sort((a, b) => b.finalPrice - a.finalPrice);
     } else if (sortOption === "free") {
       tempCourses = tempCourses.filter((course) => course.finalPrice === 0);
     }
@@ -167,18 +159,17 @@ export default function Courses() {
                       {course.benefits && (
                         <p className="text-sm text-slate-600 mb-4">
                           {course.benefits
-                            .split("•")
+                            .split("\n")
                             .filter(Boolean)
                             .slice(0, 2)
                             .map((point, idx) => (
                               <div key={idx} className="flex items-start">
-                                <span className="text-[#87161a] mr-1">•</span>
-                                <span>{point.trim()}.</span>
+                                <span className="text-[#87161a] mr-2">•</span>
+                                <span>{point.trim()}</span>
                               </div>
                             ))}
                         </p>
                       )}
-
                       <div className="mt-auto">
                         <button
                           onClick={() => handleCourseClick(course.title)}

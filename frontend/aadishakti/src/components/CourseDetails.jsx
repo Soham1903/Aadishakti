@@ -15,6 +15,7 @@ import {
   Users,
   CheckCircle,
   ShoppingCart,
+  Youtube,
 } from "lucide-react";
 
 export default function CourseDetails() {
@@ -82,6 +83,10 @@ export default function CourseDetails() {
         title: course.title,
       },
     });
+  };
+
+  const handleWatchCourse = () => {
+    window.open('https://youtu.be/K6RijrUkbMs?si=ht2cplyTvy8Ld05j', '_blank');
   };
 
   return (
@@ -239,11 +244,15 @@ export default function CourseDetails() {
                           value={course.finalPrice}
                           onChange={handleChange}
                         />
+                      ) : course.finalPrice === 0 ? (
+                        "Free"
                       ) : (
                         `₹${course.finalPrice}`
                       )}
                     </div>
-                    <p className="text-slate-600">One-time payment</p>
+                    <p className="text-slate-600">
+                      {course.finalPrice === 0 ? "Free Course" : "One-time payment"}
+                    </p>
                   </div>
 
                   <div className="space-y-4 mb-6">
@@ -280,20 +289,32 @@ export default function CourseDetails() {
                   </div>
 
                   <div className="space-y-4">
-                    <button
-                      onClick={handleBuyNow}
-                      className="w-full px-4 py-3 bg-[#87161a] hover:bg-[#87161a]/90 text-white rounded-lg font-semibold transition-colors duration-200"
-                    >
-                      Buy Now
-                    </button>
+                    {course.finalPrice === 0 ? (
+                      <button
+                        onClick={handleWatchCourse}
+                        className="w-full px-4 py-3 bg-[#87161a] hover:bg-[#87161a]/90 text-white rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2"
+                      >
+                        <Youtube className="w-5 h-5" />
+                        Watch Course
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          onClick={handleBuyNow}
+                          className="w-full px-4 py-3 bg-[#87161a] hover:bg-[#87161a]/90 text-white rounded-lg font-semibold transition-colors duration-200"
+                        >
+                          Buy Now
+                        </button>
 
-                    <button
-                      onClick={handleAddToCart}
-                      className="w-full px-4 py-3 border-2 border-[#87161a] text-[#87161a] hover:bg-[#87161a] hover:text-white rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2"
-                    >
-                      <ShoppingCart className="w-5 h-5" />
-                      Add to Cart
-                    </button>
+                        <button
+                          onClick={handleAddToCart}
+                          className="w-full px-4 py-3 border-2 border-[#87161a] text-[#87161a] hover:bg-[#87161a] hover:text-white rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2"
+                        >
+                          <ShoppingCart className="w-5 h-5" />
+                          Add to Cart
+                        </button>
+                      </>
+                    )}
 
                     {user?.role === "admin" && (
                       <>

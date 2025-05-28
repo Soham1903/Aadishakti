@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { FadeInSection } from "../Home/FadeInSection";
 import { SectionHeading } from "../Home/SectionHeading";
 
-
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -73,15 +72,15 @@ const BookDetails = () => {
               }}
               className="lg:col-span-8"
             >
-              <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-100 h-full">
-                <div className="space-y-4">
-                  <h1 className="text-2xl font-semibold text-slate-800 mb-2">
+              <div className="bg-white rounded-xl shadow-sm p-6 sm:p-8 border border-slate-100 h-full">
+                <div className="space-y-6">
+                  <h1 className="text-2xl font-semibold text-slate-800">
                     {book.title}
                   </h1>
-                  <p className="text-[#87161a]/80 text-lg mb-4">
+                  <p className="text-[#87161a]/80 text-lg">
                     {book.author}
                   </p>
-                  <p className="text-3xl font-bold text-[#87161a] mb-8">
+                  <p className="text-3xl font-bold text-[#87161a]">
                     ₹ {book.price}
                   </p>
 
@@ -92,28 +91,33 @@ const BookDetails = () => {
                     Buy Now
                   </button>
 
-                  <div className="space-y-4 text-slate-600 leading-relaxed mt-8">
-                    <h2 className="text-xl font-medium text-slate-800 mb-4">Description</h2>
+                  <div className="space-y-4 text-slate-600 leading-relaxed">
+                    <h2 className="text-xl font-medium text-slate-800">Description</h2>
                     <p>{book.description}</p>
                   </div>
 
-                  <div className="bg-slate-50/50 rounded-lg p-6 mt-8">
+                  <div className="bg-slate-50/50 rounded-lg p-5 sm:p-6">
                     <h2 className="text-xl font-medium text-slate-800 mb-4">Book Details</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600">
-                      <div className="flex items-center">
-                        <span className="font-medium mr-2">Pages:</span> {book.pages}
+                    <div className="grid grid-cols-1 gap-4 text-slate-600">
+                      <div className="flex flex-wrap items-center">
+                        <span className="font-medium min-w-[80px] mr-2">Pages:</span> 
+                        <span className="flex-1">{book.pages}</span>
                       </div>
-                      <div className="flex items-center">
-                        <span className="font-medium mr-2">Language:</span> {book.language}
+                      <div className="flex flex-wrap items-center">
+                        <span className="font-medium min-w-[80px] mr-2">Language:</span> 
+                        <span className="flex-1">{book.language}</span>
                       </div>
-                      <div className="flex items-center">
-                        <span className="font-medium mr-2">Publisher:</span> {book.publisher}
+                      <div className="flex flex-wrap items-center">
+                        <span className="font-medium min-w-[80px] mr-2">Publisher:</span> 
+                        <span className="flex-1 break-words">{book.publisher}</span>
                       </div>
-                      <div className="flex items-center">
-                        <span className="font-medium mr-2">Format:</span> {book.format}
+                      <div className="flex flex-wrap items-center">
+                        <span className="font-medium min-w-[80px] mr-2">Format:</span> 
+                        <span className="flex-1">{book.format}</span>
                       </div>
-                      <div className="flex items-center col-span-2">
-                        <span className="font-medium mr-2">ISBN:</span> {book.isbn}
+                      <div className="flex flex-wrap items-center">
+                        <span className="font-medium min-w-[80px] mr-2">ISBN:</span> 
+                        <span className="flex-1 break-words">{book.isbn}</span>
                       </div>
                     </div>
                   </div>
