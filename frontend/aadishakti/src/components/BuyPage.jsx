@@ -32,7 +32,9 @@ function BuyPage() {
   useEffect(() => {
     // Find the course in the static JSON data instead of fetching from API
     try {
-      const foundCourse = coursesData.find((c) => c.courseId);
+      const decodedTitle = decodeURIComponent(title);
+
+      const foundCourse = coursesData.find((c) => c.title === decodedTitle);
       console.log(foundCourse);
 
       if (foundCourse) {

@@ -45,6 +45,8 @@ export default function Courses() {
   const handleSearchAndSort = () => {
     let tempCourses = [...courses];
 
+    tempCourses.sort((a, b) => Number(a.courseId) - Number(b.courseId));
+
     if (searchTerm) {
       tempCourses = tempCourses.filter((course) =>
         course.title.toLowerCase().includes(searchTerm.toLowerCase())
