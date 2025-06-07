@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { useCart } from "../contexts/CartContext";
 import coursesData from "../data/courses.json";
-import { FadeInSection } from "./Home/FadeInSection";
+// import { FadeInSection } from "./Home/FadeInSection";
 import { SectionHeading } from "./Home/SectionHeading";
 
 import {
@@ -92,7 +92,7 @@ export default function CourseDetails() {
   return (
     <div className="min-h-screen bg-white pt-[80px] sm:pt-[90px] md:pt-[100px] pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeInSection>
+        {/* <FadeInSection> */}
           <SectionHeading 
             title={isEditing ? (
               <input
@@ -337,7 +337,7 @@ export default function CourseDetails() {
               </div>
             </div>
           </div>
-        </FadeInSection>
+        {/* </FadeInSection> */}
       </div>
     </div>
   );

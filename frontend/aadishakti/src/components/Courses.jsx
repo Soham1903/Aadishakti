@@ -1,10 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Search, Filter } from "lucide-react";
-import { motion } from "framer-motion";
 import { UserContext } from "../UserContext";
 import coursesData from "../data/courses.json";
-import { FadeInSection } from "./Home/FadeInSection";
+// import { FadeInSection } from "./Home/FadeInSection";
 import { SectionHeading } from "./Home/SectionHeading";
 
 export default function Courses() {
@@ -67,7 +66,7 @@ export default function Courses() {
   return (
     <div className="min-h-screen bg-white pt-[80px] sm:pt-[90px] md:pt-[100px] pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeInSection>
+        {/* <FadeInSection> */}
           <SectionHeading
             title="Our Courses"
             subtitle="Discover and learn from our expert-led courses"
@@ -103,10 +102,10 @@ export default function Courses() {
               </select>
             </div>
           </div>
-        </FadeInSection>
+        {/* </FadeInSection> */}
 
         {/* Courses Grid */}
-        <FadeInSection>
+        {/* <FadeInSection> */}
           {filteredCourses.length === 0 ? (
             <div className="text-center text-slate-600 p-8 bg-white rounded-xl shadow-sm border border-slate-100">
               <p className="text-lg">
@@ -115,14 +114,9 @@ export default function Courses() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredCourses.map((course, index) => (
-                <motion.div
+              {filteredCourses.map((course) => (
+                <div
                   key={course.courseId}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -5 }}
                   className="group"
                 >
                   <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow transition-all duration-300 h-full flex flex-col border border-slate-100">
@@ -183,11 +177,11 @@ export default function Courses() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           )}
-        </FadeInSection>
+        {/* </FadeInSection> */}
       </div>
     </div>
   );
