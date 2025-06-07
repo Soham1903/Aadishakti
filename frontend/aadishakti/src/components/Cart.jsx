@@ -127,7 +127,7 @@ const Cart = () => {
                           {item.title}
                         </h3>
                         <p className="text-lg text-[#87161a] font-medium">
-                          ₹{item.price}
+                          ₹{item.finalPrice}
                         </p>
                       </div>
 
