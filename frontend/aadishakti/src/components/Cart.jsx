@@ -62,6 +62,8 @@ const Cart = () => {
     setCode(e.target.value);
   };
 
+  console.log(totalPrice);
+
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">

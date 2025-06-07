@@ -24,7 +24,9 @@ export const CartProvider = ({ children }) => {
 
     setCart((prevCart) => {
       const userCart = prevCart[user.id] || [];
-      const isAlreadyInCart = userCart.some((cartItem) => cartItem.title === item.title);
+      const isAlreadyInCart = userCart.some(
+        (cartItem) => cartItem.title === item.title
+      );
 
       if (isAlreadyInCart) {
         alert("This course is already in your cart.");
@@ -45,7 +47,9 @@ export const CartProvider = ({ children }) => {
     setCart((prevCart) => {
       if (!prevCart[user.id]) return prevCart; // Ensure user cart exists
 
-      const updatedCart = prevCart[user.id].filter((item) => item.title !== title);
+      const updatedCart = prevCart[user.id].filter(
+        (item) => item.title !== title
+      );
 
       // If user's cart is empty, remove user key
       const newCart = { ...prevCart };
@@ -70,10 +74,15 @@ export const CartProvider = ({ children }) => {
   };
 
   // ✅ Calculate total price
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.finalPrice,
+    0
+  );
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, totalPrice }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, clearCart, totalPrice }}
+    >
       {children}
     </CartContext.Provider>
   );
