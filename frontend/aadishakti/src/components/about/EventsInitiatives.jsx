@@ -11,7 +11,7 @@ const EventsInitiatives = () => {
       <FadeInSection>
         <SectionHeading
           title="अधिवेशन"
-          subtitle="आदिशक्ती गुरुकुलचे प्रमुख अधिवेशने"
+          subtitle="आदिशक्ती गुरुकुलची प्रमुख अधिवेशने"
         />
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -54,7 +54,7 @@ const EventsInitiatives = () => {
               <div className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {initiatives.map((initiative, index) => (
-                    <motion.div 
+                    <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ const EventsInitiatives = () => {
               <div className="p-4 max-h-[400px] overflow-y-auto">
                 <ul className="space-y-3">
                   {teamMembers.map((member, index) => (
-                    <motion.li 
+                    <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -5 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -127,9 +127,10 @@ const EventsInitiatives = () => {
                 आदिशक्ती गुरुकुल यूट्यूब चॅनेल
               </h3>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                अनेक अध्यात्मिक मार्गदर्शनपर व्हिडिओ, वास्तु, ज्योतिष, रेकी,
-                अंकशास्त्र या विषयांवरील मोफत मार्गदर्शन व कार्यशाळा आमच्या
-                यूट्यूब चॅनेलवर उपलब्ध आहेत.
+                अनेक विषयांवरील मार्गदर्शन पर व्हिडिओ तसेच ज्योतिष अंकशास्त्र
+                रेकी हीलिंग अंकशास्त्र, टॅरो कार्ड , मोबाईल न्यूमरॉलॉजी ,
+                अध्यात्म , विज्ञान , यासारख्या विषयांवरील मोफत मार्गदर्शन पर
+                कार्यशाळा आमच्या यूट्यूब चैनल वर उपलब्ध आहेत
               </p>
               <a
                 href="https://www.youtube.com/channel/UCxxxxxx"
@@ -259,17 +260,18 @@ const events = [
   {
     title: "राज्यस्तरीय वास्तू अधिवेशन",
     description:
-      "डोंबिवली येथे वास्तुशास्त्राच्या वैज्ञानिक अंगावर आधारित राज्यस्तरीय अधिवेशन",
+      "डोंबिवली येथे वास्तुशास्त्र या विषयावर आधारित विविध व्याख्याने आयोजित केली अनेक मान्यवर यावेळी उपस्थित होते .",
     location: "डोंबिवली",
   },
   {
     title: "महिला दिन आणि आनंद मेळा",
-    description: "महिला दिनानिमित्त महिलांसाठी अध्यात्मिक मार्गदर्शन व उपक्रम",
+    description:
+      "दरवर्षी प्रमाणे महिला दिनानिमित्त महिलांसाठी होम मिनिस्टर आणि सुगम संगीत कार्यक्रमाचे आयोजन आणि विविध पुरस्कार आणि बक्षिसांचे वाटप करण्यात आले . ",
     location: "पुणे",
   },
   {
     title: "ऑनलाईन मोफत कार्यशाळा",
-    description: "अनेक विषयांवर ऑनलाईन स्वरूपात नियमित आयोजित मोफत कार्यशाळा",
+    description: "अनेक विषयांवर ऑनलाईन स्वरूपात नियमित मोफत कार्यशाळा",
     location: "ऑनलाईन",
   },
 ];
@@ -282,7 +284,7 @@ const initiatives = [
     icon: Calendar,
   },
   {
-    title: "भजन प्रशिक्षण",
+    title: "सुगम संगीत आणि भजन प्रशिक्षण ",
     description:
       "महिलांसाठी मोफत ऑनलाईन भजन प्रशिक्षण आणि सुगम संगीत प्रशिक्षण आणि स्पर्धा",
     icon: Users,
@@ -311,9 +313,9 @@ const teamMembers = [
   { name: "सौ. ज्योती दानवे", role: "योगा विभाग प्रमुख" },
   { name: "श्री. कमलाकर कहाने", role: "सदस्य" },
   { name: "सौ. चंद्रकला कहाने", role: "सदस्य" },
-  { name: "सौ. रोदहणी लभडे", role: "सदस्य" },
-  { name: "श्री सुधीर लभडे", role: "सदस्य" },
-  { name: "सौ. पद्मिा कुलकणी", role: "सदस्य" },
+  { name: "सौ. रोहिणी भिडे", role: "सदस्य" },
+  { name: "श्री. सुधीर भिडे", role: "सदस्य" },
+  { name: "सौ. पद्मजा कुलकर्णी", role: "सदस्य" },
 ];
 
 const youtubeVideos = [
@@ -344,32 +346,32 @@ const awardRecipients = [
     title: "उत्तम लेखक पुरस्कार",
     subtitle: "अष्टक वर्ग महागुरु",
     recipient: "श्री. प्रदीप पंडित",
-    icon: Trophy
+    icon: Trophy,
   },
   {
     title: "ज्योतिष भूषण पुरस्कार",
     subtitle: "ज्योतिषाचार्य",
     recipient: "श्री. दीनानाथ जोशी",
-    icon: Award
+    icon: Award,
   },
   {
     title: "कार्यगौरव पुरस्कार",
     subtitle: "सक्रिय सहभाग",
     recipient: "सौ. वीणा जोशी",
-    icon: Trophy
+    icon: Trophy,
   },
   {
     title: "सेवा गौरव पुरस्कार",
     subtitle: "समर्पित सेवा",
     recipient: "सौ. वर्षा सिध्दे",
-    icon: Award
+    icon: Award,
   },
   {
     title: "जीवनगौरव पुरस्कार",
     subtitle: "सामाजिक कार्यकर्त्या",
     recipient: "सौ. सुधा सुळे",
     role: "आदिशक्ती गुरुकुलच्या सल्लागार",
-    icon: Trophy
+    icon: Trophy,
   },
 ];
 

@@ -16,7 +16,7 @@ const AboutFounder = () => {
           <motion.div
             variants={{
               hidden: { opacity: 0, scale: 0.95 },
-              visible: { opacity: 1, scale: 1 }
+              visible: { opacity: 1, scale: 1 },
             }}
             className="lg:col-span-4 flex justify-center"
           >
@@ -36,7 +36,7 @@ const AboutFounder = () => {
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             className="lg:col-span-8"
           >
@@ -46,8 +46,8 @@ const AboutFounder = () => {
                   ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
                 </h3>
                 <p className="text-[#87161a]/80 text-lg mb-4">
-                  संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड,
-                  जि. पुणे <br />
+                  संस्थापक अध्यक्षा, आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र
+                  सासवड, जि. पुणे <br />
                   एम. कॉम., वास्तु, ज्योतिष, रेकी, हिलींग आणि संमोहन तज्ञ,
                   अंकशास्त्र व मोबाईल न्यूमरॉलॉजी तज्ञ
                 </p>
@@ -57,20 +57,20 @@ const AboutFounder = () => {
                     वास्तु, ज्योतिष, रेकी, हीलींग, टॅरॉकार्ड रिडर, रमल शास्त्री,
                     मोबाईल न्यूमरॉलॉजी, डाउझिंग आणि या सारख्या अनेक विषयांचा
                     अभ्यास २००० पासून आवड म्हणून सुरू केला. वरील सर्व प्रत्येक
-                    शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे म्हणून
-                    २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या कार्यशाळा
-                    आणि मार्गदर्शन सलग २०११ पासून करत आहे.
+                    शास्त्र विज्ञानावर आधारित आहे ते कसे हे सर्वांना समजावे
+                    म्हणून २०१० पासून या क्षेत्रात पदार्पण केले. या विषयांच्या
+                    कार्यशाळा आणि मार्गदर्शन सलग २०११ पासून करत आहे.
                   </p>
 
                   <p>
                     अनेक विषयांच्या मोफत कार्यशाळा चालू असतात त्यामुळे हे ज्ञान
                     अनेकांपर्यंत पोहोचवण्याचे कार्य हाती घेतले आहे. तसेच अनेक
-                    लोकांना समस्यामुक्त करण्यासाठी मार्गदर्शन करणे व अंधश्रद्धेचा
-                    वापर न करता वैज्ञानिक दृष्टिकोनातून रेकी, हीलिंग, संमोहन,
-                    यासारख्या विषयांमधून समस्या निराकारण करणे. आदिशक्ती गुरुकुल हे
-                    यूट्यूब चैनल सध्या कार्यान्वित आहे. विविध अधिवेशनांमध्ये
-                    वास्तु ज्योतिष आणि मोबाईल न्यूमरॉलॉजी या विषयांवर व्याख्याने
-                    दिली जातात.
+                    लोकांना समस्यामुक्त करण्यासाठी मार्गदर्शन करणे व
+                    अंधश्रद्धेचा वापर न करता वैज्ञानिक दृष्टिकोनातून रेकी,
+                    हीलिंग, संमोहन, यासारख्या विषयांमधून समस्या निराकारण करणे.
+                    आदिशक्ती गुरुकुल हे यूट्यूब चैनल सध्या कार्यान्वित आहे.
+                    विविध अधिवेशनांमध्ये वास्तु ज्योतिष आणि मोबाईल न्यूमरॉलॉजी
+                    या विषयांवर व्याख्याने दिली जातात.
                   </p>
                 </div>
               </div>
@@ -89,12 +89,12 @@ const AboutFounder = () => {
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Honorary Titles - Left column */}
           <div className="lg:col-span-4">
-            <AwardsCard 
-              title="मानद पदव्या" 
+            <AwardsCard
+              title="मानद पदव्या"
               icon={<Award className="h-5 w-5 text-[#87161a]" />}
-              items={honoraryTitles.map(title => ({
+              items={honoraryTitles.map((title) => ({
                 organization: title.organization,
-                title: title.title
+                title: title.title,
               }))}
             />
           </div>
@@ -104,8 +104,8 @@ const AboutFounder = () => {
             <AwardsCard
               title="वक्ते म्हणून स्मृतीचिन्ह आणि सत्कार"
               icon={<Award className="h-5 w-5 text-[#87161a]" />}
-              items={speakerRecognitions.map(recognition => ({
-                title: recognition
+              items={speakerRecognitions.map((recognition) => ({
+                title: recognition,
               }))}
             />
           </div>
@@ -168,9 +168,7 @@ const AboutFounder = () => {
                     <book.icon className="h-6 w-6 text-[#87161a]" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-800">
-                      {book.title}
-                    </h4>
+                    <h4 className="font-medium text-slate-800">{book.title}</h4>
                     {book.publisher && (
                       <p className="text-sm text-slate-500 mt-1">
                         {book.publisher}
@@ -237,9 +235,7 @@ const AwardsCard = ({ title, icon, items }) => {
                 {item.organization} यांच्यातर्फे
               </p>
             )}
-            <p className="font-medium text-slate-700 mt-1">
-              {item.title}
-            </p>
+            <p className="font-medium text-slate-700 mt-1">{item.title}</p>
           </motion.div>
         ))}
       </div>

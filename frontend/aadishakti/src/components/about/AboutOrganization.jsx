@@ -1,6 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Target, BookOpen, Home, Star, Zap, BookText, Calculator, Phone } from "lucide-react";
+import {
+  Target,
+  BookOpen,
+  Home,
+  Star,
+  Zap,
+  BookText,
+  Calculator,
+  Phone,
+} from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { FadeInSection } from "./FadeInSection";
 
@@ -8,7 +17,7 @@ const AboutOrganization = () => {
   return (
     <div className="space-y-16">
       <FadeInSection>
-        <SectionHeading 
+        <SectionHeading
           title="आदिशक्ती गुरुकुल"
           subtitle="संस्थेचा परिचय व उद्देश"
         />
@@ -18,7 +27,7 @@ const AboutOrganization = () => {
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             className="bg-white rounded-xl shadow-sm p-8 border border-slate-100"
           >
@@ -37,7 +46,7 @@ const AboutOrganization = () => {
                 आदिशक्ती गुरुकुलचे पूर्वीचे नाव आदिशक्ती वास्तु ज्योतिष आणि
                 ऊर्जा हीलिंग सेंटर असे होते. परंतु आदिशक्ती गुरुकुलच्या
                 माध्यमातून मोठ्या प्रमाणावर समाजाला कार्यशाळेमार्फत मार्गदर्शन
-                करण्याचे काम करत असल्यामुळे आमच्या संस्थेचे नाव 2019 मध्ये
+                करण्याचे काम करत असल्यामुळे आमच्या संस्थेचे नाव 2011 मध्ये
                 आदिशक्ती गुरुकुल ज्योतिष संशोधन केंद्र, सासवड, जि. पुणे. असे
                 बदलण्यात आले.
               </p>
@@ -46,8 +55,7 @@ const AboutOrganization = () => {
                 2011 पासून वास्तु, ज्योतिष, रेकी, हीलिंग, अंकशास्त्र या सर्व
                 शास्त्रांच्या माध्यमातून सल्ला व मार्गदर्शनाचे काम चालू होते
                 परंतु त्याच बरोबर ठीक ठिकाणी जाऊन अनेक मोफत वास्तू व्हिजिट
-                केल्या व आम्ही शिकवत असलेल्या शास्त्राचा प्रसार आणि प्रचार
-                केला.
+                केल्या व आम्ही शिकवत असलेल्या शास्त्राचा प्रसार आणि प्रचार केला.
               </p>
 
               <p>
@@ -58,11 +66,11 @@ const AboutOrganization = () => {
               </p>
 
               <p>
-                वास्तुशास्त्र, रेकी, सम्मोहन, मॅजिक मनी मंत्रा, मनी रेकी,
-                मॅजिकल कॅश बॉक्स, ज्योतिष शास्त्र आणि अंकशास्त्र या विषयावरील
-                कार्यशाळा खूप गाजल्या. व त्यानंतर २०२० पासून ऑनलाईन
-                कार्यशाळाची मागणी वाढली. खरंतर त्यामुळे अनेक व्यक्तींना
-                शिकवण्याचे भाग्य आम्हाला मिळाले.
+                वास्तुशास्त्र, रेकी, सम्मोहन, मॅजिक मनी मंत्रा, मनी रेकी, मॅजिकल
+                कॅश बॉक्स, ज्योतिष शास्त्र आणि अंकशास्त्र या विषयावरील कार्यशाळा
+                खूप गाजल्या. व त्यानंतर २०२० पासून ऑनलाईन कार्यशाळाची मागणी
+                वाढली. खरंतर त्यामुळे अनेक व्यक्तींना शिकवण्याचे भाग्य आम्हाला
+                मिळाले.
               </p>
             </div>
           </motion.div>
@@ -70,10 +78,10 @@ const AboutOrganization = () => {
           {/* Right column - Mission & Vision */}
           <div className="space-y-8">
             {/* Mission Card */}
-            <motion.div 
+            <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
+                visible: { opacity: 1, y: 0 },
               }}
               className="bg-white rounded-xl shadow-sm p-8 border border-slate-100"
             >
@@ -93,7 +101,7 @@ const AboutOrganization = () => {
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
+                visible: { opacity: 1, y: 0 },
               }}
               className="bg-white rounded-xl shadow-sm p-8 border border-slate-100"
             >
@@ -158,9 +166,7 @@ const ServiceCard = ({ service, index }) => {
           <h3 className="text-xl font-medium text-slate-800 mb-2">
             {service.title}
           </h3>
-          <p className="text-slate-600">
-            {service.description}
-          </p>
+          <p className="text-slate-600">{service.description}</p>
         </div>
       </div>
     </motion.div>
@@ -174,39 +180,39 @@ const services = [
     description: "वैज्ञानिक पद्धतीचे वास्तुशास्त्र मार्गदर्शन व कार्यशाळा",
     image:
       "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    icon: Home
+    icon: Home,
   },
   {
     title: "ज्योतिष",
     description: "वैज्ञानिक दृष्टिकोनातून ज्योतिष शास्त्राचे मार्गदर्शन",
     image: "assets/AboutOrganization/Jyotish.jpg",
-    icon: Star
+    icon: Star,
   },
   {
     title: "रेकी हीलिंग",
     description: "प्राचीन उर्जा उपचार पद्धती व प्रशिक्षण",
     image:
       "https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    icon: Zap
+    icon: Zap,
   },
   {
     title: "संमोहन",
     description: "स्वसंमोहन, क्लिनिकल हिप्नोसिस आणि मॅजिकल हिप्नोसिस",
     image: "assets/AboutOrganization/samohan.jpg",
-    icon: BookText
+    icon: BookText,
   },
   {
     title: "अंकशास्त्र",
     description: "अंकशास्त्र आणि मोबाईल न्यूमरॉलॉजी",
     image: "assets/AboutOrganization/mobilenumber.jpg",
-    icon: Calculator
+    icon: Calculator,
   },
   {
     title: "मोबाईल न्यूमरॉलॉजी",
     description: "मोबाईल नंबर विश्लेषण आणि त्याचे प्रभाव",
     image: "assets/AboutOrganization/numero.png",
-    icon: Phone
-  }
+    icon: Phone,
+  },
 ];
 
 export default AboutOrganization;

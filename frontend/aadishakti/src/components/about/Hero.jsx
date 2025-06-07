@@ -8,8 +8,7 @@ function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('assets/AboutOrganization/Jyotish.jpg')",
+          backgroundImage: "url('assets/AboutOrganization/Jyotish.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900/80"></div>
@@ -42,6 +41,9 @@ function Hero() {
 
             <p className="text-xl md:text-2xl font-medium mb-4 text-white">
               ज्योतिषाचार्य सौ. चारुशीला श्रीकांत कांबळे (शिंपी)
+            </p>
+            <p className="text-lg md:text-xl font-normal text-white/90">
+              संपर्क - 9130755631 / 9657196333
             </p>
 
             <p className="text-lg md:text-xl font-normal text-white/90">
