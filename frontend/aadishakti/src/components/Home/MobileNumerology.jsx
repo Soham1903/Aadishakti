@@ -75,18 +75,13 @@ const MobileNumerology = () => {
             <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
               <div className="aspect-video overflow-hidden relative">
                 <img
-                  src="/assets/mobilenumber.jpg"
+                  src="assets/carousel/स्क्रीन लॉक.jpg"
                   alt="Mobile Numerology"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-white text-xl md:text-2xl font-medium">
-                    भाग्यकारक मोबाईल पॅटर्न
-                  </h3>
-                  <p className="text-white/90 text-sm md:text-base mt-1">
-                    वैज्ञानिक पद्धतीने तुमच्या जीवनात सकारात्मक बदल घडवून आणा
-                  </p>
+                  
                 </div>
               </div>
 
