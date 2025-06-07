@@ -96,7 +96,7 @@ const Footer = () => {
             <div className="space-y-3">
               <p className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-1" />
-                <span>123, संत तुकाराम नगर, पुणे, महाराष्ट्र - 411001</span>
+                <span>333, डी, सोपाननगर, सासवड, महाराष्ट्र 412301</span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
@@ -104,7 +104,7 @@ const Footer = () => {
                   href="tel:+919876543210"
                   className="hover:text-white/80 transition-colors duration-200"
                 >
-                  +91 98765 43210
+                  +91 9130755631
                 </a>
               </p>
               <p className="flex items-center gap-2">
@@ -113,7 +113,7 @@ const Footer = () => {
                   href="mailto:info@numerology.com"
                   className="hover:text-white/80 transition-colors duration-200"
                 >
-                  info@numerology.com
+                  adishaktigurukul@gmail.com
                 </a>
               </p>
             </div>
