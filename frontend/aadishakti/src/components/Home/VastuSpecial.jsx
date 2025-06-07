@@ -10,7 +10,7 @@ const VastuSpecial = () => {
           title="वास्तुशास्त्र मार्गदर्शन"
           subtitle="वैज्ञानिक पद्धतीचे वास्तुशास्त्र - विना तोडफोड सुख समृद्धी"
         />
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 items-center">
           {/* Left Side - Image Grid */}
           <div className="order-2 lg:order-1">
@@ -65,6 +65,7 @@ const VastuSpecial = () => {
                 "व्यावसायिक स्थळासाठी वास्तू सल्ला",
                 "वैज्ञानिक दृष्टिकोनातून वास्तू विश्लेषण",
                 "साधे आणि प्रभावी वास्तू उपाय",
+                "उपाययोजनांचा कमी खर्च जास्त फायदे",
               ].map((feature, index) => (
                 <div key={index} className="flex items-start">
                   <div className="bg-[#87161a]/10 p-2 rounded-full mr-4 text-[#87161a]">
