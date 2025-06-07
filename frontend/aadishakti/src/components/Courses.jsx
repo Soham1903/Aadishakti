@@ -11,7 +11,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("priceLowHigh");
+  const [sortOption, setSortOption] = useState("default");
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useContext(UserContext);
@@ -51,7 +51,9 @@ export default function Courses() {
       );
     }
 
-    if (sortOption === "priceLowHigh") {
+    if (sortOption === "default") {
+      tempCourses.sort((a, b) => Number(a.courseId) - Number(b.courseId));
+    } else if (sortOption === "priceLowHigh") {
       tempCourses.sort((a, b) => a.finalPrice - b.finalPrice);
     } else if (sortOption === "priceHighLow") {
       tempCourses.sort((a, b) => b.finalPrice - a.finalPrice);
@@ -66,8 +68,8 @@ export default function Courses() {
     <div className="min-h-screen bg-white pt-[80px] sm:pt-[90px] md:pt-[100px] pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeInSection>
-          <SectionHeading 
-            title="Our Courses" 
+          <SectionHeading
+            title="Our Courses"
             subtitle="Discover and learn from our expert-led courses"
           />
 
@@ -96,6 +98,7 @@ export default function Courses() {
               >
                 <option value="priceLowHigh">Price: Low to High</option>
                 <option value="priceHighLow">Price: High to Low</option>
+                <option value="default">Default</option>
                 <option value="free">Free Courses</option>
               </select>
             </div>

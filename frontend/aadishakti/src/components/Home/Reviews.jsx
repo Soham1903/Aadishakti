@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 const Reviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef(null);
 
   const reviews = [
     {
@@ -30,17 +32,43 @@ const Reviews = () => {
       text: "स्पर्श रेकी आणि दुसऱ्यांवर रेकी देण्याचे व्हिडीओ देखील खूपच प्रभावी आहेत. अद्याप मी त्यांची प्रत्यक्ष प्रॅक्टिस केलेली नाही, पण लवकरच करून अनुभव घेणार आहे. तुमचं मार्गदर्शन, शिकवलेली पद्धत आणि दिलेली उर्जा यासाठी तुम्हाला मनापासून धन्यवाद!",
       position: "ज्योतिषी",
     },
+    {
+      id: 4,
+      name: "श्री.गुड्डया स्वामी ",
+      image: "/users/swami.jpeg",
+      rating: 4,
+      text: "मॅडमनी सांगितल्याप्रमाणे भाग्यकारक मोबाईल नंबर घेतल्यामुळे माझे पैशाची आवक वाढली व त्यानंतर माझं घर बांधून झालं .माझ्या वडिलांची तब्येत सुद्धा व्यवस्थित नव्हती ती सुद्धा आता ओके आहे",
+      position: "ज्योतिषी",
+    },
+    {
+      id: 5,
+      name: "सौ.लता पास्ते ",
+      image: "/users/lata.jpeg",
+      rating: 5,
+      text: " मी रेकीचा क्लास केला. मला त्याचा खुपच फायदा झाला. सकाळी उठताना माझी कंबर खूप दु खायची. गेल्यावर्षी मला झिका वायरस ची लागण झाली होती. मी खूप औषधे घेतली अलोपथी. आयुर्वेदिक. होमिओपॅथी पण माझ्या हाताचे सांधे बोटाचे सांधे दुखतच होते. पण मी रोज एकवीस दिवस माझ्यावर रेकी घेतली आणि काय आश्चर्य माझ्या हाताचे दुखणे एकदम बंद झाले.",
+      position: "गृहिणी",
+    },
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const startAutoPlay = () => {
+    intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
       );
-    }, 8000);
+    }, 15000); // ⏱️ 15 seconds per card
+  };
 
-    return () => clearInterval(timer);
-  }, [reviews.length]);
+  const stopAutoPlay = () => {
+    clearInterval(intervalRef.current);
+  };
+
+  useEffect(() => {
+    if (!isPaused) {
+      startAutoPlay();
+    }
+
+    return () => stopAutoPlay();
+  }, [isPaused, reviews.length]);
 
   const nextReview = () => {
     setCurrentIndex((prevIndex) =>
@@ -55,7 +83,13 @@ const Reviews = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50">
+    <section
+      className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onMouseDown={() => setIsPaused(true)}
+      onMouseUp={() => setIsPaused(false)}
+    >
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <SectionHeading
           title="आमच्या विद्यार्थ्यांचा अभिप्राय"
@@ -65,7 +99,7 @@ const Reviews = () => {
         <div className="mt-12 relative">
           <div className="overflow-hidden relative">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {reviews.map((review) => (
@@ -81,8 +115,8 @@ const Reviews = () => {
                         <Star
                           key={i}
                           className={`w-5 h-5 ${
-                            i < review.rating 
-                              ? "text-yellow-400 fill-current" 
+                            i < review.rating
+                              ? "text-yellow-400 fill-current"
                               : "text-gray-300"
                           }`}
                         />
@@ -122,7 +156,7 @@ const Reviews = () => {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                className={`w-2.5 h-2.5 rounded-full transition-all ${
                   index === currentIndex ? "bg-[#87161a] w-6" : "bg-slate-300"
                 }`}
                 aria-label={`Go to review ${index + 1}`}
