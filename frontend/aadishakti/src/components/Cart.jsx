@@ -67,7 +67,7 @@ const Cart = () => {
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md text-center w-full max-w-md">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Please Login
+            Please Login first
           </h2>
           <p className="text-gray-600 mb-6">
             You need to be logged in to view your cart
