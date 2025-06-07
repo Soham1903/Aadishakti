@@ -4,7 +4,7 @@ import { Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import { UserContext } from "../UserContext";
 import coursesData from "../data/courses.json";
-import { FadeInSection } from "./Home/FadeInSection";
+// import { FadeInSection } from "./Home/FadeInSection";
 import { SectionHeading } from "./Home/SectionHeading";
 
 export default function Courses() {
