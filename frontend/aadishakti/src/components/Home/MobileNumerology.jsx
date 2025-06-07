@@ -10,7 +10,7 @@ const MobileNumerology = () => {
           title="मोबाईल नंबर न्यूमरॉलॉजी"
           subtitle="तुमच्या मोबाईल नंबरमधून जाणून घ्या तुमच्या जीवनातील भविष्य"
         />
-        
+
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Content - Information */}
           <div className="space-y-8">
@@ -20,17 +20,23 @@ const MobileNumerology = () => {
                   <Phone className="h-6 w-6 text-[#87161A]" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-medium text-slate-800 mb-2">मोबाईल नंबर आपल्या जीवनावर कसा परिणाम करतो?</h3>
-                  <p className="text-slate-600">तुमचा मोबाईल नंबर केवळ संपर्कासाठी नाही, तर आपल्या जीवनाच्या विविध पैलूंवर प्रभाव टाकतो.</p>
+                  <h3 className="text-xl font-medium text-slate-800 mb-2">
+                    मोबाईल नंबर आपल्या जीवनावर कसा परिणाम करतो?
+                  </h3>
+                  <p className="text-slate-600">
+                    तुमचा मोबाईल नंबर केवळ संपर्कासाठी नाही, तर आपल्या जीवनाच्या
+                    विविध पैलूंवर प्रभाव टाकतो.
+                  </p>
                 </div>
               </div>
-              
+
               <div className="space-y-4 mt-6">
                 {[
                   "तुमच्या मोबाईल नंबर मधील अंकांचा तुमच्या व्यक्तिमत्वावर प्रभाव",
                   "मोबाईल नंबरच्या ऊर्जेचा तुमच्या करिअरवर होणारा परिणाम",
                   "अंकशास्त्रानुसार तुमच्या आर्थिक स्थितीवर नंबरचा प्रभाव",
-                  "भाग्यकारक पॅटर्न लॉक पासवर्ड द्वारे सकारात्मक ऊर्जा"
+                  "भाग्यकारक पॅटर्न लॉक पासवर्ड द्वारे सकारात्मक ऊर्जा",
+                  "विवाह, जॉब, व्यवसाय, धनसंपत्ती, नातेसंबंध, यामध्ये सुधारणा.",
                 ].map((text, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <Star className="h-5 w-5 text-[#87161A] mt-1 flex-shrink-0" />
@@ -38,7 +44,7 @@ const MobileNumerology = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-8">
                 <a
                   href="https://wa.me/919130755631?text=Hi%20I%20would%20like%20to%20book%20an%20appointment!"
@@ -50,18 +56,20 @@ const MobileNumerology = () => {
                 </a>
               </div>
             </div>
-            
+
             <div className="bg-gradient-to-br from-[#791317]/10 to-slate-50 rounded-xl p-8">
               <h3 className="text-xl font-medium text-slate-800 mb-4 flex items-center">
                 <span className="w-1.5 h-8 bg-[#87161a]/80 rounded-full mr-3 inline-block"></span>
                 तुमचे भाग्य तुमच्या अंकांमध्ये दडलेले आहे
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                आजच तुमच्या मोबाईल नंबरचे विश्लेषण करून, जाणून घ्या तुमच्या जीवनातील सकारात्मक आणि नकारात्मक प्रभावांबद्दल. आमच्या तज्ञ अंकशास्त्रज्ञाकडून मार्गदर्शन घ्या.
+                आजच तुमच्या मोबाईल नंबरचे विश्लेषण करून, जाणून घ्या तुमच्या
+                जीवनातील सकारात्मक आणि नकारात्मक प्रभावांबद्दल. आमच्या तज्ञ
+                अंकशास्त्रज्ञाकडून मार्गदर्शन घ्या.
               </p>
             </div>
           </div>
-          
+
           {/* Right Content - Pattern Examples */}
           <div className="lg:pl-6">
             <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
@@ -73,11 +81,15 @@ const MobileNumerology = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-white text-xl md:text-2xl font-medium">भाग्यकारक मोबाईल पॅटर्न</h3>
-                  <p className="text-white/90 text-sm md:text-base mt-1">वैज्ञानिक पद्धतीने तुमच्या जीवनात सकारात्मक बदल घडवून आणा</p>
+                  <h3 className="text-white text-xl md:text-2xl font-medium">
+                    भाग्यकारक मोबाईल पॅटर्न
+                  </h3>
+                  <p className="text-white/90 text-sm md:text-base mt-1">
+                    वैज्ञानिक पद्धतीने तुमच्या जीवनात सकारात्मक बदल घडवून आणा
+                  </p>
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Lock className="h-5 w-5 text-[#87161A]" />
@@ -85,16 +97,21 @@ const MobileNumerology = () => {
                     भाग्यकारक पॅटर्न उदाहरणे
                   </h3>
                 </div>
-                
+
                 <div className="grid grid-cols-3 gap-6 mb-6">
                   <PatternExample pattern={[1, 2, 3, 5, 7]} />
                   <PatternExample pattern={[1, 5, 9, 8, 7]} />
                   <PatternExample pattern={[2, 5, 8, 9, 6]} />
                 </div>
-                
+
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="text-slate-700 text-sm md:text-base">
-                    <span className="font-medium">वैज्ञानिक तथ्य:</span> भाग्यकारक पासवर्ड वापरल्याने तुमच्या जीवनात आणि इन्कम मध्ये दहा टक्के वाढ होऊ शकते. अनेक लोकांच्या अनुभवावरून हे सिद्ध झाले आहे.
+                  <p className="text-slate-700 text-sm md:text-lg">
+                    <span className="font-mediumc font-bold">
+                      वैज्ञानिक तथ्य:
+                    </span>{" "}
+                    भाग्यकारक पासवर्ड वापरल्याने तुमच्या जीवनात आणि इन्कम मध्ये
+                    दहा टक्के वाढ होऊ शकते. अनेक लोकांच्या अनुभवावरून हे सिद्ध
+                    झाले आहे.
                   </p>
                 </div>
               </div>

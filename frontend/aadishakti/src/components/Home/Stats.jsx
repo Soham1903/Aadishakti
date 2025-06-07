@@ -63,11 +63,11 @@ const Stats = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-medium text-slate-800 inline-block mb-2 relative">
-            आमची वैदिक कामगिरी
+            आमचे कार्यक्षेत्र
             <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#87161a]/70 rounded-full"></span>
           </h2>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <motion.div
             className="text-center bg-slate-50 rounded-xl p-8 shadow-sm"
@@ -81,7 +81,7 @@ const Stats = () => {
             </div>
             <p className="text-slate-600 font-medium">विद्यार्थी</p>
           </motion.div>
-          
+
           <motion.div
             className="text-center bg-slate-50 rounded-xl p-8 shadow-sm"
             variants={statVariants}
@@ -94,7 +94,7 @@ const Stats = () => {
             </div>
             <p className="text-slate-600 font-medium">सल्ला सत्रे</p>
           </motion.div>
-          
+
           <motion.div
             className="text-center bg-slate-50 rounded-xl p-8 shadow-sm"
             variants={statVariants}
@@ -107,7 +107,7 @@ const Stats = () => {
             </div>
             <p className="text-slate-600 font-medium">भविष्यवाणी अचूकता</p>
           </motion.div>
-          
+
           <motion.div
             className="text-center bg-slate-50 rounded-xl p-8 shadow-sm"
             variants={statVariants}
