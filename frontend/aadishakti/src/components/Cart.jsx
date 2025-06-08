@@ -4,6 +4,7 @@ import { useUser } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ShoppingCart, Package2 } from "lucide-react";
+import { SectionHeading } from "./Home/SectionHeading";
 import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
@@ -21,7 +22,7 @@ const Cart = () => {
         items: cartItems,
         totalPrice,
         discountedPrice,
-        promoCode: code,
+        promoCode: appliedCode,
       },
     });
   };
@@ -85,16 +86,14 @@ const Cart = () => {
     setCode(e.target.value);
   };
 
-  console.log(totalPrice);
-
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-        <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md text-center w-full max-w-md">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 pt-24">
+        <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm text-center w-full max-w-md border border-slate-100">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4">
             Please Login first
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-slate-600 mb-6">
             You need to be logged in to view your cart
           </p>
           <button
@@ -109,21 +108,20 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:py-12">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 pt-24">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-4 sm:p-6 md:p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <ShoppingCart className="w-8 h-8 text-[#87161a]" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
-                Your Cart
-              </h2>
-            </div>
+        <SectionHeading
+          title="Your Shopping Cart"
+          subtitle="Review and checkout your items"
+          icon={<ShoppingCart className="w-6 h-6 text-[#87161a]" />}
+        />
 
+        <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 mt-8">
+          <div className="p-6 sm:p-8">
             {cartItems.length === 0 ? (
               <div className="text-center py-12">
-                <Package2 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 text-lg mb-6">Your cart is empty</p>
+                <Package2 className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                <p className="text-slate-600 text-lg mb-6">Your cart is empty</p>
                 <button
                   onClick={() => navigate("/courses")}
                   className="bg-[#87161a] text-white px-6 py-3 rounded-md hover:bg-[#821636] transition-colors w-full sm:w-auto"
@@ -137,7 +135,7 @@ const Cart = () => {
                   {cartItems.map((item) => (
                     <div
                       key={item.id}
-                      className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100"
+                      className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 bg-slate-50 rounded-lg border border-slate-100"
                     >
                       <div className="w-full sm:w-24 h-24 overflow-hidden rounded-lg flex-shrink-0">
                         <img
@@ -148,7 +146,7 @@ const Cart = () => {
                       </div>
 
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-1 break-words">
+                        <h3 className="text-lg font-semibold text-slate-800 mb-1 break-words">
                           {item.title}
                         </h3>
                         <p className="text-lg text-[#87161a] font-medium">
@@ -158,20 +156,7 @@ const Cart = () => {
 
                       <button
                         onClick={() => removeFromCart(item.title)}
-                        className="w-full sm:w-auto px-4 py-2 text-white border rounded-lg transition-all duration-300 font-medium text-center"
-                        style={{
-                          color: "#87161a",
-                          borderColor: "#87161a",
-                          backgroundColor: "transparent",
-                        }}
-                        onMouseEnter={(e) => (
-                          (e.target.style.backgroundColor = "#87161a"),
-                          (e.target.style.color = "white")
-                        )}
-                        onMouseLeave={(e) => (
-                          (e.target.style.backgroundColor = "transparent"),
-                          (e.target.style.color = "#87161a")
-                        )}
+                        className="w-full sm:w-auto px-4 py-2 text-[#87161a] border border-[#87161a] rounded-lg transition-all duration-300 font-medium text-center hover:bg-[#87161a] hover:text-white"
                       >
                         Remove
                       </button>
@@ -179,11 +164,11 @@ const Cart = () => {
                   ))}
                 </div>
 
-                <div className="mt-8 border-t pt-6">
+                <div className="mt-8 border-t border-slate-100 pt-6">
                   <div className="mb-6">
                     <label
                       htmlFor="coupon"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-sm font-medium text-slate-700 mb-2"
                     >
                       Promo Code
                     </label>
@@ -193,7 +178,7 @@ const Cart = () => {
                         id="coupon"
                         value={code}
                         onChange={handleInputChange}
-                        className="flex-1 border border-gray-300 rounded-md shadow-sm focus:ring-[#87161a] focus:border-[#87161a] px-4 py-2"
+                        className="flex-1 border border-slate-300 rounded-md shadow-sm focus:ring-[#87161a] focus:border-[#87161a] px-4 py-2"
                         placeholder="Enter code"
                       />
                       <button
@@ -203,10 +188,15 @@ const Cart = () => {
                         Apply Code
                       </button>
                     </div>
+                    {appliedCode && (
+                      <p className="text-sm text-green-600 mt-2">
+                        Applied code: {appliedCode}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="space-y-3 bg-gray-50 p-4 rounded-lg">
-                    <div className="flex justify-between text-gray-600">
+                  <div className="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-100">
+                    <div className="flex justify-between text-slate-600">
                       <span>Subtotal</span>
                       <span>₹{totalPrice}</span>
                     </div>
@@ -218,7 +208,7 @@ const Cart = () => {
                         </span>
                       </div>
                     )}
-                    <div className="flex justify-between text-xl font-bold text-gray-800 pt-2 border-t">
+                    <div className="flex justify-between text-xl font-bold text-slate-800 pt-2 border-t border-slate-200">
                       <span>Total</span>
                       <span>₹{discountedPrice}</span>
                     </div>
