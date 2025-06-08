@@ -158,7 +158,7 @@ const Navbar = () => {
               <img
                 src="/assets/Adishakti TEXT logo.png"
                 alt="Aadishakti Text"
-                className="h-10 md:h-8 w-64"
+                className="h-14 md:h-8 w-64"
               />
             </Link>
           </div>

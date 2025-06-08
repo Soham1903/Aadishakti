@@ -23,7 +23,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-white/80 pr-4">
-              तुमच्या जीवनातील महत्वपूर्ण निर्णयांसाठी अंकशास्त्राचा मार्गदर्शक
+              तुमच्या जीवनातील महत्वपूर्ण निर्णयांसाठी आम्हाला संपर्क करा
             </p>
           </div>
 
@@ -85,6 +85,30 @@ const Footer = () => {
                   className="hover:text-white/80 transition-colors duration-200"
                 >
                   टॅरो रीडिंग
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/tarot"
+                  className="hover:text-white/80 transition-colors duration-200"
+                >
+                  ज्योतिष शास्त्र
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/tarot"
+                  className="hover:text-white/80 transition-colors duration-200"
+                >
+                  स्क्रीन लॉक पासवर्ड
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/tarot"
+                  className="hover:text-white/80 transition-colors duration-200"
+                >
+                  वास्तुशास्त्र मार्गदर्शन
                 </a>
               </li>
             </ul>

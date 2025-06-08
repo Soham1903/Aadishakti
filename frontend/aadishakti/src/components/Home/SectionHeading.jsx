@@ -7,7 +7,9 @@ export const SectionHeading = ({ title, subtitle }) => {
         {title}
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#87161a]/70 rounded-full"></span>
       </h2>
-      {subtitle && <p className="text-slate-600 mt-4 text-xl">{subtitle}</p>}
+      {subtitle && (
+        <p className="text-slate-600 mt-4 text-xl font-bold">{subtitle}</p>
+      )}
     </div>
   );
 };

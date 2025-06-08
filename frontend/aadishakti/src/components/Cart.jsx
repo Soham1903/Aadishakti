@@ -13,12 +13,32 @@ const Cart = () => {
 
   const [code, setCode] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState(totalPrice);
+  const [appliedCode, setAppliedCode] = useState("");
+
+  const handleCheckout = () => {
+    navigate("/checkout", {
+      state: {
+        items: cartItems,
+        totalPrice,
+        discountedPrice,
+        promoCode: code,
+      },
+    });
+  };
 
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (appliedCode) {
+      handleApplyCoupon(); // Reapply last valid code
+    } else {
+      setDiscountedPrice(totalPrice); // Reset discount
+    }
+  }, [totalPrice]);
 
   const handleApplyCoupon = async () => {
     if (!code) {
@@ -47,13 +67,16 @@ const Cart = () => {
       if (!response.ok) {
         setDiscountedPrice(totalPrice);
         toast.error("⚠️ Invalid or expired promo code. Discount: ₹0");
+        setAppliedCode(""); // Clear applied code
         return;
       }
 
       setDiscountedPrice(data.finalAmount);
+      setAppliedCode(code); // Save the valid promo
       toast.success(`✅ ${data.message}`);
     } catch (err) {
       setDiscountedPrice(totalPrice);
+      setAppliedCode(""); // Clear on error
       toast.error(`⚠️ ${err.message || "Something went wrong."}`);
     }
   };
@@ -201,7 +224,10 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <button className="mt-6 w-full bg-[#87161a] text-white py-3 rounded-md hover:bg-[#821636] transition-colors font-medium text-lg">
+                  <button
+                    onClick={handleCheckout}
+                    className="mt-6 w-full bg-[#87161a] text-white py-3 rounded-md hover:bg-[#821636] transition-colors font-medium text-lg"
+                  >
                     Proceed to Checkout
                   </button>
                 </div>

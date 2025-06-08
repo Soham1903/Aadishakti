@@ -46,7 +46,7 @@ function Hero() {
               संपर्क - 9130755631 / 9657196333
             </p>
 
-            <p className="text-lg md:text-xl font-normal text-white/90">
+            <p className="text-lg md:text-xl font-normal text-white/90 mt-8">
               आदिशक्ति गुरुकुल ज्योतिष संशोधन केंद्र सासवड, जि. पुणे
             </p>
           </motion.div>

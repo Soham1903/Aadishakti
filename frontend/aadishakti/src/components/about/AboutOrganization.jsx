@@ -189,7 +189,7 @@ const services = [
     icon: Star,
   },
   {
-    title: "रेकी हीलिंग",
+    title: "रेकी हीलिंग व उपचार",
     description: "प्राचीन उर्जा उपचार पद्धती व प्रशिक्षण",
     image:
       "https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -202,15 +202,15 @@ const services = [
     icon: BookText,
   },
   {
-    title: "अंकशास्त्र",
+    title: "अंकशास्त्र आणि नेम न्यूमरॉलॉजी",
     description: "अंकशास्त्र आणि मोबाईल न्यूमरॉलॉजी",
-    image: "assets/AboutOrganization/mobilenumber.jpg",
+    image: "assets/AboutOrganization/numero.png",
     icon: Calculator,
   },
   {
     title: "मोबाईल न्यूमरॉलॉजी",
     description: "मोबाईल नंबर विश्लेषण आणि त्याचे प्रभाव",
-    image: "assets/AboutOrganization/numero.png",
+    image: "assets/carousel/स्क्रीन लॉक.jpg",
     icon: Phone,
   },
 ];

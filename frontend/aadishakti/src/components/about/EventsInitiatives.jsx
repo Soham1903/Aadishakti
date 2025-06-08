@@ -127,13 +127,13 @@ const EventsInitiatives = () => {
                 आदिशक्ती गुरुकुल यूट्यूब चॅनेल
               </h3>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                अनेक विषयांवरील मार्गदर्शन पर व्हिडिओ तसेच ज्योतिष अंकशास्त्र
-                रेकी हीलिंग अंकशास्त्र, टॅरो कार्ड , मोबाईल न्यूमरॉलॉजी ,
-                अध्यात्म , विज्ञान , यासारख्या विषयांवरील मोफत मार्गदर्शन पर
-                कार्यशाळा आमच्या यूट्यूब चैनल वर उपलब्ध आहेत
+                अनेक विषयांवरील मार्गदर्शन पर व्हिडिओ तसेच ज्योतिष, अंकशास्त्र,
+                रेकी हीलिंग, टॅरो कार्ड , मोबाईल न्यूमरॉलॉजी , अध्यात्म ,
+                विज्ञान यासारख्या विषयांवरील मोफत मार्गदर्शन पर कार्यशाळा आमच्या
+                यूट्यूब चैनल वर उपलब्ध आहेत
               </p>
               <a
-                href="https://www.youtube.com/channel/UCxxxxxx"
+                href="https://www.youtube.com/@aadishaktigurukul8441"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-5 py-2 bg-[#87161a]/80 text-white rounded-full hover:bg-[#87161a] transition-colors text-sm"

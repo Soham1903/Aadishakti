@@ -49,7 +49,7 @@ const BookDetails = () => {
             <motion.div
               variants={{
                 hidden: { opacity: 0, scale: 0.95 },
-                visible: { opacity: 1, scale: 1 }
+                visible: { opacity: 1, scale: 1 },
               }}
               className="lg:col-span-4"
             >
@@ -68,7 +68,7 @@ const BookDetails = () => {
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
+                visible: { opacity: 1, y: 0 },
               }}
               className="lg:col-span-8"
             >
@@ -77,11 +77,9 @@ const BookDetails = () => {
                   <h1 className="text-2xl font-semibold text-slate-800">
                     {book.title}
                   </h1>
-                  <p className="text-[#87161a]/80 text-lg">
-                    {book.author}
-                  </p>
+                  <p className="text-[#87161a]/80 text-lg">{book.author}</p>
                   <p className="text-3xl font-bold text-[#87161a]">
-                    ₹ {book.price}
+                    ₹ {book.price} + ₹ 60 Courier charges
                   </p>
 
                   <button
@@ -92,31 +90,47 @@ const BookDetails = () => {
                   </button>
 
                   <div className="space-y-4 text-slate-600 leading-relaxed">
-                    <h2 className="text-xl font-medium text-slate-800">Description</h2>
+                    <h2 className="text-xl font-medium text-slate-800">
+                      Description
+                    </h2>
                     <p>{book.description}</p>
                   </div>
 
                   <div className="bg-slate-50/50 rounded-lg p-5 sm:p-6">
-                    <h2 className="text-xl font-medium text-slate-800 mb-4">Book Details</h2>
+                    <h2 className="text-xl font-medium text-slate-800 mb-4">
+                      Book Details
+                    </h2>
                     <div className="grid grid-cols-1 gap-4 text-slate-600">
                       <div className="flex flex-wrap items-center">
-                        <span className="font-medium min-w-[80px] mr-2">Pages:</span> 
+                        <span className="font-medium min-w-[80px] mr-2">
+                          Pages:
+                        </span>
                         <span className="flex-1">{book.pages}</span>
                       </div>
                       <div className="flex flex-wrap items-center">
-                        <span className="font-medium min-w-[80px] mr-2">Language:</span> 
+                        <span className="font-medium min-w-[80px] mr-2">
+                          Language:
+                        </span>
                         <span className="flex-1">{book.language}</span>
                       </div>
                       <div className="flex flex-wrap items-center">
-                        <span className="font-medium min-w-[80px] mr-2">Publisher:</span> 
-                        <span className="flex-1 break-words">{book.publisher}</span>
+                        <span className="font-medium min-w-[80px] mr-2">
+                          Publisher:
+                        </span>
+                        <span className="flex-1 break-words">
+                          {book.publisher}
+                        </span>
                       </div>
                       <div className="flex flex-wrap items-center">
-                        <span className="font-medium min-w-[80px] mr-2">Format:</span> 
+                        <span className="font-medium min-w-[80px] mr-2">
+                          Format:
+                        </span>
                         <span className="flex-1">{book.format}</span>
                       </div>
                       <div className="flex flex-wrap items-center">
-                        <span className="font-medium min-w-[80px] mr-2">ISBN:</span> 
+                        <span className="font-medium min-w-[80px] mr-2">
+                          ISBN:
+                        </span>
                         <span className="flex-1 break-words">{book.isbn}</span>
                       </div>
                     </div>
