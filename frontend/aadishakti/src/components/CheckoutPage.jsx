@@ -158,9 +158,9 @@ function CheckoutPage() {
           <p className="text-gray-600 mb-2">
             We'll verify your payment and send you access details soon.
           </p>
-          <p className="text-sm text-green-600 mb-8 font-medium">
+          {/* <p className="text-sm text-green-600 mb-8 font-medium">
             Your cart has been cleared automatically.
-          </p>
+          </p> */}
           <div className="space-y-3">
             <button
               onClick={() => navigate("/courses")}
