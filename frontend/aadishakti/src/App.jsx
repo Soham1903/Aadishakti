@@ -31,6 +31,7 @@ import BooksList from "./components/Books/BooksList";
 import BookDetails from "./components/Books/BooksDetails";
 import CheckoutPage from "./components/CheckoutPage.jsx";
 import BuyBook from "./components/Books/BuyBook.jsx";
+import Certificate from "./components/Certificate.jsx";
 
 function App() {
   return (
@@ -57,6 +58,16 @@ function App() {
             <Route path="/books" element={<BooksList />} />
             <Route path="/buybook" element={<BuyBook />} />
             <Route path="/book/:id" element={<BookDetails />} />
+            <Route
+              path="/certificate"
+              element={
+                <Certificate
+                  name="Soham Ladgaonkar"
+                  course="रेकी लेव्हल टू - डिस्टन्स रेकी"
+                  date="June 8, 2025"
+                />
+              }
+            />
 
             <Route
               path="/courses/:courseId/details"
