@@ -66,7 +66,7 @@ const Dashboard = () => {
             <div className="text-red-400 text-center">
               Error loading courses: {error}
             </div>
-          ) : courses.length === 0 ? (
+          ) : !courses ? (
             <div className="text-white text-center">
               No courses purchased yet
             </div>
