@@ -66,13 +66,13 @@ const Dashboard = () => {
             <div className="text-red-400 text-center">
               Error loading courses: {error}
             </div>
-          ) : !courses ? (
+          ) : !data.data.courses ? (
             <div className="text-white text-center">
               No courses purchased yet
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {courses.map((course) => (
+              {data.courses.map((course) => (
                 <div
                   key={course._id}
                   className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-[#87161a] transition-all"
