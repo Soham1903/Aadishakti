@@ -11,13 +11,21 @@ export const createTransaction = async (req, res) => {
     const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
       req.body;
 
+    console.log(req.body.courseTitle);
+
     console.log("Received transaction data:");
     console.log("Customer:", courseTitle);
     console.log("Phone:", phoneNumber);
     console.log("Promo Code:", promoCode);
     console.log("Final Price:", finalPrice);
     // Validate required fields
-    if (!customerName || !phoneNumber || !courseTitle || !req.file) {
+    if (
+      !customerName ||
+      !phoneNumber ||
+      !courseTitle ||
+      !finalPrice ||
+      !req.file
+    ) {
       return res.status(400).json({
         success: false,
         message: "All fields including screenshot are required",
@@ -48,6 +56,15 @@ export const createTransaction = async (req, res) => {
       imageBase64: req.file.buffer.toString("base64"),
     };
 
+    // 6. Find and update user
+    const user = await User.findOne({ phoneno: phoneNumber });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
     // 5. Create transaction record
     const newTransaction = new Transaction({
       customerName,
@@ -62,16 +79,6 @@ export const createTransaction = async (req, res) => {
       transactionDate: new Date(),
       user: user._id,
     });
-
-    // 6. Find and update user
-    // const user = await User.findOne({ phoneno: phoneNumber });
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
     // 7. Save everything
     await Promise.all([newTransaction.save(), user.save()]);
 
@@ -107,9 +114,7 @@ export const createTransaction = async (req, res) => {
 // Get all transactions
 export const getAllTransactions = async (req, res) => {
   try {
-    const transactions = await Transaction.find()
-      .sort({ createdAt: -1 })
-      .populate("course", "title");
+    const transactions = await Transaction.find().sort({ createdAt: -1 });
     res.json(transactions);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -153,6 +158,7 @@ export const toggleVerification = async (req, res) => {
     // 3. If verified, update user and promocode
     if (isVerified && transaction.course && transaction.phoneNumber) {
       const user = await User.findOne({ phoneno: transaction.phoneNumber });
+      console.log(user);
 
       if (user && !user.courses.includes(transaction.course)) {
         user.courses.push(transaction.course);
