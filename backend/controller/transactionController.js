@@ -133,11 +133,13 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // 1. Find transaction
-    const transaction = await Transaction.findById(transactionId).populate(
-      "user",
-      "courses"
-    );
+    // 1. Find transaction with user and course populated
+    const transaction = await Transaction.findById(transactionId)
+      .populate("user", "courses")
+      .populate("course");
+
+    console.log("Fetched transaction:", transaction);
+
     if (!transaction) {
       return res.status(404).json({
         success: false,
@@ -145,7 +147,7 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // 2. Update verification
+    // 2. Update verification status
     const updatedTransaction = await Transaction.findByIdAndUpdate(
       transactionId,
       {
@@ -155,20 +157,36 @@ export const toggleVerification = async (req, res) => {
       { new: true }
     );
 
-    // 3. If verified, update user and promocode
-    if (isVerified && transaction.course && transaction.phoneNumber) {
-      const user = await User.findOne({ phoneno: transaction.phoneNumber });
+    console.log("Updated transaction:", updatedTransaction);
 
-      if (user && !user.courses.includes(transaction.course)) {
-        user.courses.push(transaction.course);
+    // 3. If verified, update user's courses and promo code
+    if (isVerified && transaction.course && transaction.user) {
+      const user = await User.findById(transaction.user._id);
+      console.log("Fetched user before course update:", user);
+
+      // Check if course already exists in user's courses
+      const courseExists = user.courses.some(
+        (courseId) => courseId.toString() === transaction.course._id.toString()
+      );
+
+      console.log("Course exists in user already:", courseExists);
+      console.log("Transaction course ID:", transaction.course._id);
+
+      if (!courseExists) {
+        user.courses.push(transaction.course._id);
         await user.save();
+        console.log("Course added to user. Updated user:", user);
+      } else {
+        console.log("Course already exists in user's courses. Skipping push.");
       }
 
       if (transaction.promoCode) {
-        await PromoCode.findOneAndUpdate(
+        const updatedPromo = await PromoCode.findOneAndUpdate(
           { code: transaction.promoCode },
-          { $inc: { totalRedemptions: 1 } }
+          { $inc: { totalRedemptions: 1 } },
+          { new: true }
         );
+        console.log("Promo code updated:", updatedPromo);
       }
     }
 

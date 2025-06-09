@@ -93,9 +93,7 @@ export const getCourseByTitle = async (req, res) => {
   }
 };
 
-export const getCourseById = async (req, res) => {
-  
-}
+export const getCourseById = async (req, res) => {};
 
 // controllers/courseController.js
 export const updateCourse = async (req, res) => {
@@ -156,8 +154,9 @@ export const deleteCourse = async (req, res) => {
 // controllers/userController.js
 export const getUserCourses = async (req, res) => {
   console.log("Function invoked");
+  onsole.log(req.params.userId);
   try {
-    console.log(req.params);
+    console.log(req.params.userId);
     const user = await User.findById(req.params.userId).populate({
       path: "courses",
       select: "title description price duration instructor image",

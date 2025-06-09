@@ -7,6 +7,11 @@ const transactionSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  course: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
+    required: true, // optional if not always needed
+  },
   customerName: {
     type: String,
     required: [true, "Customer name is required"],
