@@ -1,5 +1,6 @@
 import Course from "../model/courseSchema.js";
 import User from "../model/userSchema.js";
+import mongoose from "mongoose";
 
 // Add Course
 export const addCourse = async (req, res) => {
