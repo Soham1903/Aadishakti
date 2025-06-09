@@ -160,6 +160,10 @@ export const toggleVerification = async (req, res) => {
     console.log("Updated transaction:", updatedTransaction);
 
     // 3. If verified, update user's courses and promo code
+    console.log("isVerified:", isVerified);
+    console.log("transaction.course:", transaction.course);
+    console.log("transaction.user:", transaction.user);
+
     if (isVerified && transaction.course && transaction.user) {
       const user = await User.findById(transaction.user._id);
       console.log("Fetched user before course update:", user);
