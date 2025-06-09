@@ -1,3 +1,9 @@
+import Transaction from "../model/transactionSchema.js";
+import User from "../model/userSchema.js";
+import Course from "../model/courseSchema.js";
+import PromoCode from "../model/promocodeSchema.js";
+import { v4 as uuidv4 } from "uuid";
+
 export const createTransaction = async (req, res) => {
   try {
     const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
