@@ -153,29 +153,51 @@ export const deleteCourse = async (req, res) => {
 
 // controllers/userController.js
 export const getUserCourses = async (req, res) => {
-  console.log("Function invoked");
-  console.log(req.params.userId);
   try {
-    console.log(req.params.userId);
-    const user = await User.findById(req.params.userId).populate({
+    const { userId } = req.params;
+    console.log("Getting courses for user:", userId);
+
+    // Validate userId format
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user ID format",
+      });
+    }
+
+    const user = await User.findById(userId).populate({
       path: "courses",
-      select: "title description price duration instructor image",
+      select:
+        "title description price duration instructor image createdAt isActive",
+      // Optional: Only populate active courses
+      match: { isActive: { $ne: false } },
     });
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
+
+    // Filter out any null courses (in case some courses were deleted)
+    const activeCourses = user.courses.filter((course) => course !== null);
 
     res.status(200).json({
       success: true,
-      courses: user.courses,
+      message: `Found ${activeCourses.length} courses`,
+      data: {
+        userId: user._id,
+        userName: user.name, // Include user name if available
+        courses: activeCourses,
+        totalCourses: activeCourses.length,
+      },
     });
   } catch (error) {
+    console.error("Error fetching user courses:", error);
     res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Server error while fetching courses",
       error: error.message,
     });
   }

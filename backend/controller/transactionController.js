@@ -1,23 +1,15 @@
-import Transaction from "../model/transactionSchema.js";
-import User from "../model/userSchema.js";
-import Course from "../model/courseSchema.js";
-import PromoCode from "../model/promocodeSchema.js";
-import { v4 as uuidv4 } from "uuid";
-
-// controllers/transactionController.js
-// controllers/transactionController.js
 export const createTransaction = async (req, res) => {
   try {
     const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
       req.body;
 
-    console.log(req.body.courseTitle);
-
     console.log("Received transaction data:");
-    console.log("Customer:", courseTitle);
+    console.log("Customer:", customerName); // Fixed: was courseTitle
     console.log("Phone:", phoneNumber);
+    console.log("Course:", courseTitle);
     console.log("Promo Code:", promoCode);
     console.log("Final Price:", finalPrice);
+
     // Validate required fields
     if (
       !customerName ||
@@ -32,31 +24,16 @@ export const createTransaction = async (req, res) => {
       });
     }
 
-    // 1. Find the course
-    // const course = await Course.findOne({ title: courseTitle });
-    // const user = await User.findOne({ phoneno: phoneNumber });
-    // if (!course) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Course not found",
-    //   });
-    // }
+    // 1. Find the course and validate it exists
+    const course = await Course.findOne({ title: courseTitle });
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
 
-    // 2. Initialize price variables
-    let originalPrice = finalPrice || 0;
-    let discountApplied = 0;
-    let validPromoCode = null;
-
-    // 3. Validate and apply promo code if provided
-
-    // 4. Process payment proof
-    const paymentProof = {
-      filename: req.file.originalname,
-      contentType: req.file.mimetype,
-      imageBase64: req.file.buffer.toString("base64"),
-    };
-
-    // 6. Find and update user
+    // 2. Find and validate user exists
     const user = await User.findOne({ phoneno: phoneNumber });
     if (!user) {
       return res.status(404).json({
@@ -65,11 +42,42 @@ export const createTransaction = async (req, res) => {
       });
     }
 
-    // 5. Create transaction record
+    // 3. Initialize price variables
+    let originalPrice = course.price || finalPrice; // Use course price as original
+    let discountApplied = 0;
+    let validPromoCode = null;
+
+    // 4. Validate and apply promo code if provided
+    if (promoCode) {
+      const promo = await PromoCode.findOne({ code: promoCode });
+      if (promo && promo.isActive) {
+        validPromoCode = promo;
+        discountApplied = (originalPrice * promo.discountPercentage) / 100;
+        // Verify final price matches expected discounted price
+        const expectedFinalPrice = originalPrice - discountApplied;
+        if (Math.abs(finalPrice - expectedFinalPrice) > 0.01) {
+          return res.status(400).json({
+            success: false,
+            message: "Price calculation mismatch",
+          });
+        }
+      }
+    }
+
+    // 5. Process payment proof
+    const paymentProof = {
+      filename: req.file.originalname,
+      contentType: req.file.mimetype,
+      imageBase64: req.file.buffer.toString("base64"),
+    };
+
+    // 6. Create transaction record
     const newTransaction = new Transaction({
       customerName,
       phoneNumber,
-      courseTitle,
+      courseTitle: [courseTitle], // Fixed: Make array if schema expects array
+      // OR change schema to: courseTitle: { type: String, required: true }
+      course: course._id, // Fixed: Reference the actual course
       paymentProof,
       transactionId: uuidv4(),
       promoCode: promoCode,
@@ -79,8 +87,9 @@ export const createTransaction = async (req, res) => {
       transactionDate: new Date(),
       user: user._id,
     });
-    // 7. Save everything
-    await Promise.all([newTransaction.save(), user.save()]);
+
+    // 7. Save transaction
+    await newTransaction.save();
 
     // 8. Return success response
     res.status(201).json({
@@ -109,18 +118,6 @@ export const createTransaction = async (req, res) => {
   }
 };
 
-// controllers/transactionController.js
-
-// Get all transactions
-export const getAllTransactions = async (req, res) => {
-  try {
-    const transactions = await Transaction.find().sort({ createdAt: -1 });
-    res.json(transactions);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
-
 export const toggleVerification = async (req, res) => {
   try {
     const { isVerified } = req.body;
@@ -133,11 +130,11 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // 1. Find transaction
-    const transaction = await Transaction.findById(transactionId).populate(
-      "user",
-      "courses"
-    );
+    // 1. Find transaction with populated course
+    const transaction = await Transaction.findById(transactionId)
+      .populate("user", "courses")
+      .populate("course", "title"); // Fixed: populate course details
+
     if (!transaction) {
       return res.status(404).json({
         success: false,
@@ -156,18 +153,15 @@ export const toggleVerification = async (req, res) => {
     );
 
     // 3. If verified, update user and promocode
-    console.log(isVerified);
-    console.log(transaction);
-    console.log(transaction.phoneNumber);
     if (isVerified && transaction.course && transaction.phoneNumber) {
       const user = await User.findOne({ phoneno: transaction.phoneNumber });
-      console.log(user);
 
-      if (user && !user.courses.includes(transaction.course)) {
-        user.courses.push(transaction.course);
+      if (user && !user.courses.includes(transaction.course._id)) {
+        user.courses.push(transaction.course._id); // Fixed: Use course ObjectId
         await user.save();
       }
 
+      // Update promo code usage
       if (transaction.promoCode) {
         await PromoCode.findOneAndUpdate(
           { code: transaction.promoCode },
@@ -187,5 +181,14 @@ export const toggleVerification = async (req, res) => {
       message: "Server error",
       error: error.message,
     });
+  }
+};
+
+export const getAllTransactions = async (req, res) => {
+  try {
+    const transactions = await Transaction.find().sort({ createdAt: -1 });
+    res.json(transactions);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
