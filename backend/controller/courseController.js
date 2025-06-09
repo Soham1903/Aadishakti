@@ -154,7 +154,7 @@ export const deleteCourse = async (req, res) => {
 // controllers/userController.js
 export const getUserCourses = async (req, res) => {
   console.log("Function invoked");
-  onsole.log(req.params.userId);
+  console.log(req.params.userId);
   try {
     console.log(req.params.userId);
     const user = await User.findById(req.params.userId).populate({

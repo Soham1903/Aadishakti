@@ -147,8 +147,12 @@ export const toggleVerification = async (req, res) => {
     );
 
     // 3. If verified, update user and promocode
+    console.log("isVerified:", isVerified);
+    console.log("transaction.course:", transaction.course);
+    console.log("transaction.user:", transaction.user);
+
     if (isVerified && transaction.course && transaction.phoneNumber) {
-      const user = await User.findOne({ phoneno: transaction.phoneNumber });
+      const user = await User.findById(transaction.user._id);
 
       if (user && !user.courses.includes(transaction.course)) {
         user.courses.push(transaction.course);

@@ -20,7 +20,7 @@ app.use(
     // origin: ["https://aadishakti-frontend.onrender.com"],
     origin: [
       "https://aadishakti-frontend.onrender.com",
-      "http://localhost:5173",
+      "http://localhost:5173", //
       "https://www.adishaktigurukul.com",
       "https://aadishakti-backend-ue51.onrender.com",
     ],
