@@ -9,8 +9,7 @@ const transactionSchema = new mongoose.Schema({
   },
   course: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Course",
-    required: true, // optional if not always needed
+    ref: "Course", // optional if not always needed
   },
   customerName: {
     type: String,

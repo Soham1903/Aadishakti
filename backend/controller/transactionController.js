@@ -11,21 +11,8 @@ export const createTransaction = async (req, res) => {
     const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
       req.body;
 
-    console.log(req.body.courseTitle);
-
-    console.log("Received transaction data:");
-    console.log("Customer:", courseTitle);
-    console.log("Phone:", phoneNumber);
-    console.log("Promo Code:", promoCode);
-    console.log("Final Price:", finalPrice);
     // Validate required fields
-    if (
-      !customerName ||
-      !phoneNumber ||
-      !courseTitle ||
-      !finalPrice ||
-      !req.file
-    ) {
+    if (!customerName || !phoneNumber || !courseTitle || !req.file) {
       return res.status(400).json({
         success: false,
         message: "All fields including screenshot are required",
@@ -33,17 +20,17 @@ export const createTransaction = async (req, res) => {
     }
 
     // 1. Find the course
-    // const course = await Course.findOne({ title: courseTitle });
-    // const user = await User.findOne({ phoneno: phoneNumber });
-    // if (!course) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Course not found",
-    //   });
-    // }
+    const course = await Course.findOne({ title: courseTitle });
+    const user = await User.findOne({ phoneno: phoneNumber });
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
 
     // 2. Initialize price variables
-    let originalPrice = finalPrice || 0;
+    let originalPrice = course.price;
     let discountApplied = 0;
     let validPromoCode = null;
 
@@ -56,19 +43,11 @@ export const createTransaction = async (req, res) => {
       imageBase64: req.file.buffer.toString("base64"),
     };
 
-    // 6. Find and update user
-    const user = await User.findOne({ phoneno: phoneNumber });
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
     // 5. Create transaction record
     const newTransaction = new Transaction({
       customerName,
       phoneNumber,
+      course: course._id,
       courseTitle,
       paymentProof,
       transactionId: uuidv4(),
@@ -78,7 +57,18 @@ export const createTransaction = async (req, res) => {
       discountApplied,
       transactionDate: new Date(),
       user: user._id,
+      course: course._id,
     });
+
+    // 6. Find and update user
+    // const user = await User.findOne({ phoneno: phoneNumber });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
     // 7. Save everything
     await Promise.all([newTransaction.save(), user.save()]);
 
@@ -100,7 +90,6 @@ export const createTransaction = async (req, res) => {
     });
   } catch (error) {
     console.error("Transaction error:", error);
-    console.error("Transaction error:", error.stack);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -114,7 +103,9 @@ export const createTransaction = async (req, res) => {
 // Get all transactions
 export const getAllTransactions = async (req, res) => {
   try {
-    const transactions = await Transaction.find().sort({ createdAt: -1 });
+    const transactions = await Transaction.find()
+      .sort({ createdAt: -1 })
+      .populate("course", "title");
     res.json(transactions);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -133,13 +124,11 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // 1. Find transaction with user and course populated
-    const transaction = await Transaction.findById(transactionId)
-      .populate("user", "courses")
-      .populate("course");
-
-    console.log("Fetched transaction:", transaction);
-
+    // 1. Find transaction
+    const transaction = await Transaction.findById(transactionId).populate(
+      "user",
+      "courses"
+    ).po;
     if (!transaction) {
       return res.status(404).json({
         success: false,
@@ -147,7 +136,7 @@ export const toggleVerification = async (req, res) => {
       });
     }
 
-    // 2. Update verification status
+    // 2. Update verification
     const updatedTransaction = await Transaction.findByIdAndUpdate(
       transactionId,
       {
@@ -157,40 +146,20 @@ export const toggleVerification = async (req, res) => {
       { new: true }
     );
 
-    console.log("Updated transaction:", updatedTransaction);
+    // 3. If verified, update user and promocode
+    if (isVerified && transaction.course && transaction.phoneNumber) {
+      const user = await User.findOne({ phoneno: transaction.phoneNumber });
 
-    // 3. If verified, update user's courses and promo code
-    console.log("isVerified:", isVerified);
-    console.log("transaction.course:", transaction.course);
-    console.log("transaction.user:", transaction.user);
-
-    if (isVerified && transaction.course && transaction.user) {
-      const user = await User.findById(transaction.user._id);
-      console.log("Fetched user before course update:", user);
-
-      // Check if course already exists in user's courses
-      const courseExists = user.courses.some(
-        (courseId) => courseId.toString() === transaction.course._id.toString()
-      );
-
-      console.log("Course exists in user already:", courseExists);
-      console.log("Transaction course ID:", transaction.course._id);
-
-      if (!courseExists) {
-        user.courses.push(transaction.course._id);
+      if (user && !user.courses.includes(transaction.course)) {
+        user.courses.push(transaction.course);
         await user.save();
-        console.log("Course added to user. Updated user:", user);
-      } else {
-        console.log("Course already exists in user's courses. Skipping push.");
       }
 
       if (transaction.promoCode) {
-        const updatedPromo = await PromoCode.findOneAndUpdate(
+        await PromoCode.findOneAndUpdate(
           { code: transaction.promoCode },
-          { $inc: { totalRedemptions: 1 } },
-          { new: true }
+          { $inc: { totalRedemptions: 1 } }
         );
-        console.log("Promo code updated:", updatedPromo);
       }
     }
 
