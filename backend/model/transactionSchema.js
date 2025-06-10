@@ -21,6 +21,11 @@ const transactionSchema = new mongoose.Schema({
     required: [true, "Transaction ID is required"],
     unique: true,
   },
+  courseId: {
+    type: String,
+    required: [true, "Course ID is required"],
+    unique: true,
+  },
   phoneNumber: {
     type: String,
     required: [true, "Phone number is required"],

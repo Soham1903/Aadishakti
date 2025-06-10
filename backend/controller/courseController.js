@@ -169,7 +169,7 @@ export const getUserCourses = async (req, res) => {
     const user = await User.findById(userId).populate({
       path: "courses",
       select:
-        "title description price duration instructor image createdAt isActive",
+        "title description price duration instructor image createdAt isActive courseId",
       // Optional: Only populate active courses
       match: { isActive: { $ne: false } },
     });

@@ -6,8 +6,14 @@ import { v4 as uuidv4 } from "uuid";
 
 export const createTransaction = async (req, res) => {
   try {
-    const { customerName, phoneNumber, courseTitle, promoCode, finalPrice } =
-      req.body;
+    const {
+      customerName,
+      phoneNumber,
+      courseTitle,
+      promoCode,
+      finalPrice,
+      courseId,
+    } = req.body;
 
     console.log("Received transaction data:");
     console.log("Customer:", customerName); // Fixed: was courseTitle
@@ -31,13 +37,13 @@ export const createTransaction = async (req, res) => {
     }
 
     // 1. Find the course and validate it exists
-    const course = await Course.findOne({ title: courseTitle });
-    if (!course) {
-      return res.status(404).json({
-        success: false,
-        message: "Course not found",
-      });
-    }
+    // const course = await Course.findOne({ title: courseTitle });
+    // if (!course) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Course not found",
+    //   });
+    // }
 
     // 2. Find and validate user exists
     const user = await User.findOne({ phoneno: phoneNumber });
@@ -49,7 +55,7 @@ export const createTransaction = async (req, res) => {
     }
 
     // 3. Initialize price variables
-    let originalPrice = course.price || finalPrice; // Use course price as original
+    let originalPrice = 0 || finalPrice; // Use course price as original
     let discountApplied = 0;
     let validPromoCode = null;
 
@@ -83,7 +89,7 @@ export const createTransaction = async (req, res) => {
       phoneNumber,
       courseTitle: [courseTitle], // Fixed: Make array if schema expects array
       // OR change schema to: courseTitle: { type: String, required: true }
-      course: course._id, // Fixed: Reference the actual course
+      course: Course._id, // Fixed: Reference the actual course
       paymentProof,
       transactionId: uuidv4(),
       promoCode: promoCode,
@@ -92,6 +98,7 @@ export const createTransaction = async (req, res) => {
       discountApplied,
       transactionDate: new Date(),
       user: user._id,
+      courseId: courseId,
     });
 
     // 7. Save transaction
@@ -129,6 +136,8 @@ export const toggleVerification = async (req, res) => {
     const { isVerified } = req.body;
     const transactionId = req.params.id;
 
+    console.log("bedug, ", transactionId);
+
     if (typeof isVerified !== "boolean") {
       return res.status(400).json({
         success: false,
@@ -137,10 +146,10 @@ export const toggleVerification = async (req, res) => {
     }
 
     // 1. Find transaction with populated course
-    const transaction = await Transaction.findById(transactionId)
-      .populate("user", "courses")
-      .populate("course", "title"); // Fixed: populate course details
-
+    const transaction = await Transaction.findById(transactionId).populate(
+      "user",
+      "courses"
+    ); // Fixed: populate course details
     if (!transaction) {
       return res.status(404).json({
         success: false,
@@ -159,11 +168,22 @@ export const toggleVerification = async (req, res) => {
     );
 
     // 3. If verified, update user and promocode
-    if (isVerified && transaction.course && transaction.phoneNumber) {
+    if (isVerified && transaction.phoneNumber) {
       const user = await User.findOne({ phoneno: transaction.phoneNumber });
 
-      if (user && !user.courses.includes(transaction.course._id)) {
-        user.courses.push(transaction.course._id); // Fixed: Use course ObjectId
+      console.log(typeof transaction.courseTitle[0]);
+
+      // const courseIdDocument = await Course.findOne({
+      //   courseId: transaction.courseId,
+      // });
+
+      // console.log(courseIdDocument);
+      const courseObj = await Course.findOne({
+        courseId: transaction.courseId,
+      });
+      console.log("courseObj->", courseObj);
+      if (user && !user.courses.includes(courseObj._id)) {
+        user.courses.push(courseObj._id); // Fixed: Use course ObjectId
         await user.save();
       }
 
