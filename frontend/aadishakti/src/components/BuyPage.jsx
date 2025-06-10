@@ -27,8 +27,7 @@ function BuyPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [code, setCode] = useState(""); // For promo code input
   const [totalPrice, setTotalPrice] = useState(0);
-  const [discountedPrice, setDiscountedPrice] = useState(0);
-
+  const [discountedPrice, setDiscountedPrice] = useState(0); // prints "6846b0be91df16401d9e636b"
   useEffect(() => {
     // Find the course in the static JSON data instead of fetching from API
     try {
@@ -50,6 +49,18 @@ function BuyPage() {
       setLoading(false);
     }
   }, [decodedTitle]);
+
+  function getCourseIdByTitle(title, courses) {
+    const course = courses.find((c) => c.title === title);
+    return course ? course.courseId : null;
+  }
+
+  const titleToFind = decodedTitle;
+  const courseId = getCourseIdByTitle(titleToFind, coursesData);
+
+  console.log(courseId);
+
+  console.log(courseId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +88,7 @@ function BuyPage() {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/promocode/apply",
+        "http://localhost:4000/api/promocode/apply",
         {
           method: "POST",
           headers: {
@@ -123,6 +134,7 @@ function BuyPage() {
       });
     } else {
       formDataToSend.append("courseTitle", formData.courseTitle);
+      formDataToSend.append("courseId", courseId);
     }
 
     formDataToSend.append("promoCode", code);
@@ -135,7 +147,7 @@ function BuyPage() {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
+        "http://localhost:4000/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,
@@ -188,6 +200,7 @@ function BuyPage() {
             <h1 className="text-3xl font-bold text-center">
               Complete Your Purchase
             </h1>
+            <h2>{courseId}</h2>
           </div>
 
           {/* Course Details Card */}

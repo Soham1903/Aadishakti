@@ -22,7 +22,7 @@ const TransactionsDashboard = () => {
     const fetchTransactions = async () => {
       try {
         const response = await fetch(
-          "https://aadishakti-backend-ue51.onrender.com/api/transaction/get"
+          "http://localhost:4000/api/transaction/get"
         );
         const data = await response.json();
         setTransactions(data);
@@ -38,7 +38,7 @@ const TransactionsDashboard = () => {
   const toggleVerification = async (transactionId, currentStatus) => {
     try {
       const response = await fetch(
-        `https://aadishakti-backend-ue51.onrender.com/api/transaction/${transactionId}/verify`,
+        `http://localhost:4000/api/transaction/${transactionId}/verify`,
         {
           method: "PATCH",
           headers: {
@@ -139,7 +139,6 @@ const TransactionsDashboard = () => {
                   <Book className="w-5 h-5 text-[#87161a] mr-2" />
                   <div className="text-gray-700 flex flex-col">
                     {(() => {
-                      console.log(typeof transaction.courseTitle);
                       const courseTitles = Array.isArray(
                         transaction.courseTitle
                       )
@@ -148,16 +147,13 @@ const TransactionsDashboard = () => {
                         ? [transaction.courseTitle]
                         : [];
 
-                      console.log(transaction);
-
                       if (!courseTitles.length) {
-                        console.log(transaction);
                         return <span>Course title not available</span>;
                       }
 
-                      courseTitles.forEach((title, index) => {
+                      {/* courseTitles.forEach((title, index) => {
                         console.log(`Course ${index + 1}: ${title}`);
-                      });
+                      }); */}
 
                       return courseTitles.map((title, index) => (
                         <span key={index}>

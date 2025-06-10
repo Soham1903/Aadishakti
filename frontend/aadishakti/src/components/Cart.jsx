@@ -49,7 +49,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/promocode/apply",
+        "http://localhost:4000/api/promocode/apply",
         {
           method: "POST",
           headers: {
@@ -121,7 +121,9 @@ const Cart = () => {
             {cartItems.length === 0 ? (
               <div className="text-center py-12">
                 <Package2 className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-                <p className="text-slate-600 text-lg mb-6">Your cart is empty</p>
+                <p className="text-slate-600 text-lg mb-6">
+                  Your cart is empty
+                </p>
                 <button
                   onClick={() => navigate("/courses")}
                   className="bg-[#87161a] text-white px-6 py-3 rounded-md hover:bg-[#821636] transition-colors w-full sm:w-auto"

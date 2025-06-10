@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://aadishakti-backend-ue51.onrender.com/api/v1/forgot-password/",
+        "http://localhost:4000/api/v1/forgot-password/",
         { email },
         {
           headers: {

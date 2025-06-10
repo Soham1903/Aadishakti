@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.post(
-        `https://aadishakti-backend-ue51.onrender.com/api/v1/reset-password/${token}`,
+        `http://localhost:4000/api/v1/reset-password/${token}`,
         { newPassword },
         {
           headers: {
@@ -45,7 +45,9 @@ const ResetPassword = () => {
         <div className="text-center mb-2">
           <span className="text-red-800 text-2xl">✦</span>
         </div>
-        <h3 className="text-2xl font-bold mb-4 text-center text-red-800">Reset Password</h3>
+        <h3 className="text-2xl font-bold mb-4 text-center text-red-800">
+          Reset Password
+        </h3>
         <form onSubmit={handleResetPassword}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -81,7 +83,9 @@ const ResetPassword = () => {
           </button>
         </form>
         <div className="text-center mt-4">
-          <a href="/login" className="text-gray-600 hover:text-red-800">Return to Login</a>
+          <a href="/login" className="text-gray-600 hover:text-red-800">
+            Return to Login
+          </a>
         </div>
       </div>
     </section>

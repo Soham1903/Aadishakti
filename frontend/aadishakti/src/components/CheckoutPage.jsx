@@ -3,7 +3,15 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { useCart } from "../contexts/CartContext";
 import { toast } from "react-toastify";
-import { ShoppingCart, User, Phone, Upload, CreditCard, CheckCircle, AlertCircle } from "lucide-react";
+import {
+  ShoppingCart,
+  User,
+  Phone,
+  Upload,
+  CreditCard,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 
 function CheckoutPage() {
   const location = useLocation();
@@ -54,7 +62,7 @@ function CheckoutPage() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setError(""); // Clear general error when user types
-    
+
     // Validate phone number in real-time
     if (name === "phoneNumber") {
       if (value && !validatePhoneNumber(value)) {
@@ -111,7 +119,7 @@ function CheckoutPage() {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
+        "http://localhost:4000/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,
@@ -123,12 +131,14 @@ function CheckoutPage() {
       }
 
       const data = await response.json();
-      
+
       // Clear the cart after successful payment
       clearCart();
-      
+
       setSubmitSuccess(true);
-      toast.success("Payment submitted successfully! Your cart has been cleared.");
+      toast.success(
+        "Payment submitted successfully! Your cart has been cleared."
+      );
       setFormData({
         customerName: user ? user.name : "",
         phoneNumber: "",
@@ -151,7 +161,9 @@ function CheckoutPage() {
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-12 h-12 text-green-600" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Payment Successful!</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Payment Successful!
+          </h2>
           <p className="text-gray-600 mb-2">
             Your payment has been submitted successfully.
           </p>
@@ -186,7 +198,9 @@ function CheckoutPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Checkout</h1>
-          <p className="text-gray-600">Complete your purchase to get instant access</p>
+          <p className="text-gray-600">
+            Complete your purchase to get instant access
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">
@@ -197,12 +211,17 @@ function CheckoutPage() {
                 <div className="w-10 h-10 bg-[#87161a] rounded-lg flex items-center justify-center">
                   <ShoppingCart className="w-5 h-5 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Order Summary</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Order Summary
+                </h2>
               </div>
 
               <div className="space-y-4">
                 {items?.map((item, index) => (
-                  <div key={item.id || index} className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                  <div
+                    key={item.id || index}
+                    className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl"
+                  >
                     <div className="w-20 h-20 bg-white rounded-lg overflow-hidden shadow-sm flex-shrink-0">
                       {item.image ? (
                         <img
@@ -210,21 +229,32 @@ function CheckoutPage() {
                           alt={item.title}
                           className="w-full h-full object-cover"
                           onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'flex';
+                            e.target.style.display = "none";
+                            e.target.nextSibling.style.display = "flex";
                           }}
                         />
                       ) : null}
-                      <div className="w-full h-full bg-gradient-to-br from-[#87161a] to-[#a91d23] flex items-center justify-center" style={{display: item.image ? 'none' : 'flex'}}>
-                        <span className="text-white font-bold text-sm">Course</span>
+                      <div
+                        className="w-full h-full bg-gradient-to-br from-[#87161a] to-[#a91d23] flex items-center justify-center"
+                        style={{ display: item.image ? "none" : "flex" }}
+                      >
+                        <span className="text-white font-bold text-sm">
+                          Course
+                        </span>
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 mb-1 leading-tight">{item.title}</h3>
-                      <p className="text-sm text-gray-600">Digital Course Access</p>
+                      <h3 className="font-semibold text-gray-900 mb-1 leading-tight">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Digital Course Access
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-lg text-[#87161a]">₹{item.finalPrice || item.price}</p>
+                      <p className="font-bold text-lg text-[#87161a]">
+                        ₹{item.finalPrice || item.price}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -234,7 +264,10 @@ function CheckoutPage() {
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
-                    <span>Subtotal ({items?.length} item{items?.length > 1 ? 's' : ''})</span>
+                    <span>
+                      Subtotal ({items?.length} item
+                      {items?.length > 1 ? "s" : ""})
+                    </span>
                     <span>₹{totalPrice}</span>
                   </div>
                   {promoCode && totalPrice !== discountedPrice && (
@@ -257,9 +290,11 @@ function CheckoutPage() {
                 <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                   <CreditCard className="w-5 h-5 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Payment Method</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Payment Method
+                </h2>
               </div>
-              
+
               <div className="text-center">
                 <div className="inline-block bg-white p-6 rounded-2xl shadow-lg border-4 border-gray-100 mb-4">
                   <img
@@ -267,19 +302,28 @@ function CheckoutPage() {
                     alt="Payment QR Code"
                     className="w-48 h-48 object-contain mx-auto"
                     onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
+                      e.target.style.display = "none";
+                      e.target.nextSibling.style.display = "flex";
                     }}
                   />
-                  <div className="w-48 h-48 bg-gray-100 rounded-lg flex flex-col items-center justify-center mx-auto" style={{display: 'none'}}>
+                  <div
+                    className="w-48 h-48 bg-gray-100 rounded-lg flex flex-col items-center justify-center mx-auto"
+                    style={{ display: "none" }}
+                  >
                     <CreditCard className="w-12 h-12 text-gray-400 mb-2" />
                     <p className="text-gray-500 text-sm">QR Code</p>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-2">Scan this QR code to make payment</p>
-                <p className="text-sm text-gray-500">Or use UPI ID: your-upi@bank</p>
+                <p className="text-gray-600 mb-2">
+                  Scan this QR code to make payment
+                </p>
+                <p className="text-sm text-gray-500">
+                  Or use UPI ID: your-upi@bank
+                </p>
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700 font-medium">Amount to Pay: ₹{discountedPrice}</p>
+                  <p className="text-sm text-blue-700 font-medium">
+                    Amount to Pay: ₹{discountedPrice}
+                  </p>
                 </div>
               </div>
             </div>
@@ -288,8 +332,10 @@ function CheckoutPage() {
           {/* Payment Form - Right Side */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-4">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Payment Details</h2>
-              
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Payment Details
+              </h2>
+
               {error && (
                 <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3">
                   <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
@@ -325,7 +371,9 @@ function CheckoutPage() {
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent transition-colors ${
-                      phoneError ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                      phoneError
+                        ? "border-red-300 bg-red-50"
+                        : "border-gray-300"
                     }`}
                     placeholder="Enter 10-digit phone number"
                     maxLength="10"
@@ -337,7 +385,9 @@ function CheckoutPage() {
                       {phoneError}
                     </p>
                   )}
-                  <p className="mt-1 text-xs text-gray-500">Format: 9876543210</p>
+                  <p className="mt-1 text-xs text-gray-500">
+                    Format: 9876543210
+                  </p>
                 </div>
 
                 <div>
@@ -384,7 +434,9 @@ function CheckoutPage() {
                               />
                             </label>
                           </div>
-                          <p className="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                          <p className="text-xs text-gray-500">
+                            PNG, JPG, JPEG up to 10MB
+                          </p>
                         </>
                       )}
                     </div>

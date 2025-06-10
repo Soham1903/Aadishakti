@@ -80,7 +80,7 @@ const BuyBook = () => {
 
     try {
       const response = await fetch(
-        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
+        "http://localhost:4000/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,
@@ -118,7 +118,9 @@ const BuyBook = () => {
       </button>
 
       <div className="bg-white rounded-2xl shadow-lg p-8">
-        <h1 className="text-3xl font-bold mb-8 text-[#87161a]">Complete Your Purchase</h1>
+        <h1 className="text-3xl font-bold mb-8 text-[#87161a]">
+          Complete Your Purchase
+        </h1>
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Book Details */}
@@ -129,9 +131,13 @@ const BuyBook = () => {
                 alt={book.title}
                 className="w-full rounded-lg shadow-md mb-6"
               />
-              <h2 className="text-xl font-bold text-[#87161a] mb-2">{book.title}</h2>
+              <h2 className="text-xl font-bold text-[#87161a] mb-2">
+                {book.title}
+              </h2>
               <p className="text-slate-600 mb-2 italic">{book.author}</p>
-              <p className="text-2xl font-bold text-[#87161a]">₹ {book.price}</p>
+              <p className="text-2xl font-bold text-[#87161a]">
+                ₹ {book.price}
+              </p>
             </div>
           </div>
 
@@ -139,7 +145,9 @@ const BuyBook = () => {
           <div className="lg:w-2/3">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-slate-700 font-semibold mb-2">Full Name</label>
+                <label className="block text-slate-700 font-semibold mb-2">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   name="customerName"
@@ -153,7 +161,9 @@ const BuyBook = () => {
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-2">Phone Number</label>
+                <label className="block text-slate-700 font-semibold mb-2">
+                  Phone Number
+                </label>
                 <input
                   type="tel"
                   name="phoneNumber"
@@ -167,7 +177,9 @@ const BuyBook = () => {
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-2">Delivery Address</label>
+                <label className="block text-slate-700 font-semibold mb-2">
+                  Delivery Address
+                </label>
                 <textarea
                   name="address"
                   value={formData.address}

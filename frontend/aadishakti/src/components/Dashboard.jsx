@@ -18,7 +18,7 @@ const Dashboard = () => {
         try {
           // console.log(user.id);
           const response = await fetch(
-            `https://aadishakti-backend-ue51.onrender.com/api/courses/${user.id}/courses`,
+            `http://localhost:4000/api/courses/${user.id}/courses`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -32,7 +32,8 @@ const Dashboard = () => {
           }
 
           const data = await response.json();
-          setCourses(data.courses);
+          console.log(data.data);
+          setCourses(data.data.courses);
         } catch (err) {
           console.error("Failed to fetch courses:", err);
           setError(err.message);
@@ -66,7 +67,7 @@ const Dashboard = () => {
             <div className="text-red-400 text-center">
               Error loading courses: {error}
             </div>
-          ) : courses.length === 0 ? (
+          ) : !courses ? (
             <div className="text-white text-center">
               No courses purchased yet
             </div>
@@ -80,7 +81,7 @@ const Dashboard = () => {
                   {course.image && (
                     <div className="h-40 mb-4 rounded-lg overflow-hidden">
                       <img
-                        src={`data:${course.image.contentType};base64,${course.image.imageBase64}`}
+                        src={course.image}
                         alt={course.title}
                         className="w-full h-full object-cover"
                       />
@@ -100,7 +101,9 @@ const Dashboard = () => {
                       <span className="text-white">₹{course.price}</span>
                     </div>
                     <button
-                      onClick={() => navigate(`/courses/${course._id}/details`)}
+                      onClick={() =>
+                        navigate(`/courses/${course.courseId}/details`)
+                      }
                       className="px-4 py-2 bg-[#87161a] text-white rounded-lg hover:bg-[#7a1535] transition"
                     >
                       Access Course
