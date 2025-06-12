@@ -18,7 +18,7 @@ const Dashboard = () => {
         try {
           // console.log(user.id);
           const response = await fetch(
-            `http://localhost:4000/api/courses/${user.id}/courses`,
+            `https://aadishakti-backend-ue51.onrender.com/api/courses/${user.id}/courses`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -67,13 +67,13 @@ const Dashboard = () => {
             <div className="text-red-400 text-center">
               Error loading courses: {error}
             </div>
-          ) : !data.data.courses ? (
+          ) : !courses.length === 0 ? (
             <div className="text-white text-center">
               No courses purchased yet
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {data.courses.map((course) => (
+              {courses.map((course) => (
                 <div
                   key={course._id}
                   className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-[#87161a] transition-all"
@@ -97,9 +97,6 @@ const Dashboard = () => {
                     {course.description}
                   </p>
                   <div className="flex justify-between items-center">
-                    <div>
-                      <span className="text-white">₹{course.price}</span>
-                    </div>
                     <button
                       onClick={() =>
                         navigate(`/courses/${course.courseId}/details`)

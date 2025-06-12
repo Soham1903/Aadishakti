@@ -88,7 +88,7 @@ function BuyPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/promocode/apply",
+        "https://aadishakti-backend-ue51.onrender.com/api/promocode/apply",
         {
           method: "POST",
           headers: {
@@ -147,7 +147,7 @@ function BuyPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/transaction/create",
+        "https://aadishakti-backend-ue51.onrender.com/api/transaction/create",
         {
           method: "POST",
           body: formDataToSend,

@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/api/v1/reset-password/${token}`,
+        `https://aadishakti-backend-ue51.onrender.com/api/v1/reset-password/${token}`,
         { newPassword },
         {
           headers: {

@@ -32,6 +32,7 @@ import BookDetails from "./components/Books/BooksDetails";
 import CheckoutPage from "./components/CheckoutPage.jsx";
 import BuyBook from "./components/Books/BuyBook.jsx";
 import Certificate from "./components/Certificate.jsx";
+import CertificateWrapper from "./components/CertificateWrapper.jsx";
 
 function App() {
   return (
@@ -72,6 +73,11 @@ function App() {
             <Route
               path="/courses/:courseId/details"
               element={<CourseLinks />}
+            />
+
+            <Route
+              path="/courses/:courseId/certificate"
+              element={<CertificateWrapper />}
             />
 
             {/* Admin Panel Route */}
