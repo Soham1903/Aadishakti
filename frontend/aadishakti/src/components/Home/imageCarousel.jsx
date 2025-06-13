@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 const Carousel = () => {
   const images = [
     {
-      url: "/assets/carousel/अंकशास्त्र.jpg",
+      url: "/assets/carousel/anks3.jpg",
       // title: "अंधश्रद्धा टाळा विज्ञान जाणून घ्या",
       // description: "शास्त्र समजून घ्या, अंधश्रद्धेपासून दूर रहा!",
     },
     {
-      url: "/assets/carousel/ज्योतिष शास्त्र .jpg",
+      url: "/assets/carousel/ज्योतिष शास्त्र2.jpg",
       // title: "ज्योतिष जाणून घ्या – जीवन समजून घ्या!",
       // description:
       //   "ग्रह, नक्षत्रं, आणि राशी हे तुमचं आयुष्य अधिक चांगल्या प्रकारे समजून घेण्याची साधने आहेत. त्यांचा वापर योग्य मार्गदर्शनासाठी करा.",
@@ -20,17 +20,17 @@ const Carousel = () => {
       // description: "",
     },
     {
-      url: "/assets/carousel/मोबाईल नंबर.jpg",
+      url: "/assets/carousel/मोबाईल नंबर2.jpg",
       // title: "",
       // description: "",
     },
     {
-      url: "/assets/carousel/वास्तुशास्त्र.jpg",
+      url: "/assets/carousel/वास्तुशास्त्र2.jpg",
       // title: "",
       // description: "",
     },
     {
-      url: "/assets/carousel/स्क्रीन लॉक.jpg",
+      url: "/assets/carousel/स्क्रीन लॉक2.jpg",
       // title: "",
       // description: "",
     },
@@ -74,14 +74,14 @@ const Carousel = () => {
         {/* Current Image */}
         <img
           src={images[currentImageIndex].url}
-          className={`w-full h-[420px] md:h-[500px] lg:h-[600px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
+          className={`w-full h-[500px] md:h-[650px] lg:h-[750px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
             isTransitioning ? "opacity-20" : "opacity-100"
           }`}
           alt={images[currentImageIndex].title || "Carousel image"}
         />
 
         {/* Placeholder to maintain layout */}
-        <div className="w-full h-[420px] md:h-[500px] lg:h-[600px]"></div>
+        <div className="w-full h-[500px] md:h-[650px] lg:h-[750px]"></div>
 
         <AnimatePresence mode="wait">
           <motion.div
