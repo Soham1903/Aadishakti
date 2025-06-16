@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, Lock, Star } from "lucide-react";
+import { Phone, Lock } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 const MobileNumerology = () => {
@@ -39,7 +39,11 @@ const MobileNumerology = () => {
                   "विवाह, जॉब, व्यवसाय, धनसंपत्ती, नातेसंबंध, यामध्ये सुधारणा.",
                 ].map((text, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <Star className="h-5 w-5 text-[#87161A] mt-1 flex-shrink-0" />
+                    <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-[#B85C5C] mt-1">
+                      <div className="w-4 h-4 bg-[#B85C5C] rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">✓</span>
+                      </div>
+                    </div>
                     <p className="text-slate-700">{text}</p>
                   </div>
                 ))}

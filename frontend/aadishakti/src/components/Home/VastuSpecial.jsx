@@ -67,21 +67,11 @@ const VastuSpecial = () => {
                 "साधे आणि प्रभावी वास्तू उपाय",
                 "उपाययोजनांचा कमी खर्च जास्त फायदे",
               ].map((feature, index) => (
-                <div key={index} className="flex items-start">
-                  <div className="bg-[#87161a]/10 p-2 rounded-full mr-4 text-[#87161a]">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                <div key={index} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-[#B85C5C] mt-1">
+                    <div className="w-4 h-4 bg-[#B85C5C] rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
                   </div>
                   <span className="text-slate-700 text-lg">{feature}</span>
                 </div>
