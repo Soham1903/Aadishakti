@@ -119,7 +119,7 @@ function Gallery() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-16 md:py-20">
+    <div className="bg-gray-50 min-h-screen py-16 md:py-20 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="आमची पुरस्कारप्राप्त क्षणचित्रे"

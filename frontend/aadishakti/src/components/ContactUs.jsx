@@ -33,15 +33,25 @@ export default function Contact() {
     }
   ];
 
+  const services = [
+    "विविध गुढ शास्त्रांच्या कार्यशाळा",
+    "ज्योतिष शास्त्र सल्ला",
+    "अंकशास्त्र मार्गदर्शन",
+    "मोबाईल नंबर सल्ला",
+    "स्क्रीन लॉक पासवर्ड मार्गदर्शन",
+    "टॅरो कार्ड मार्गदर्शन",
+    "वास्तुशास्त्र मार्गदर्शन"
+  ];
+
   return (
-    <div className="bg-gray-50 min-h-screen py-16 md:py-20">
+    <div className="bg-gray-50 min-h-screen pt-18 md:pt-24 py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="संपर्क साधा"
           subtitle="आपल्या आध्यात्मिक प्रवासाची सुरुवात करा"
         />
 
-        <div className="grid md:grid-cols-2 gap-12 mt-12">
+        <div className="grid md:grid-cols-2 gap-12 mt-24">
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
@@ -129,10 +139,11 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-[#87161A] focus:border-transparent"
                 >
                   <option value="">सेवा निवडा</option>
-                  <option value="रेकी हिलिंग">रेकी हिलिंग</option>
-                  <option value="वास्तुशास्त्र">वास्तुशास्त्र</option>
-                  <option value="हिप्नोथेरपी">हिप्नोथेरपी</option>
-                  <option value="ज्योतिष">ज्योतिष</option>
+                  {services.map((service, index) => (
+                    <option key={index} value={service}>
+                      {service}
+                    </option>
+                  ))}
                 </select>
               </div>
 

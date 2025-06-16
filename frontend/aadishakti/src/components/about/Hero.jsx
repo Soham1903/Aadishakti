@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 function Hero() {
   return (
-    <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+    <section className="relative h-[60vh] min-h-[400px] overflow-hidden pt-16 md:pt-20">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
