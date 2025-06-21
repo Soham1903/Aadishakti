@@ -66,7 +66,10 @@ const Carousel = () => {
   };
 
   return (
-    <div className="px-2 sm:px-3 md:px-5 lg:px-9 pt-16 sm:pt-20 md:pt-24">
+    <div className="px-2 sm:px-3 md:px-5 lg:px-9 pt-20 sm:pt-24 md:pt-28">
+
+      
+
       <div className="relative bg-black rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
         {/* Enhanced overlay with gradient for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-10"></div>
