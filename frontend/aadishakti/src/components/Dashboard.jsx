@@ -70,9 +70,9 @@ const Dashboard = () => {
           {/* Dashboard Header */}
           <div className="mb-8 sm:mb-10">
             <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 lg:space-x-6 mb-6 sm:mb-8">
-              <div className="p-3 sm:p-4 lg:p-5 bg-gradient-to-r from-[#921a40] to-[#b91c47] rounded-xl sm:rounded-2xl shadow-lg w-fit">
+              {/* <div className="p-3 sm:p-4 lg:p-5 bg-gradient-to-r from-[#921a40] to-[#b91c47] rounded-xl sm:rounded-2xl shadow-lg w-fit">
                 <FaStar className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-white" />
-              </div>
+              </div> */}
               <div className="flex-1">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3">
                   My Dashboard
