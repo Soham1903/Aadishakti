@@ -1,0 +1,225 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../UserContext";
+import { Stars, BookOpen, User, ArrowRight, Clock, Award } from "lucide-react";
+
+const Dashboard = () => {
+  const { user } = useUser();
+  const navigate = useNavigate();
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      const fetchUserCourses = async () => {
+        try {
+          const response = await fetch(
+            `https://aadishakti-backend-ue51.onrender.com/api/courses/${user.id}/courses`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log(data.data);
+          setCourses(data.data.courses);
+        } catch (err) {
+          console.error("Failed to fetch courses:", err);
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchUserCourses();
+    }
+  }, [user, navigate]);
+
+  if (!user) return null;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      {/* Header Section */}
+      <div className="bg-white/80 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-gradient-to-r from-[#921a40] to-[#b91c47] rounded-xl shadow-lg">
+                <Stars className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Learning Dashboard</h1>
+                <p className="text-gray-600">Track your progress and continue learning</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-full">
+              <div className="p-2 bg-[#921a40] rounded-full">
+                <User className="h-4 w-4 text-white" />
+              </div>
+              <span className="font-medium text-gray-700">{user.name}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <div className="bg-gradient-to-r from-[#921a40] to-[#b91c47] rounded-2xl p-8 text-white shadow-xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Welcome back, {user.name}! 👋</h2>
+                <p className="text-white/90 text-lg">Ready to continue your learning journey?</p>
+              </div>
+              <div className="hidden md:block">
+                <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6">
+                  <Award className="h-12 w-12 text-white mb-2" />
+                  <p className="text-sm font-medium">Your Progress</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div className="flex items-center space-x-3">
+              <div className="p-3 bg-blue-50 rounded-lg">
+                <BookOpen className="h-6 w-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-900">{courses.length}</p>
+                <p className="text-gray-600">Enrolled Courses</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div className="flex items-center space-x-3">
+              <div className="p-3 bg-green-50 rounded-lg">
+                <Clock className="h-6 w-6 text-green-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-900">24</p>
+                <p className="text-gray-600">Hours Learned</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div className="flex items-center space-x-3">
+              <div className="p-3 bg-[#921a40]/10 rounded-lg">
+                <Award className="h-6 w-6 text-[#921a40]" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-900">3</p>
+                <p className="text-gray-600">Certificates</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Courses Section */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold text-gray-900">Your Courses</h3>
+            <div className="text-sm text-gray-500">
+              {courses.length} course{courses.length !== 1 ? 's' : ''} enrolled
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#921a40]"></div>
+              <span className="ml-3 text-gray-600">Loading your courses...</span>
+            </div>
+          ) : error ? (
+            <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+              <div className="text-red-600 font-medium mb-2">Unable to load courses</div>
+              <div className="text-red-500 text-sm">{error}</div>
+            </div>
+          ) : courses.length === 0 ? (
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-12 text-center">
+              <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+              <h4 className="text-xl font-medium text-gray-900 mb-2">No courses yet</h4>
+              <p className="text-gray-600 mb-6">Start your learning journey by enrolling in a course</p>
+              <button 
+                onClick={() => navigate('/courses')}
+                className="inline-flex items-center px-6 py-3 bg-[#921a40] text-white font-medium rounded-lg hover:bg-[#7a1535] transition-colors"
+              >
+                Browse Courses
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {courses.map((course) => (
+                <div
+                  key={course._id}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#921a40]/20 transition-all duration-300 group"
+                >
+                  {course.image && (
+                    <div className="h-48 bg-gray-100 overflow-hidden">
+                      <img
+                        src={course.image}
+                        alt={course.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+                  
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-[#921a40] transition-colors">
+                        {course.title}
+                      </h4>
+                    </div>
+                    
+                    <div className="flex items-center text-sm text-gray-600 mb-3">
+                      <User className="h-4 w-4 mr-1" />
+                      {course.instructor}
+                    </div>
+                    
+                    <p className="text-gray-600 text-sm mb-6 line-clamp-3">
+                      {course.description}
+                    </p>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div className="bg-[#921a40] h-2 rounded-full" style={{ width: '65%' }}></div>
+                        </div>
+                        <span className="text-xs text-gray-500 whitespace-nowrap">65%</span>
+                      </div>
+                    </div>
+                    
+                    <button
+                      onClick={() => navigate(`/courses/${course.courseId}/details`)}
+                      className="w-full mt-4 inline-flex items-center justify-center px-4 py-3 bg-[#921a40] text-white font-medium rounded-lg hover:bg-[#7a1535] transition-colors group-hover:shadow-md"
+                    >
+                      Continue Learning
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
