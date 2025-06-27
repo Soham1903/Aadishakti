@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const Carousel = () => {
   const images = [
     {
-      url: "/assets/carousel/anks3.jpg",
+      url: "/assets/carousel/car.jpg",
       // title: "अंधश्रद्धा टाळा विज्ञान जाणून घ्या",
       // description: "शास्त्र समजून घ्या, अंधश्रद्धेपासून दूर रहा!",
     },
