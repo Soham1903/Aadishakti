@@ -264,7 +264,7 @@ function BuyPage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>Lifetime Access</span>
+                    <span>3 months Access</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <svg
