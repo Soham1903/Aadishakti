@@ -221,28 +221,40 @@ const AwardCard = ({ award, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 hover:shadow transition-shadow"
+      className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 hover:shadow transition-shadow h-full flex flex-col"
     >
-      <div className="p-4 bg-slate-50 flex justify-center">
-        <award.icon className="w-8 h-8 text-[#87161a]/80" />
+      {/* Icon Section */}
+      <div className="p-6 bg-slate-50 flex justify-center items-center">
+        <award.icon className="w-10 h-10 text-[#87161a]/80" />
       </div>
-      <div className="p-5">
-        <h3 className="text-lg font-medium text-slate-800 mb-2">
-          {award.title}
-        </h3>
-        <p className="text-slate-500 text-sm mb-4">{award.subtitle}</p>
-        <div className="flex items-center">
-          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#87161a]/80 mr-3">
-            <User className="w-4 h-4" />
+      
+      {/* Content Section */}
+      <div className="p-6 flex-1 flex flex-col justify-between">
+        {/* Award Details */}
+        <div className="text-center mb-6">
+          <h3 className="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+            {award.title}
+          </h3>
+          <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+            {award.subtitle}
+          </p>
+        </div>
+        
+        {/* Recipient Info */}
+        <div className="text-center">
+          <div className="flex justify-center items-center mb-3">
+            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-[#87161a]/80">
+              <User className="w-5 h-5" />
+            </div>
           </div>
-          <div>
-            <h4 className="font-medium text-slate-700 text-sm">
-              {award.recipient}
-            </h4>
-            {award.role && (
-              <p className="text-xs text-slate-500">{award.role}</p>
-            )}
-          </div>
+          <h4 className="font-medium text-slate-800 text-sm mb-1 leading-tight">
+            {award.recipient}
+          </h4>
+          {award.role && (
+            <p className="text-xs text-slate-500 leading-tight">
+              {award.role}
+            </p>
+          )}
         </div>
       </div>
     </motion.div>
@@ -316,7 +328,7 @@ const teamMembers = [
   { name: "सौ. रोहिणी भिडे", role: "सदस्य" },
   { name: "श्री. सुधीर भिडे", role: "सदस्य" },
   { name: "सौ. पद्मजा कुलकर्णी", role: "सदस्य" },
-   { name: "श्री. गणेश तांबोळकर ", role: "सदस्य" },
+  { name: "श्री. गणेश तांबोळकर ", role: "सदस्य" },
 ];
 
 const youtubeVideos = [
