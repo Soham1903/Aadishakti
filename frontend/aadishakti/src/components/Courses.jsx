@@ -68,8 +68,8 @@ export default function Courses() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* <FadeInSection> */}
           <SectionHeading
-            title="Our Courses"
-            subtitle="Discover and learn from our expert-led courses"
+            title="आमचे कोर्सेस"
+            subtitle="आमच्या तज्ज्ञ-नेतृत्वाखालील कोर्सेसमधून शिका आणि ज्ञान मिळवा"
           />
 
           {/* Search & Sort Controls */}
