@@ -19,14 +19,15 @@ const BooksList = () => {
         </FadeInSection>
 
         <FadeInSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 mt-8">
             {books.map((book) => (
               <div
                 key={book.id}
                 className="relative bg-white rounded-xl border border-slate-100 shadow-md transition-all duration-300 hover:scale-[1.05] hover:shadow-xl"
               >
                 <div className="relative z-10 flex flex-col h-full p-4">
-                  <div className="aspect-[2/3] bg-slate-50 rounded-lg overflow-hidden flex items-center justify-center mb-4">
+                  <div className="aspect-[2/3] rounded-lg overflow-hidden flex items-center justify-center mb-4">
+
                     <img
                       src={book.coverImage}
                       alt={book.title}
