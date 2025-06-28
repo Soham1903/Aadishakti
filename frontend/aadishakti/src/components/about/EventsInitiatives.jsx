@@ -316,6 +316,7 @@ const teamMembers = [
   { name: "सौ. रोहिणी भिडे", role: "सदस्य" },
   { name: "श्री. सुधीर भिडे", role: "सदस्य" },
   { name: "सौ. पद्मजा कुलकर्णी", role: "सदस्य" },
+   { name: "श्री. गणेश तांबोळकर ", role: "सदस्य" },
 ];
 
 const youtubeVideos = [

@@ -137,21 +137,21 @@ const About = () => {
           <div className="hidden md:flex order-2 md:order-2 h-full flex-col gap-6">
             <div className="w-full">
               <img
-                src="assets/homeabout/taro.jpg"
+                src="assets/shulkseva/bird.jpg"
                 alt="Astrology Services"
                 className="rounded-lg shadow-lg w-full h-48 md:h-56 object-cover"
               />
             </div>
             <div className="w-full">
               <img
-                src="assets/homeabout/kundali.jpg"
+                src="assets/shulkseva/jyotish.jpg"
                 alt="Tarot Card Reading"
                 className="rounded-lg shadow-lg w-full h-48 md:h-56 object-cover"
               />
             </div>
             <div className="w-full">
               <img
-                src="assets/homeabout/lucky number.jpg"
+                src="assets/shulkseva/direction1.jpg"
                 alt="Numerology Consultation"
                 className="rounded-lg shadow-lg w-full h-48 md:h-56 object-cover"
               />
