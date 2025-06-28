@@ -226,7 +226,7 @@ const SignupForm = () => {
               {loading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                "Start Your Cosmic Journey"
+                "Click to Signup"
               )}
             </button>
           </form>

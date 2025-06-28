@@ -4,6 +4,7 @@ import { useUser } from "../UserContext";
 import { BookOpen, User, ArrowRight } from "lucide-react";
 import { FaUserGraduate, FaStar, FaBook, FaChartLine } from "react-icons/fa";
 import { GiCrystalBall } from "react-icons/gi";
+// import { SectionHeading } from "..Home/SectionHeading";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -154,7 +155,7 @@ const Dashboard = () => {
                   </p>
                   <div className="flex items-center text-xs sm:text-sm text-red-600 font-medium">
                     <span>Ready to continue learning?</span>
-                    <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    {/* <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" /> */}
                   </div>
                 </div>
               </div>

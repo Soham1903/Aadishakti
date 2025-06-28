@@ -142,7 +142,7 @@ const LoginForm = () => {
               {loading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                "Enter the Cosmos"
+                "Login "
               )}
             </button>
           </form>
