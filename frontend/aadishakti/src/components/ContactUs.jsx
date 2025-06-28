@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { SectionHeading } from './Home/SectionHeading';
+import React, { useRef } from "react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { SectionHeading } from "./Home/SectionHeading";
 
 export default function Contact() {
   const form = useRef();
@@ -14,23 +14,23 @@ export default function Contact() {
     {
       icon: Phone,
       title: "फोन",
-      details: ["+91 9130755631", "+91 96571 96333"]
+      details: ["+91 91307 55631", "+91 96571 96333"],
     },
     {
       icon: Mail,
       title: "ईमेल",
-      details: ["adishaktigurukul@gmail.com"]
+      details: ["adishaktigurukul@gmail.com"],
     },
     {
       icon: MapPin,
       title: "पत्ता",
-      details: ["333, डी, सोपाननगर", "सासवड, महाराष्ट्र 412301"]
+      details: ["333, डी, सोपाननगर", "सासवड, महाराष्ट्र 412301"],
     },
     {
       icon: Clock,
       title: "कार्यालय वेळ",
-      details: ["सोमवार - शनिवार: सकाळी ९ ते सायंकाळी ७", "रविवार: बंद"]
-    }
+      details: ["सोमवार - शनिवार: सकाळी ९ ते सायंकाळी ७", "रविवार: बंद"],
+    },
   ];
 
   const services = [
@@ -40,7 +40,7 @@ export default function Contact() {
     "मोबाईल नंबर सल्ला",
     "स्क्रीन लॉक पासवर्ड मार्गदर्शन",
     "टॅरो कार्ड मार्गदर्शन",
-    "वास्तुशास्त्र मार्गदर्शन"
+    "वास्तुशास्त्र मार्गदर्शन",
   ];
 
   return (
@@ -56,14 +56,18 @@ export default function Contact() {
           <div className="space-y-8">
             <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start space-y-8 mb-8 last:mb-0">
+                <div key={index} className="flex items-center  mb-8 last:mb-0">
                   <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#791317]/10 flex items-center justify-center text-[#87161A]">
                     <item.icon className="w-6 h-6" />
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-lg font-medium text-slate-800 mb-2">{item.title}</h3>
+                    <h3 className="text-lg font-medium text-slate-800 mb-2">
+                      {item.title}
+                    </h3>
                     {item.details.map((detail, idx) => (
-                      <p key={idx} className="text-slate-600">{detail}</p>
+                      <p key={idx} className="text-slate-600">
+                        {detail}
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -72,10 +76,12 @@ export default function Contact() {
 
             {/* Social Links */}
             <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
-              <h3 className="text-lg font-medium text-slate-800 mb-4">सोशल मीडिया</h3>
+              <h3 className="text-lg font-medium text-slate-800 mb-4">
+                सोशल मीडिया
+              </h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/share/1JA1ytQhzm/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#791317]/10 text-[#87161A] p-3 rounded-lg hover:bg-[#791317]/20 transition-colors"
@@ -90,16 +96,28 @@ export default function Contact() {
                 >
                   YouTube
                 </a>
+                <a
+                  href="https://www.instagram.com/aadishakti_gurukul/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#791317]/10 text-[#87161A] p-3 rounded-lg hover:bg-[#791317]/20 transition-colors"
+                >
+                  Instagram
+                </a>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
-            <h3 className="text-xl font-medium text-slate-800 mb-6">आम्हाला संदेश पाठवा</h3>
+            <h3 className="text-xl font-medium text-slate-800 mb-6">
+              आम्हाला संदेश पाठवा
+            </h3>
             <form ref={form} onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">पूर्ण नाव</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  पूर्ण नाव
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -110,7 +128,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">ईमेल पत्ता</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  ईमेल पत्ता
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -121,7 +141,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">फोन नंबर</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  फोन नंबर
+                </label>
                 <input
                   type="tel"
                   name="phone"
@@ -132,7 +154,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">सेवेची आवड</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  सेवेची आवड
+                </label>
                 <select
                   name="service"
                   required
@@ -148,7 +172,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">तुमचा संदेश</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  तुमचा संदेश
+                </label>
                 <textarea
                   name="message"
                   required

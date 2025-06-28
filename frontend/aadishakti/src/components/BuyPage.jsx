@@ -200,7 +200,6 @@ function BuyPage() {
             <h1 className="text-3xl font-bold text-center">
               Complete Your Purchase
             </h1>
-            <h2>{courseId}</h2>
           </div>
 
           {/* Course Details Card */}

@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 const Footer = () => {
   const handleAddressClick = () => {
     const mapUrl =
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30295.51158892893!2d73.99405990403132!3d18.3500694752919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ef88682aff03%3A0x8f1183045ce2366!2sSaswad%2C%20Maharashtra%20412301!5e0!3m2!1sen!2sin!4v1751105091897!5m2!1sen!2sin";
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3786.8944358807485!2d74.02446950000001!3d18.352099799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ef869cac27f1%3A0xb2403e98ae1233b2!2sD%20333%2C%20Sopan%20Nagar%2C%20Saswad%2C%20Maharashtra%20412301!5e0!3m2!1sen!2sin!4v1751112917960!5m2!1sen!2sin";
     window.open(mapUrl, "_blank");
   };
 
@@ -37,12 +37,36 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-lg mb-4">क्विक लिंक्स</h4>
             <ul className="space-y-2">
-              <li><a href="/" className="hover:text-white/80">होम</a></li>
-              <li><a href="/about" className="hover:text-white/80">आमच्याबद्दल</a></li>
-              <li><a href="/courses" className="hover:text-white/80">कोर्सेस</a></li>
-              <li><a href="/books" className="hover:text-white/80">पुस्तके</a></li>
-              <li><a href="/gallery" className="hover:text-white/80">गॅलरी</a></li>
-              <li><a href="/contact" className="hover:text-white/80">संपर्क</a></li>
+              <li>
+                <a href="/" className="hover:text-white/80">
+                  होम
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="hover:text-white/80">
+                  आमच्याबद्दल
+                </a>
+              </li>
+              <li>
+                <a href="/courses" className="hover:text-white/80">
+                  कोर्सेस
+                </a>
+              </li>
+              <li>
+                <a href="/books" className="hover:text-white/80">
+                  पुस्तके
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="hover:text-white/80">
+                  संपर्क
+                </a>
+              </li>
+              <li>
+                <a href="/gallery" className="hover:text-white/80">
+                  गॅलरी
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -50,12 +74,36 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-lg mb-4">सेवा</h4>
             <ul className="space-y-2">
-              <li><a href="#about" className="hover:text-white/80">रेकी</a></li>
-              <li><a href="#mobile-numerology" className="hover:text-white/80">मोबाईल न्यूमरोलॉजी</a></li>
-              <li><a href="#about" className="hover:text-white/80">टॅरो रीडिंग</a></li>
-              <li><a href="#about" className="hover:text-white/80">ज्योतिष शास्त्र</a></li>
-              <li><a href="#mobile-numerology" className="hover:text-white/80">स्क्रीन लॉक पासवर्ड</a></li>
-              <li><a href="#vastu" className="hover:text-white/80">वास्तुशास्त्र मार्गदर्शन</a></li>
+              <li>
+                <a href="#about" className="hover:text-white/80">
+                  रेकी
+                </a>
+              </li>
+              <li>
+                <a href="#mobile-numerology" className="hover:text-white/80">
+                  मोबाईल न्यूमरोलॉजी
+                </a>
+              </li>
+              <li>
+                <a href="#about" className="hover:text-white/80">
+                  टॅरो रीडिंग
+                </a>
+              </li>
+              <li>
+                <a href="#about" className="hover:text-white/80">
+                  ज्योतिष शास्त्र
+                </a>
+              </li>
+              <li>
+                <a href="#mobile-numerology" className="hover:text-white/80">
+                  स्क्रीन लॉक पासवर्ड
+                </a>
+              </li>
+              <li>
+                <a href="#vastu" className="hover:text-white/80">
+                  वास्तुशास्त्र मार्गदर्शन
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -97,13 +145,32 @@ const Footer = () => {
         {/* Policies */}
         <div className="mt-8 pt-6 border-t border-white/20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <a href="/privacy-policy" className="text-white/80 hover:text-white text-sm">प्रायव्हसी पॉलिसी</a>
-            <a href="/terms" className="text-white/80 hover:text-white text-sm">नियम आणि अटी</a>
-            <a href="/security" className="text-white/80 hover:text-white text-sm">सुरक्षा धोरण</a>
-            <a href="/refund" className="text-white/80 hover:text-white text-sm">रिफंड धोरण</a>
+            <a
+              href="/privacy-policy"
+              className="text-white/80 hover:text-white text-sm"
+            >
+              प्रायव्हसी पॉलिसी
+            </a>
+            <a href="/terms" className="text-white/80 hover:text-white text-sm">
+              नियम आणि अटी
+            </a>
+            <a
+              href="/security"
+              className="text-white/80 hover:text-white text-sm"
+            >
+              सुरक्षा धोरण
+            </a>
+            <a
+              href="/refund"
+              className="text-white/80 hover:text-white text-sm"
+            >
+              रिफंड धोरण
+            </a>
           </div>
           <div className="text-center text-white/60 text-sm">
-            <p>© {new Date().getFullYear()} आदिशक्ती गुरुकुल. सर्व हक्क राखीव.</p>
+            <p>
+              © {new Date().getFullYear()} आदिशक्ती गुरुकुल. सर्व हक्क राखीव.
+            </p>
           </div>
         </div>
       </div>

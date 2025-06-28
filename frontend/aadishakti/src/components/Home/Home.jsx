@@ -18,10 +18,11 @@ const Home = () => {
           <MobileNumerology />
         </div>
         <QuoteSection />
+        <Stats />
         <div id="vastu">
           <VastuSpecial />
         </div>
-        <Stats />
+
         <Reviews />
       </div>
     </>

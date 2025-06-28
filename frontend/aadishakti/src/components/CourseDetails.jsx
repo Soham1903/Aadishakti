@@ -86,7 +86,10 @@ export default function CourseDetails() {
   };
 
   const handleWatchCourse = () => {
-    window.open("https://youtu.be/K6RijrUkbMs?si=ht2cplyTvy8Ld05j", "_blank");
+    window.open(
+      "https://youtube.com/playlist?list=PLbNJZLhq0A1kKdNfHUOs9I3HzB58Uvdnf&si=dn8q1DRAmcQ0rycn",
+      "_blank"
+    );
   };
 
   return (
