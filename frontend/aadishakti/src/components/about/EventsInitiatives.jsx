@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, Users, Youtube, Trophy, Award, User } from "lucide-react";
+import { Calendar, Users, Youtube, Trophy, Award, User, Play } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { FadeInSection } from "./FadeInSection";
 
@@ -205,9 +205,22 @@ const EventCard = ({ event, index }) => {
         <p className="text-slate-600 mb-4 leading-relaxed">
           {event.description}
         </p>
-        <div className="inline-flex items-center px-3 py-1.5 rounded-full text-sm bg-slate-100 text-slate-700">
-          <Calendar className="w-4 h-4 mr-1.5" />
-          {event.location}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="inline-flex items-center px-3 py-1.5 rounded-full text-sm bg-slate-100 text-slate-700">
+            <Calendar className="w-4 h-4 mr-1.5" />
+            {event.location}
+          </div>
+          {event.watchUrl && (
+            <a
+              href={event.watchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm bg-[#87161a]/80 text-white hover:bg-[#87161a] transition-colors group"
+            >
+              <Play className="w-4 h-4 mr-1.5 group-hover:scale-110 transition-transform" />
+              पहा
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -268,6 +281,7 @@ const events = [
     description:
       "आचार्य अत्रे प्रतिष्ठान सासवड, जिल्हा पुणे येथे भव्य दिव्य राज्यस्तरीय अधिवेशन",
     location: "सासवड, पुणे",
+    watchUrl: "https://www.youtube.com/playlist?list=PLbNJZLhq0A1mydnAJKnFdqR2GFZTnLFbw",
   },
   {
     title: "राज्यस्तरीय वास्तू अधिवेशन",

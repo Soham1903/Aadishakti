@@ -1,10 +1,11 @@
 import React from "react";
 import { Phone, Lock } from "lucide-react";
-import { SectionHeading } from "./SectionHeading";
+// import { SectionHeading } from "./SectionHeading";
+import { SectionHeading } from "../Home/SectionHeading";
 
 const MobileNumerology = () => {
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className=" bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <SectionHeading
           title="मोबाईल नंबर न्यूमरॉलॉजी"
