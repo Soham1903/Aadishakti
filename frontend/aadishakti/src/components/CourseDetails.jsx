@@ -35,7 +35,7 @@ export default function CourseDetails() {
 
   // Use state to manage editable course data
   const [course, setCourse] = useState(courseFromData);
-
+  console.log("course", course);
   // Update page title and scroll to top
   useEffect(() => {
     document.title = `${course?.title || "Course"} - Aadishakti`;
@@ -86,11 +86,14 @@ export default function CourseDetails() {
   };
 
   const handleWatchCourse = () => {
-    window.open(
-      "https://youtube.com/playlist?list=PLbNJZLhq0A1kKdNfHUOs9I3HzB58Uvdnf&si=dn8q1DRAmcQ0rycn",
-      "_blank"
-    );
+    if (course?.links?.length > 0) {
+      window.open(course.links[0], "_blank");
+    } else {
+      console.warn("No video links found for this course.");
+    }
   };
+
+  console.log(course.links);
 
   return (
     <div className="min-h-screen bg-white pt-[80px] sm:pt-[90px] md:pt-[100px] pb-12">
