@@ -16,6 +16,7 @@ const CourseSchema = new mongoose.Schema({
   duration: { type: String, required: true },
   benefits: { type: String, required: true }, // New Field (e.g. key benefits)
   syllabus: { type: String, required: true },
+  links: { type: [String], default: [] },
 });
 
 const Course = mongoose.model("Course", CourseSchema);
