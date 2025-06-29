@@ -100,6 +100,7 @@ function CheckoutPage() {
 
     // Create an array of course titles from the items in cart
     const courseTitles = items.map((item) => item.title);
+    const courseIds = items.map((item) => item.courseId);
 
     const formDataToSend = new FormData();
     formDataToSend.append("customerName", formData.customerName);
@@ -108,6 +109,10 @@ function CheckoutPage() {
     // Append all course titles
     courseTitles.forEach((title) => {
       formDataToSend.append("courseTitle", title);
+    });
+
+    courseIds.forEach((id) => {
+      formDataToSend.append("courseId", id);
     });
 
     formDataToSend.append("promoCode", code);
