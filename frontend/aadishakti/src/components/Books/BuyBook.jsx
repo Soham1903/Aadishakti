@@ -182,7 +182,7 @@ const BuyBook = () => {
                       <div className="flex items-center justify-between">
                         <span className="text-gray-600">Total Amount</span>
                         <span className="text-2xl font-bold text-[#87161a]">
-                          ₹{book.price}
+                          ₹{book.price + 60}
                         </span>
                       </div>
                     </div>
