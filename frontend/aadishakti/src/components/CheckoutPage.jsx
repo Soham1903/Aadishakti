@@ -301,24 +301,25 @@ function CheckoutPage() {
               </div>
 
               <div className="text-center">
-                <div className="inline-block bg-white p-6 rounded-2xl shadow-lg border-4 border-gray-100 mb-4">
+                <div className="w-full max-w-sm mx-auto bg-white p-6 rounded-2xl shadow-lg mb-4">
                   <img
-                    src="https://image.similarpng.com/file/similarpng/original-picture/2021/06/QR-code-sample-for-smartphone-scanning-isolated-on-transparent-background-PNG.png"
+                    src="/assets/qrcode.jpg"
                     alt="Payment QR Code"
-                    className="w-48 h-48 object-contain mx-auto"
+                    className="w-full h-auto object-contain mx-auto"
                     onError={(e) => {
                       e.target.style.display = "none";
                       e.target.nextSibling.style.display = "flex";
                     }}
                   />
                   <div
-                    className="w-48 h-48 bg-gray-100 rounded-lg flex flex-col items-center justify-center mx-auto"
+                    className="w-full h-48 bg-gray-100 rounded-lg flex flex-col items-center justify-center mx-auto"
                     style={{ display: "none" }}
                   >
                     <CreditCard className="w-12 h-12 text-gray-400 mb-2" />
                     <p className="text-gray-500 text-sm">QR Code</p>
                   </div>
                 </div>
+
                 <p className="text-gray-600 mb-2">
                   Scan this QR code to make payment
                 </p>
