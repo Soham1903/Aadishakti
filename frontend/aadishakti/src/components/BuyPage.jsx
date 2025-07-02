@@ -318,11 +318,11 @@ function BuyPage() {
                 Scan QR Code to Make Payment
               </h3>
               <div className="flex justify-center mb-8">
-                <div className="p-4 bg-white rounded-xl shadow-md">
+                <div className="w-full max-w-sm bg-white p-4 rounded-2xl shadow-lg">
                   <img
-                    src="https://image.similarpng.com/file/similarpng/original-picture/2021/06/QR-code-sample-for-smartphone-scanning-isolated-on-transparent-background-PNG.png"
-                    alt="payment-qr-code"
-                    className="w-48 h-48 object-contain"
+                    src="/assets/qrcode.jpg"
+                    alt="Payment QR Code"
+                    className="w-full h-auto object-contain rounded-lg"
                   />
                 </div>
               </div>
