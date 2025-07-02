@@ -50,7 +50,7 @@ const Carousel = () => {
   const getResponsiveStyles = () => {
     const aspectRatio = imageDimensions.width / imageDimensions.height;
     const maxWidths = { mobile: '100vw', tablet: '90vw', desktop: '85vw' };
-    const maxHeights = { mobile: '60vh', tablet: '70vh', desktop: '75vh' };
+    const maxHeights = { mobile: '70vh', tablet: '70vh', desktop: '75vh' };
 
     return {
       maxWidth: maxWidths.desktop,
@@ -62,7 +62,7 @@ const Carousel = () => {
   const responsiveStyles = getResponsiveStyles();
 
   return (
-    <div className="px-2 sm:px-3 md:px-5 lg:px-9 pt-20 sm:pt-24 md:pt-28">
+    <div className="bg-white px-2 sm:px-3 md:px-5 lg:px-9 pt-20 sm:pt-24 md:pt-28">
       <div className="flex justify-center">
         <div
           className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
@@ -70,6 +70,7 @@ const Carousel = () => {
             maxWidth: responsiveStyles.maxWidth,
             maxHeight: responsiveStyles.maxHeight,
             width: '100%',
+            minHeight: '450px',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-10"></div>
@@ -84,6 +85,7 @@ const Carousel = () => {
               style={{
                 maxHeight: responsiveStyles.maxHeight,
                 aspectRatio: responsiveStyles.aspectRatio,
+                minHeight: '450px',
               }}
               alt="Carousel image"
               onLoad={handleImageLoad}
