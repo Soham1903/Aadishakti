@@ -6,7 +6,7 @@ const Carousel = () => {
     { url: "/assets/carousel/anks3.jpg" },
     { url: "/assets/carousel/ज्योतिष शास्त्र2.jpg" },
     { url: "/assets/carousel/भाग्यकारक मोबाईल नंबर.jpg" },
-    { url: "/assets/carousel/मोबाईल नंबर2.jpg" },
+    { url: "/assets/carousel/मोबाईल2.jpg" },
     { url: "/assets/carousel/वास्तुशास्त्र2.jpg" },
     { url: "/assets/carousel/स्क्रीन लॉक2.jpg" },
   ];
@@ -14,7 +14,10 @@ const Carousel = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [nextImageIndex, setNextImageIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
+  const [imageDimensions, setImageDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -49,8 +52,8 @@ const Carousel = () => {
 
   const getResponsiveStyles = () => {
     const aspectRatio = imageDimensions.width / imageDimensions.height;
-    const maxWidths = { mobile: '100vw', tablet: '90vw', desktop: '85vw' };
-    const maxHeights = { mobile: '70vh', tablet: '70vh', desktop: '75vh' };
+    const maxWidths = { mobile: "100vw", tablet: "90vw", desktop: "85vw" };
+    const maxHeights = { mobile: "70vh", tablet: "70vh", desktop: "75vh" };
 
     return {
       maxWidth: maxWidths.desktop,
@@ -69,8 +72,8 @@ const Carousel = () => {
           style={{
             maxWidth: responsiveStyles.maxWidth,
             maxHeight: responsiveStyles.maxHeight,
-            width: '100%',
-            minHeight: '450px',
+            width: "100%",
+            minHeight: "450px",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-10"></div>
@@ -85,7 +88,7 @@ const Carousel = () => {
               style={{
                 maxHeight: responsiveStyles.maxHeight,
                 aspectRatio: responsiveStyles.aspectRatio,
-                minHeight: '450px',
+                minHeight: "450px",
               }}
               alt="Carousel image"
               onLoad={handleImageLoad}
