@@ -22,7 +22,6 @@ const Carousel = () => {
       url: "/assets/carousel/7.jpg",
       title: "मोबाईल नंबर",
       subtitle: "सल्ला, मार्गदर्शन आणि कार्यशाळा",
-    
     },
     {
       url: "/assets/carousel/10.png",
@@ -66,7 +65,6 @@ const Carousel = () => {
 
   return (
     <div className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 pt-24 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32">
-
       <div className="relative bg-black rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
         <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[750px] overflow-hidden">
           <img
@@ -77,6 +75,7 @@ const Carousel = () => {
             alt={images[currentImageIndex].title || "Carousel image"}
             loading="lazy"
           />
+          <div className="absolute inset-0 bg-black/40 z-10"></div>
         </div>
 
         <AnimatePresence mode="wait">
@@ -94,9 +93,7 @@ const Carousel = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               style={{
-                textShadow:
-                  "4px 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.7)",
-                WebkitTextStroke: "1px rgba(0,0,0,0.5)",
+                textShadow: "2px 2px 4px rgba(0,0,0,0.8)"
               }}
             >
               {images[currentImageIndex].title}
@@ -108,9 +105,7 @@ const Carousel = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               style={{
-                textShadow:
-                  "4px 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.7)",
-                WebkitTextStroke: "1px rgba(0,0,0,0.5)",
+                textShadow: "2px 2px 4px rgba(0,0,0,0.8)"
               }}
             >
               {images[currentImageIndex].subtitle}
