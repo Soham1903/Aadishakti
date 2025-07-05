@@ -5,35 +5,35 @@ const Carousel = () => {
   const images = [
     {
       url: "/assets/carousel/1.jpg",
-      // title: "अंधश्रद्धा टाळा विज्ञान जाणून घ्या",
-      // description: "शास्त्र समजून घ्या, अंधश्रद्धेपासून दूर रहा!",
+      title: "ज्योतिष शास्त्र",
+      subtitle: "सल्ला, मार्गदर्शन आणि कार्यशाळा",
     },
     {
       url: "/assets/carousel/2.jpg",
-      // title: "ज्योतिष जाणून घ्या – जीवन समजून घ्या!",
-      // description:
-      //   "ग्रह, नक्षत्रं, आणि राशी हे तुमचं आयुष्य अधिक चांगल्या प्रकारे समजून घेण्याची साधने आहेत. त्यांचा वापर योग्य मार्गदर्शनासाठी करा.",
+      title: "अंकशास्त्र",
+      subtitle: " सल्ला, मार्गदर्शन आणि कार्यशाळा",
     },
     {
       url: "/assets/carousel/3.jpg",
-      // title: "",
-      // description: "",
+      title: "वास्तुशास्त्र",
+      subtitle: "सल्ला, मार्गदर्शन आणि कार्यशाळा",
     },
     {
       url: "/assets/carousel/4.jpg",
-      // title: "",
-      // description: "",
+      title: "मोबाईल नंबर",
+      subtitle: "सल्ला, मार्गदर्शन आणि कार्यशाळा",
+    
     },
     {
       url: "/assets/carousel/5.jpg",
-      // title: "",
-      // description: "",
+      title: "मोबाईल नंबर",
+      subtitle: "भाग्यकारक मोबाईल नंबर मार्गदर्शन",
     },
     {
       url: "/assets/carousel/6.jpg",
-      // title: "",
-      // description: "",
-    },
+      title: "स्क्रीन लॉक",
+      subtitle: "भाग्यकारक स्क्रीन लॉक पासवर्ड मार्गदर्शन",
+    }
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -43,7 +43,6 @@ const Carousel = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIsTransitioning(true);
-
       setTimeout(() => {
         setCurrentImageIndex(nextImageIndex);
         setNextImageIndex((nextImageIndex + 1) % images.length);
@@ -66,70 +65,81 @@ const Carousel = () => {
   };
 
   return (
-    <div className="px-2 sm:px-3 md:px-5 lg:px-9 pt-16 sm:pt-20 md:pt-24">
-      <div className="relative bg-black rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
-        {/* Enhanced overlay with gradient for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50 z-10"></div>
+    <div className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 pt-24 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32">
 
-        {/* Current Image */}
-        <img
-          src={images[currentImageIndex].url}
-          className={`w-full h-[500px] md:h-[650px] lg:h-[750px] absolute top-0 left-0 transition-opacity duration-1000 object-cover ${
-            isTransitioning ? "opacity-20" : "opacity-100"
-          }`}
-          alt={images[currentImageIndex].title || "Carousel image"}
-        />
-
-        {/* Placeholder to maintain layout */}
-        <div className="w-full h-[500px] md:h-[650px] lg:h-[750px]"></div>
+      <div className="relative bg-black rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
+        <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[750px] overflow-hidden">
+          <img
+            src={images[currentImageIndex].url}
+            className={`w-full h-full object-cover object-center transition-all duration-1000 ${
+              isTransitioning ? "opacity-20 scale-105" : "opacity-100 scale-100"
+            }`}
+            alt={images[currentImageIndex].title || "Carousel image"}
+            loading="lazy"
+          />
+        </div>
 
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
-            className="absolute w-full top-1/2 -translate-y-1/2 flex flex-col space-y-4 md:space-y-5 justify-center items-center px-4 sm:px-6 md:px-10 z-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 lg:px-12 z-20"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            {images[currentImageIndex].title && (
-              <motion.h2
-                className="text-white font-bold text-[32px] sm:text-[36px] md:text-[45px] lg:text-[65px] leading-[1.1] md:leading-[1.2] lg:leading-[1.15] text-center drop-shadow-md"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                {images[currentImageIndex].title}
-              </motion.h2>
-            )}
+            <motion.h1
+              className="text-white font-khand font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-3 sm:mb-4 md:mb-6 lg:mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              style={{
+                textShadow:
+                  "4px 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.7)",
+                WebkitTextStroke: "1px rgba(0,0,0,0.5)",
+              }}
+            >
+              {images[currentImageIndex].title}
+            </motion.h1>
 
-            {images[currentImageIndex].description && (
-              <motion.p
-                className="text-white text-[16px] sm:text-[18px] md:text-[18px] lg:text-[20px] w-[92%] sm:w-[85%] md:w-[70%] lg:w-[60%] text-center pb-3 md:pb-5 lg:pb-8 drop-shadow-md"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-              >
-                {images[currentImageIndex].description}
-              </motion.p>
-            )}
+            <motion.p
+              className="text-white font-khand font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%] leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              style={{
+                textShadow:
+                  "4px 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.7)",
+                WebkitTextStroke: "1px rgba(0,0,0,0.5)",
+              }}
+            >
+              {images[currentImageIndex].subtitle}
+            </motion.p>
           </motion.div>
         </AnimatePresence>
 
-        {/* Improved Navigation Dots */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 sm:space-x-3 z-30">
           {images.map((_, index) => (
             <button
               key={index}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
+              className={`h-2 sm:h-2.5 md:h-3 rounded-full transition-all duration-300 shadow-lg ${
                 currentImageIndex === index
-                  ? "bg-white w-6"
-                  : "bg-white/60 w-2.5 hover:bg-white/80"
+                  ? "bg-white w-6 sm:w-8 md:w-10 shadow-white/50"
+                  : "bg-white/60 w-2 sm:w-2.5 md:w-3 hover:bg-white/80 hover:shadow-white/30"
               }`}
               onClick={() => handleDotClick(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-25">
+          <motion.div
+            className="h-full bg-white/80"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 6, ease: "linear", repeat: Infinity }}
+          />
         </div>
       </div>
     </div>
