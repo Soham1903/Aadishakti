@@ -19,13 +19,13 @@ const Carousel = () => {
       subtitle: "सल्ला, मार्गदर्शन आणि कार्यशाळा",
     },
     {
-      url: "/assets/carousel/4.jpg",
+      url: "/assets/carousel/7.jpg",
       title: "मोबाईल नंबर",
       subtitle: "सल्ला, मार्गदर्शन आणि कार्यशाळा",
     
     },
     {
-      url: "/assets/carousel/5.jpg",
+      url: "/assets/carousel/10.png",
       title: "मोबाईल नंबर",
       subtitle: "भाग्यकारक मोबाईल नंबर मार्गदर्शन",
     },
