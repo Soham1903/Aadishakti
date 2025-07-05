@@ -4,33 +4,33 @@ import { motion, AnimatePresence } from "framer-motion";
 const Carousel = () => {
   const images = [
     {
-      url: "/assets/carousel/anks3.jpg",
+      url: "/assets/carousel/1.jpg",
       // title: "अंधश्रद्धा टाळा विज्ञान जाणून घ्या",
       // description: "शास्त्र समजून घ्या, अंधश्रद्धेपासून दूर रहा!",
     },
     {
-      url: "/assets/carousel/ज्योतिष शास्त्र2.jpg",
+      url: "/assets/carousel/2.jpg",
       // title: "ज्योतिष जाणून घ्या – जीवन समजून घ्या!",
       // description:
       //   "ग्रह, नक्षत्रं, आणि राशी हे तुमचं आयुष्य अधिक चांगल्या प्रकारे समजून घेण्याची साधने आहेत. त्यांचा वापर योग्य मार्गदर्शनासाठी करा.",
     },
     {
-      url: "/assets/carousel/भाग्यकारक मोबाईल नंबर.jpg",
+      url: "/assets/carousel/3.jpg",
       // title: "",
       // description: "",
     },
     {
-      url: "/assets/carousel/मोबाईल2.jpg",
+      url: "/assets/carousel/4.jpg",
       // title: "",
       // description: "",
     },
     {
-      url: "/assets/carousel/वास्तुशास्त्र2.jpg",
+      url: "/assets/carousel/5.jpg",
       // title: "",
       // description: "",
     },
     {
-      url: "/assets/carousel/स्क्रीन लॉक2.jpg",
+      url: "/assets/carousel/6.jpg",
       // title: "",
       // description: "",
     },
