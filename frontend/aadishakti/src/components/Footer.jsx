@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Phone, Mail, MapPin, Instagram, Facebook, Youtube, X } from "lucide-react";
 import TermsModal from "./TermsModal";
 import PrivacyModal from "./PrivacyModal";
@@ -7,10 +7,50 @@ const Footer = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
 
+  // Handle hash-based navigation when component mounts
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    };
+
+    // Handle hash on page load
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   const handleAddressClick = () => {
     const mapUrl =
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3786.8944358807485!2d74.02446950000001!3d18.352099799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ef869cac27f1%3A0xb2403e98ae1233b2!2sD%20333%2C%20Sopan%20Nagar%2C%20Saswad%2C%20Maharashtra%20412301!5e0!3m2!1sen!2sin!4v1751112917960!5m2!1sen!2sin";
     window.open(mapUrl, "_blank");
+  };
+
+  // Function to handle service navigation
+  const handleServiceClick = (sectionId) => {
+    // Check if we're already on the home page
+    if (window.location.pathname === '/' || window.location.pathname === '') {
+      // If on home page, scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page with hash
+      window.location.href = `/#${sectionId}`;
+    }
   };
 
   const socialMediaLinks = [
@@ -102,34 +142,52 @@ const Footer = () => {
               <h4 className="font-bold text-lg mb-4">सेवा</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#about" className="hover:text-white/80 transition-colors duration-200">
+                  <button 
+                    onClick={() => handleServiceClick('about')}
+                    className="hover:text-white/80 transition-colors duration-200 text-left"
+                  >
                     रेकी
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#mobile-numerology" className="hover:text-white/80 transition-colors duration-200">
+                  <button 
+                    onClick={() => handleServiceClick('mobile-numerology')}
+                    className="hover:text-white/80 transition-colors duration-200 text-left"
+                  >
                     मोबाईल न्यूमरोलॉजी
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#about" className="hover:text-white/80 transition-colors duration-200">
+                  <button 
+                    onClick={() => handleServiceClick('about')}
+                    className="hover:text-white/80 transition-colors duration-200 text-left"
+                  >
                     टॅरो रीडिंग
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#about" className="hover:text-white/80 transition-colors duration-200">
+                  <button 
+                    onClick={() => handleServiceClick('about')}
+                    className="hover:text-white/80 transition-colors duration-200 text-left"
+                  >
                     ज्योतिष शास्त्र
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#mobile-numerology" className="hover:text-white/80 transition-colors duration-200">
+                  <button 
+                    onClick={() => handleServiceClick('mobile-numerology')}
+                    className="hover:text-white/80 transition-colors duration-200 text-left"
+                  >
                     स्क्रीन लॉक पासवर्ड
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#vastu" className="hover:text-white/80 transition-colors duration-200">
+                  <button 
+                    onClick={() => handleServiceClick('vastu')}
+                    className="hover:text-white/80 transition-colors duration-200 text-left"
+                  >
                     वास्तुशास्त्र मार्गदर्शन
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
