@@ -1,18 +1,19 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { Loader2, AlertCircle, Moon, Sun, Stars } from "lucide-react";
-import { useUser } from "../UserContext";
+import React, { useState } from "react";
+import { Loader2, AlertCircle, Moon, Sun, Stars, Eye, EyeOff } from "lucide-react";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const { setUser } = useUser();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -165,13 +166,13 @@ const LoginForm = () => {
       }
 
       console.log("Login successful:", data.user);
-      setUser(data.user);
       setSuccess(true);
 
       // Navigate after a short delay
       setTimeout(() => {
         try {
-          navigate("/");
+          // Since we don't have router setup, we'll just reload the page
+          window.location.href = "/";
         } catch (navError) {
           console.error("Navigation failed:", navError);
           // Fallback to window location
@@ -224,9 +225,9 @@ const LoginForm = () => {
           </h2>
           <p className="text-center text-gray-600 mb-6">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-[#87161a] hover:text-[#b22550]">
+            <a href="/signup" className="text-[#87161a] hover:text-[#b22550] transition-colors">
               Sign up
-            </Link>
+            </a>
           </p>
 
           {error && (
@@ -257,7 +258,7 @@ const LoginForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
                 placeholder="Enter your email"
               />
             </div>
@@ -266,35 +267,49 @@ const LoginForm = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
-                placeholder="Enter your password"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 pr-12 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
+                  placeholder="Enter your password"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none focus:text-[#87161a]"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
             </div>
 
             <div className="flex justify-end">
-              <Link
-                to="/forgot-password"
-                className="text-sm text-gray-600 hover:text-[#87161a]"
+              <a
+                href="/forgot-password"
+                className="text-sm text-gray-600 hover:text-[#87161a] transition-colors duration-200"
               >
                 Forgot password?
-              </Link>
+              </a>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 rounded-lg text-white bg-[#87161a] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#87161a] focus:ring-offset-[#f9f3f5] transition-colors disabled:opacity-50 flex items-center justify-center"
+              className="w-full py-3 px-4 rounded-lg text-white bg-[#87161a] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#87161a] focus:ring-offset-[#f9f3f5] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {loading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                "Login "
+                "Login"
               )}
             </button>
           </form>

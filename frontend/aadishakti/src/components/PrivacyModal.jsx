@@ -20,7 +20,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
 
         {/* Content */}
         <div className="p-6 space-y-6 text-gray-800 leading-relaxed">
-          <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-[#87161A]">
             <p className="text-base font-medium">
               आम्ही तुमची वैयक्तिक माहिती गोपनीय ठेवण्यास वचनबद्ध आहोत.
             </p>

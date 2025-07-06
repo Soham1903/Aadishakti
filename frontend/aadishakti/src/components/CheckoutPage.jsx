@@ -159,6 +159,7 @@ function CheckoutPage() {
     }
   };
 
+  // Payment Success Screen
   if (submitSuccess) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4 pt-20">
@@ -175,13 +176,19 @@ function CheckoutPage() {
           <p className="text-gray-600 mb-2">
             We'll verify your payment and send you access details soon.
           </p>
-          {/* <p className="text-sm text-green-600 mb-8 font-medium">
-            Your cart has been cleared automatically.
-          </p> */}
+          <p className="text-sm text-[#87161a] mb-8 font-medium bg-[#87161a]/10 p-3 rounded-lg">
+            Check your dashboard to view courses. Your purchased courses will be visible on your dashboard once payment is verified.
+          </p>
           <div className="space-y-3">
             <button
-              onClick={() => navigate("/courses")}
+              onClick={() => navigate("/dashboard")}
               className="w-full bg-[#87161a] text-white py-3 rounded-lg hover:bg-[#721419] transition-colors font-medium"
+            >
+              Go to Dashboard
+            </button>
+            <button
+              onClick={() => navigate("/courses")}
+              className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
             >
               Browse More Courses
             </button>

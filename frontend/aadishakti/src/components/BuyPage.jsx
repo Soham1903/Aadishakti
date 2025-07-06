@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { toast } from "react-toastify";
+import { CheckCircle, Loader2, AlertCircle, Moon, Sun, Stars, Eye, EyeOff } from "lucide-react";
 import coursesData from "../data/courses.json"; // Import the static JSON file
-
-// Use them in your component
 
 function BuyPage() {
   const { title } = useParams();
-  console.log("title", title);
   const location = useLocation();
+  const navigate = useNavigate();
   const { courseTitle } = location.state || {};
   const decodedTitle = decodeURIComponent(title);
   const [course, setCourse] = useState(null);
@@ -27,7 +26,8 @@ function BuyPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [code, setCode] = useState(""); // For promo code input
   const [totalPrice, setTotalPrice] = useState(0);
-  const [discountedPrice, setDiscountedPrice] = useState(0); // prints "6846b0be91df16401d9e636b"
+  const [discountedPrice, setDiscountedPrice] = useState(0);
+
   useEffect(() => {
     // Find the course in the static JSON data instead of fetching from API
     try {
@@ -57,10 +57,6 @@ function BuyPage() {
 
   const titleToFind = decodedTitle;
   const courseId = getCourseIdByTitle(titleToFind, coursesData);
-
-  console.log(courseId);
-
-  console.log(courseId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -160,6 +156,7 @@ function BuyPage() {
 
       const data = await response.json();
       setSubmitSuccess(true);
+      toast.success("Payment submitted successfully!");
       setFormData({
         customerName: user ? user.name : "",
         phoneNumber: "",
@@ -170,6 +167,7 @@ function BuyPage() {
       setCode("");
     } catch (err) {
       setError(err.message);
+      toast.error("Failed to submit payment. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -190,6 +188,51 @@ function BuyPage() {
         </div>
       </div>
     );
+
+  // Payment Success Screen
+  if (submitSuccess) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4 pt-20">
+        <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-md w-full">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-12 h-12 text-green-600" />
+          </div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Payment Successful!
+          </h2>
+          <p className="text-gray-600 mb-2">
+            Your payment has been submitted successfully.
+          </p>
+          <p className="text-gray-600 mb-2">
+            We'll verify your payment and send you access details soon.
+          </p>
+          <p className="text-sm text-[#87161a] mb-8 font-medium bg-[#87161a]/10 p-3 rounded-lg">
+            Check your dashboard to view courses. Your purchased course will be visible on your dashboard once payment is verified.
+          </p>
+          <div className="space-y-3">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="w-full bg-[#87161a] text-white py-3 rounded-lg hover:bg-[#721419] transition-colors font-medium"
+            >
+              Go to Dashboard
+            </button>
+            <button
+              onClick={() => navigate("/courses")}
+              className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+            >
+              Browse More Courses
+            </button>
+            <button
+              onClick={() => navigate("/")}
+              className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+            >
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -329,29 +372,6 @@ function BuyPage() {
             </div>
 
             {/* Transaction Form */}
-            {submitSuccess && (
-              <div className="mb-8 bg-green-50 border-l-4 border-green-500 p-4 rounded">
-                <div className="flex items-center">
-                  <svg
-                    className="w-6 h-6 text-green-500 mr-3"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <p className="text-green-700 font-medium">
-                    Transaction submitted successfully!
-                  </p>
-                </div>
-              </div>
-            )}
-
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Loader2, AlertCircle, Moon, Sun, Stars } from "lucide-react";
+import { Loader2, AlertCircle, Moon, Sun, Stars, Eye, EyeOff } from "lucide-react";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -10,15 +10,26 @@ const SignupForm = () => {
     phoneno: "",
     gender: "",
     password: "",
+    confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validateEmail = (email) =>
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
   const validatePhone = (phone) => /^[0-9]{10}$/.test(phone);
   const validatePassword = (password) => password.length >= 8;
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +43,8 @@ const SignupForm = () => {
       !formData.email ||
       !formData.phoneno ||
       !formData.gender ||
-      !formData.password
+      !formData.password ||
+      !formData.confirmPassword
     ) {
       setError("All fields are required");
       setLoading(false);
@@ -57,13 +69,22 @@ const SignupForm = () => {
       return;
     }
 
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+
     try {
+      // Remove confirmPassword from the data sent to API
+      const { confirmPassword, ...apiData } = formData;
+      
       const response = await fetch(
         "https://aadishakti-backend-ue51.onrender.com/api/v1/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(apiData),
         }
       );
 
@@ -116,7 +137,7 @@ const SignupForm = () => {
           </h2>
           <p className="text-center text-gray-700 mb-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-[#87161a] hover:text-[#b22550]">
+            <Link to="/login" className="text-[#87161a] hover:text-[#b22550] transition-colors">
               Log in
             </Link>
           </p>
@@ -149,7 +170,7 @@ const SignupForm = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
                 placeholder="Enter your name"
               />
             </div>
@@ -164,7 +185,7 @@ const SignupForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
                 placeholder="Enter your email"
               />
             </div>
@@ -179,7 +200,7 @@ const SignupForm = () => {
                 value={formData.phoneno}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
                 placeholder="Enter your phone number"
               />
             </div>
@@ -193,7 +214,7 @@ const SignupForm = () => {
                 value={formData.gender}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 transition-all duration-200"
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -206,27 +227,71 @@ const SignupForm = () => {
               <label className="block text-sm font-medium text-gray-800 mb-2">
                 Password
               </label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                minLength="8"
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400"
-                placeholder="Create a password"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  minLength="8"
+                  className="w-full px-4 py-3 pr-12 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
+                  placeholder="Create a password"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none focus:text-[#87161a]"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-800 mb-2">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                  minLength="8"
+                  className="w-full px-4 py-3 pr-12 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
+                  placeholder="Confirm your password"
+                />
+                <button
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none focus:text-[#87161a]"
+                  aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 rounded-lg text-white bg-[#87161a] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#87161a] focus:ring-offset-[#f9f3f5] transition-colors disabled:opacity-50 flex items-center justify-center"
+              className="w-full py-3 px-4 rounded-lg text-white bg-[#87161a] hover:bg-[#b22550] focus:ring-2 focus:ring-offset-2 focus:ring-[#87161a] focus:ring-offset-[#f9f3f5] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {loading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                "Click to Signup"
+                "Create Account"
               )}
             </button>
           </form>
