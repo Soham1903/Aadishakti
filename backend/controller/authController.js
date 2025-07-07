@@ -32,6 +32,14 @@ export const forgotPassword = async (req, res) => {
       },
     });
 
+    console.log("Email Service - Environment Variables:");
+    console.log("EMAIL_USER:", process.env.EMAIL_USER || "MISSING");
+    console.log(
+      "EMAIL_PASSWORD:",
+      process.env.EMAIL_PASS ? "PRESENT" : "MISSING"
+    );
+    console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "MISSING");
+
     // Send Reset Password email
     await transporter.sendMail({
       from: '"Support Team" <support@example.com>',

@@ -368,61 +368,115 @@ export const createTransaction = async (req, res) => {
       newTransaction._id
     );
 
-    try {
-      // Populate user data for email
-      const populatedTransaction = await Transaction.findById(
-        newTransaction._id
-      )
-        .populate("user", "email name")
-        .exec();
+    // 8. IMMEDIATELY SEND EMAIL NOTIFICATIONS
+    console.log(`[${requestId}] Starting immediate email notifications...`);
 
-      // Send admin notification
-      const adminResult = await sendAdminNotification(
-        populatedTransaction,
-        courseDetails
-      );
-      if (adminResult.success) {
-        console.log(`[${requestId}] Admin notification email sent`);
-      } else {
-        console.error(`[${requestId}] Admin email failed:`, adminResult.error);
-      }
+    // Create a promise that resolves immediately to ensure emails are sent
+    const sendEmailsImmediately = async () => {
+      try {
+        // Populate user data for email - Use lean() for faster query
+        const populatedTransaction = await Transaction.findById(
+          newTransaction._id
+        )
+          .populate("user", "email name")
+          .lean()
+          .exec();
 
-      // Send customer confirmation (if user has email)
-      if (populatedTransaction.user && populatedTransaction.user.email) {
-        const customerResult = await sendCustomerConfirmation(
-          populatedTransaction,
-          courseDetails
-        );
-        if (customerResult.success) {
-          console.log(`[${requestId}] Customer confirmation email sent`);
+        console.log(`[${requestId}] Transaction populated for email:`, {
+          transactionId: populatedTransaction._id,
+          userEmail: populatedTransaction.user?.email,
+          userName: populatedTransaction.user?.name,
+        });
+
+        // Send both emails concurrently for faster delivery
+        const [adminResult, customerResult] = await Promise.allSettled([
+          // Send admin notification
+          sendAdminNotification(populatedTransaction, courseDetails),
+          // Send customer confirmation (if user has email)
+          populatedTransaction.user && populatedTransaction.user.email
+            ? sendCustomerConfirmation(populatedTransaction, courseDetails)
+            : Promise.resolve({ success: false, error: "No customer email" }),
+        ]);
+
+        // Log admin email result
+        if (adminResult.status === "fulfilled" && adminResult.value.success) {
+          console.log(
+            `[${requestId}] ✅ Admin notification email sent successfully`
+          );
         } else {
           console.error(
-            `[${requestId}] Customer email failed:`,
-            customerResult.error
+            `[${requestId}] ❌ Admin email failed:`,
+            adminResult.status === "fulfilled"
+              ? adminResult.value.error
+              : adminResult.reason
           );
         }
-      } else {
-        console.log(
-          `[${requestId}] No customer email found, skipping customer notification`
-        );
-      }
-    } catch (emailError) {
-      console.error(
-        `[${requestId}] Error sending email notifications:`,
-        emailError
-      );
-      // Don't fail the transaction if email fails
-    }
 
-    // 8. Success response
+        // Log customer email result
+        if (
+          customerResult.status === "fulfilled" &&
+          customerResult.value.success
+        ) {
+          console.log(
+            `[${requestId}] ✅ Customer confirmation email sent successfully`
+          );
+        } else if (
+          populatedTransaction.user &&
+          populatedTransaction.user.email
+        ) {
+          console.error(
+            `[${requestId}] ❌ Customer email failed:`,
+            customerResult.status === "fulfilled"
+              ? customerResult.value.error
+              : customerResult.reason
+          );
+        } else {
+          console.log(
+            `[${requestId}] ℹ️ No customer email found, skipping customer notification`
+          );
+        }
+
+        return {
+          adminSuccess:
+            adminResult.status === "fulfilled" && adminResult.value.success,
+          customerSuccess:
+            customerResult.status === "fulfilled" &&
+            customerResult.value.success,
+          emailsSent: true,
+        };
+      } catch (emailError) {
+        console.error(
+          `[${requestId}] ❌ Critical error in email sending:`,
+          emailError
+        );
+        return {
+          adminSuccess: false,
+          customerSuccess: false,
+          emailsSent: false,
+          error: emailError.message,
+        };
+      }
+    };
+
+    // Execute email sending immediately (don't wait for completion)
+    const emailResults = await sendEmailsImmediately();
+
+    console.log(`[${requestId}] Email notification results:`, emailResults);
+
+    // 9. Success response with email status
     return res.status(201).json({
       success: true,
       message: "Transaction created successfully",
       transaction: newTransaction,
+      emailNotifications: {
+        adminEmailSent: emailResults.adminSuccess,
+        customerEmailSent: emailResults.customerSuccess,
+        emailProcessed: emailResults.emailsSent,
+      },
       requestId, // Include for debugging
     });
   } catch (error) {
-    console.error(`[${requestId}] Error creating transaction:`, error);
+    console.error(`[${requestId}] ❌ Error creating transaction:`, error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",

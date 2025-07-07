@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Loader2, AlertCircle, Moon, Sun, Stars, Eye, EyeOff } from "lucide-react";
+import {
+  Loader2,
+  AlertCircle,
+  Moon,
+  Sun,
+  Stars,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -18,8 +26,8 @@ const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const validateEmail = (email) =>
-    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+  const validateEmail = (email) => /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+
   const validatePhone = (phone) => /^[0-9]{10}$/.test(phone);
   const validatePassword = (password) => password.length >= 8;
 
@@ -78,7 +86,7 @@ const SignupForm = () => {
     try {
       // Remove confirmPassword from the data sent to API
       const { confirmPassword, ...apiData } = formData;
-      
+
       const response = await fetch(
         "https://aadishakti-backend-ue51.onrender.com/api/v1/signup",
         {
@@ -137,7 +145,10 @@ const SignupForm = () => {
           </h2>
           <p className="text-center text-gray-700 mb-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-[#87161a] hover:text-[#b22550] transition-colors">
+            <Link
+              to="/login"
+              className="text-[#87161a] hover:text-[#b22550] transition-colors"
+            >
               Log in
             </Link>
           </p>
@@ -244,11 +255,7 @@ const SignupForm = () => {
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none focus:text-[#87161a]"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? (
-                    <EyeOff size={20} />
-                  ) : (
-                    <Eye size={20} />
-                  )}
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
             </div>
@@ -272,7 +279,11 @@ const SignupForm = () => {
                   type="button"
                   onClick={toggleConfirmPasswordVisibility}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none focus:text-[#87161a]"
-                  aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                  aria-label={
+                    showConfirmPassword
+                      ? "Hide confirm password"
+                      : "Show confirm password"
+                  }
                 >
                   {showConfirmPassword ? (
                     <EyeOff size={20} />

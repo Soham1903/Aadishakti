@@ -1,49 +1,80 @@
-// services/emailService.js
-import dotenv from "dotenv";
+// emailConfig.js - Complete email configuration with debugging
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-// Ensure environment variables are loaded
+// Load environment variables
 dotenv.config();
 
-// Debug logging (remove after fixing)
-console.log("Email Service - Environment Variables:");
-console.log("EMAIL_USER:", process.env.EMAIL_USER || "MISSING");
-console.log("EMAIL_PASSWORD:", process.env.EMAIL_PASS ? "PRESENT" : "MISSING");
-console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "MISSING");
+// Debug: Log environment variables (remove this after fixing)
+// console.log("Debug - Email Environment Variables:");
+// console.log("EMAIL_USER:", process.env.EMAIL_USER);
+// console.log(
+//   "EMAIL_PASSWORD:",
+//   process.env.EMAIL_PASS ? "***PRESENT***" : "***MISSING***"
+// );
+// console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
 
-// Create transporter
+// Create transporter with explicit configuration
 export const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "adishaktigurukul@gmail.com",
-    pass: "zqze vcaj uusn rslm",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
-// Test connection
+// Alternative: More explicit Gmail configuration
+export const transporterExplicit = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// Test function to verify credentials
 export const testEmailConnection = async () => {
   try {
-    // if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
-    //   throw new Error("Email credentials missing from environment variables");
-    // }
+    console.log("Testing email connection...");
+
+    // Check if credentials exist
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+      throw new Error("Email credentials missing from environment variables");
+    }
 
     await transporter.verify();
-    console.log("✅ Email connection successful");
+    console.log("✅ Email server connection successful");
     return true;
   } catch (error) {
-    console.error("❌ Email connection failed:", error.message);
-    return false;
+    console.error("❌ Email server connection failed:", error.message);
+
+    // Try explicit configuration
+    try {
+      console.log("Trying explicit Gmail configuration...");
+      await transporterExplicit.verify();
+      console.log("✅ Explicit Gmail configuration successful");
+      return true;
+    } catch (explicitError) {
+      console.error(
+        "❌ Explicit Gmail configuration also failed:",
+        explicitError.message
+      );
+      return false;
+    }
   }
 };
 
+// Email template functions
 const createAdminNotificationEmail = (transaction, courseDetails) => {
   const courseList = courseDetails
     .map((course) => `- ${course.courseTitle} (₹${course.price})`)
     .join("\n");
 
   return {
-    from: "adishaktigurukul@gmail.com",
-    to: "adishaktigurukul@gmail.com",
+    from: process.env.EMAIL_USER,
+    to: process.env.ADMIN_EMAIL,
     subject: `New Transaction Created - ${transaction.transactionId}`,
     html: `
       <h2>New Transaction Notification</h2>
@@ -69,7 +100,9 @@ const createAdminNotificationEmail = (transaction, courseDetails) => {
         <p><strong>Status:</strong> Pending Verification</p>
         
         <div style="margin-top: 20px;">
-          <a href="https://www.adishaktigurukul.com/transactiondashboard
+          <a href="${process.env.ADMIN_DASHBOARD_URL}/transactions/${
+      transaction._id
+    }" 
              style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
             View Transaction
           </a>
@@ -85,7 +118,7 @@ const createCustomerConfirmationEmail = (transaction, courseDetails) => {
     .join("\n");
 
   return {
-    from: "adishaktigurukul@gmail.com",
+    from: process.env.EMAIL_USER,
     to: transaction.user.email,
     subject: `Transaction Confirmation - ${transaction.transactionId}`,
     html: `
@@ -115,43 +148,77 @@ const createCustomerConfirmationEmail = (transaction, courseDetails) => {
   };
 };
 
+// Main email sending functions
 export const sendAdminNotification = async (transaction, courseDetails) => {
   try {
-    console.log("Sending admin notification...");
+    console.log("Attempting to send admin notification...");
 
+    // Test connection first
     const connectionTest = await testEmailConnection();
     if (!connectionTest) {
-      throw new Error("Email connection test failed");
+      throw new Error("Email server connection failed");
     }
 
     const emailData = createAdminNotificationEmail(transaction, courseDetails);
-    await transporter.sendMail(emailData);
-    console.log("✅ Admin notification sent successfully");
-    return { success: true };
+    console.log("Email data prepared, sending...");
+
+    // Try with regular transporter first
+    try {
+      await transporter.sendMail(emailData);
+      console.log("✅ Admin notification email sent successfully");
+      return { success: true };
+    } catch (error) {
+      console.log(
+        "Regular transporter failed, trying explicit configuration..."
+      );
+      await transporterExplicit.sendMail(emailData);
+      console.log(
+        "✅ Admin notification email sent successfully (explicit config)"
+      );
+      return { success: true };
+    }
   } catch (error) {
-    console.error("❌ Admin notification failed:", error.message);
+    console.error("❌ Error sending admin notification:", error.message);
     return { success: false, error: error.message };
   }
 };
 
 export const sendCustomerConfirmation = async (transaction, courseDetails) => {
   try {
-    console.log("Sending customer confirmation...");
+    console.log("Attempting to send customer confirmation...");
 
+    // Test connection first
     const connectionTest = await testEmailConnection();
     if (!connectionTest) {
-      throw new Error("Email connection test failed");
+      throw new Error("Email server connection failed");
     }
 
     const emailData = createCustomerConfirmationEmail(
       transaction,
       courseDetails
     );
-    await transporter.sendMail(emailData);
-    console.log("✅ Customer confirmation sent successfully");
-    return { success: true };
+    console.log("Customer email data prepared, sending...");
+
+    // Try with regular transporter first
+    try {
+      await transporter.sendMail(emailData);
+      console.log("✅ Customer confirmation email sent successfully");
+      return { success: true };
+    } catch (error) {
+      console.log(
+        "Regular transporter failed, trying explicit configuration..."
+      );
+      await transporterExplicit.sendMail(emailData);
+      console.log(
+        "✅ Customer confirmation email sent successfully (explicit config)"
+      );
+      return { success: true };
+    }
   } catch (error) {
-    console.error("❌ Customer confirmation failed:", error.message);
+    console.error("❌ Error sending customer confirmation:", error.message);
     return { success: false, error: error.message };
   }
 };
+
+// Export default transporter for backward compatibility
+export default transporter;
