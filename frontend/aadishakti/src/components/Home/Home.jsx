@@ -11,13 +11,14 @@ const Home = () => {
     <>
       <div className="w-full">
         <Carousel />
+        <QuoteSection />
         <div id="about">
           <About />
         </div>
         <div id="mobile-numerology">
           <MobileNumerology />
         </div>
-        <QuoteSection />
+
         <Stats />
         <div id="vastu">
           <VastuSpecial />

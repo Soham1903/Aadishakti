@@ -4,6 +4,10 @@ import Course from "../model/courseSchema.js";
 import PromoCode from "../model/promocodeSchema.js";
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+import {
+  sendAdminNotification,
+  sendCustomerConfirmation,
+} from "../services/emailService.js";
 
 export const createTransaction = async (req, res) => {
   // Add unique request ID for tracking
@@ -364,6 +368,52 @@ export const createTransaction = async (req, res) => {
       newTransaction._id
     );
 
+    try {
+      // Populate user data for email
+      const populatedTransaction = await Transaction.findById(
+        newTransaction._id
+      )
+        .populate("user", "email name")
+        .exec();
+
+      // Send admin notification
+      const adminResult = await sendAdminNotification(
+        populatedTransaction,
+        courseDetails
+      );
+      if (adminResult.success) {
+        console.log(`[${requestId}] Admin notification email sent`);
+      } else {
+        console.error(`[${requestId}] Admin email failed:`, adminResult.error);
+      }
+
+      // Send customer confirmation (if user has email)
+      if (populatedTransaction.user && populatedTransaction.user.email) {
+        const customerResult = await sendCustomerConfirmation(
+          populatedTransaction,
+          courseDetails
+        );
+        if (customerResult.success) {
+          console.log(`[${requestId}] Customer confirmation email sent`);
+        } else {
+          console.error(
+            `[${requestId}] Customer email failed:`,
+            customerResult.error
+          );
+        }
+      } else {
+        console.log(
+          `[${requestId}] No customer email found, skipping customer notification`
+        );
+      }
+    } catch (emailError) {
+      console.error(
+        `[${requestId}] Error sending email notifications:`,
+        emailError
+      );
+      // Don't fail the transaction if email fails
+    }
+
     // 8. Success response
     return res.status(201).json({
       success: true,
@@ -498,17 +548,25 @@ export const toggleVerification = async (req, res) => {
 
 export const getAllTransactions = async (req, res) => {
   try {
+    console.log("Query params:", req.query);
+
     const page = parseInt(req.query.page) || 1;
-    const limit = Math.min(parseInt(req.query.limit) || 50, 100); // Cap at 100
+    const limit = Math.min(parseInt(req.query.limit) || 50, 100);
     const skip = (page - 1) * limit;
+
+    console.log("Pagination:", { page, limit, skip });
+
+    // Check total count first
+    const total = await Transaction.countDocuments();
+    console.log("Total documents:", total);
 
     const transactions = await Transaction.find()
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
-      .lean(); // Use lean() for better performance
+      .lean();
 
-    const total = await Transaction.countDocuments();
+    console.log("Found transactions:", transactions.length);
 
     res.json({
       transactions,
