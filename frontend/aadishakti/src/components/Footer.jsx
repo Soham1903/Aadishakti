@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Phone, Mail, MapPin, Instagram, Facebook, Youtube, X } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Instagram,
+  Facebook,
+  Youtube,
+  X,
+} from "lucide-react";
 import TermsModal from "./TermsModal";
 import PrivacyModal from "./PrivacyModal";
 
@@ -15,7 +23,7 @@ const Footer = () => {
         setTimeout(() => {
           const element = document.getElementById(hash);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView({ behavior: "smooth" });
           }
         }, 100);
       }
@@ -25,10 +33,10 @@ const Footer = () => {
     handleHashChange();
 
     // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
 
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
@@ -41,11 +49,11 @@ const Footer = () => {
   // Function to handle service navigation
   const handleServiceClick = (sectionId) => {
     // Check if we're already on the home page
-    if (window.location.pathname === '/' || window.location.pathname === '') {
+    if (window.location.pathname === "/" || window.location.pathname === "") {
       // If on home page, scroll to section
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
       // If on another page, navigate to home page with hash
@@ -58,20 +66,21 @@ const Footer = () => {
       name: "Instagram",
       icon: Instagram,
       url: "https://www.instagram.com/aadishakti_gurukul/",
-      bgColor: "hover:bg-gradient-to-r hover:from-purple-400 hover:via-pink-500 hover:to-red-500"
+      bgColor:
+        "hover:bg-gradient-to-r hover:from-purple-400 hover:via-pink-500 hover:to-red-500",
     },
     {
-      name: "Facebook", 
+      name: "Facebook",
       icon: Facebook,
       url: "https://www.facebook.com/share/1JA1ytQhzm/",
-      bgColor: "hover:bg-blue-600"
+      bgColor: "hover:bg-blue-600",
     },
     {
       name: "YouTube",
       icon: Youtube,
       url: "https://www.youtube.com/@aadishaktigurukul8441",
-      bgColor: "hover:bg-red-600"
-    }
+      bgColor: "hover:bg-red-600",
+    },
   ];
 
   return (
@@ -105,32 +114,50 @@ const Footer = () => {
               <h4 className="font-bold text-lg mb-4">क्विक लिंक्स</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="/" className="hover:text-white/80 transition-colors duration-200">
+                  <a
+                    href="/"
+                    className="hover:text-white/80 transition-colors duration-200"
+                  >
                     होम
                   </a>
                 </li>
                 <li>
-                  <a href="/about" className="hover:text-white/80 transition-colors duration-200">
+                  <a
+                    href="/about"
+                    className="hover:text-white/80 transition-colors duration-200"
+                  >
                     आमच्याबद्दल
                   </a>
                 </li>
                 <li>
-                  <a href="/courses" className="hover:text-white/80 transition-colors duration-200">
+                  <a
+                    href="/courses"
+                    className="hover:text-white/80 transition-colors duration-200"
+                  >
                     कोर्सेस
                   </a>
                 </li>
                 <li>
-                  <a href="/books" className="hover:text-white/80 transition-colors duration-200">
+                  <a
+                    href="/books"
+                    className="hover:text-white/80 transition-colors duration-200"
+                  >
                     पुस्तके
                   </a>
                 </li>
                 <li>
-                  <a href="/contact" className="hover:text-white/80 transition-colors duration-200">
+                  <a
+                    href="/contact"
+                    className="hover:text-white/80 transition-colors duration-200"
+                  >
                     संपर्क
                   </a>
                 </li>
                 <li>
-                  <a href="/gallery" className="hover:text-white/80 transition-colors duration-200">
+                  <a
+                    href="/gallery"
+                    className="hover:text-white/80 transition-colors duration-200"
+                  >
                     गॅलरी
                   </a>
                 </li>
@@ -142,48 +169,48 @@ const Footer = () => {
               <h4 className="font-bold text-lg mb-4">सेवा</h4>
               <ul className="space-y-2">
                 <li>
-                  <button 
-                    onClick={() => handleServiceClick('about')}
+                  <button
+                    onClick={() => handleServiceClick("about")}
                     className="hover:text-white/80 transition-colors duration-200 text-left"
                   >
                     रेकी
                   </button>
                 </li>
                 <li>
-                  <button 
-                    onClick={() => handleServiceClick('mobile-numerology')}
+                  <button
+                    onClick={() => handleServiceClick("mobile-numerology")}
                     className="hover:text-white/80 transition-colors duration-200 text-left"
                   >
                     मोबाईल न्यूमरोलॉजी
                   </button>
                 </li>
                 <li>
-                  <button 
-                    onClick={() => handleServiceClick('about')}
+                  <button
+                    onClick={() => handleServiceClick("about")}
                     className="hover:text-white/80 transition-colors duration-200 text-left"
                   >
                     टॅरो रीडिंग
                   </button>
                 </li>
                 <li>
-                  <button 
-                    onClick={() => handleServiceClick('about')}
+                  <button
+                    onClick={() => handleServiceClick("about")}
                     className="hover:text-white/80 transition-colors duration-200 text-left"
                   >
                     ज्योतिष शास्त्र
                   </button>
                 </li>
                 <li>
-                  <button 
-                    onClick={() => handleServiceClick('mobile-numerology')}
+                  <button
+                    onClick={() => handleServiceClick("mobile-numerology")}
                     className="hover:text-white/80 transition-colors duration-200 text-left"
                   >
                     स्क्रीन लॉक पासवर्ड
                   </button>
                 </li>
                 <li>
-                  <button 
-                    onClick={() => handleServiceClick('vastu')}
+                  <button
+                    onClick={() => handleServiceClick("vastu")}
                     className="hover:text-white/80 transition-colors duration-200 text-left"
                   >
                     वास्तुशास्त्र मार्गदर्शन
@@ -248,9 +275,7 @@ const Footer = () => {
                         `}
                         aria-label={social.name}
                       >
-                        <IconComponent 
-                          className="w-5 h-5 transition-all duration-300 group-hover:text-white" 
-                        />
+                        <IconComponent className="w-5 h-5 transition-all duration-300 group-hover:text-white" />
                       </a>
                     );
                   })}
@@ -282,6 +307,7 @@ const Footer = () => {
               <p>
                 © {new Date().getFullYear()} आदिशक्ती गुरुकुल. सर्व हक्क राखीव.
               </p>
+              <p>Developed By - Soham Ladgaonkar & Aditi Gupta | 7700089520</p>
             </div>
           </div>
         </div>
@@ -289,9 +315,12 @@ const Footer = () => {
 
       {/* Terms Modal */}
       <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
-      
+
       {/* Privacy Modal */}
-      <PrivacyModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
+      <PrivacyModal
+        isOpen={showPrivacy}
+        onClose={() => setShowPrivacy(false)}
+      />
     </>
   );
 };
