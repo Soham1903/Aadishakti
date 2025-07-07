@@ -21,7 +21,7 @@ export const forgotPassword = async (req, res) => {
       expiresIn: "15m", // Token valid for 15 minutes
     });
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://www.adishaktigurukul.com/reset-password/${resetToken}`;
 
     // Configure Nodemailer transporter
     const transporter = nodemailer.createTransport({
