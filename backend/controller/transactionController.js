@@ -26,21 +26,6 @@ export const createTransaction = async (req, res) => {
       cartTotal,
     } = req.body;
 
-    // Add detailed logging
-    console.log(`[${requestId}] Raw request data:`, {
-      customerName,
-      phoneNumber,
-      courseTitle,
-      courseId,
-      courses,
-      promoCode,
-      finalPrice,
-      cartTotal,
-      bodyKeys: Object.keys(req.body),
-      courseTitleType: typeof req.body.courseTitle,
-      courseIdType: typeof req.body.courseId,
-    });
-
     // Handle array data from FormData
     let courseTitlesArray = req.body.courseTitle;
     let courseIdsArray = req.body.courseId;
@@ -100,18 +85,6 @@ export const createTransaction = async (req, res) => {
       isSingleCourse,
       isMultipleCourses,
       isFormDataArray,
-      conditions: {
-        hasCourseTitleAndId: !!(courseTitle && courseId),
-        noParsedCourses: !parsedCourses,
-        noCourseTitlesArray: !courseTitlesArray,
-        courseTitlesArrayLength1: courseTitlesArray?.length === 1,
-        hasParsedCourses: !!(
-          parsedCourses &&
-          Array.isArray(parsedCourses) &&
-          parsedCourses.length > 0
-        ),
-        courseTitlesArrayLengthGt1: courseTitlesArray?.length > 1,
-      },
     });
 
     if (!isSingleCourse && !isMultipleCourses) {
@@ -200,7 +173,7 @@ export const createTransaction = async (req, res) => {
       }
     };
 
-    // Process courses (your existing logic continues...)
+    // Process courses based on the transaction type
     if (isFormDataArray) {
       console.log(`[${requestId}] Processing FormData arrays`);
 
@@ -341,25 +314,39 @@ export const createTransaction = async (req, res) => {
       customerName,
       phoneNumber,
       courseTitles,
-      courseIds: courseIds[0],
+      courseIdsLength: courseIds.length,
       finalPrice,
       userId: user._id,
     });
 
-    // 6. Create transaction record
-    const newTransaction = new Transaction({
+    // 6. Create transaction record with proper handling for single/multiple courses
+    const transactionData = {
       customerName,
       phoneNumber,
       courseTitle: courseTitles,
-      courseId: courseIds[0],
-      course: courseIds[0],
       paymentProof,
       transactionId: uuidv4(),
       promoCode: promoCode,
       originalPrice,
       finalPrice,
       user: user._id,
-    });
+      // Enhanced courses array with proper ObjectIds
+      courses: courseDetails.map((detail) => ({
+        courseId: detail.courseId, // This is already an ObjectId
+        courseTitle: detail.courseTitle,
+        price: detail.price,
+      })),
+      // Array of course ObjectIds for easy querying
+      courseIds: courseIds, // This is already an array of ObjectIds
+    };
+
+    // For single course - populate legacy fields for backward compatibility
+    if (courseIds.length === 1) {
+      transactionData.courseId = courseIds[0].toString();
+      transactionData.course = courseIds[0];
+    }
+
+    const newTransaction = new Transaction(transactionData);
 
     // 7. Save transaction
     await newTransaction.save();
@@ -526,54 +513,141 @@ export const toggleVerification = async (req, res) => {
     if (isVerified && transaction.phoneNumber) {
       const user = await User.findOne({ phoneno: transaction.phoneNumber });
 
-      // Handle course verification - Fix the course finding logic
-      let courseObj = null;
+      // Handle multiple courses
+      const coursesToAdd = [];
 
-      // Method 1: If courseId is stored as ObjectId (most likely case)
-      if (transaction.courseId) {
-        courseObj = await Course.findById(transaction.courseId);
-        console.log("Found course by ObjectId:", courseObj);
+      // Get course IDs - handle different possible structures
+      let courseIds = [];
+
+      // NEW: Handle courseIds array (from updated transaction creation)
+      if (transaction.courseIds && Array.isArray(transaction.courseIds)) {
+        courseIds = transaction.courseIds;
+        console.log("Found courseIds array:", transaction.courseIds);
+      } else if (transaction.courseId && Array.isArray(transaction.courseId)) {
+        // Handle courseId as array
+        courseIds = transaction.courseId;
+        console.log("Found courseId as array:", transaction.courseId);
+      } else if (transaction.course && Array.isArray(transaction.course)) {
+        // Handle course as array
+        courseIds = transaction.course;
+        console.log("Found course as array:", transaction.course);
+      } else if (transaction.courses && Array.isArray(transaction.courses)) {
+        // Handle courses stored as array of objects
+        courseIds = transaction.courses
+          .map((course) => course.courseId)
+          .filter(Boolean);
+        console.log("Found courses array:", transaction.courses);
+      } else if (
+        transaction.courses &&
+        typeof transaction.courses === "string"
+      ) {
+        // Handle courses as JSON string (fallback)
+        try {
+          const coursesData = JSON.parse(transaction.courses);
+          courseIds = coursesData
+            .map((course) => course.courseId)
+            .filter(Boolean);
+          console.log("Parsed courses from JSON string:", coursesData);
+        } catch (error) {
+          console.error("Error parsing courses JSON:", error);
+        }
+      } else if (
+        Array.isArray(transaction.courseTitle) &&
+        transaction.courseTitle.length > 1
+      ) {
+        // LEGACY: Multiple course titles but single courseId (your current situation)
+        console.log(
+          "Legacy format: Multiple course titles detected, finding courses by title..."
+        );
+
+        // Find courses by their titles
+        const courseTitles = transaction.courseTitle;
+        for (const title of courseTitles) {
+          const courseObj = await Course.findOne({ title: title });
+          if (courseObj) {
+            courseIds.push(courseObj._id);
+            console.log(`Found course by title "${title}":`, courseObj._id);
+          } else {
+            console.error(`Course not found by title: "${title}"`);
+          }
+        }
+      } else if (transaction.courseId) {
+        // Single course fallback
+        courseIds = [transaction.courseId];
+      } else if (transaction.course) {
+        // Single course fallback
+        courseIds = [transaction.course];
+      }
+      console.log("Course IDs to process:", courseIds);
+
+      // Find all courses
+      for (const courseId of courseIds) {
+        let courseObj = null;
+
+        // Method 1: If courseId is stored as ObjectId
+        try {
+          courseObj = await Course.findById(courseId);
+          console.log("Found course by ObjectId:", courseObj?._id);
+        } catch (error) {
+          console.log("Not a valid ObjectId:", courseId);
+        }
+
+        // Method 2: If courseId is stored as a string identifier
+        if (!courseObj) {
+          courseObj = await Course.findOne({
+            $or: [
+              { courseId: courseId },
+              { courseNumber: courseId },
+              { id: courseId },
+              { slug: courseId },
+            ],
+          });
+          console.log("Found course by identifier:", courseObj?._id);
+        }
+
+        if (courseObj) {
+          coursesToAdd.push(courseObj);
+        } else {
+          console.error("Course not found:", courseId);
+        }
       }
 
-      // Method 2: If courseId is stored as a string identifier
-      if (!courseObj && transaction.courseId) {
-        courseObj = await Course.findOne({
-          $or: [
-            { courseId: transaction.courseId },
-            { courseNumber: transaction.courseId },
-            { id: transaction.courseId },
-            { slug: transaction.courseId },
-          ],
-        });
-        console.log("Found course by identifier:", courseObj);
-      }
-
-      // Method 3: If course is stored in the 'course' field
-      if (!courseObj && transaction.course) {
-        courseObj = await Course.findById(transaction.course);
-        console.log("Found course by course field:", courseObj);
-      }
-
-      // If no course found, log details for debugging
-      if (!courseObj) {
-        console.error("Course not found. Debug info:", {
+      if (coursesToAdd.length === 0) {
+        console.error("No courses found. Debug info:", {
           transactionId: transaction._id,
           courseId: transaction.courseId,
           course: transaction.course,
-          courseTitle: transaction.courseTitle,
+          courses: transaction.courses,
+          courseIds: transaction.courseIds,
+          items: transaction.items,
         });
 
         return res.status(404).json({
           success: false,
-          message: "Course not found for this transaction",
+          message: "No courses found for this transaction",
         });
       }
 
-      // Add course to user if not already added
-      if (user && !user.courses.includes(courseObj._id)) {
-        user.courses.push(courseObj._id);
-        await user.save();
-        console.log("Course added to user:", courseObj._id);
+      // Add courses to user if not already added
+      if (user) {
+        let coursesAdded = 0;
+        for (const courseObj of coursesToAdd) {
+          if (!user.courses.includes(courseObj._id)) {
+            user.courses.push(courseObj._id);
+            coursesAdded++;
+            console.log("Course added to user:", courseObj._id);
+          } else {
+            console.log(
+              "Course already exists in user account:",
+              courseObj._id
+            );
+          }
+        }
+
+        if (coursesAdded > 0) {
+          await user.save();
+          console.log(`${coursesAdded} courses added to user account`);
+        }
       }
 
       // Update promo code usage

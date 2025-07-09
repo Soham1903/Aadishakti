@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 import User from "./userSchema.js";
 import Course from "./courseSchema.js";
+
 const transactionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
+  // For single course transactions - keep for backward compatibility
   course: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Course", // optional if not always needed
+    ref: "Course",
+    required: false, // Make optional since we might have multiple courses
   },
   customerName: {
     type: String,
@@ -21,10 +24,11 @@ const transactionSchema = new mongoose.Schema({
     required: [true, "Transaction ID is required"],
     unique: true,
   },
+  // For single course - keep for backward compatibility
   courseId: {
     type: String,
-    required: [true, "Course ID is required"],
-    unique: true,
+    required: false, // Make optional since we might have multiple courses
+    // Remove unique constraint as we'll have courseIds array
   },
   phoneNumber: {
     type: String,
@@ -52,9 +56,9 @@ const transactionSchema = new mongoose.Schema({
     required: true,
   },
   paymentProof: {
-    filename: String, // Name of the image file
-    contentType: String, // MIME type of the image
-    imageBase64: String, // Image stored as a base64 string
+    filename: String,
+    contentType: String,
+    imageBase64: String,
   },
   createdAt: {
     type: Date,
@@ -71,9 +75,36 @@ const transactionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  // Main courses array - this is the primary way to store course data
+  courses: [
+    {
+      courseId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
+        required: true,
+      },
+      courseTitle: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
+  // Array of course ObjectIds for easy querying
+  courseIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
 });
 
 transactionSchema.index({ createdAt: -1 });
+transactionSchema.index({ phoneNumber: 1 });
+transactionSchema.index({ courseIds: 1 });
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
 
