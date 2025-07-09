@@ -247,7 +247,7 @@ const SignupForm = () => {
                   required
                   minLength="8"
                   className="w-full px-4 py-3 pr-12 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#87161a] focus:border-transparent text-gray-900 placeholder-gray-400 transition-all duration-200"
-                  placeholder="Create a password"
+                  placeholder="Create a 8 character password"
                 />
                 <button
                   type="button"

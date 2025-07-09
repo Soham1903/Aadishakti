@@ -5,10 +5,12 @@ import {
   Play,
   CheckCircle,
   Clock,
+  Award,
   ArrowLeft,
   BookOpen,
   Cross as Progress,
   Star,
+  Download,
 } from "lucide-react";
 
 function CourseLinks() {
@@ -79,22 +81,21 @@ function CourseLinks() {
   const completedVideos = watchedVideos.size;
   const progressPercentage =
     totalVideos > 0 ? (completedVideos / totalVideos) * 100 : 0;
+  const isComplete = progressPercentage === 100;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-red-50">
       {/* Header Section */}
-      <div className="pt-8 pb-8">
+      <div className="pt-20 pb-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
-          <div className="pt-4 pb-6">
-            <button
-              onClick={() => navigate("/dashboard")}
-              className="inline-flex items-center text-gray-600 hover:text-[#921a40] transition-colors group px-4 py-2 rounded-lg hover:bg-gray-50"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
-              Back to Dashboard
-            </button>
-          </div>
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="inline-flex items-center text-gray-600 hover:text-[#921a40] mb-6 transition-colors group"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Dashboard
+          </button>
 
           {/* Course Header */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 mb-8">
@@ -126,7 +127,7 @@ function CourseLinks() {
                   </div>
                   <div className="flex items-center">
                     <Star className="mr-1 h-4 w-4" />
-                    Premium Content
+                    Certificate included
                   </div>
                 </div>
               </div>
@@ -300,28 +301,94 @@ function CourseLinks() {
             )}
           </div>
 
-          {/* Progress Summary */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900">
-                Learning Progress
-              </h3>
-              <span className="text-sm text-gray-500">
-                {Math.round(progressPercentage)}% Complete
-              </span>
+          {/* Certificate Section */}
+          <div
+            className={`
+            bg-white rounded-2xl p-6 sm:p-8 border-2 transition-all duration-300
+            ${
+              isComplete
+                ? "border-green-200 bg-gradient-to-r from-green-50 to-emerald-50"
+                : "border-gray-200"
+            }
+          `}
+          >
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
+              <div className="flex items-start space-x-4">
+                <div
+                  className={`
+                  p-3 rounded-xl
+                  ${isComplete ? "bg-green-500" : "bg-gray-300"}
+                `}
+                >
+                  <Award className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Course Certificate
+                  </h3>
+                  <p className="text-gray-600 mb-2">
+                    {isComplete
+                      ? "Congratulations! You've completed the course."
+                      : `Complete all ${totalVideos} videos to unlock your certificate.`}
+                  </p>
+                  <div className="text-sm text-gray-500">
+                    Progress: {completedVideos}/{totalVideos} videos completed
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-3">
+                {isComplete ? (
+                  <>
+                    <button
+                      onClick={() =>
+                        navigate(`/courses/${course.courseId}/certificate`)
+                      }
+                      className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                    >
+                      <Award className="mr-2 h-5 w-5" />
+                      View Certificate
+                    </button>
+                    <button className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors">
+                      <Download className="mr-2 h-4 w-4" />
+                      Download PDF
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    disabled
+                    className="inline-flex items-center px-6 py-3 bg-gray-300 text-gray-500 font-semibold rounded-lg cursor-not-allowed"
+                  >
+                    <Award className="mr-2 h-5 w-5" />
+                    Certificate Locked
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div
-                className="h-3 rounded-full transition-all duration-500 bg-gradient-to-r from-[#921a40] to-[#b91c47]"
-                style={{ width: `${progressPercentage}%` }}
-              ></div>
-            </div>
-            <div className="mt-4 flex items-center justify-between text-sm text-gray-600">
-              <span>{completedVideos} videos completed</span>
-              <span>{totalVideos - completedVideos} videos remaining</span>
+
+            {/* Progress Bar */}
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-600">
+                  Overall Progress
+                </span>
+                <span className="text-sm text-gray-500">
+                  {Math.round(progressPercentage)}%
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div
+                  className={`h-3 rounded-full transition-all duration-500 ${
+                    isComplete
+                      ? "bg-green-500"
+                      : "bg-gradient-to-r from-[#921a40] to-[#b91c47]"
+                  }`}
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );
