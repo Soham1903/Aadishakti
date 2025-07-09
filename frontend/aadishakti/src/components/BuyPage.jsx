@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { toast } from "react-toastify";
-import { CheckCircle, Loader2, AlertCircle, Moon, Sun, Stars, Eye, EyeOff } from "lucide-react";
+import {
+  CheckCircle,
+  Loader2,
+  AlertCircle,
+  Moon,
+  Sun,
+  Stars,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import coursesData from "../data/courses.json"; // Import the static JSON file
 
 function BuyPage() {
@@ -207,7 +216,8 @@ function BuyPage() {
             We'll verify your payment and send you access details soon.
           </p>
           <p className="text-sm text-[#87161a] mb-8 font-medium bg-[#87161a]/10 p-3 rounded-lg">
-            Check your dashboard to view courses. Your purchased course will be visible on your dashboard once payment is verified.
+            Check your dashboard to view courses. Your purchased course will be
+            visible on your dashboard once payment is verified.
           </p>
           <div className="space-y-3">
             <button

@@ -98,29 +98,44 @@ function CheckoutPage() {
       return;
     }
 
-    // Create an array of course titles from the items in cart
-    const courseTitles = items.map((item) => item.title);
-    const courseIds = items.map((item) => item.courseId);
-
     const formDataToSend = new FormData();
     formDataToSend.append("customerName", formData.customerName);
     formDataToSend.append("phoneNumber", formData.phoneNumber);
-
-    // Append all course titles
-    courseTitles.forEach((title) => {
-      formDataToSend.append("courseTitle", title);
-    });
-
-    courseIds.forEach((id) => {
-      formDataToSend.append("courseId", id);
-    });
-
     formDataToSend.append("promoCode", code);
     formDataToSend.append("finalPrice", discountedPrice);
+
+    // Check if this is a single course or multiple courses
+    if (items.length === 1) {
+      // Single course purchase
+      const singleItem = items[0];
+      formDataToSend.append("courseTitle", singleItem.title);
+      formDataToSend.append("courseId", singleItem.courseId);
+      console.log("Single course purchase:", singleItem.title);
+    } else {
+      // Multiple courses purchase - send as JSON string
+      const coursesData = items.map((item) => ({
+        courseId: item.courseId,
+        courseTitle: item.title,
+        price: item.price || item.finalPrice || 0, // Make sure price is included
+      }));
+
+      formDataToSend.append("courses", JSON.stringify(coursesData));
+
+      // Calculate cart total
+      const cartTotal = items.reduce((total, item) => {
+        return total + (item.price || item.finalPrice || 0);
+      }, 0);
+
+      formDataToSend.append("cartTotal", cartTotal);
+      console.log("Multiple courses purchase:", coursesData);
+      console.log("Cart total:", cartTotal);
+    }
 
     if (screenshot) {
       formDataToSend.append("screenshot", screenshot);
     }
+
+    console.log(screenshot);
 
     try {
       const response = await fetch(
@@ -132,17 +147,20 @@ function CheckoutPage() {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to submit transaction");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to submit transaction");
       }
 
       const data = await response.json();
+      console.log("Transaction successful:", data);
 
       // Clear the cart after successful payment
       clearCart();
 
       setSubmitSuccess(true);
       toast.success(
-        "Payment submitted successfully! Your cart has been cleared."
+        data.message ||
+          "Payment submitted successfully! Your cart has been cleared."
       );
       setFormData({
         customerName: user ? user.name : "",
@@ -152,6 +170,7 @@ function CheckoutPage() {
       setScreenshotPreview(null);
       setCode("");
     } catch (err) {
+      console.error("Transaction error:", err);
       setError(err.message);
       toast.error("Failed to submit payment. Please try again.");
     } finally {
@@ -177,7 +196,8 @@ function CheckoutPage() {
             We'll verify your payment and send you access details soon.
           </p>
           <p className="text-sm text-[#87161a] mb-8 font-medium bg-[#87161a]/10 p-3 rounded-lg">
-            Check your dashboard to view courses. Your purchased courses will be visible on your dashboard once payment is verified.
+            Check your dashboard to view courses. Your purchased courses will be
+            visible on your dashboard once payment is verified.
           </p>
           <div className="space-y-3">
             <button

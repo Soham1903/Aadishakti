@@ -79,7 +79,7 @@ const ResetPassword = () => {
             type="submit"
             className="w-full py-3 bg-red-800 text-white font-semibold rounded-lg hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800"
           >
-            Send Reset Link
+            Change Password
           </button>
         </form>
         <div className="text-center mt-4">

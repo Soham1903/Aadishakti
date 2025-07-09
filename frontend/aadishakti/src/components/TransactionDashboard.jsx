@@ -25,7 +25,9 @@ const TransactionsDashboard = () => {
           "https://aadishakti-backend-ue51.onrender.com/api/transaction/get"
         );
         const data = await response.json();
-        setTransactions(data);
+
+        // Extract the transactions array from the response object
+        setTransactions(data.transactions || []);
       } catch (error) {
         toast.error("Failed to fetch transactions");
       } finally {
@@ -64,6 +66,8 @@ const TransactionsDashboard = () => {
       toast.error("Failed to update verification status");
     }
   };
+
+  console.log("transactions:", transactions);
 
   const filteredTransactions = transactions.filter((transaction) =>
     Object.values(transaction).some(

@@ -21,7 +21,7 @@ export const forgotPassword = async (req, res) => {
       expiresIn: "15m", // Token valid for 15 minutes
     });
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://www.adishaktigurukul.com/reset-password/${resetToken}`;
 
     // Configure Nodemailer transporter
     const transporter = nodemailer.createTransport({
@@ -31,6 +31,14 @@ export const forgotPassword = async (req, res) => {
         pass: process.env.EMAIL_PASS,
       },
     });
+
+    console.log("Email Service - Environment Variables:");
+    console.log("EMAIL_USER:", process.env.EMAIL_USER || "MISSING");
+    console.log(
+      "EMAIL_PASSWORD:",
+      process.env.EMAIL_PASS ? "PRESENT" : "MISSING"
+    );
+    console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "MISSING");
 
     // Send Reset Password email
     await transporter.sendMail({
