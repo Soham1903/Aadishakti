@@ -200,51 +200,56 @@ export default function CourseDetails() {
             </div>
 
             {/* What's Included */}
-            <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-100">
-              <h3 className="text-xl font-medium text-slate-800 mb-6">
-                What's Included
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {[
-                  {
-                    icon: Award,
-                    title: "Certification",
-                    description: "Certification upon completion on demand",
-                  },
-                  {
-                    icon: Video,
-                    title: "Recordings",
-                    description: "3 Months access to course recordings",
-                  },
-                  {
-                    icon: Users,
-                    title: "Live Sessions",
-                    description:
-                      "Interactive live sessions with experts for doubts",
-                  },
-                  {
-                    icon: Users,
-                    title: "Notes",
-                    description: "Digital Notes to all courses",
-                  },
-                ].map((feature, index) => (
-                  <div
-                    key={index}
-                    className="bg-slate-50/50 p-6 rounded-lg hover:bg-slate-50 transition-colors"
-                  >
-                    <div className="bg-white p-2 rounded-lg w-fit shadow-sm mb-4">
-                      <feature.icon className="h-6 w-6 text-[#87161a]" />
-                    </div>
-                    <h4 className="font-medium text-slate-800 mb-2">
-                      {feature.title}
-                    </h4>
-                    <p className="text-sm text-slate-600">
-                      {feature.description}
-                    </p>
-                  </div>
-                ))}
+            {course.finalPrice !== 0 && (
+              <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-100">
+                <h3 className="text-xl font-medium text-slate-800 mb-6">
+                  What's Included
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  {[
+                    {
+                      icon: Award,
+                      title: "Certification",
+                      description: "Certification upon completion on demand",
+                    },
+                    {
+                      icon: Video,
+                      title: "Recordings",
+                      description: "3 Months access to course recordings",
+                    },
+                    {
+                      icon: Users,
+                      title: "Live Sessions",
+                      description:
+                        "Interactive live sessions with experts for doubts",
+                    },
+                    {
+                      icon: Users,
+                      title: "Notes",
+                      description: "Digital Notes to all courses",
+                    },
+                  ].map((feature, index) => {
+                    const Icon = feature.icon;
+                    return (
+                      <div
+                        key={index}
+                        className="bg-slate-50/50 p-6 rounded-lg hover:bg-slate-50 transition-colors"
+                      >
+                        <div className="bg-white p-2 rounded-lg w-fit shadow-sm mb-4">
+                          <Icon className="h-6 w-6 text-[#87161a]" />
+                        </div>
+                        <h4 className="font-medium text-slate-800 mb-2">
+                          {feature.title}
+                        </h4>
+                        <p className="text-sm text-slate-600">
+                          {feature.description}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Right Column - Course Details Card */}
